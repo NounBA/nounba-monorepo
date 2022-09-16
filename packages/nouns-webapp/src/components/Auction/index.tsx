@@ -83,10 +83,12 @@ const Auction: React.FC<AuctionProps> = props => {
     <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
       <Container fluid="xl">
         <Row>
-          <Col lg={{ span: 6 }} className={classes.nounContentCol}>
+          <Col lg={{ span: 12 }} className={classes.nounContentCol}>
             {currentAuction ? nounContent : loadingNoun}
           </Col>
-          <Col lg={{ span: 6 }} className={classes.auctionActivityCol}>
+        </Row>
+        <Row>
+          <Col lg={{ span: 12 }} className={classes.auctionActivityCol}>
             {currentAuction &&
               (isNounderNoun(currentAuction.nounId)
                 ? nounderNounContent

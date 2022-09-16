@@ -9,11 +9,8 @@ import AuctionTimer from '../AuctionTimer';
 import CurrentBid from '../CurrentBid';
 import Winner from '../Winner';
 import BidHistory from '../BidHistory';
-import AuctionNavigation from '../AuctionNavigation';
 import AuctionActivityWrapper from '../AuctionActivityWrapper';
-import AuctionTitleAndNavWrapper from '../AuctionTitleAndNavWrapper';
 import AuctionActivityNounTitle from '../AuctionActivityNounTitle';
-import AuctionActivityDateHeadline from '../AuctionActivityDateHeadline';
 import BidHistoryBtn from '../BidHistoryBtn';
 import config from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
@@ -96,17 +93,6 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
       <AuctionActivityWrapper>
         <div className={classes.informationRow}>
           <Row className={classes.activityRow}>
-            <AuctionTitleAndNavWrapper>
-              {displayGraphDepComps && (
-                <AuctionNavigation
-                  isFirstAuction={isFirstAuction}
-                  isLastAuction={isLastAuction}
-                  onNextAuctionClick={onNextAuctionClick}
-                  onPrevAuctionClick={onPrevAuctionClick}
-                />
-              )}
-              <AuctionActivityDateHeadline startTime={auction.startTime} />
-            </AuctionTitleAndNavWrapper>
             <Col lg={12}>
               <AuctionActivityNounTitle isCool={isCool} nounId={auction.nounId} />
             </Col>

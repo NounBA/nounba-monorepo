@@ -8,6 +8,7 @@ import { nounPath } from '../../utils/history';
 import useOnDisplayAuction from '../../wrappers/onDisplayAuction';
 import { useEffect } from 'react';
 import ProfileActivityFeed from '../../components/ProfileActivityFeed';
+import { Container, Row, Col } from 'react-bootstrap';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -18,6 +19,7 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
   const onDisplayAuction = useOnDisplayAuction();
   const lastAuctionNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
   const onDisplayAuctionNounId = onDisplayAuction?.nounId.toNumber();
+  let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
 
   const dispatch = useAppDispatch();
 
@@ -44,15 +46,24 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
   }, [lastAuctionNounId, dispatch, initialAuctionId, onDisplayAuction]);
 
   return (
-    <>
-      <Auction auction={onDisplayAuction} />
+    <div style={{ backgroundColor: stateBgColor }}>
+      <Container fluid="xl">
+        <Row>
+          <Col lg={{ span: 6 }}>
+            <Auction auction={onDisplayAuction} />
+          </Col>
+          <Col lg={{ span: 6 }}>
+            <Auction auction={onDisplayAuction} />
+          </Col>
+        </Row>
+      </Container>
       {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? (
         <ProfileActivityFeed nounId={onDisplayAuctionNounId} />
       ) : (
         <Banner />
       )}
       <Documentation />
-    </>
+    </div>
   );
 };
 export default AuctionPage;
