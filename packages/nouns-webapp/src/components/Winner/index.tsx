@@ -33,7 +33,7 @@ const Winner: React.FC<WinnerProps> = props => {
         <h2
           className={classes.winnerContent}
           style={{
-            color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
+            color: 'var(--brand-white)',
           }}
         >
           <Trans>You</Trans>
@@ -94,7 +94,7 @@ const Winner: React.FC<WinnerProps> = props => {
           <h2
             className={classes.winnerContent}
             style={{
-              color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
+              color: 'var(--brand-white)',
             }}
           >
             {isNounders ? nounderNounContent : nonNounderNounContent}

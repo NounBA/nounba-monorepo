@@ -37,14 +37,7 @@ interface AuctionActivityProps {
 }
 
 const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityProps) => {
-  const {
-    auction,
-    isFirstAuction,
-    isLastAuction,
-    onPrevAuctionClick,
-    onNextAuctionClick,
-    displayGraphDepComps,
-  } = props;
+  const { auction, isLastAuction, displayGraphDepComps } = props;
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
