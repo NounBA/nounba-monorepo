@@ -9,6 +9,11 @@ import {
   setNextOnDisplayAuctionNounId,
   setPrevOnDisplayAuctionNounId,
 } from '../../state/slices/onDisplayAuction';
+import { StandaloneNounWithSeed } from '../StandaloneNoun';
+import { LoadingNoun } from '../Noun';
+import { setStateBackgroundColor } from '../../state/slices/application';
+import { grey, beige } from '../../utils/nounBgColors';
+import { INounSeed } from '../../wrappers/nounToken';
 
 interface AuctionProps {
   auction?: IAuction;
@@ -20,6 +25,10 @@ const Auction: React.FC<AuctionProps> = props => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const lastNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
+  let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
+  const loadedNounHandler = (seed: INounSeed) => {
+    dispatch(setStateBackgroundColor(seed.background === 0 ? grey : beige));
+  };
 
   const prevAuctionHandler = () => {
     dispatch(setPrevOnDisplayAuctionNounId());
@@ -51,10 +60,33 @@ const Auction: React.FC<AuctionProps> = props => {
     />
   );
 
+  const nounContent = currentAuction && (
+    <div className={classes.nounWrapper}>
+      <StandaloneNounWithSeed
+        nounId={currentAuction.nounId}
+        onLoadSeed={loadedNounHandler}
+        shouldLinkToProfile={false}
+      />
+    </div>
+  );
+
+  const loadingNoun = (
+    <div className={classes.nounWrapper}>
+      <LoadingNoun />
+    </div>
+  );
+
   return (
-    <div style={{ backgroundColor: 'black' }} className={classes.wrapper}>
-      {currentAuction &&
-        (isNounderNoun(currentAuction.nounId) ? nounderNounContent : currentAuctionActivityContent)}
+    <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
+      {currentAuction ? nounContent : loadingNoun}
+      <div className={classes.infoWrapper}>
+        <div className={classes.auctionInfo}>
+          {currentAuction &&
+            (isNounderNoun(currentAuction.nounId)
+              ? nounderNounContent
+              : currentAuctionActivityContent)}
+        </div>
+      </div>
     </div>
   );
 };

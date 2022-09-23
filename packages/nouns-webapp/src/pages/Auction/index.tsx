@@ -9,7 +9,6 @@ import useOnDisplayAuction from '../../wrappers/onDisplayAuction';
 import { useEffect } from 'react';
 import ProfileActivityFeed from '../../components/ProfileActivityFeed';
 import { Container, Row, Col } from 'react-bootstrap';
-import AuctionNounOnly from '../../components/AuctionNounOnly';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -47,40 +46,24 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
   }, [lastAuctionNounId, dispatch, initialAuctionId, onDisplayAuction]);
 
   return (
-    <>
-      <div style={{ backgroundColor: stateBgColor }}>
-        <Container fluid="xl">
-          <Row>
-            <Col lg={{ span: 4, offset: 1 }}>
-              <AuctionNounOnly auction={onDisplayAuction} />
-            </Col>
-            <Col lg={{ span: 4, offset: 2 }}>
-              <AuctionNounOnly auction={onDisplayAuction} />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <div style={{ backgroundColor: 'black' }}>
-        <Container fluid="xl">
-          <Row>
-            <Col lg={{ span: 4, offset: 1 }}>
-              <Auction auction={onDisplayAuction} />
-            </Col>
-            <Col lg={{ span: 4, offset: 2 }}>
-              <Auction auction={onDisplayAuction} />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <div style={{ backgroundColor: stateBgColor }}>
-        {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? (
-          <ProfileActivityFeed nounId={onDisplayAuctionNounId} />
-        ) : (
-          <Banner />
-        )}
-        <Documentation />
-      </div>
-    </>
+    <div style={{ backgroundColor: stateBgColor }}>
+      <Container fluid="xl">
+        <Row>
+          <Col lg={{ span: 5 }}>
+            <Auction auction={onDisplayAuction} />
+          </Col>
+          <Col lg={{ span: 5, offset: 2 }}>
+            <Auction auction={onDisplayAuction} />
+          </Col>
+        </Row>
+      </Container>
+      {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? (
+        <ProfileActivityFeed nounId={onDisplayAuctionNounId} />
+      ) : (
+        <Banner />
+      )}
+      <Documentation />
+    </div>
   );
 };
 export default AuctionPage;
