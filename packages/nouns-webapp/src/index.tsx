@@ -19,7 +19,7 @@ import firstAuction, {
   setFullAuction,
   appendBid,
 } from './state/slices/auction/firstAuction';
-import auction2 from './state/slices/auction2';
+import secondAuction from './state/slices/auction/secondAuction';
 import onDisplayAuction, {
   setLastAuctionNounId,
   setOnDisplayAuctionNounId,
@@ -54,8 +54,8 @@ const createRootReducer = (history: History) =>
     router: connectRouter(history),
     account,
     application,
-    auction: firstAuction,
-    auction2,
+    firstAuction,
+    secondAuction,
     logs,
     pastAuctions,
     onDisplayAuction,
