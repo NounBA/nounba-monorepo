@@ -112,13 +112,10 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <ChainSubscriber
         wsProvider={wsProvider}
-        auctionsActions={[
-          actions,
-          // secondAuctionActions
-        ]}
+        auctionsActions={[actions, secondAuctionActions]}
         auctionHouseProxyAddresses={[
           config.addresses.nounsAuctionHouseProxy,
-          // config.addresses.nounsAuctionHouseProxy2,
+          config.addresses.nounsAuctionHouseProxy2,
         ]}
       />
       <React.StrictMode>

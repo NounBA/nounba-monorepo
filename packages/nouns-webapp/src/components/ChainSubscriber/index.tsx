@@ -97,9 +97,9 @@ export const ChainSubscriber = ({
       processAuctionSettled(nounId, winner, amount),
     );
   };
-  console.log('oi');
-  auctionsActions.forEach((auctionActions, index) => {
-    loadState(auctionActions, auctionHouseProxyAddresses[index]);
+
+  auctionsActions.forEach((_, index) => {
+    loadState(auctionsActions[index], auctionHouseProxyAddresses[index]);
   });
 
   return <></>;
