@@ -11,11 +11,15 @@ import { Auction as IAuction } from '../../../wrappers/nounsAuction';
 export interface AuctionState {
   activeAuction?: IAuction;
   bids: BidEvent[];
+  lastAuctionNounId: number | undefined;
+  onDisplayAuctionNounId: number | undefined;
 }
 
 const initialState: AuctionState = {
   activeAuction: undefined,
   bids: [],
+  lastAuctionNounId: undefined,
+  onDisplayAuctionNounId: undefined,
 };
 
 export const reduxSafeNewAuction = (auction: AuctionCreateEvent): IAuction => ({
@@ -96,6 +100,22 @@ export const buildAuctionSlice = (name: string) =>
         if (!(state.activeAuction && auctionsEqual(state.activeAuction, action.payload))) return;
         state.activeAuction.endTime = BigNumber.from(action.payload.endTime).toJSON();
         console.log('processed auction extended', action.payload);
+      },
+      setLastAuctionNounId: (state, action: PayloadAction<number>) => {
+        state.lastAuctionNounId = action.payload;
+      },
+      setOnDisplayAuctionNounId: (state, action: PayloadAction<number>) => {
+        state.onDisplayAuctionNounId = action.payload;
+      },
+      setPrevOnDisplayAuctionNounId: state => {
+        if (!state.onDisplayAuctionNounId) return;
+        if (state.onDisplayAuctionNounId === 0) return;
+        state.onDisplayAuctionNounId = state.onDisplayAuctionNounId - 1;
+      },
+      setNextOnDisplayAuctionNounId: state => {
+        if (state.onDisplayAuctionNounId === undefined) return;
+        if (state.lastAuctionNounId === state.onDisplayAuctionNounId) return;
+        state.onDisplayAuctionNounId = state.onDisplayAuctionNounId + 1;
       },
     },
   });

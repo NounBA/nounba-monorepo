@@ -33,6 +33,8 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
           timestamp: BigNumber.from(bid.blockTimestamp).toJSON(),
         };
       }),
+      lastAuctionNounId: auction.lastAuctionNounId,
+      onDisplayAuctionNounId: auction.onDisplayAuctionNounId,
     };
   });
   return pastAuctions;

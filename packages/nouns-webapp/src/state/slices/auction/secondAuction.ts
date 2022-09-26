@@ -2,7 +2,7 @@ import { buildAuctionSlice } from './auctionWrapper';
 export * from './auctionWrapper';
 
 export const auctionName = 'secondAuction';
-const { actions, reducer } = buildAuctionSlice(auctionName);
+const { actions: acts, reducer } = buildAuctionSlice(auctionName);
 
 export const {
   setActiveAuction,
@@ -10,6 +10,12 @@ export const {
   setAuctionExtended,
   setAuctionSettled,
   setFullAuction,
-} = actions;
+  setLastAuctionNounId,
+  setOnDisplayAuctionNounId,
+  setPrevOnDisplayAuctionNounId,
+  setNextOnDisplayAuctionNounId,
+} = acts;
+
+export const actions = acts;
 
 export default reducer;

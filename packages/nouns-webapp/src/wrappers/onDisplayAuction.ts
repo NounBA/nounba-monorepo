@@ -44,7 +44,7 @@ const useOnDisplayAuction = (
     state => state[currentAuctionName].activeAuction?.nounId,
   );
   const onDisplayAuctionNounId = useAppSelector(
-    state => state.onDisplayAuction.onDisplayAuctionNounId,
+    state => state[currentAuctionName].onDisplayAuctionNounId,
   );
   const currentAuction = useAppSelector(state => state[currentAuctionName].activeAuction);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
@@ -85,7 +85,7 @@ export const useAuctionBids = (
   auctionNounId: BigNumber,
   currentAuctionName: auctionNames = firstAuctionName,
 ): Bid[] | undefined => {
-  const lastAuctionNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
+  const lastAuctionNounId = useAppSelector(state => state[currentAuctionName].lastAuctionNounId);
   const lastAuctionBids = useAppSelector(state => state[currentAuctionName].bids);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
 

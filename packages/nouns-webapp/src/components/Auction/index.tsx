@@ -15,16 +15,22 @@ import { setStateBackgroundColor } from '../../state/slices/application';
 import { grey, beige } from '../../utils/nounBgColors';
 import { INounSeed } from '../../wrappers/nounToken';
 
+import { auctionName as firstAuctionName } from '../../state/slices/auction/firstAuction';
+import { auctionName as secondAuctionName } from '../../state/slices/auction/secondAuction';
+
+type auctionNames = typeof firstAuctionName | typeof secondAuctionName;
+
 interface AuctionProps {
   auction?: IAuction;
+  auctionName: auctionNames;
 }
 
 const Auction: React.FC<AuctionProps> = props => {
-  const { auction: currentAuction } = props;
+  const { auction: currentAuction, auctionName } = props;
 
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const lastNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
+  const lastNounId = useAppSelector(state => state[auctionName].lastAuctionNounId);
   let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
   const loadedNounHandler = (seed: INounSeed) => {
     dispatch(setStateBackgroundColor(seed.background === 0 ? grey : beige));
@@ -76,6 +82,7 @@ const Auction: React.FC<AuctionProps> = props => {
     </div>
   );
 
+  console.log(currentAuction);
   return (
     <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
       {currentAuction ? nounContent : loadingNoun}
