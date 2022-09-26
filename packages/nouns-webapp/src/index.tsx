@@ -9,7 +9,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import account from './state/slices/account';
 import application from './state/slices/application';
 import logs from './state/slices/logs';
-import auction, {
+import firstAuction, {
   reduxSafeAuction,
   reduxSafeNewAuction,
   reduxSafeBid,
@@ -17,7 +17,9 @@ import auction, {
   setAuctionExtended,
   setAuctionSettled,
   setFullAuction,
-} from './state/slices/auction';
+  appendBid,
+} from './state/slices/auction/firstAuction';
+import auction2 from './state/slices/auction2';
 import onDisplayAuction, {
   setLastAuctionNounId,
   setOnDisplayAuctionNounId,
@@ -33,7 +35,6 @@ import { BigNumber, BigNumberish } from 'ethers';
 import { NounsAuctionHouseFactory } from '@nouns/sdk';
 import dotenv from 'dotenv';
 import { useAppDispatch, useAppSelector } from './hooks';
-import { appendBid } from './state/slices/auction';
 import { ConnectedRouter, connectRouter } from 'connected-react-router';
 import { createBrowserHistory, History } from 'history';
 import { applyMiddleware, createStore, combineReducers, PreloadedState } from 'redux';
@@ -53,7 +54,8 @@ const createRootReducer = (history: History) =>
     router: connectRouter(history),
     account,
     application,
-    auction,
+    auction: firstAuction,
+    auction2,
     logs,
     pastAuctions,
     onDisplayAuction,
@@ -111,10 +113,9 @@ const ChainSubscriber: React.FC = () => {
   const loadState = async () => {
     const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(
-      config.addresses.nounsAuctionHouseProxy,
+      config.addresses.nounsAuctionHouseProxy2,
       wsProvider,
     );
-
     const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(null, null, null, null);
     const extendedFilter = nounsAuctionHouseContract.filters.AuctionExtended(null, null);
     const createdFilter = nounsAuctionHouseContract.filters.AuctionCreated(null, null, null);

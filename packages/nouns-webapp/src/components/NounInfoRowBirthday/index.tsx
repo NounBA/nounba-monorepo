@@ -7,7 +7,7 @@ import _BirthdayIcon from '../../assets/icons/Birthday.svg';
 
 import { Image } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
-import { AuctionState } from '../../state/slices/auction';
+import { AuctionState } from '../../state/slices/auction/auctionWrapper';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuctionState } from './auction';
+import { AuctionState } from './auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
 
 interface PastAuctionsState {

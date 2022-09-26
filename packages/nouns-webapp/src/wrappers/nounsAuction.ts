@@ -5,7 +5,7 @@ import config from '../config';
 import BigNumber from 'bignumber.js';
 import { isNounderNoun } from '../utils/nounderNoun';
 import { useAppSelector } from '../hooks';
-import { AuctionState } from '../state/slices/auction';
+import { AuctionState } from '../state/slices/auction/auctionWrapper';
 
 export enum AuctionHouseContractFunction {
   auction = 'auction',

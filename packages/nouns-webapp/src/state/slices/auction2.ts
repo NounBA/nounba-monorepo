@@ -63,7 +63,7 @@ const containsBid = (bidEvents: BidEvent[], bidEvent: BidEvent) =>
  * State of **current** auction (sourced via websocket)
  */
 export const auctionSlice = createSlice({
-  name: 'auction',
+  name: 'auction2',
   initialState,
   reducers: {
     setActiveAuction: (state, action: PayloadAction<AuctionCreateEvent>) => {

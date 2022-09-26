@@ -1,5 +1,5 @@
 import { Auction } from '../wrappers/nounsAuction';
-import { AuctionState } from '../state/slices/auction';
+import { AuctionState } from '../state/slices/auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
 
 export const isNounderNoun = (nounId: BigNumber) => {
