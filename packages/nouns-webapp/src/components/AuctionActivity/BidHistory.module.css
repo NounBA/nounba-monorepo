@@ -69,6 +69,7 @@
 .bidder {
   font-family: 'PT Root UI';
   font-weight: bold;
+  color: var(--brand-white);
 }
 
 .bidder > div > div {
@@ -78,7 +79,7 @@
 }
 
 .bidRowCool .bidder > div > div {
-  color: var(--brand-cool-dark-text);
+  color: var(--brand-white);
 }
 
 .bidRowWarm .bidder > div > div {
@@ -106,7 +107,7 @@
 }
 
 .bidRowCool .bidAmount {
-  color: var(--brand-cool-dark-text);
+  color: var(--brand-white);
 }
 
 .bidRowWarm .bidAmount {
@@ -114,11 +115,11 @@
 }
 
 .linkSymbol {
-  color: var(--brand-cool-light-text);
+  color: var(--brand-white);
 }
 
 .linkSymbol:hover {
-  color: var(--brand-cool-dark-text);
+  color: var(--brand-white);
 }
 
 @media (max-width: 992px) {

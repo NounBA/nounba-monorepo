@@ -5,6 +5,7 @@
 .infoWrapper {
   position: relative;
   background-color: black;
+  padding-top: 59px;
 }
 .infoWrapper::before {
   content: " ";
@@ -32,6 +33,30 @@
   align-self: flex-end !important;
 }
 
+.conferenceTitleWrapper {
+  z-index: 2;
+  position: relative;
+}
+.conferenceTitle {
+  margin: 0 0 -59px;
+  height: 118px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--brand-white);
+  text-align: center;
+  font-size: 2rem;
+  border-radius: 10px;
+}
+
+.eastSide {
+  background-color: var(--brand-color-red);
+}
+.westSide {
+  background-color: var(--brand-color-blue);
+}
+
 @media (max-width: 992px) {
   .nounWrapper {
     width: 70%;
@@ -44,6 +69,14 @@
     padding-left: 5%;
     width: 100%;
     background-color: white;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -41px;
+    height: 82px;
+    font-size: 1.7rem;
   }
 }
 
@@ -67,5 +100,13 @@
 
   .nounContentCol {
     padding: 0rem;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -25px;
+    height: 50px;
+    font-size: 1.3rem;
   }
 }

@@ -112,14 +112,14 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
     <div style={{ backgroundColor: stateBgColor }}>
       <Container fluid="xl">
         <Row>
-          <Col lg={{ span: 5 }} className={classes.westernSide}>
+          <Col lg={{ span: 6 }} className={classes.westernSide}>
             <Auction
               side={REGIONS.west}
               auction={onDisplayFirstAuction}
               auctionName={firstAuctionName}
             />
           </Col>
-          <Col lg={{ span: 5, offset: 2 }} className={classes.easternSide}>
+          <Col lg={{ span: 6 }} className={classes.easternSide}>
             <Auction
               side={REGIONS.east}
               auction={onDisplaySecondAuction}

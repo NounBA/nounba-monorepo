@@ -88,6 +88,15 @@ const Auction: React.FC<AuctionProps> = props => {
   return (
     <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
       {currentAuction ? nounContent : loadingNoun}
+      <div className={classes.conferenceTitleWrapper}>
+        <div
+          className={`${classes.conferenceTitle} ${
+            side === REGIONS.east ? classes.eastSide : classes.westSide
+          }`}
+        >
+          {side === REGIONS.east ? 'Eastern' : 'Western'} Conference
+        </div>
+      </div>
       <div className={classes.infoWrapper}>
         <div className={classes.auctionInfo}>
           {currentAuction &&
