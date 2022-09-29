@@ -17,16 +17,18 @@ import { INounSeed } from '../../wrappers/nounToken';
 
 import { auctionName as firstAuctionName } from '../../state/slices/auction/firstAuction';
 import { auctionName as secondAuctionName } from '../../state/slices/auction/secondAuction';
+import { REGIONS } from '../../config';
 
 type auctionNames = typeof firstAuctionName | typeof secondAuctionName;
 
 interface AuctionProps {
   auction?: IAuction;
   auctionName: auctionNames;
+  side: REGIONS;
 }
 
 const Auction: React.FC<AuctionProps> = props => {
-  const { auction: currentAuction, auctionName } = props;
+  const { auction: currentAuction, auctionName, side } = props;
 
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -53,6 +55,7 @@ const Auction: React.FC<AuctionProps> = props => {
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
       displayGraphDepComps={true}
+      side={side}
     />
   );
   const nounderNounContent = currentAuction && lastNounId && (
@@ -82,7 +85,6 @@ const Auction: React.FC<AuctionProps> = props => {
     </div>
   );
 
-  console.log(currentAuction);
   return (
     <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
       {currentAuction ? nounContent : loadingNoun}

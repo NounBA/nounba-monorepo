@@ -12,14 +12,11 @@ import BidHistory from '../BidHistory';
 import AuctionActivityWrapper from '../AuctionActivityWrapper';
 import AuctionActivityNounTitle from '../AuctionActivityNounTitle';
 import BidHistoryBtn from '../BidHistoryBtn';
-import config from '../../config';
+import config, { REGIONS } from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import NounInfoCard from '../NounInfoCard';
 import { useAppSelector } from '../../hooks';
 import BidHistoryModal from '../BidHistoryModal';
-import { Trans } from '@lingui/macro';
 import Holder from '../Holder';
 
 const openEtherscanBidHistory = () => {
@@ -34,10 +31,11 @@ interface AuctionActivityProps {
   onPrevAuctionClick: () => void;
   onNextAuctionClick: () => void;
   displayGraphDepComps: boolean;
+  side: REGIONS;
 }
 
 const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityProps) => {
-  const { auction, isLastAuction, displayGraphDepComps } = props;
+  const { auction, isLastAuction, displayGraphDepComps, side } = props;
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
@@ -110,21 +108,11 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
             </Col>
           </Row>
         </div>
-        {!auctionEnded && (
-          <Row className={classes.activityRow}>
-            <Col lg={12} className={classes.fomoNounsLink}>
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <a href={'https://fomonouns.wtf'} target={'_blank'} rel="noreferrer">
-                <Trans>Help mint the next Noun</Trans>
-              </a>
-            </Col>
-          </Row>
-        )}
         {isLastAuction && (
           <>
             <Row className={classes.activityRow}>
               <Col lg={12}>
-                <Bid auction={auction} auctionEnded={auctionEnded} />
+                <Bid auction={auction} auctionEnded={auctionEnded} side={side} />
               </Col>
             </Row>
           </>

@@ -101,4 +101,9 @@ const config = {
   addresses: getAddresses(),
 };
 
+export enum REGIONS {
+  west,
+  east,
+}
+
 export default config;

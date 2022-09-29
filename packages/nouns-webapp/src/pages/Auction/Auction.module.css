@@ -1,0 +1,13 @@
+
+.westernSide .bidButtonSide:hover,
+.westernSide .bidButtonSide:active,
+.westernSide .bidButtonSide:focus .bidButtonSide:disabled {
+  background-color: var(--brand-color-blue) !important;
+}
+
+.easternSide .bidButtonSide,
+.easternSide .bidButtonSide:hover,
+.easternSide .bidButtonSide:active,
+.easternSide .bidButtonSide:focus .bidButtonSide:disabled {
+  background-color: var(--brand-color-red) !important;
+}

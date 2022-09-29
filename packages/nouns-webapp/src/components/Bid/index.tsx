@@ -11,7 +11,7 @@ import { useAuctionMinBidIncPercentage } from '../../wrappers/nounsAuction';
 import { useAppDispatch } from '../../hooks';
 import { AlertModal, setAlertModal } from '../../state/slices/application';
 import { NounsAuctionHouseFactory } from '@nouns/sdk';
-import config from '../../config';
+import config, { REGIONS } from '../../config';
 import WalletConnectModal from '../WalletConnectModal';
 import SettleManuallyBtn from '../SettleManuallyBtn';
 import { Trans } from '@lingui/macro';
@@ -49,10 +49,11 @@ const currentBid = (bidInputRef: React.RefObject<HTMLInputElement>) => {
 const Bid: React.FC<{
   auction: Auction;
   auctionEnded: boolean;
+  side: REGIONS;
 }> = props => {
+  let { auction, auctionEnded, side } = props;
   const activeAccount = useAppSelector(state => state.account.activeAccount);
   const { library } = useEthers();
-  let { auction, auctionEnded } = props;
   const activeLocale = useActiveLocale();
   const nounsAuctionHouseContract = new NounsAuctionHouseFactory().attach(
     config.addresses.nounsAuctionHouseProxy,
@@ -252,7 +253,7 @@ const Bid: React.FC<{
       {showConnectModal && activeAccount === undefined && (
         <WalletConnectModal onDismiss={hideModalHandler} />
       )}
-      <InputGroup>
+      <InputGroup className={classes.bidInputGroup}>
         {!auctionEnded && (
           <>
             <span className={classes.customPlaceholderBidAmt}>
@@ -281,30 +282,32 @@ const Bid: React.FC<{
             />
           </>
         )}
-        {!auctionEnded ? (
-          <Button
-            className={auctionEnded ? classes.bidBtnAuctionEnded : classes.bidBtn}
-            onClick={auctionEnded ? settleAuctionHandler : placeBidHandler}
-            disabled={isDisabled}
-          >
-            {bidButtonContent.loading ? <Spinner animation="border" /> : bidButtonContent.content}
-          </Button>
-        ) : (
-          <>
-            <Col lg={12} className={classes.voteForNextNounBtnWrapper}>
-              <Button className={classes.bidBtnAuctionEnded} onClick={fomoNounsBtnOnClickHandler}>
-                <Trans>Vote for the next Noun</Trans> ⌐◧-◧
-              </Button>
-            </Col>
-            {/* Only show force settle button if wallet connected */}
-            {isWalletConnected && (
-              <Col lg={12}>
-                <SettleManuallyBtn settleAuctionHandler={settleAuctionHandler} auction={auction} />
-              </Col>
-            )}
-          </>
-        )}
       </InputGroup>
+      {!auctionEnded ? (
+        <Button
+          className={`${classes.bidBtn} ${
+            side === REGIONS.east ? classes.eastBtn : classes.westBtn
+          }`}
+          onClick={placeBidHandler}
+          disabled={isDisabled}
+        >
+          {bidButtonContent.loading ? <Spinner animation="border" /> : bidButtonContent.content}
+        </Button>
+      ) : (
+        <>
+          <Col lg={12} className={classes.voteForNextNounBtnWrapper}>
+            <Button className={classes.bidBtnAuctionEnded} onClick={fomoNounsBtnOnClickHandler}>
+              <Trans>Vote for the next Noun</Trans> ⌐◧-◧
+            </Button>
+          </Col>
+          {/* Only show force settle button if wallet connected */}
+          {isWalletConnected && (
+            <Col lg={12}>
+              <SettleManuallyBtn settleAuctionHandler={settleAuctionHandler} auction={auction} />
+            </Col>
+          )}
+        </>
+      )}
     </>
   );
 };

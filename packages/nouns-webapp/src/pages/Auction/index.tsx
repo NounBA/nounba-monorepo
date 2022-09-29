@@ -17,6 +17,10 @@ import {
   auctionName as secondAuctionName,
   setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId,
 } from '../../state/slices/auction/secondAuction';
+
+import classes from './Auction.module.css';
+import { REGIONS } from '../../config';
+
 interface AuctionPageProps {
   initialAuctionId?: number;
 }
@@ -108,11 +112,19 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
     <div style={{ backgroundColor: stateBgColor }}>
       <Container fluid="xl">
         <Row>
-          <Col lg={{ span: 5 }}>
-            <Auction auction={onDisplayFirstAuction} auctionName={firstAuctionName} />
+          <Col lg={{ span: 5 }} className={classes.westernSide}>
+            <Auction
+              side={REGIONS.west}
+              auction={onDisplayFirstAuction}
+              auctionName={firstAuctionName}
+            />
           </Col>
-          <Col lg={{ span: 5, offset: 2 }}>
-            <Auction auction={onDisplaySecondAuction} auctionName={secondAuctionName} />
+          <Col lg={{ span: 5, offset: 2 }} className={classes.easternSide}>
+            <Auction
+              side={REGIONS.east}
+              auction={onDisplaySecondAuction}
+              auctionName={secondAuctionName}
+            />
           </Col>
         </Row>
       </Container>

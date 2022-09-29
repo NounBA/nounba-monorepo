@@ -82,7 +82,7 @@
 }
 
 .bidRowWarm .bidder > div > div {
-  color: var(--brand-warm-dark-text);
+  color: var(--brand-white);
 }
 
 .bidDate {
@@ -110,7 +110,7 @@
 }
 
 .bidRowWarm .bidAmount {
-  color: var(--brand-warm-dark-text);
+  color: var(--brand-white);
 }
 
 .linkSymbol {

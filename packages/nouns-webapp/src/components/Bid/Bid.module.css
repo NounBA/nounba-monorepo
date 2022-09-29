@@ -9,14 +9,15 @@
 .bidBtn {
   font-family: 'PT Root UI';
   border-radius: 12px !important;
-  margin-left: 0.6rem !important;
+  /* margin-left: 0.6rem !important; */
+  margin-top: 12px;
   margin-top: 3px;
-  width: auto;
+  width: 100%;
   padding: 10px 16px;
   height: 3rem;
   color: white;
   border: transparent;
-  background-color: var(--brand-black);
+  background-color: var(--brand-orange);
   font-weight: bold;
   letter-spacing: normal;
   font-size: 19px;
@@ -27,12 +28,22 @@
   cursor: not-allowed;
 }
 
-.bidBtn:hover,
-.bidBtn:active,
-.bidBtn:focus .bidBtn:disabled {
+.westBtn:hover,
+.westBtn:active,
+.westBtn:focus,
+.westBtn:disabled {
+  background-color: var(--brand-color-blue) !important;
   outline: none !important;
   box-shadow: none !important;
-  background-color: #2125298a;
+}
+
+.eastBtn:hover,
+.eastBtn:active,
+.eastBtn:focus,
+.eastBtn:disabled {
+  background-color: var(--brand-color-red) !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .bidBtn:disabled {
@@ -46,27 +57,33 @@
   margin-bottom: 0.3rem;
 }
 
+.bidInputGroup {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .bidInput {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  width: auto;
+  width: 100%;
   height: 54px;
-  color: black;
+  color: #616161;
   border-radius: 12px !important;
-  box-shadow: inset 0px 0px 0px 1px #fff;
-  background-color: white;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+  background-color: transparent;
   outline: none !important;
   box-shadow: none !important;
   font-family: 'PT Root UI';
   font-weight: bold;
   font-size: 25px;
   transition: all 0.2s ease-in-out;
-  border: none;
+  border: 1px solid #f9f9f9;
 }
 
 .bidInput:focus {
-  box-shadow: inset 0px 0px 0px 1px var(--brand-cool-dark-text) !important;
+  box-shadow: inset 0px 0px 0px 1px var(--brand-white) !important;
+  color: #fff;
+  background-color: transparent;
 }
 
 .customPlaceholder {
