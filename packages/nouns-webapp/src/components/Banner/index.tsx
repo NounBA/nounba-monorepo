@@ -16,9 +16,11 @@ const Banner = () => (
             </h2>
           </header>
           <p>
-            NounBA is a nounish community of basketball fans. The NounBA DAO uses a league style
-            governance structure to coordinate competing communities of basketball fans to
-            participate in the Nouns ecosystem.
+            <Trans>
+              NounBA is a nounish community of basketball fans. The NounBA DAO uses a league style
+              governance structure to coordinate competing communities of basketball fans to
+              participate in the Nouns ecosystem.
+            </Trans>
           </p>
         </Col>
       </Row>
