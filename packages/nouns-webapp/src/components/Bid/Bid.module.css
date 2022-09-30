@@ -32,7 +32,7 @@
 .westBtn:active,
 .westBtn:focus,
 .westBtn:disabled {
-  background-color: var(--brand-color-blue) !important;
+  background-color: var(--brand-color-red) !important;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -41,7 +41,7 @@
 .eastBtn:active,
 .eastBtn:focus,
 .eastBtn:disabled {
-  background-color: var(--brand-color-red) !important;
+  background-color: var(--brand-color-blue) !important;
   outline: none !important;
   box-shadow: none !important;
 }
