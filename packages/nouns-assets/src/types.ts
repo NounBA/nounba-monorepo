@@ -4,6 +4,8 @@ export interface NounSeed {
   accessory: number;
   head: number;
   glasses: number;
+  oneOfOne?: boolean;
+  oneOfOneIndex?: number;
 }
 
 export interface EncodedImage {

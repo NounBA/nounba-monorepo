@@ -1,16 +1,16 @@
 import { keccak256 as solidityKeccak256 } from '@ethersproject/solidity';
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
 import { NounSeed, NounData } from './types';
-import { images, bgcolors } from './image-data.json';
+import { images, bgcolors } from './image-data-nounba.json';
 
-const { bodies, accessories, heads, glasses } = images;
+const { oneOfOnes, bodies, accessories, heads, glasses } = images;
 
 /**
  * Get encoded part and background information using a Noun seed
  * @param seed The Noun seed
  */
 export const getNounData = (seed: NounSeed): NounData => {
-  return {
+  const nounData =  {
     parts: [
       bodies[seed.body],
       accessories[seed.accessory],
@@ -19,6 +19,10 @@ export const getNounData = (seed: NounSeed): NounData => {
     ],
     background: bgcolors[seed.background],
   };
+  if (seed.oneOfOneIndex !== undefined) {
+    nounData.parts.push(oneOfOnes[seed.oneOfOneIndex]);
+  }
+  return nounData;
 };
 
 /**
