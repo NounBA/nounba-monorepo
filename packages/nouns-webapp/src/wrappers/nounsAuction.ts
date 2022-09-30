@@ -23,6 +23,7 @@ export interface Auction {
   startTime: EthersBN;
   nounId: EthersBN;
   settled: boolean;
+  contractAddress: string;
 }
 
 const abi = new utils.Interface(NounsAuctionHouseABI);

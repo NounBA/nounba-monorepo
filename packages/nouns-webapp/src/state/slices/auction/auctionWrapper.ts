@@ -13,6 +13,7 @@ export interface AuctionState {
   bids: BidEvent[];
   lastAuctionNounId: number | undefined;
   onDisplayAuctionNounId: number | undefined;
+  contractAddress: string;
 }
 
 const initialState: AuctionState = {
@@ -20,6 +21,7 @@ const initialState: AuctionState = {
   bids: [],
   lastAuctionNounId: undefined,
   onDisplayAuctionNounId: undefined,
+  contractAddress: '',
 };
 
 export const reduxSafeNewAuction = (auction: AuctionCreateEvent): IAuction => ({
@@ -29,6 +31,7 @@ export const reduxSafeNewAuction = (auction: AuctionCreateEvent): IAuction => ({
   endTime: BigNumber.from(auction.endTime).toJSON(),
   nounId: BigNumber.from(auction.nounId).toJSON(),
   settled: false,
+  contractAddress: auction.contractAddress,
 });
 
 export const reduxSafeAuction = (auction: IAuction): IAuction => ({
@@ -38,6 +41,7 @@ export const reduxSafeAuction = (auction: IAuction): IAuction => ({
   endTime: BigNumber.from(auction.endTime).toJSON(),
   nounId: BigNumber.from(auction.nounId).toJSON(),
   settled: auction.settled,
+  contractAddress: auction.contractAddress,
 });
 
 export const reduxSafeBid = (bid: BidEvent): BidEvent => ({
@@ -116,6 +120,9 @@ export const buildAuctionSlice = (name: string) =>
         if (state.onDisplayAuctionNounId === undefined) return;
         if (state.lastAuctionNounId === state.onDisplayAuctionNounId) return;
         state.onDisplayAuctionNounId = state.onDisplayAuctionNounId + 1;
+      },
+      setContractAddress: (state, action: PayloadAction<string>) => {
+        state.contractAddress = action.payload;
       },
     },
   });

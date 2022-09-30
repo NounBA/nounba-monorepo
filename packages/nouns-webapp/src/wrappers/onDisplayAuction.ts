@@ -16,6 +16,7 @@ const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
     endTime: BigNumber.from(reduxSafeAuction.endTime),
     nounId: BigNumber.from(reduxSafeAuction.nounId),
     settled: false,
+    contractAddress: reduxSafeAuction.contractAddress,
   };
 };
 
@@ -47,6 +48,7 @@ const useOnDisplayAuction = (
     state => state[currentAuctionName].onDisplayAuctionNounId,
   );
   const currentAuction = useAppSelector(state => state[currentAuctionName].activeAuction);
+  const contractAddress = useAppSelector(state => state[currentAuctionName].contractAddress);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
 
   if (
@@ -59,7 +61,7 @@ const useOnDisplayAuction = (
 
   // current auction
   if (BigNumber.from(onDisplayAuctionNounId).eq(lastAuctionNounId)) {
-    return deserializeAuction(currentAuction);
+    return deserializeAuction({ ...currentAuction, contractAddress });
   }
 
   // nounder auction

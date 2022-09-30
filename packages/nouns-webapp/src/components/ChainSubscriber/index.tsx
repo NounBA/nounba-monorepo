@@ -27,6 +27,7 @@ export const ChainSubscriber = ({
   const dispatch = useAppDispatch();
 
   const loadState = async (actions: actionType, auctionHouseProxyAddress: string) => {
+    dispatch(actions.setContractAddress(auctionHouseProxyAddress));
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(
       auctionHouseProxyAddress,
       wsProvider,
@@ -57,7 +58,13 @@ export const ChainSubscriber = ({
     ) => {
       dispatch(
         actions.setActiveAuction(
-          reduxSafeNewAuction({ nounId, startTime, endTime, settled: false }),
+          reduxSafeNewAuction({
+            nounId,
+            startTime,
+            endTime,
+            settled: false,
+            contractAddress: auctionHouseProxyAddress,
+          }),
         ),
       );
       const nounIdNumber = BigNumber.from(nounId).toNumber();
@@ -74,7 +81,11 @@ export const ChainSubscriber = ({
 
     // Fetch the current auction
     const currentAuction = await nounsAuctionHouseContract.auction();
-    dispatch(actions.setFullAuction(reduxSafeAuction(currentAuction)));
+    dispatch(
+      actions.setFullAuction(
+        reduxSafeAuction({ ...currentAuction, contractAddress: auctionHouseProxyAddress }),
+      ),
+    );
     dispatch(actions.setLastAuctionNounId(currentAuction.nounId.toNumber()));
 
     // Fetch the previous 24hours of  bids

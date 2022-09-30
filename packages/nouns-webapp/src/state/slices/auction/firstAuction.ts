@@ -14,6 +14,7 @@ export const {
   setOnDisplayAuctionNounId,
   setPrevOnDisplayAuctionNounId,
   setNextOnDisplayAuctionNounId,
+  setContractAddress,
 } = acts;
 
 export const actions = acts;
