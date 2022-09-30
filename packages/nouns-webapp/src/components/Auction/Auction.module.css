@@ -52,10 +52,10 @@
 }
 
 .eastSide {
-  background-color: var(--brand-color-red);
+  background-color: var(--brand-color-blue);
 }
 .westSide {
-  background-color: var(--brand-color-blue);
+  background-color: var(--brand-color-red);
 }
 
 @media (max-width: 992px) {
