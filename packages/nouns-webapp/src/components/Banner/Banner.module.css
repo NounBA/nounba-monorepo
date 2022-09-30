@@ -17,11 +17,13 @@
 }
 .bannerContainer {
   background-color: var(--brand-color-blue);
-  width: 100%;
+  box-sizing: border-box;
   border-radius: 10px;
   z-index: 2;
   position: relative;
   padding-bottom: 90px;
+  margin-left: 0;
+  margin-right: 0;
 }
 .bannerContent {
   display: flex;
