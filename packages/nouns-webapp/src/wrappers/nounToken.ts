@@ -18,6 +18,8 @@ export interface INounSeed {
   body: number;
   glasses: number;
   head: number;
+  oneOfOne: boolean;
+  oneOfOneIndex: number;
 }
 
 export enum NounsTokenContractFunction {
@@ -61,6 +63,8 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
       accessory: Number(seed.accessory),
       head: Number(seed.head),
       glasses: Number(seed.glasses),
+      oneOfOne: seed.oneOfOne,
+      oneOfOneIndex: Number(seed.oneOfOneIndex),
     };
     return acc;
   }, {});
@@ -104,6 +108,8 @@ export const useNounSeed = (nounId: EthersBN) => {
           body: response.body,
           glasses: response.glasses,
           head: response.head,
+          oneOfOne: response.oneOfOne,
+          oneOfOneIndex: response.oneOfOneIndex,
         },
       });
       localStorage.setItem(seedCacheKey, updatedSeedCache);
