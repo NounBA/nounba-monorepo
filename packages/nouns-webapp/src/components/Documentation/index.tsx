@@ -1,18 +1,10 @@
 import Section from '../../layout/Section';
-import { Col } from 'react-bootstrap';
 import classes from './Documentation.module.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from '../Link';
 import { Trans } from '@lingui/macro';
 
 const Documentation = () => {
-  const cryptopunksLink = (
-    <Link
-      text={<Trans>Cryptopunks</Trans>}
-      url="https://www.larvalabs.com/cryptopunks"
-      leavesPage={true}
-    />
-  );
   const playgroundLink = (
     <Link text={<Trans>Playground</Trans>} url="/playground" leavesPage={false} />
   );
