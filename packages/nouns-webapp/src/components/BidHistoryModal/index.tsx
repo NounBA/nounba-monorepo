@@ -8,6 +8,7 @@ import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { Bid } from '../../utils/types';
 import BidHistoryModalRow from '../BidHistoryModalRow';
 import { Trans } from '@lingui/macro';
+import { AUCTION_NAMES } from '../../config';
 
 export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
   return <div className={classes.backdrop} onClick={props.onDismiss} />;
@@ -19,7 +20,9 @@ const BidHistoryModalOverlay: React.FC<{
 }> = props => {
   const { onDismiss, auction } = props;
 
-  const bids = useAuctionBids(auction.nounId);
+  const bids = useAuctionBids(auction.nounId, auction.auctionName);
+  const conferenceAuctionClass =
+    auction.auctionName === AUCTION_NAMES.FIRST_AUCTION ? classes.westAuction : classes.eastAuction;
 
   return (
     <>
@@ -29,7 +32,7 @@ const BidHistoryModalOverlay: React.FC<{
         </button>
       </div>
 
-      <div className={classes.modal}>
+      <div className={`${classes.modal} ${conferenceAuctionClass}`}>
         <div className={classes.content}>
           <div className={classes.header}>
             <div className={classes.nounWrapper}>

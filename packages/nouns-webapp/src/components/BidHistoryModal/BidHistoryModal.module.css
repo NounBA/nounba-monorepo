@@ -28,6 +28,7 @@
   border-radius: 24px;
   left: calc(50% - 20rem);
   width: 40rem;
+  background-color: var(--brand-white);
 }
 
 .modal .header {
@@ -43,13 +44,20 @@
 .modal .title h2 {
   font-size: 24px;
   margin-top: 0.5rem;
-  color: rgba(140, 141, 146, 1);
 }
 
 .modal .title h1 {
   line-height: 25px;
   height: 2rem;
   font-size: 42px;
+}
+.modal.westAuction .title h1,
+.modal.westAuction .title h2 {
+  color: var(--brand-color-red);
+}
+.modal.eastAuction .title h1,
+.modal.eastAuction .title h2 {
+  color: var(--brand-color-blue);
 }
 
 .nounWrapper {

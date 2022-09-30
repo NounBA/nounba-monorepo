@@ -12,9 +12,8 @@ const BidHistoryBtn: React.FC<{ onClick: () => void }> = props => {
   return (
     <div
       className={isCool ? bidBtnClasses.bidHistoryWrapperCool : bidBtnClasses.bidHistoryWrapperWarm}
-      onClick={onClick}
     >
-      <Button className={bidBtnClasses.bidHistory}>
+      <Button className={bidBtnClasses.bidHistory} onClick={onClick}>
         <Trans>View all bids</Trans>
       </Button>
     </div>
