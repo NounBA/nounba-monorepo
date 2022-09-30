@@ -60,20 +60,20 @@ const NavBar = () => {
             )}
           </div>
           <Nav.Item>
-            {/* {treasuryBalance && ( */}
-            <Nav.Link
-              href={daoEtherscanLink}
-              className={classes.nounsNavLink}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <NavBarTreasury
-                treasuryBalance={'1000'}
-                // treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
-                treasuryStyle={nonWalletButtonStyle}
-              />
-            </Nav.Link>
-            {/* )} */}
+            {treasuryBalance && (
+              <Nav.Link
+                href={daoEtherscanLink}
+                className={classes.nounsNavLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <NavBarTreasury
+                  // treasuryBalance={'1000'}
+                  treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
+                  treasuryStyle={nonWalletButtonStyle}
+                />
+              </Nav.Link>
+            )}
           </Nav.Item>
           <Navbar.Toggle
             className={classes.navBarToggle}

@@ -1,6 +1,52 @@
-.wrapper h1 {
+.bannerSection {
+  background-color: transparent;
+  position: relative;
+  color: var(--brand-white);
+  text-align: center;
+  padding-top: 155px;
+}
+.bannerSection::before {
+  content: " ";
+  background-color: black;
+  position: absolute;
+  left: -100vw;
+  right: -100vw;
+  top: 0;
+  bottom: 30%;
+  z-index: 0;
+}
+.bannerContainer {
+  background-color: var(--brand-color-blue);
+  width: 100%;
+  border-radius: 10px;
+  z-index: 2;
+  position: relative;
+  padding-bottom: 90px;
+}
+.bannerContent {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.bannerContent h1 {
   font-family: 'Londrina Solid';
   font-size: 5rem;
+}
+.bannerContent h2 {
+  font-family: 'Londrina Solid';
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+.bannerContent p {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: left;
+}
+
+.sectionLogo {
+  width: 190px;
+  height: 190px;
+  margin-top: -95px;
 }
 
 @media (max-width: 992px) {
@@ -8,14 +54,10 @@
     padding: 2rem;
   }
 
-  .wrapper h1 {
+  .bannerContent h1 {
     font-size: 3.75rem;
   }
-}
-
-@media (min-width: 992px) {
-  .wrapper h1 {
-    font-size: 6rem;
-    margin-left: 2rem;
+  .bannerContent h2 {
+    font-size: 1.2rem;
   }
 }
