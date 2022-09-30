@@ -128,6 +128,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
               displayGraphDepComps && (
                 <BidHistory
                   auctionId={auction.nounId.toString()}
+                  auctionName={auction.auctionName}
                   max={3}
                   classes={bidHistoryClasses}
                 />

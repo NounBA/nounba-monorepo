@@ -1,7 +1,7 @@
 import { useContractCall } from '@usedapp/core';
 import { BigNumber as EthersBN, utils } from 'ethers';
 import { NounsAuctionHouseABI } from '@nouns/sdk';
-import config from '../config';
+import config, { AUCTION_NAMES } from '../config';
 import BigNumber from 'bignumber.js';
 import { isNounderNoun } from '../utils/nounderNoun';
 import { useAppSelector } from '../hooks';
@@ -24,6 +24,7 @@ export interface Auction {
   nounId: EthersBN;
   settled: boolean;
   contractAddress: string;
+  auctionName: AUCTION_NAMES;
 }
 
 const abi = new utils.Interface(NounsAuctionHouseABI);

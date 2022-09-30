@@ -9,17 +9,11 @@ import { useEffect } from 'react';
 // import ProfileActivityFeed from '../../components/ProfileActivityFeed';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import {
-  auctionName as firstAuctionName,
-  setOnDisplayAuctionNounId as setOnDisplayFirstAuctionNounId,
-} from '../../state/slices/auction/firstAuction';
-import {
-  auctionName as secondAuctionName,
-  setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId,
-} from '../../state/slices/auction/secondAuction';
+import { setOnDisplayAuctionNounId as setOnDisplayFirstAuctionNounId } from '../../state/slices/auction/firstAuction';
+import { setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId } from '../../state/slices/auction/secondAuction';
 
 import classes from './Auction.module.css';
-import { REGIONS } from '../../config';
+import { AUCTION_NAMES, REGIONS } from '../../config';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -30,7 +24,7 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
   const onDisplayFirstAuction = useOnDisplayAuction();
   const lastFirstAuctionNounId = useAppSelector(state => state.firstAuction.lastAuctionNounId);
 
-  const onDisplaySecondAuction = useOnDisplayAuction('secondAuction');
+  const onDisplaySecondAuction = useOnDisplayAuction(AUCTION_NAMES.SECOND_AUCTION);
   const lastSecondAuctionNounId = useAppSelector(state => state.secondAuction.lastAuctionNounId);
 
   // Used by activities
@@ -116,14 +110,14 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
             <Auction
               side={REGIONS.west}
               auction={onDisplayFirstAuction}
-              auctionName={firstAuctionName}
+              auctionName={AUCTION_NAMES.FIRST_AUCTION}
             />
           </Col>
           <Col lg={{ span: 6 }} className={classes.easternSide}>
             <Auction
               side={REGIONS.east}
               auction={onDisplaySecondAuction}
-              auctionName={secondAuctionName}
+              auctionName={AUCTION_NAMES.SECOND_AUCTION}
             />
           </Col>
         </Row>

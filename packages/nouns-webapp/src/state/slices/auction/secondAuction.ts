@@ -1,8 +1,8 @@
+import { AUCTION_NAMES } from '../../../config';
 import { buildAuctionSlice } from './auctionWrapper';
 export * from './auctionWrapper';
 
-export const auctionName = 'secondAuction';
-const { actions: acts, reducer } = buildAuctionSlice(auctionName);
+const { actions: acts, reducer } = buildAuctionSlice(AUCTION_NAMES.SECOND_AUCTION);
 
 export const {
   setActiveAuction,

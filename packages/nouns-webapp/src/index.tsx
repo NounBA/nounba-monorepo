@@ -26,7 +26,7 @@ import { clientFactory, latestAuctionsQuery } from './wrappers/subgraph';
 import { useEffect } from 'react';
 import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
-import config, { CHAIN_ID, createNetworkHttpUrl } from './config';
+import config, { AUCTION_NAMES, CHAIN_ID, createNetworkHttpUrl } from './config';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { LanguageProvider } from './i18n/LanguageProvider';
 import ChainSubscriber from './components/ChainSubscriber';
@@ -117,6 +117,7 @@ ReactDOM.render(
           config.addresses.nounsAuctionHouseProxy,
           config.addresses.nounsAuctionHouseProxy2,
         ]}
+        auctionNames={[AUCTION_NAMES.FIRST_AUCTION, AUCTION_NAMES.SECOND_AUCTION]}
       />
       <React.StrictMode>
         <Web3ReactProvider

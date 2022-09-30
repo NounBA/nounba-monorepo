@@ -23,6 +23,7 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
         nounId: BigNumber.from(auction.id).toJSON(),
         settled: false,
         contractAddress: auction.contractAddress,
+        auctionName: auction.auctionName,
       },
       bids: auction.bids.map((bid: any) => {
         return {
@@ -37,6 +38,7 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
       lastAuctionNounId: auction.lastAuctionNounId,
       onDisplayAuctionNounId: auction.onDisplayAuctionNounId,
       contractAddress: auction.contractAddress,
+      auctionName: auction.auctionName,
     };
   });
   return pastAuctions;

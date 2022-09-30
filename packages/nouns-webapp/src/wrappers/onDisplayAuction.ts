@@ -1,12 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber';
+import { AUCTION_NAMES } from '../config';
 import { useAppSelector } from '../hooks';
 import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun';
 import { Bid, BidEvent } from '../utils/types';
 import { Auction } from './nounsAuction';
-import { auctionName as firstAuctionName } from '../state/slices/auction/firstAuction';
-import { auctionName as secondAuctionName } from '../state/slices/auction/secondAuction';
-
-type auctionNames = typeof firstAuctionName | typeof secondAuctionName;
 
 const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
   return {
@@ -17,6 +14,7 @@ const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
     nounId: BigNumber.from(reduxSafeAuction.nounId),
     settled: false,
     contractAddress: reduxSafeAuction.contractAddress,
+    auctionName: reduxSafeAuction.auctionName,
   };
 };
 
@@ -39,7 +37,7 @@ const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
 };
 
 const useOnDisplayAuction = (
-  currentAuctionName: auctionNames = firstAuctionName,
+  currentAuctionName: AUCTION_NAMES = AUCTION_NAMES.FIRST_AUCTION,
 ): Auction | undefined => {
   const lastAuctionNounId = useAppSelector(
     state => state[currentAuctionName].activeAuction?.nounId,
@@ -85,7 +83,7 @@ const useOnDisplayAuction = (
 
 export const useAuctionBids = (
   auctionNounId: BigNumber,
-  currentAuctionName: auctionNames = firstAuctionName,
+  currentAuctionName: AUCTION_NAMES = AUCTION_NAMES.FIRST_AUCTION,
 ): Bid[] | undefined => {
   const lastAuctionNounId = useAppSelector(state => state[currentAuctionName].lastAuctionNounId);
   const lastAuctionBids = useAppSelector(state => state[currentAuctionName].bids);

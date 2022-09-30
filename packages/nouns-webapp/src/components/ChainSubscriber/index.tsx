@@ -10,11 +10,13 @@ import {
 import { actionType } from '../../state/slices/auction/firstAuction';
 import { WebSocketProvider } from '@ethersproject/providers';
 import { nounPath } from '../../utils/history';
+import { AUCTION_NAMES } from '../../config';
 
 type ChainSubscriberArgs = {
   wsProvider: WebSocketProvider;
   auctionsActions: actionType[];
   auctionHouseProxyAddresses: string[];
+  auctionNames: AUCTION_NAMES[];
 };
 
 const BLOCKS_PER_DAY = 6_500;
@@ -23,10 +25,15 @@ export const ChainSubscriber = ({
   wsProvider,
   auctionsActions,
   auctionHouseProxyAddresses,
+  auctionNames,
 }: ChainSubscriberArgs) => {
   const dispatch = useAppDispatch();
 
-  const loadState = async (actions: actionType, auctionHouseProxyAddress: string) => {
+  const loadState = async (
+    actions: actionType,
+    auctionHouseProxyAddress: string,
+    auctionName: AUCTION_NAMES,
+  ) => {
     dispatch(actions.setContractAddress(auctionHouseProxyAddress));
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(
       auctionHouseProxyAddress,
@@ -64,6 +71,7 @@ export const ChainSubscriber = ({
             endTime,
             settled: false,
             contractAddress: auctionHouseProxyAddress,
+            auctionName,
           }),
         ),
       );
@@ -83,7 +91,11 @@ export const ChainSubscriber = ({
     const currentAuction = await nounsAuctionHouseContract.auction();
     dispatch(
       actions.setFullAuction(
-        reduxSafeAuction({ ...currentAuction, contractAddress: auctionHouseProxyAddress }),
+        reduxSafeAuction({
+          ...currentAuction,
+          contractAddress: auctionHouseProxyAddress,
+          auctionName,
+        }),
       ),
     );
     dispatch(actions.setLastAuctionNounId(currentAuction.nounId.toNumber()));
@@ -110,7 +122,7 @@ export const ChainSubscriber = ({
   };
 
   auctionsActions.forEach((_, index) => {
-    loadState(auctionsActions[index], auctionHouseProxyAddresses[index]);
+    loadState(auctionsActions[index], auctionHouseProxyAddresses[index], auctionNames[index]);
   });
 
   return <></>;

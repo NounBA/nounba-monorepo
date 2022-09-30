@@ -1,6 +1,7 @@
 import { Auction } from '../wrappers/nounsAuction';
 import { AuctionState } from '../state/slices/auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
+import { AUCTION_NAMES } from '../config';
 
 export const isNounderNoun = (nounId: BigNumber) => {
   return nounId.mod(10).eq(0) || nounId.eq(0);
@@ -15,6 +16,7 @@ const emptyNounderAuction = (onDisplayAuctionId: number): Auction => {
     nounId: BigNumber.from(onDisplayAuctionId).toJSON(),
     settled: false,
     contractAddress: '',
+    auctionName: AUCTION_NAMES.FIRST_AUCTION,
   };
 };
 

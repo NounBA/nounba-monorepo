@@ -106,4 +106,9 @@ export enum REGIONS {
   east,
 }
 
+export enum AUCTION_NAMES {
+  FIRST_AUCTION = 'firstAuction',
+  SECOND_AUCTION = 'secondAuction',
+}
+
 export default config;

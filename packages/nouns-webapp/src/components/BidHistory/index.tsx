@@ -9,6 +9,7 @@ import { Bid } from '../../utils/types';
 import { BigNumber as EthersBN } from '@ethersproject/bignumber';
 import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { useAppSelector } from '../../hooks';
+import { AUCTION_NAMES } from '../../config';
 
 const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   const bidAmount = <TruncatedAmount amount={new BigNumber(EthersBN.from(bid.value).toString())} />;
@@ -43,10 +44,17 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   );
 };
 
-const BidHistory: React.FC<{ auctionId: string; max: number; classes?: any }> = props => {
-  const { auctionId, max, classes } = props;
+const BidHistory: React.FC<{
+  auctionId: string;
+  max: number;
+  classes?: any;
+  auctionName: AUCTION_NAMES;
+}> = props => {
+  const { auctionId, max, classes, auctionName } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
-  const bids = useAuctionBids(EthersBN.from(auctionId));
+
+  const bids = useAuctionBids(EthersBN.from(auctionId), auctionName);
+  console.log('BIIIIDSS', bids);
   const bidContent =
     bids &&
     bids

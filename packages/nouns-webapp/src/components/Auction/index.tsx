@@ -15,15 +15,11 @@ import { setStateBackgroundColor } from '../../state/slices/application';
 import { grey, beige } from '../../utils/nounBgColors';
 import { INounSeed } from '../../wrappers/nounToken';
 
-import { auctionName as firstAuctionName } from '../../state/slices/auction/firstAuction';
-import { auctionName as secondAuctionName } from '../../state/slices/auction/secondAuction';
-import { REGIONS } from '../../config';
-
-type auctionNames = typeof firstAuctionName | typeof secondAuctionName;
+import { REGIONS, AUCTION_NAMES } from '../../config';
 
 interface AuctionProps {
   auction?: IAuction;
-  auctionName: auctionNames;
+  auctionName: AUCTION_NAMES;
   side: REGIONS;
 }
 

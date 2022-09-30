@@ -1,5 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AUCTION_NAMES } from '../../../config';
 import {
   AuctionCreateEvent,
   AuctionExtendedEvent,
@@ -14,6 +15,7 @@ export interface AuctionState {
   lastAuctionNounId: number | undefined;
   onDisplayAuctionNounId: number | undefined;
   contractAddress: string;
+  auctionName?: AUCTION_NAMES;
 }
 
 const initialState: AuctionState = {
@@ -22,6 +24,7 @@ const initialState: AuctionState = {
   lastAuctionNounId: undefined,
   onDisplayAuctionNounId: undefined,
   contractAddress: '',
+  auctionName: AUCTION_NAMES.FIRST_AUCTION,
 };
 
 export const reduxSafeNewAuction = (auction: AuctionCreateEvent): IAuction => ({
@@ -32,6 +35,7 @@ export const reduxSafeNewAuction = (auction: AuctionCreateEvent): IAuction => ({
   nounId: BigNumber.from(auction.nounId).toJSON(),
   settled: false,
   contractAddress: auction.contractAddress,
+  auctionName: auction.auctionName,
 });
 
 export const reduxSafeAuction = (auction: IAuction): IAuction => ({
@@ -42,6 +46,7 @@ export const reduxSafeAuction = (auction: IAuction): IAuction => ({
   nounId: BigNumber.from(auction.nounId).toJSON(),
   settled: auction.settled,
   contractAddress: auction.contractAddress,
+  auctionName: auction.auctionName,
 });
 
 export const reduxSafeBid = (bid: BidEvent): BidEvent => ({
@@ -73,7 +78,7 @@ const containsBid = (bidEvents: BidEvent[], bidEvent: BidEvent) =>
 export const buildAuctionSlice = (name: string) =>
   createSlice({
     name,
-    initialState,
+    initialState: { ...initialState, auctionName: name },
     reducers: {
       setActiveAuction: (state, action: PayloadAction<AuctionCreateEvent>) => {
         state.activeAuction = reduxSafeNewAuction(action.payload);
