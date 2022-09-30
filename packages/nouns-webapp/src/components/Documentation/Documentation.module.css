@@ -17,6 +17,10 @@
   letter-spacing: -0.25px;
   line-height: 28px;
   font-size: 1.2rem !important;
+  border-radius: 10px !important;
+  background-color: var(--brand-white);
+  margin-bottom: 2.5rem;
+  border: none;
 }
 
 @media (max-width: 992px) {
@@ -24,12 +28,6 @@
     padding: 1rem;
   }
 }
-
-.accordionItem {
-  margin-bottom: 2.5rem;
-  border: none;
-}
-
 .aboutText {
   margin: 0px !important;
 }
@@ -40,7 +38,7 @@
 }
 
 .accordionHeader button:hover {
-  color: var(--brand-dark-red) !important;
+  color: var(--brand-color-red) !important;
 }
 
 .accordionHeader button {
@@ -50,8 +48,8 @@
   font-size: 2.5rem !important;
   cursor: pointer;
   line-height: normal;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .accordionHeader button:not(.collapsed) {
