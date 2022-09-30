@@ -8,6 +8,9 @@
   padding: 0px 0px 0px 14px;
   transition: all 0.125s ease-in-out;
   box-shadow: none;
+  color: #b6a9a7;
+  background-color: #fdf9f9;
+  border-color: white !important;
 }
 
 .whiteInfo {

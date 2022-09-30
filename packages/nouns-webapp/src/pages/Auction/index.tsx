@@ -129,12 +129,11 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
         </Row>
       </Container>
       {/* TODO: show profileActivityFeed to the owner */}
-      <Banner />
-      {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? (
-        <ProfileActivityFeed nounId={onDisplayAuctionNounId} />
-      ) : (
-        <Banner />
+      {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
+      {/* <ProfileActivityFeed nounId={1} /> */}
+      {/* ) : (
       )} */}
+      <Banner />
       <Documentation />
     </div>
   );

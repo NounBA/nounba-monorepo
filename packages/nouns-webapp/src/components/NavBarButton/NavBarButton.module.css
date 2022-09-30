@@ -26,7 +26,6 @@
 
 .icon > svg {
   max-height: 14px;
-  opacity: 0.5;
 }
 
 @media (max-width: 992px) {
@@ -70,14 +69,16 @@
 }
 
 .warmInfo {
-  border: 1px solid var(--brand-warm-border);
+  border: 1px solid var(--brand-color-blue);
   border-radius: 10px;
-  color: var(--brand-warm-dark-text);
+  color: var(--brand-white);
+  background-color: var(--brand-color-blue);
 }
 
 .warmInfo:hover {
-  background-color: var(--brand-warm-accent);
-  color: black;
+  background-color: var(--brand-white);
+  border-color: var(--brand-color-blue);
+  color: var(--brand-color-blue);
 }
 
 .warmWallet {

@@ -14,22 +14,27 @@
 }
 
 .navBarLogo {
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
 }
 
 .navLogoTitle {
   display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0;
+  font-size: 2.5rem;
 }
 
 .navBarCustom {
-  padding-bottom: 1rem;
+  padding-bottom: 0;
+  padding-top: 0;
+  background-color: var(--brand-white);
 }
 
 @media (max-width: 992px) {
   .navBarLogo {
-    width: 65px;
-    height: 65px;
+    width: 40px;
+    height: 40px;
   }
 
   .navBarCustom {
@@ -37,6 +42,9 @@
     margin-right: -5px;
     padding-bottom: 0rem;
   }
+}
+@media (max-width: 479px) {
+  .navLogoTitle {display:none}
 }
 
 /* connect button displays differently to default NavBarItems, thus the !importants */
@@ -108,4 +116,8 @@
   height: 44px;
   padding: 0.25rem 0.5rem;
   margin-right: 12px;
+}
+
+.navbarCollapse {
+  flex-grow: unset;
 }

@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 import { useEtherBalance } from '@usedapp/core';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -22,7 +22,6 @@ import { useState } from 'react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
-  const stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   const history = useHistory();
   const ethBalance = useEtherBalance(config.addresses.nounsDaoExecutor);
@@ -46,12 +45,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar
-        expand="xl"
-        style={{ backgroundColor: `${useStateBg ? stateBgColor : 'white'}` }}
-        className={classes.navBarCustom}
-        expanded={isNavExpanded}
-      >
+      <Navbar expand="xl" className={classes.navBarCustom} expanded={isNavExpanded}>
         <Container style={{ maxWidth: 'unset' }}>
           <div className={classes.brandAndTreasuryWrapper}>
             <Navbar.Brand as={Link} to="/" className={classes.navBarBrand}>
@@ -64,28 +58,29 @@ const NavBar = () => {
                 TESTNET
               </Nav.Item>
             )}
-            <Nav.Item>
-              {treasuryBalance && (
-                <Nav.Link
-                  href={daoEtherscanLink}
-                  className={classes.nounsNavLink}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <NavBarTreasury
-                    treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
-                    treasuryStyle={nonWalletButtonStyle}
-                  />
-                </Nav.Link>
-              )}
-            </Nav.Item>
           </div>
+          <Nav.Item>
+            {/* {treasuryBalance && ( */}
+            <Nav.Link
+              href={daoEtherscanLink}
+              className={classes.nounsNavLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <NavBarTreasury
+                treasuryBalance={'1000'}
+                // treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
+                treasuryStyle={nonWalletButtonStyle}
+              />
+            </Nav.Link>
+            {/* )} */}
+          </Nav.Item>
           <Navbar.Toggle
             className={classes.navBarToggle}
             aria-controls="basic-navbar-nav"
             onClick={() => setIsNavExpanded(!isNavExpanded)}
           />
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Collapse className={classes.navbarCollapse}>
             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}

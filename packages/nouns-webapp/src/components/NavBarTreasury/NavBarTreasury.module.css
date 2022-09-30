@@ -7,7 +7,7 @@
   padding: 0px 10px 0px 10px;
   transition: all 0.125s ease-in-out;
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .button {
@@ -38,7 +38,7 @@
   margin-right: 0.25rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .wrapper {
     margin-left: -0.5rem;
     padding: 0px 7px 0px 6px;
@@ -77,13 +77,14 @@
 }
 
 .warmInfo {
-  border: 1px solid var(--brand-warm-border);
-  border-radius: 10px;
+  /* border: 1px solid var(--brand-warm-border);
+  border-radius: 10px; */
   color: var(--brand-warm-light-text);
+  background-color: transparent !important;
 }
 
 .warmInfo:hover {
-  background-color: var(--brand-warm-accent);
+  /* background-color: var(--brand-warm-accent); */
   color: var(--brand-warm-dark-text);
   color: black;
 }
