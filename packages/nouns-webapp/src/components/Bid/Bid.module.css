@@ -188,3 +188,6 @@
   margin: 0;
   padding: 0;
 }
+.connectToSettle {
+  color: var(--brand-cool-accent);
+}

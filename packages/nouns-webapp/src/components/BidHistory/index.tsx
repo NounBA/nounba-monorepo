@@ -54,7 +54,6 @@ const BidHistory: React.FC<{
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
   const bids = useAuctionBids(EthersBN.from(auctionId), auctionName);
-  console.log('BIIIIDSS', bids);
   const bidContent =
     bids &&
     bids
