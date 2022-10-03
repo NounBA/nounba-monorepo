@@ -5,9 +5,6 @@ import Link from '../Link';
 import { Trans } from '@lingui/macro';
 
 const Documentation = () => {
-  const playgroundLink = (
-    <Link text={<Trans>Playground</Trans>} url="/playground" leavesPage={false} />
-  );
   const publicDomainLink = (
     <Link
       text={<Trans>public domain</Trans>}
