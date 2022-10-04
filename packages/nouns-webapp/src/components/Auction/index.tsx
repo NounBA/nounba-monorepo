@@ -92,7 +92,7 @@ const Auction: React.FC<AuctionProps> = props => {
               side === REGIONS.east ? classes.eastSide : classes.westSide
             }`}
           >
-            {side === REGIONS.east ? 'Eastern' : 'Western'} Conference
+            {side === REGIONS.east ? 'East' : 'West'}
           </div>
         </div>
         <div className={classes.infoWrapper}>

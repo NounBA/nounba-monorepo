@@ -18,6 +18,11 @@
 
 @media (max-width: 992px) {
   .wrapper h1 {
+    padding-top: 0;
     font-size: 56px;
+  }
+  .wrapper h2 {
+    font-size: 1.16rem;
+    margin-top: 16px;
   }
 }
