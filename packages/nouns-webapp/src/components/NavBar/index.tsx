@@ -2,7 +2,7 @@ import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
 import logo from '../../assets/logo.png';
 import { useEtherBalance } from '@usedapp/core';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import testnetNoun from '../../assets/testnet-noun.png';
@@ -22,24 +22,28 @@ import { useState } from 'react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
-  const isCool = useAppSelector(state => state.application.isCoolBackground);
-  const history = useHistory();
+  // const isCool = useAppSelector(state => state.application.isCoolBackground);
+  // const history = useHistory();
   const ethBalance = useEtherBalance(config.addresses.nounsDaoExecutor);
   const lidoBalanceAsETH = useLidoBalance();
   const treasuryBalance = ethBalance && lidoBalanceAsETH && ethBalance.add(lidoBalanceAsETH);
   const daoEtherscanLink = buildEtherscanHoldingsLink(config.addresses.nounsDaoExecutor);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
-  const useStateBg =
-    history.location.pathname === '/' ||
-    history.location.pathname.includes('/noun/') ||
-    history.location.pathname.includes('/auction/');
+  // const useStateBg =
+  //   history.location.pathname === '/' ||
+  //   history.location.pathname.includes('/noun/') ||
+  //   history.location.pathname.includes('/auction/');
 
-  const nonWalletButtonStyle = !useStateBg
-    ? NavBarButtonStyle.WHITE_INFO
-    : isCool
-    ? NavBarButtonStyle.COOL_INFO
-    : NavBarButtonStyle.WARM_INFO;
+  // const nonWalletButtonStyle = !useStateBg
+  //   ? NavBarButtonStyle.WHITE_INFO
+  //   : isCool
+  //   ? NavBarButtonStyle.COOL_INFO
+  //   : NavBarButtonStyle.WARM_INFO;
+  const nonWalletButtonStyle =
+    // NavBarButtonStyle.WHITE_INFO
+    // NavBarButtonStyle.COOL_INFO;
+    NavBarButtonStyle.WARM_INFO;
 
   const closeNav = () => setIsNavExpanded(false);
 
