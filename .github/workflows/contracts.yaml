@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     paths:
-      - 'packages/nouns-contracts/**'
+      # - 'packages/nouns-contracts/**'
       - 'packages/nouns-subgraph/**'
     branches:
       - '**'
