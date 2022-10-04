@@ -41,4 +41,12 @@ export const east = [
 
 export const cities = { [REGIONS.east]: east, [REGIONS.west]: west };
 
+const listById = (cities: { id: number; displayName: string }[]) =>
+  cities.reduce((prev, city) => ({ ...prev, [city.id]: city }), {});
+
+export const allCities: { [n: number]: { id: number; displayName: string } } = {
+  ...listById(west),
+  ...listById(east),
+};
+
 export default cities;
