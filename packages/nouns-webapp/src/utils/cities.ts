@@ -1,3 +1,5 @@
+import { REGIONS } from '../config';
+
 export const west = [
   { id: 1, displayName: 'Golden State' },
   { id: 3, displayName: 'Dallas' },
@@ -37,6 +39,6 @@ export const east = [
   { id: 34, displayName: 'Orlando' },
 ];
 
-export const cities = { east, west };
+export const cities = { [REGIONS.east]: east, [REGIONS.west]: west };
 
 export default cities;

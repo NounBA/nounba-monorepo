@@ -14,7 +14,6 @@ import { setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId } from '..
 
 import classes from './Auction.module.css';
 import { AUCTION_NAMES, REGIONS } from '../../config';
-import CitiesBoard from '../../components/CitiesBoard';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -128,10 +127,6 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
       {/* <ProfileActivityFeed nounId={1} /> */}
       {/* ) : (
       )} */}
-      <CitiesBoard
-        westAuctionID={onDisplayFirstAuction?.nounId}
-        eastAuctionID={onDisplaySecondAuction?.nounId}
-      />
       <Banner />
       <Documentation />
     </div>

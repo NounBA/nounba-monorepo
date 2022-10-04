@@ -17,7 +17,11 @@ interface DelegationCandidateInfoProps {
 }
 
 const DelegationCandidateInfo: React.FC<DelegationCandidateInfoProps> = props => {
-  const { address, changeModalState, votesToAdd } = props;
+  const {
+    address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+    changeModalState,
+    votesToAdd,
+  } = props;
 
   const [willHaveVoteCount, setWillHaveVoteCount] = useState(0);
 
