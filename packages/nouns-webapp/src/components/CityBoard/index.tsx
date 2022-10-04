@@ -57,7 +57,8 @@ const CityBoard = ({ auctionID, side }: CityBoardProps) => {
     <div className={classes.containerWrapper}>
       <section className={classes.wrapper}>
         <h1 className={classes.title}>
-          <Trans>{side === REGIONS.east ? 'Eastern' : 'Western'} team current bid</Trans>
+          {side === REGIONS.east ? 'Eastern' : 'Western'}
+          <Trans> team current bid</Trans>
         </h1>
         <ListGroup
           className={clsx(classes.list, side === REGIONS.east && classes.blueList)}
