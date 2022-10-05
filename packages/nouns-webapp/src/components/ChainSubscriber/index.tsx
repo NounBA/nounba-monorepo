@@ -1,5 +1,4 @@
 import { NounsAuctionHouseFactory } from '@nouns/sdk';
-import { push } from 'connected-react-router';
 import { BigNumberish, BigNumber } from 'ethers';
 import { useAppDispatch } from '../../hooks';
 import {
@@ -9,7 +8,6 @@ import {
 } from '../../state/slices/auction/auctionWrapper';
 import { actionType } from '../../state/slices/auction/firstAuction';
 import { WebSocketProvider } from '@ethersproject/providers';
-import { nounPath } from '../../utils/history';
 import { AUCTION_NAMES } from '../../config';
 
 type ChainSubscriberArgs = {
