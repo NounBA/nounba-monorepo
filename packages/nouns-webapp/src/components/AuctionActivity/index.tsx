@@ -28,8 +28,8 @@ interface AuctionActivityProps {
   auction: Auction;
   isFirstAuction: boolean;
   isLastAuction: boolean;
-  onPrevAuctionClick: () => void;
-  onNextAuctionClick: () => void;
+  onPrevAuctionClick?: () => void;
+  onNextAuctionClick?: () => void;
   displayGraphDepComps: boolean;
   side: REGIONS;
 }

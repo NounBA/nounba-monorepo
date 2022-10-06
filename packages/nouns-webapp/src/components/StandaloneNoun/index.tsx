@@ -19,7 +19,6 @@ interface StandaloneCircularNounProps {
 
 interface StandaloneNounWithSeedProps {
   nounId: EthersBN;
-  onLoadSeed?: (seed: INounSeed) => void;
   shouldLinkToProfile: boolean;
 }
 
@@ -119,15 +118,13 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
 export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   props: StandaloneNounWithSeedProps,
 ) => {
-  const { nounId, onLoadSeed, shouldLinkToProfile } = props;
+  const { nounId, shouldLinkToProfile } = props;
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
-  if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="Noun" />;
-
-  onLoadSeed(seed);
+  if (!seed || seedIsInvalid || !nounId) return <Noun imgPath="" alt="Noun" />;
 
   const onClickHandler = () => {
     dispatch(setOnDisplayAuctionNounId(nounId.toNumber()));
