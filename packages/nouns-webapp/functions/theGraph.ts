@@ -14,6 +14,8 @@ export interface Seed {
   accessory: number;
   head: number;
   glasses: number;
+  oneOfOne: boolean;
+  oneOfOneIndex: number;
 }
 
 export interface NormalizedNoun {
@@ -46,6 +48,8 @@ const nounsGql = `
       accessory
       head
       glasses
+      oneOfOne
+      oneOfOneIndex
     }
   }
 }
@@ -62,6 +66,8 @@ export const normalizeSeed = (seed: any): Seed => ({
   glasses: Number(seed.glasses),
   accessory: Number(seed.accessory),
   head: Number(seed.head),
+  oneOfOne: seed.oneOfOne,
+  oneOfOneIndex: Number(seed.oneOfOneIndex),
 });
 
 export const normalizeNoun = (noun: any): NormalizedNoun => ({

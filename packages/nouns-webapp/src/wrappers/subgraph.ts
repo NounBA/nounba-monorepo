@@ -50,6 +50,8 @@ export const seedsQuery = (first = 1_000) => gql`
     accessory
     head
     glasses
+    oneOfOne
+    oneOfOneIndex
   }
 }
 `;
