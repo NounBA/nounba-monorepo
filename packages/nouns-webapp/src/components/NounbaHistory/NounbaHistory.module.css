@@ -1,0 +1,102 @@
+.nounWrapper {
+  align-self: flex-end;
+  width: 100%;
+}
+.infoWrapper {
+  position: relative;
+  padding-top: 59px;
+}
+.auctionInfo {
+  z-index: 1;
+  position: relative;
+}
+
+.nounContentCol {
+  display: flex;
+}
+
+.auctionActivityCol {
+  padding-right: 5rem;
+  padding-bottom: 0rem;
+  min-height: 520px;
+  align-self: flex-end !important;
+}
+
+.conferenceTitleWrapper {
+  z-index: 2;
+  position: relative;
+}
+.conferenceTitle {
+  margin: 0 0 -59px;
+  height: 118px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--brand-white);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.eastSide {
+  background-color: var(--brand-color-blue);
+}
+.westSide {
+  background-color: var(--brand-color-red);
+}
+
+@media (max-width: 992px) {
+  .nounWrapper {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  .auctionActivityCol {
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+    width: 100%;
+    background-color: white;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -41px;
+    height: 82px;
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 568px) {
+  .auctionActivityCol {
+    width: 100%;
+    margin-left: unset;
+    margin-right: unset;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    padding-right: unset;
+    padding-left: 0;
+  }
+
+  .nounWrapper {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2rem;
+  }
+
+  .nounContentCol {
+    padding: 0rem;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -25px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+}

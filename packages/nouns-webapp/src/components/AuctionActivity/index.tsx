@@ -26,8 +26,8 @@ const openEtherscanBidHistory = () => {
 
 interface AuctionActivityProps {
   auction: Auction;
-  isFirstAuction: boolean;
-  isLastAuction: boolean;
+  isFirstAuction?: boolean;
+  isLastAuction?: boolean;
   onPrevAuctionClick?: () => void;
   onNextAuctionClick?: () => void;
   displayGraphDepComps: boolean;

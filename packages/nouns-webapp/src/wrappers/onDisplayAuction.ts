@@ -5,7 +5,7 @@ import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun
 import { Bid, BidEvent } from '../utils/types';
 import { Auction } from './nounsAuction';
 
-const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
+export const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
   return {
     amount: BigNumber.from(reduxSafeAuction.amount),
     bidder: reduxSafeAuction.bidder,
