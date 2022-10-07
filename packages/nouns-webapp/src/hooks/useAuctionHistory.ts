@@ -60,15 +60,19 @@ export function useAuctionHistory(nounbaId: string) {
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(auctionAddress, wsProvider);
     const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(nounId, null, null, null);
     const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(nounId, null, null);
+    const auctionCreatedFilter = nounsAuctionHouseContract.filters.AuctionCreated(
+      nounId,
+      null,
+      null,
+    );
 
     const loadAuction = async () => {
-      const settledAuction = await nounsAuctionHouseContract.queryFilter(
-        settledFilter,
-        0 - BLOCKS_PER_DAY,
-      );
+      const createdAuction = await nounsAuctionHouseContract.queryFilter(auctionCreatedFilter);
+      const settledAuction = await nounsAuctionHouseContract.queryFilter(settledFilter);
       const block = await settledAuction[0].getBlock();
       const currentSide = getSide(nounId.toNumber());
 
+      console.log(createdAuction);
       setSide(currentSide);
       setAuction(
         deserializeSettledAuction({
@@ -76,7 +80,7 @@ export function useAuctionHistory(nounbaId: string) {
           bidder: settledAuction[0].args.winner,
           nounId: settledAuction[0].args.nounId,
           endTime: BigNumber.from(block.timestamp),
-          startTime: BigNumber.from(block.timestamp),
+          startTime: BigNumber.from(createdAuction[0].args.startTime),
           settled: true,
           contractAddress: '',
           auctionName:
@@ -88,10 +92,7 @@ export function useAuctionHistory(nounbaId: string) {
     };
     const loadBids = async () => {
       // Fetch the previous 24hours of  bids
-      const previousBids = await nounsAuctionHouseContract.queryFilter(
-        bidFilter,
-        0 - BLOCKS_PER_DAY,
-      );
+      const previousBids = await nounsAuctionHouseContract.queryFilter(bidFilter);
       for (let event of previousBids) {
         if (event.args === undefined) return;
         processBidFilter(...(event.args as [BigNumber, string, BigNumber, boolean]), event);

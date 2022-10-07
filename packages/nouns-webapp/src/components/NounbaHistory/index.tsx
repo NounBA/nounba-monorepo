@@ -1,8 +1,11 @@
+import { useContext } from 'react';
+import { BigNumber } from '@ethersproject/bignumber';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
 import AuctionActivity from '../AuctionActivity';
-import { Auction as IAuction } from '../../wrappers/nounsAuction';
 import classes from './NounbaHistory.module.css';
 // import NounderNounContent from '../NounderNounContent';
-import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 // import { isNounderNoun } from '../../utils/nounderNoun';
 import {
@@ -12,18 +15,12 @@ import {
 import { StandaloneNounWithSeed } from '../StandaloneNoun';
 import { LoadingNoun } from '../Noun';
 
-import { REGIONS } from '../../config';
-import { BigNumber } from '@ethersproject/bignumber';
-import { Container, Row, Col } from 'react-bootstrap';
+import PastAuctionContext from '../../contexts/PastAuctionContext';
 
-interface NounbaHistoryProps {
-  auction: IAuction;
-  side: REGIONS;
-}
+const NounbaHistory = () => {
+  const { auction: currentAuction, side } = useContext(PastAuctionContext);
 
-const NounbaHistory: React.FC<NounbaHistoryProps> = props => {
-  const { auction: currentAuction, side } = props;
-  const auctionIdBigNumber = BigNumber.from(currentAuction.nounId);
+  const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId);
   const history = useHistory();
   const dispatch = useAppDispatch();
 
