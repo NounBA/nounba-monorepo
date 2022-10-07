@@ -5,21 +5,33 @@ import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import citiesByRegion from '../../utils/cities';
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { REGIONS } from '../../config';
+import { useHistory } from 'react-router-dom';
 
 type CityItemProps = {
   name: string;
+  id: number;
   isDisabled?: boolean;
   isSelected?: boolean;
   cityRef?: RefObject<HTMLAnchorElement> | null;
 };
-const CityItem = ({ name, isDisabled = false, isSelected, cityRef }: CityItemProps) => (
-  <ListGroupItem className={classes.itemWrapper} ref={cityRef}>
-    <Button className={clsx(classes.city, isSelected && classes.isSelected)} disabled={isDisabled}>
-      <span className={classes.avatar} />
-      {name}
-    </Button>
-  </ListGroupItem>
-);
+const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityItemProps) => {
+  const history = useHistory();
+  const onClickHandler = () => {
+    history.push(`/nounba/${id}`);
+  };
+  return (
+    <ListGroupItem className={classes.itemWrapper} ref={cityRef}>
+      <Button
+        className={clsx(classes.city, isSelected && classes.isSelected)}
+        disabled={isDisabled}
+        onClick={onClickHandler}
+      >
+        <span className={classes.avatar} />
+        {name}
+      </Button>
+    </ListGroupItem>
+  );
+};
 
 type CityBoardProps = {
   auctionID: number;
@@ -66,6 +78,7 @@ const CityBoard = ({ auctionID, side }: CityBoardProps) => {
           {cities.map(city => (
             <CityItem
               key={city.id}
+              id={city.id}
               name={city.displayName}
               isSelected={city.id === currentID}
               isDisabled={city.id > currentID}

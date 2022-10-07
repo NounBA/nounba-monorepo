@@ -4,14 +4,27 @@ import { BigNumberish } from 'ethers';
 import { useEffect, useState } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 
-import config, { AUCTION_NAMES } from '../config';
-import { reduxSafeBid, reduxSafeAuction } from '../state/slices/auction/auctionWrapper';
+import config, { AUCTION_NAMES, REGIONS } from '../config';
+import { reduxSafeBid } from '../state/slices/auction/auctionWrapper';
 import { BidEvent } from '../utils/types';
 import { Auction } from '../wrappers/nounsAuction';
-import { deserializeAuction } from '../wrappers/onDisplayAuction';
+import { getSide } from '../utils/cities';
 
 const BLOCKS_PER_DAY = 6_500;
 const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
+
+const deserializeSettledAuction = (auction: Auction): Auction => {
+  return {
+    amount: BigNumber.from(auction.amount),
+    bidder: auction.bidder,
+    endTime: BigNumber.from(auction.endTime),
+    startTime: BigNumber.from(auction.endTime),
+    nounId: BigNumber.from(auction.nounId),
+    settled: true,
+    contractAddress: '',
+    auctionName: AUCTION_NAMES.FIRST_AUCTION,
+  };
+};
 
 /**
  * A function that loads the auction info and history of the nounba id passed
@@ -19,12 +32,10 @@ const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
  * @returns data
  */
 
-export function useAuctionHistory(nounbaId: BigNumber) {
+export function useAuctionHistory(nounbaId: string) {
   const [bids, setBids] = useState<BidEvent[]>([]);
-  const [nounId, setNounId] = useState<BigNumber>(nounbaId);
-  const [amount, setAmount] = useState<BigNumber>();
-  const [winner, setWinner] = useState<BigNumber>();
   const [auction, setAuction] = useState<Auction>();
+  const [side, setSide] = useState(REGIONS.east);
 
   const processBidFilter = async (
     nounId: BigNumberish,
@@ -42,28 +53,37 @@ export function useAuctionHistory(nounbaId: BigNumber) {
       ];
     });
   };
-  const processAuctionSettled = (nounId: BigNumberish, winner: string, amount: BigNumberish) => {
-    setNounId(BigNumber.from(nounId));
-    setAmount(BigNumber.from(amount));
-    setWinner(BigNumber.from(winner));
-  };
 
   useEffect(() => {
+    const nounId = BigNumber.from(nounbaId);
     const auctionAddress = config.addresses.nounsAuctionHouseProxy;
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(auctionAddress, wsProvider);
-    const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(null, null, null, null);
-    const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(null, null, null);
+    const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(nounId, null, null, null);
+    const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(nounId, null, null);
 
     const loadAuction = async () => {
-      const auctionData = await nounsAuctionHouseContract.auction();
+      const settledAuction = await nounsAuctionHouseContract.queryFilter(
+        settledFilter,
+        0 - BLOCKS_PER_DAY,
+      );
+      const block = await settledAuction[0].getBlock();
+      const currentSide = getSide(nounId.toNumber());
+
+      setSide(currentSide);
       setAuction(
-        deserializeAuction(
-          reduxSafeAuction({
-            ...auctionData,
-            contractAddress: auctionAddress,
-            auctionName: AUCTION_NAMES.FIRST_AUCTION,
-          }),
-        ),
+        deserializeSettledAuction({
+          amount: settledAuction[0].args.amount,
+          bidder: settledAuction[0].args.winner,
+          nounId: settledAuction[0].args.nounId,
+          endTime: BigNumber.from(block.timestamp),
+          startTime: BigNumber.from(block.timestamp),
+          settled: true,
+          contractAddress: '',
+          auctionName:
+            currentSide === REGIONS.west
+              ? AUCTION_NAMES.FIRST_AUCTION
+              : AUCTION_NAMES.SECOND_AUCTION,
+        }),
       );
     };
     const loadBids = async () => {
@@ -79,17 +99,11 @@ export function useAuctionHistory(nounbaId: BigNumber) {
     };
     loadAuction();
     loadBids();
-
-    nounsAuctionHouseContract.on(settledFilter, (nounId, winner, amount) =>
-      processAuctionSettled(nounId, winner, amount),
-    );
-  }, []);
+  }, [nounbaId]);
 
   return {
     bids,
-    nounId,
-    amount,
-    winner,
     auction,
+    side,
   };
 }
