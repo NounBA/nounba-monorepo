@@ -4,8 +4,6 @@ import classes from './Holder.module.css';
 import ShortAddress from '../ShortAddress';
 import clsx from 'clsx';
 import { Trans } from '@lingui/macro';
-import { useQuery } from '@apollo/client';
-import { nounQuery } from '../../wrappers/subgraph';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import React, { useMemo } from 'react';
 import Tooltip from '../Tooltip';

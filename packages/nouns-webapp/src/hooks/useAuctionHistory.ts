@@ -10,7 +10,6 @@ import { BidEvent } from '../utils/types';
 import { Auction } from '../wrappers/nounsAuction';
 import { getSide } from '../utils/cities';
 
-const BLOCKS_PER_DAY = 6_500;
 const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
 
 const deserializeSettledAuction = (auction: Auction): Auction => {
@@ -26,6 +25,12 @@ const deserializeSettledAuction = (auction: Auction): Auction => {
   };
 };
 
+export enum STATUS {
+  LOADING,
+  SUCCESS,
+  ERROR,
+}
+
 /**
  * A function that loads the auction info and history of the nounba id passed
  * @param nounbaId the id you want to have the history
@@ -36,6 +41,7 @@ export function useAuctionHistory(nounbaId: string) {
   const [bids, setBids] = useState<BidEvent[]>([]);
   const [auction, setAuction] = useState<Auction>();
   const [side, setSide] = useState(REGIONS.east);
+  const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
 
   const processBidFilter = async (
     nounId: BigNumberish,
@@ -55,8 +61,14 @@ export function useAuctionHistory(nounbaId: string) {
   };
 
   useEffect(() => {
+    setStatus(STATUS.LOADING);
+
     const nounId = BigNumber.from(nounbaId);
-    const auctionAddress = config.addresses.nounsAuctionHouseProxy;
+    const currentSide = getSide(nounId.toNumber());
+    const auctionAddress =
+      currentSide === REGIONS.east
+        ? config.addresses.nounsAuctionHouseProxy
+        : config.addresses.nounsAuctionHouseProxy2;
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(auctionAddress, wsProvider);
     const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(nounId, null, null, null);
     const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(nounId, null, null);
@@ -69,10 +81,15 @@ export function useAuctionHistory(nounbaId: string) {
     const loadAuction = async () => {
       const createdAuction = await nounsAuctionHouseContract.queryFilter(auctionCreatedFilter);
       const settledAuction = await nounsAuctionHouseContract.queryFilter(settledFilter);
+
+      if (settledAuction.length < 1) {
+        setStatus(STATUS.ERROR);
+        return;
+      }
+
       const block = await settledAuction[0].getBlock();
       const currentSide = getSide(nounId.toNumber());
 
-      console.log(createdAuction);
       setSide(currentSide);
       setAuction(
         deserializeSettledAuction({
@@ -89,6 +106,8 @@ export function useAuctionHistory(nounbaId: string) {
               : AUCTION_NAMES.SECOND_AUCTION,
         }),
       );
+
+      setStatus(STATUS.SUCCESS);
     };
     const loadBids = async () => {
       // Fetch the previous 24hours of  bids
@@ -98,13 +117,19 @@ export function useAuctionHistory(nounbaId: string) {
         processBidFilter(...(event.args as [BigNumber, string, BigNumber, boolean]), event);
       }
     };
-    loadAuction();
-    loadBids();
+
+    try {
+      loadAuction();
+      loadBids();
+    } catch (error) {
+      setStatus(STATUS.ERROR);
+    }
   }, [nounbaId]);
 
   return {
     bids,
     auction,
     side,
+    status,
   };
 }

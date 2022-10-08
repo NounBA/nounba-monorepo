@@ -28,10 +28,10 @@ const NounInfoCard: React.FC<NounInfoCardProps> = props => {
   return (
     <>
       <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowBirthday nounId={nounId} />
+        <NounInfoRowBirthday />
       </Col>
       <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowHolder nounId={nounId} />
+        <NounInfoRowHolder />
       </Col>
       <Col lg={12} className={classes.nounInfoRow}>
         <NounInfoRowButton

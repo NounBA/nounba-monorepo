@@ -16,13 +16,17 @@ import { StandaloneNounWithSeed } from '../StandaloneNoun';
 import { LoadingNoun } from '../Noun';
 
 import PastAuctionContext from '../../contexts/PastAuctionContext';
+import { STATUS } from '../../hooks/useAuctionHistory';
 
 const NounbaHistory = () => {
-  const { auction: currentAuction, side } = useContext(PastAuctionContext);
-
-  const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId);
+  const { auction: currentAuction, side, status } = useContext(PastAuctionContext);
   const history = useHistory();
   const dispatch = useAppDispatch();
+
+  if (status === STATUS.LOADING) return <></>;
+  if (!currentAuction || status === STATUS.ERROR) history.push('/');
+
+  const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId ?? 0);
 
   const prevAuctionHandler = () => {
     dispatch(setPrevOnDisplayAuctionNounId());
