@@ -63,6 +63,7 @@ export function useAuctionHistory(nounbaId: string) {
 
   useEffect(() => {
     setStatus(STATUS.LOADING);
+    setBids([]);
 
     const nounId = BigNumber.from(nounbaId);
     const currentSide = getSide(nounId.toNumber());

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import AuctionActivity from '../AuctionActivity';
 import classes from './NounbaHistory.module.css';
 // import NounderNounContent from '../NounderNounContent';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 // import { isNounderNoun } from '../../utils/nounderNoun';
 import {
   setNextOnDisplayAuctionNounId,
@@ -17,11 +17,19 @@ import { LoadingNoun } from '../Noun';
 
 import PastAuctionContext from '../../contexts/PastAuctionContext';
 import { STATUS } from '../../hooks/useAuctionHistory';
+import { AUCTION_NAMES } from '../../config';
 
 const NounbaHistory = () => {
   const { auction: currentAuction, side, status } = useContext(PastAuctionContext);
   const history = useHistory();
   const dispatch = useAppDispatch();
+
+  const lastDisplayAuctionId = useAppSelector(state =>
+    Math.min(
+      state[AUCTION_NAMES.FIRST_AUCTION].lastAuctionNounId ?? 1,
+      state[AUCTION_NAMES.SECOND_AUCTION].lastAuctionNounId ?? 1,
+    ),
+  );
 
   if (status === STATUS.LOADING) return <></>;
   if (!currentAuction || status === STATUS.ERROR) history.push('/');
@@ -40,9 +48,9 @@ const NounbaHistory = () => {
   const currentAuctionActivityContent = currentAuction && (
     <AuctionActivity
       auction={currentAuction}
-      isFirstAuction={auctionIdBigNumber.eq(0)}
+      isFirstAuction={auctionIdBigNumber.eq(1)}
       // TODO: use lastNounId from Auctions
-      isLastAuction={auctionIdBigNumber.eq(20)}
+      isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
       displayGraphDepComps={true}
