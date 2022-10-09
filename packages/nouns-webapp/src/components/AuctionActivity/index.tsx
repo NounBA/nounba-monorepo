@@ -32,10 +32,11 @@ interface AuctionActivityProps {
   onNextAuctionClick?: () => void;
   displayGraphDepComps: boolean;
   side: REGIONS;
+  isPastAuction?: boolean;
 }
 
 const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityProps) => {
-  const { auction, isLastAuction, displayGraphDepComps, side } = props;
+  const { auction, isLastAuction, displayGraphDepComps, side, isPastAuction } = props;
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
@@ -78,7 +79,11 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
   return (
     <>
       {showBidHistoryModal && (
-        <BidHistoryModal onDismiss={dismissBidModalHanlder} auction={auction} />
+        <BidHistoryModal
+          onDismiss={dismissBidModalHanlder}
+          auction={auction}
+          isPastAuction={isPastAuction}
+        />
       )}
 
       <AuctionActivityWrapper>

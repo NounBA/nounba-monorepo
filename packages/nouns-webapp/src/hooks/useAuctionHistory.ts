@@ -6,9 +6,10 @@ import { BigNumber } from '@ethersproject/bignumber';
 
 import config, { AUCTION_NAMES, REGIONS } from '../config';
 import { reduxSafeBid } from '../state/slices/auction/auctionWrapper';
-import { BidEvent } from '../utils/types';
+import { Bid } from '../utils/types';
 import { Auction } from '../wrappers/nounsAuction';
 import { getSide } from '../utils/cities';
+import { deserializeBids } from '../wrappers/onDisplayAuction';
 
 const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
 
@@ -38,7 +39,7 @@ export enum STATUS {
  */
 
 export function useAuctionHistory(nounbaId: string) {
-  const [bids, setBids] = useState<BidEvent[]>([]);
+  const [bids, setBids] = useState<Bid[]>([]);
   const [auction, setAuction] = useState<Auction>();
   const [side, setSide] = useState(REGIONS.east);
   const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
@@ -53,10 +54,10 @@ export function useAuctionHistory(nounbaId: string) {
     const timestamp = (await event.getBlock()).timestamp;
     const transactionHash = event.transactionHash;
     setBids(currentBids => {
-      return [
+      return deserializeBids([
         ...currentBids,
         reduxSafeBid({ nounId, sender, value, extended, transactionHash, timestamp }),
-      ];
+      ]);
     });
   };
 

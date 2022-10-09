@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 import { REGIONS } from '../../config';
 import { STATUS, useAuctionHistory } from '../../hooks/useAuctionHistory';
-import { BidEvent } from '../../utils/types';
+import { Bid } from '../../utils/types';
 import { Auction } from '../../wrappers/nounsAuction';
 
 type Context = {
   auction?: Auction;
-  bids: BidEvent[];
+  bids: Bid[];
   side: REGIONS;
   status: STATUS;
 };

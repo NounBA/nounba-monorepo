@@ -47,6 +47,7 @@ const NounbaHistory = () => {
       onNextAuctionClick={nextAuctionHandler}
       displayGraphDepComps={true}
       side={side}
+      isPastAuction
     />
   );
   // const nounderNounContent = currentAuction && lastNounId && (

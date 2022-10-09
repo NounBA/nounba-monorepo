@@ -28,7 +28,7 @@ const deserializeBid = (reduxSafeBid: BidEvent): Bid => {
     timestamp: BigNumber.from(reduxSafeBid.timestamp),
   };
 };
-const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
+export const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
   return reduxSafeBids
     .map(bid => deserializeBid(bid))
     .sort((a: Bid, b: Bid) => {

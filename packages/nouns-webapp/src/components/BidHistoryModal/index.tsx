@@ -1,6 +1,6 @@
 import classes from './BidHistoryModal.module.css';
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { useContext } from 'react';
 import { XIcon } from '@heroicons/react/solid';
 import { Auction } from '../../wrappers/nounsAuction';
 import { StandaloneNounRoundedCorners } from '../StandaloneNoun';
@@ -8,7 +8,9 @@ import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { Bid } from '../../utils/types';
 import BidHistoryModalRow from '../BidHistoryModalRow';
 import { Trans } from '@lingui/macro';
-import { AUCTION_NAMES } from '../../config';
+import { REGIONS } from '../../config';
+import PastAuctionContext from '../../contexts/PastAuctionContext';
+import { getSide } from '../../utils/cities';
 
 export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
   return <div className={classes.backdrop} onClick={props.onDismiss} />;
@@ -17,12 +19,16 @@ export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
 const BidHistoryModalOverlay: React.FC<{
   auction: Auction;
   onDismiss: () => void;
+  isPastAuction?: boolean;
 }> = props => {
-  const { onDismiss, auction } = props;
+  const { onDismiss, auction, isPastAuction } = props;
+  const { bids: contextBids } = useContext(PastAuctionContext);
+  const auctionBids = useAuctionBids(auction.nounId, auction.auctionName);
 
-  const bids = useAuctionBids(auction.nounId, auction.auctionName);
+  const bids = isPastAuction ? contextBids : auctionBids;
+
   const conferenceAuctionClass =
-    auction.auctionName === AUCTION_NAMES.FIRST_AUCTION ? classes.westAuction : classes.eastAuction;
+    getSide(auction.nounId.toNumber()) === REGIONS.west ? classes.westAuction : classes.eastAuction;
 
   return (
     <>
@@ -68,8 +74,9 @@ const BidHistoryModalOverlay: React.FC<{
 const BidHistoryModal: React.FC<{
   auction: Auction;
   onDismiss: () => void;
+  isPastAuction?: boolean;
 }> = props => {
-  const { onDismiss, auction } = props;
+  const { onDismiss, auction, isPastAuction } = props;
   return (
     <>
       {ReactDOM.createPortal(
@@ -77,7 +84,11 @@ const BidHistoryModal: React.FC<{
         document.getElementById('backdrop-root')!,
       )}
       {ReactDOM.createPortal(
-        <BidHistoryModalOverlay onDismiss={onDismiss} auction={auction} />,
+        <BidHistoryModalOverlay
+          onDismiss={onDismiss}
+          auction={auction}
+          isPastAuction={isPastAuction}
+        />,
         document.getElementById('overlay-root')!,
       )}
     </>
