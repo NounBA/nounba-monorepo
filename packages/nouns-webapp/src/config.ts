@@ -78,6 +78,7 @@ const app: Record<SupportedChains, AppConfig> = {
     jsonRpcUri: 'http://localhost:8545',
     wsRpcUri: 'ws://localhost:8545',
     subgraphApiUri: '',
+    // subgraphApiUri: 'http://localhost:8000/subgraphs/name/nounsdao/nouns-subgraph',
     enableHistory: false,
   },
 };

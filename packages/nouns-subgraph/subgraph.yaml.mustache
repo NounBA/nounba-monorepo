@@ -34,6 +34,35 @@ dataSources:
         - event: AuctionSettled(indexed uint256,address,uint256)
           handler: handleAuctionSettled
   - kind: ethereum/contract
+    name: NounsAuctionHouse2
+    network: {{network}}
+    source:
+      address: '{{nounsAuctionHouse2.address}}'
+      abi: NounsAuctionHouse2
+      startBlock: {{nounsAuctionHouse2.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/nouns-auction-house2.ts
+      entities:
+        - Account
+        - Auction
+        - Bid
+        - Noun
+      abis:
+        - name: NounsAuctionHouse2
+          file: ../nouns-contracts/abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json
+      eventHandlers:
+        - event: AuctionCreated(indexed uint256,uint256,uint256)
+          handler: handleAuctionCreated
+        - event: AuctionBid(indexed uint256,address,uint256,bool)
+          handler: handleAuctionBid
+        - event: AuctionExtended(indexed uint256,uint256)
+          handler: handleAuctionExtended
+        - event: AuctionSettled(indexed uint256,address,uint256)
+          handler: handleAuctionSettled
+  - kind: ethereum/contract
     name: NounsToken
     network: {{network}}
     source:
