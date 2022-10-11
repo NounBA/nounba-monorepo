@@ -27,6 +27,7 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
   const name = `Noun ${id}`;
   const description = `Noun ${id} is a member of the Nouns DAO`;
   const { parts, background } = getNounData(seed);
+
   const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
 
   return {
@@ -39,6 +40,7 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
   const seed = useNounSeed(nounId);
+
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -129,7 +131,7 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   const onClickHandler = () => {
     dispatch(setOnDisplayAuctionNounId(nounId.toNumber()));
   };
-
+  console.log('nounId, seed', nounId, seed);
   const { image, description } = getNoun(nounId, seed);
 
   const noun = <Noun imgPath={image} alt={description} />;
