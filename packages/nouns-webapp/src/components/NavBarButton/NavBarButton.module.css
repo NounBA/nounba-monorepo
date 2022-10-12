@@ -1,14 +1,18 @@
 .wrapper {
-  height: 40px;
-  border-radius: 10px;
-  font-size: 16px;
-  line-height: 16px;
+  background-color: var(--brand-gray-background);
+  height: 56px;
+  border-radius: 4px;
+  font-size: 1.25rem;
   font-family: 'PT Root UI';
-  font-weight: bold;
   padding: 0px 12px 0px 12px;
   transition: all 0.125s ease-in-out;
   box-shadow: none !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: 992px) {
+  .wrapper {
+    padding: 0 28px 0 32px;
+  }
 }
 
 .button {
@@ -21,17 +25,11 @@
 }
 
 .icon {
-  margin-right: 0.4rem;
+  margin-right: 16px;
 }
 
 .icon > svg {
-  max-height: 14px;
-}
-
-@media (max-width: 992px) {
-  .icon > svg {
-    max-height: 17px;
-  }
+  max-height: 20px;
 }
 
 .btnEnabled {
@@ -54,31 +52,28 @@
 }
 
 .coolWallet {
-  background-color: var(--brand-cool-accent);
-  border: 1px solid var(--brand-cool-border);
-  border-radius: 10px;
-  color: var(--brand-warm-dark-text);
-  padding: 0px 12px 0px 12px;
+  background-color: var(--brand-color-blue);
+  border: 1px solid var(--brand-color-blue);
+  color: var(--brand-white);
+  font-weight: normal;
   transition: all 0.2s ease-in-out;
 }
 
 .coolWallet:hover {
-  background-color: var(--brand-color-blue);
-  color: white;
-  filter: brightness(110%);
+  background-color: var(--brand-white);
+  color: var(--brand-color-blue);
 }
 
 .warmInfo {
-  border: 1px solid var(--brand-color-blue);
-  border-radius: 10px;
+  border: 1px solid var(--brand-gray-background);
   color: var(--brand-white);
-  background-color: var(--brand-color-blue);
+  background-color: var(--brand-gray-background);
 }
 
 .warmInfo:hover {
   background-color: var(--brand-white);
-  border-color: var(--brand-color-blue);
-  color: var(--brand-color-blue);
+  border-color: var(--brand-gray-background);
+  color: var(--brand-gray-background);
 }
 
 .warmWallet {
@@ -121,14 +116,6 @@
 .whiteActiveVoteSubmit {
   background-color: #e2e3e8;
   color: black;
-}
-
-@media (max-width: 992px) {
-  .wrapper,
-  .button {
-    height: 48px;
-    font-size: 18px;
-  }
 }
 
 .delegateBack {

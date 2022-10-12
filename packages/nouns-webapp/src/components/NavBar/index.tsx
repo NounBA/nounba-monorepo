@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 import { useEtherBalance } from '@usedapp/core';
 // import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -49,19 +49,19 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar expand="xl" className={classes.navBarCustom} expanded={isNavExpanded}>
+      {Number(CHAIN_ID) !== 1 && (
+        <div className={classes.testnet}>
+          <img className={classes.testnetImg} src={testnetNoun} alt="testnet noun" />
+          TESTNET
+        </div>
+      )}
+      <Navbar expand="lg" className={classes.navBarCustom} expanded={isNavExpanded}>
         <Container style={{ maxWidth: 'unset' }}>
           <div className={classes.brandAndTreasuryWrapper}>
             <Navbar.Brand as={Link} to="/" className={classes.navBarBrand}>
               <img src={logo} className={classes.navBarLogo} alt="Nouns DAO logo" />
-              <h1 className={classes.navLogoTitle}>NounBA</h1>
+              {/* <h1 className={classes.navLogoTitle}>NounBA</h1> */}
             </Navbar.Brand>
-            {Number(CHAIN_ID) !== 1 && (
-              <Nav.Item>
-                <img className={classes.testnetImg} src={testnetNoun} alt="testnet noun" />
-                TESTNET
-              </Nav.Item>
-            )}
           </div>
           <Nav.Item>
             {treasuryBalance && (
