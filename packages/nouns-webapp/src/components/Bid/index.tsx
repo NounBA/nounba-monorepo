@@ -1,6 +1,7 @@
 import { Auction, AuctionHouseContractFunction } from '../../wrappers/nounsAuction';
 import { useEthers, useContractFunction } from '@usedapp/core';
 import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
+import { NounsAuctionHouseFactory } from '@nouns/sdk';
 import { useAppSelector } from '../../hooks';
 import React, { useEffect, useState, useRef, ChangeEvent, useCallback } from 'react';
 import { utils, BigNumber as EthersBN } from 'ethers';
@@ -10,7 +11,6 @@ import { Spinner, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import { useAuctionMinBidIncPercentage } from '../../wrappers/nounsAuction';
 import { useAppDispatch } from '../../hooks';
 import { AlertModal, setAlertModal } from '../../state/slices/application';
-import { NounsAuctionHouseFactory } from '@nouns/sdk';
 import { REGIONS } from '../../config';
 import WalletConnectModal from '../WalletConnectModal';
 import SettleManuallyBtn from '../SettleManuallyBtn';
@@ -124,7 +124,11 @@ const Bid: React.FC<{
     }
 
     const value = utils.parseEther(bidInputRef.current.value.toString());
-    const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library);
+    const contract = connectContractToSigner(
+      nounsAuctionHouseContract,
+      undefined,
+      library?.getSigner(),
+    );
     const gasLimit = await contract.estimateGas.createBid(auction.nounId, {
       value,
     });
