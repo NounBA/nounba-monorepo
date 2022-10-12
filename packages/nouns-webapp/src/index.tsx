@@ -7,7 +7,7 @@ import { applyMiddleware, createStore, combineReducers, PreloadedState } from 'r
 import { routerMiddleware } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { WebSocketProvider } from '@ethersproject/providers';
+import { getDefaultProvider, WebSocketProvider } from '@ethersproject/providers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChainId, DAppProvider } from '@usedapp/core';
@@ -26,7 +26,7 @@ import { clientFactory, latestAuctionsQuery } from './wrappers/subgraph';
 import { useEffect } from 'react';
 import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
-import config, { AUCTION_NAMES, CHAIN_ID, createNetworkHttpUrl } from './config';
+import config, { AUCTION_NAMES, CHAIN_ID } from './config';
 import { useAppDispatch } from './hooks';
 import { LanguageProvider } from './i18n/LanguageProvider';
 import ChainSubscriber from './components/ChainSubscriber';
@@ -70,19 +70,21 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 const supportedChainURLs = {
-  [ChainId.Mainnet]: createNetworkHttpUrl('mainnet'),
-  [ChainId.Rinkeby]: createNetworkHttpUrl('rinkeby'),
-  [ChainId.Goerli]: createNetworkHttpUrl('goerli'),
-  [ChainId.Hardhat]: 'http://localhost:8545',
+  [ChainId.Mainnet]: getDefaultProvider('mainnet'),
+  [ChainId.Rinkeby]: getDefaultProvider('rinkeby'),
+  [ChainId.Goerli]: getDefaultProvider('goerli'),
+  [ChainId.Hardhat]: getDefaultProvider('http://localhost:8545'),
 };
-
 // prettier-ignore
 const useDappConfig = {
   readOnlyChainId: CHAIN_ID,
   readOnlyUrls: {
     [CHAIN_ID]: supportedChainURLs[CHAIN_ID],
   },
+  autoConnect: true
 };
+
+console.log(useDappConfig);
 
 const client = clientFactory(config.app.subgraphApiUri);
 
