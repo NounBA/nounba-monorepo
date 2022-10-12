@@ -1,10 +1,11 @@
 import { useReverseENSLookUp } from '../../utils/ensLookup';
 import { resolveNounContractAddress } from '../../utils/resolveNounsContractAddress';
 import { useEthers } from '@usedapp/core';
+import React from 'react';
+import { Web3Provider } from '@ethersproject/providers';
 import classes from './ShortAddress.module.css';
 import { containsBlockedText } from '../../utils/moderation/containsBlockedText';
 import { useShortAddress } from '../../utils/addressAndENSDisplayUtils';
-import React from 'react';
 import Identicon from '../Identicon';
 
 const ShortAddress: React.FC<{ address: string; avatar?: boolean; size?: number }> = props => {
@@ -20,7 +21,7 @@ const ShortAddress: React.FC<{ address: string; avatar?: boolean; size?: number 
       <div className={classes.shortAddress}>
         {avatar && (
           <div key={address}>
-            <Identicon size={size} address={address} provider={provider} />
+            <Identicon size={size} address={address} provider={provider as Web3Provider} />
           </div>
         )}
         <span>{ens && !ensMatchesBlocklistRegex ? ens : shortAddress}</span>
