@@ -1,7 +1,6 @@
 import React from 'react';
 import ShortAddress from '../ShortAddress';
 import dayjs from 'dayjs';
-import link from '../../assets/icons/Link.svg';
 import { buildEtherscanTxLink } from '../../utils/etherscan';
 import TruncatedAmount from '../TruncatedAmount';
 import BigNumber from 'bignumber.js';
@@ -63,7 +62,17 @@ const BidHistory: React.FC<{
       })
       .slice(0, max);
 
-  return <ul className={classes.bidCollection}>{bidContent}</ul>;
+  return (
+    <>
+      {bids && bids.length > 0 && <ul className={classes.bidCollection}>{bidContent}</ul>}
+      {bids && bids.length < 1 && (
+        <div className={classes.noBids}>
+          <h1>No bids so far</h1>
+          <p>Click the "Place Bid" button above and be first to bid on the current East auction!</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default BidHistory;

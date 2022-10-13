@@ -43,6 +43,7 @@
     "graphql": "^15.5.1",
     "lucide-react": "^0.91.0",
     "pngjs": "^6.0.0",
+    "query-string": "^7.1.1",
     "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0",

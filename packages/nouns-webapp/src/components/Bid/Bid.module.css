@@ -192,3 +192,25 @@
 .connectToSettle {
   color: var(--brand-cool-accent);
 }
+.waitSettle {
+  background-color: var(--brand-bg-gray-light);
+  border-radius: var(--default-border-radius);
+  margin-top: 16px;
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: var(--brand-bg-gray-400);
+}
+.waitSettle h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0;
+}
+.waitSettle p {
+  color: var(--brand-warm-light-text);
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0 10%;
+}
