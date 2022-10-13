@@ -1,7 +1,7 @@
 .shortAddress {
   display: flex;
   flex-flow: row nowrap;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
