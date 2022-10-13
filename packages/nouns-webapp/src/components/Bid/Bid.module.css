@@ -76,7 +76,7 @@
   box-shadow: none !important;
   font-family: 'DM Sans';
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.3rem;
   transition: all 0.2s ease-in-out;
   border: 1px solid #f9f9f9;
   border-radius: var(--default-border-radius) !important;
@@ -98,15 +98,17 @@
 
 .customPlaceholderBidAmt {
   position: absolute;
-  opacity: 0.3;
-  top: 25%;
+  top: 30%;
   left: 20px;
-  color: var(--brand-cool-light-text);
+  color: var(--brand-bg-gray-400);
   font-family: 'DM Sans';
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.3rem;
   z-index: 1;
   pointer-events: none;
+}
+.etherSymbol {
+  font-family: sans-serif;
 }
 
 .activityRow .form-floating {

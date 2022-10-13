@@ -5,7 +5,7 @@
 .infoWrapper {
   position: relative;
   background-color: var(--brand-bg-gray);
-  padding-top: 61px;
+  padding-top: 40px;
 }
 .infoWrapper::before {
   content: " ";

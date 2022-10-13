@@ -26,7 +26,7 @@ const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolea
       <div className={classes.leftCol}>
         <h4
           style={{
-            color: isCool ? 'var(--brand-cool-light-text)' : 'var(--brand-warm-light-text)',
+            color: isCool ? 'var(--brand-warm-light-text)' : 'var(--brand-warm-light-text)',
           }}
         >
           {titleContent}
