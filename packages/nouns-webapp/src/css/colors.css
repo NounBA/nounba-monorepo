@@ -1,6 +1,7 @@
 :root {
   --brand-bg-green: #edf2f0;
   --brand-bg-gray: #121926;
+  --brand-bg-gray-light: #202939;
   --brand-dark-red: #d63c5e;
   --brand-light-green: #6da886;
   --brand-black: #212529;
@@ -16,7 +17,7 @@
   --brand-warm-background: #d5d7e0;
   --brand-warm-border: rgb(207, 189, 186);
   --brand-warm-dark-text: #221b1a;
-  --brand-warm-light-text: #8f7e7c;
+  --brand-warm-light-text: #4B5565;
   --brand-warm-accent: #f9f1f1;
   --brand-gray-dark-text: #14161b;
   --brand-gray-border: #e2e3eb;
@@ -30,4 +31,6 @@
   --brand-color-red-translucent: rgba(214, 60, 94, 0.1);
   --brand-color-blue-translucent: rgba(73, 101, 240, 0.1);
   --brand-color-green-translucent: rgba(67, 179, 105, 0.1);
+
+  --default-border-radius: 4px;
 }

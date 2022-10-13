@@ -23,8 +23,8 @@ const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolea
   const titleContent = auctionEnded ? <Trans>Winning bid</Trans> : <Trans>Current bid</Trans>;
 
   return (
-    <Row className={clsx(classes.wrapper, classes.container, classes.section)}>
-      <Col xs={5} lg={12} className={classes.leftCol}>
+    <div className={clsx(classes.wrapper, classes.container, classes.section)}>
+      <div className={classes.leftCol}>
         <h4
           style={{
             color: isCool ? 'var(--brand-cool-light-text)' : 'var(--brand-warm-light-text)',
@@ -32,13 +32,13 @@ const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolea
         >
           {titleContent}
         </h4>
-      </Col>
-      <Col xs="auto" lg={12}>
+      </div>
+      <div>
         <h2 className={classes.currentBid} style={{ color: 'var(--brand-white)' }}>
           {currentBid === BID_N_A ? BID_N_A : <TruncatedAmount amount={currentBid && currentBid} />}
         </h2>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

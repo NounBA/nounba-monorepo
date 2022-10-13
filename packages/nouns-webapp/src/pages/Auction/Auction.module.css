@@ -1,4 +1,7 @@
-
+.wrapper {
+  padding-right: var(--bs-gutter-x,1rem);
+  padding-left: var(--bs-gutter-x,1rem);
+}
 .westernSide .bidButtonSide:hover,
 .westernSide .bidButtonSide:active,
 .westernSide .bidButtonSide:focus .bidButtonSide:disabled {

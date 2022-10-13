@@ -118,14 +118,12 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
               <AuctionActivityNounTitle isCool={isCool} nounId={auction.nounId} />
             </Col>
           </Row>
-          <Row className={classes.activityRow}>
-            <Col lg={4} className={classes.currentBidCol}>
-              <CurrentBid
-                currentBid={new BigNumber(auction.amount.toString())}
-                auctionEnded={auctionEnded}
-              />
-            </Col>
-            <Col lg={6} className={classes.auctionTimerCol}>
+          <div className={classes.activityCustomRow}>
+            <CurrentBid
+              currentBid={new BigNumber(auction.amount.toString())}
+              auctionEnded={auctionEnded}
+            />
+            <div className={classes.auctionTimerCol}>
               {auctionEnded && (
                 <>
                   {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
@@ -133,8 +131,8 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
                 </>
               )}
               {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
-            </Col>
-          </Row>
+            </div>
+          </div>
         </div>
         {!isPastAuction && isLastAuction && (
           <>

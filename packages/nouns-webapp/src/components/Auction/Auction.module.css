@@ -4,12 +4,12 @@
 }
 .infoWrapper {
   position: relative;
-  background-color: black;
-  padding-top: 59px;
+  background-color: var(--brand-bg-gray);
+  padding-top: 61px;
 }
 .infoWrapper::before {
   content: " ";
-  background-color: black;
+  background-color: var(--brand-bg-gray);
   position: absolute;
   left: -100vw;
   right: -100vw;
@@ -38,24 +38,28 @@
   position: relative;
 }
 .conferenceTitle {
-  margin: 0 0 -59px;
-  height: 118px;
+  margin: 0 0 -61px;
+  padding-left: 24px;
+  height: 112px;
+  line-height: 112px;
   font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--brand-white);
-  text-align: center;
-  font-size: 2rem;
+  text-align: left;
+  font-size: 4rem;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: var(--default-border-radius);
+  background-color: var(--brand-bg-gray-light);
+  border-bottom-width: 8px;
+  border-bottom-style: solid;
 }
 
 .eastSide {
-  background-color: var(--brand-color-blue);
+  color: var(--brand-color-blue);
+  border-color: var(--brand-color-blue);
 }
 .westSide {
-  background-color: var(--brand-color-red);
+  color: var(--brand-color-red);
+  border-color: var(--brand-color-red);
 }
 
 @media (max-width: 992px) {
@@ -70,14 +74,6 @@
     padding-left: 5%;
     width: 100%;
     background-color: white;
-  }
-  .infoWrapper {
-    padding-top: 0;
-  }
-  .conferenceTitle {
-    margin: 0 0 -41px;
-    height: 82px;
-    font-size: 1.7rem;
   }
 }
 
@@ -101,13 +97,5 @@
 
   .nounContentCol {
     padding: 0rem;
-  }
-  .infoWrapper {
-    padding-top: 0;
-  }
-  .conferenceTitle {
-    margin: 0 0 -25px;
-    height: 50px;
-    font-size: 1.3rem;
   }
 }
