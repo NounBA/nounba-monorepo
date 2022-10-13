@@ -12,13 +12,11 @@ import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
 import { ExternalURL, externalURL } from '../../utils/externalURL';
 import useLidoBalance from '../../hooks/useLidoBalance';
 import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { Trans } from '@lingui/macro';
 import { useState } from 'react';
+import { File, Users } from 'lucide-react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
@@ -88,7 +86,7 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faUsers} />}
+                buttonIcon={<Users size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
@@ -101,7 +99,7 @@ const NavBar = () => {
             >
               <NavBarButton
                 buttonText={<Trans>Docs</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faBookOpen} />}
+                buttonIcon={<File size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
