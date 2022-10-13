@@ -14,7 +14,6 @@ import AuctionActivityNounTitle from '../AuctionActivityNounTitle';
 import BidHistoryBtn from '../BidHistoryBtn';
 import config, { REGIONS } from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
-import NounInfoCard from '../NounInfoCard';
 import { useAppSelector } from '../../hooks';
 import BidHistoryModal from '../BidHistoryModal';
 import Holder from '../Holder';
@@ -145,31 +144,26 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
         )}
         <Row className={classes.activityRow}>
           <Col lg={12}>
-            {isPastAuction ? (
-              <NounInfoCard
-                nounId={auction.nounId.toNumber()}
-                bidHistoryOnClickHandler={showBidModalHandler}
-              />
-            ) : (
-              displayGraphDepComps && (
+            <div className={classes.bidHistorySection}>
+              {displayGraphDepComps && (
                 <BidHistory
                   auctionId={auction.nounId.toString()}
                   auctionName={auction.auctionName}
                   max={3}
                   classes={bidHistoryClasses}
                 />
-              )
-            )}
-            {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,
+              )}
+              {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,
             else show etherscan contract link */}
-            {!isPastAuction &&
-              isLastAuction &&
-              !auction.amount.eq(0) &&
-              (displayGraphDepComps ? (
-                <BidHistoryBtn onClick={showBidModalHandler} />
-              ) : (
-                <BidHistoryBtn onClick={openEtherscanBidHistory} />
-              ))}
+              {!isPastAuction &&
+                isLastAuction &&
+                !auction.amount.eq(0) &&
+                (displayGraphDepComps ? (
+                  <BidHistoryBtn onClick={showBidModalHandler} />
+                ) : (
+                  <BidHistoryBtn onClick={openEtherscanBidHistory} />
+                ))}
+            </div>
           </Col>
         </Row>
       </AuctionActivityWrapper>

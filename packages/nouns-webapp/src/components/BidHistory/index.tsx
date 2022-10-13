@@ -10,6 +10,7 @@ import { BigNumber as EthersBN } from '@ethersproject/bignumber';
 import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { useAppSelector } from '../../hooks';
 import { AUCTION_NAMES } from '../../config';
+import { ExternalLink } from 'lucide-react';
 
 const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   const bidAmount = <TruncatedAmount amount={new BigNumber(EthersBN.from(bid.value).toString())} />;
@@ -18,7 +19,6 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   ).format('hh:mm a')}`;
 
   const txLink = buildEtherscanTxLink(bid.transactionHash);
-  const isMobile = window.innerWidth < 992;
 
   return (
     <li key={index} className={isCool ? classes.bidRowCool : classes.bidRowWarm}>
@@ -26,7 +26,7 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
         <div className={classes.leftSectionWrapper}>
           <div className={classes.bidder}>
             <div>
-              <ShortAddress address={bid.sender} avatar={isMobile ? false : true} />
+              <ShortAddress address={bid.sender} avatar={true} size={24} />
             </div>
           </div>
           <div className={classes.bidDate}>{date}</div>
@@ -35,7 +35,7 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
           <div className={classes.bidAmount}>{bidAmount}</div>
           <div className={classes.linkSymbol}>
             <a href={txLink} target="_blank" rel="noreferrer">
-              <img src={link} width={24} alt="link symbol" />
+              <ExternalLink size={24} />
             </a>
           </div>
         </div>
