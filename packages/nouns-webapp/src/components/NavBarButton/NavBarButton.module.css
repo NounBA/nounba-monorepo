@@ -1,7 +1,7 @@
 .wrapper {
   background-color: var(--brand-gray-background);
   height: 56px;
-  border-radius: 4px;
+  border-radius: var(--default-border-radius);
   font-size: 1.25rem;
   font-family: 'PT Root UI';
   padding: 0px 12px 0px 12px;

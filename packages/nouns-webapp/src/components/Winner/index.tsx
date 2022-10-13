@@ -55,7 +55,7 @@ const Winner: React.FC<WinnerProps> = props => {
       )}
     </Row>
   ) : (
-    <ShortAddress size={40} address={winner} avatar={true} />
+    <ShortAddress size={40} address={winner} avatar={!isMobile} />
   );
 
   const nounderNounContent = (
@@ -80,7 +80,7 @@ const Winner: React.FC<WinnerProps> = props => {
   return (
     <>
       <Row className={clsx(classes.wrapper, classes.section)}>
-        <Col xs={1} lg={12} className={classes.leftCol}>
+        <Col xs={12} className={classes.leftCol}>
           <h4
             style={{
               color: isCool ? 'var(--brand-cool-light-text)' : 'var(--brand-warm-light-text)',
@@ -90,7 +90,7 @@ const Winner: React.FC<WinnerProps> = props => {
             <Trans>Winner</Trans>
           </h4>
         </Col>
-        <Col xs="auto" lg={12}>
+        <Col xs={12}>
           <h2
             className={classes.winnerContent}
             style={{

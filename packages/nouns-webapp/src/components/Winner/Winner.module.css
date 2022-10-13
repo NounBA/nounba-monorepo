@@ -8,10 +8,6 @@
   margin-top: 0.25rem;
 }
 
-.winnerCopy {
-  min-width: 250px;
-}
-
 .link,
 .link:hover,
 .link:active {
@@ -81,14 +77,6 @@
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-  }
-
-  .leftCol {
-    padding-left: 0.5rem;
-  }
-
-  .winnerContent {
-    margin-right: 0.5rem;
   }
 
   .wrapper {

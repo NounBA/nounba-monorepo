@@ -8,10 +8,6 @@
   margin-bottom: 0.5rem;
 }
 
-.activityRow {
-  margin-bottom: 0rem;
-}
-
 h1 {
   font-size: 3rem;
 }
@@ -48,17 +44,9 @@ h4 {
   width: 150px;
   height: 150px;
 }
-
-.currentBidCol {
-  border-right: 1px solid #79809c49;
-  margin-left: 6px;
-  margin-top: 6px;
+.activityCustomRow {
+  display: flex;
 }
-
-.auctionTimerCol {
-  padding-left: 0rem;
-}
-
 .section h4 {
   font-family: 'PT Root UI';
   font-size: 17px;
@@ -81,16 +69,11 @@ h4 {
   }
 
   .auctionTimerCol {
-    margin-left: 6px;
-    margin-top: 6px;
-    padding-left: 0rem;
+    /* padding-left: 6px;
+    padding-top: 6px; */
   }
 
-  .currentBidCol {
-    border-right: 0px;
-    padding-left: 0rem;
-  }
-
+  
   .fomoNounsLink {
     padding-left: 14px;
   }
