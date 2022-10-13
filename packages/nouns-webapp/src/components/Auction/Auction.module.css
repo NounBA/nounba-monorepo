@@ -38,14 +38,13 @@
   position: relative;
 }
 .conferenceTitle {
-  margin: 0 0 -61px;
+  margin: 0 0 -40px;
   padding-left: 24px;
-  height: 112px;
-  line-height: 112px;
-  font-size: 2rem;
+  height: 80px;
+  line-height: 80px;
   color: var(--brand-white);
   text-align: left;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
   border-radius: var(--default-border-radius);
   background-color: var(--brand-bg-gray-light);
