@@ -10,6 +10,7 @@
 
 h1 {
   font-size: 3rem;
+  font-weight: 700;
 }
 
 h2 {
@@ -57,32 +58,6 @@ h4 {
   font-family: 'DM Sans';
   font-weight: bold;
   font-size: 32px;
-}
-
-@media (max-width: 992px) {
-  h1 {
-    padding-top: 12px;
-  }
-
-  .wrapper {
-    padding: 1rem;
-  }
-
-  .auctionTimerCol {
-    /* padding-left: 6px;
-    padding-top: 6px; */
-  }
-
-  
-  .fomoNounsLink {
-    padding-left: 14px;
-  }
-}
-
-@media (max-width: 400px) {
-  .fomoNounsLink {
-    font-size: 14px;
-  }
 }
 
 /* Fix Firefox navigation arrow alignment issues */
