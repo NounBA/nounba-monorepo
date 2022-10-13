@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js';
 import classes from './CurrentBid.module.css';
 import TruncatedAmount from '../TruncatedAmount';
-import { Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import clsx from 'clsx';
 import { Trans } from '@lingui/macro';

@@ -1,11 +1,13 @@
 import { Trans } from '@lingui/macro';
 import clsx from 'clsx';
+import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import classes from './CityBoard.module.css';
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import citiesByRegion from '../../utils/cities';
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { REGIONS } from '../../config';
-import { useHistory } from 'react-router-dom';
 
 type CityItemProps = {
   name: string;
@@ -26,8 +28,11 @@ const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityIte
         disabled={isDisabled}
         onClick={onClickHandler}
       >
-        <span className={classes.avatar} />
-        {name}
+        <div className={classes.cityWrapper}>
+          <span className={classes.avatar} />
+          {name}
+        </div>
+        {!isDisabled && !isSelected && <FontAwesomeIcon icon={faExternalLinkAlt} />}
       </Button>
     </ListGroupItem>
   );
