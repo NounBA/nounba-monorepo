@@ -132,9 +132,8 @@
 }
 
 @media screen and (min-width: 992px) {
-  .navBarLogo {
-    width: 293px;
-    height: 84px;
+  .navBarBrand {
+    padding: 16px 0;
   }
   .navbarCollapse{
     padding-bottom: 0;
