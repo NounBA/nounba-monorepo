@@ -6,7 +6,7 @@
   transition: all 0.15s ease-in-out;
   display: flex;
   align-items: center;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
   font-size: 40px;
 }
 
@@ -56,7 +56,7 @@
 
 .disconnectBtn {
   cursor: pointer;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
 }
 
@@ -81,7 +81,7 @@
 .nounsNavLink,
 .nounsNavLink:active,
 .nounsNavLink:visited {
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-size: 0.9rem;
   padding: 0.3rem 0.3rem !important;
   color: white !important;

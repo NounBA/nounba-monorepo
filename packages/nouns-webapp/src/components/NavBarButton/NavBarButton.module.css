@@ -3,7 +3,7 @@
   height: 56px;
   border-radius: var(--default-border-radius);
   font-size: 1.25rem;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   padding: 0px 12px 0px 12px;
   transition: all 0.125s ease-in-out;
   box-shadow: none !important;
@@ -11,7 +11,7 @@
 }
 @media screen and (min-width: 992px) {
   .wrapper {
-    padding: 0 28px 0 32px;
+    padding: 0 16px;
   }
 }
 

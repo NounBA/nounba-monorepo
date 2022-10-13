@@ -3,7 +3,7 @@
 }
 
 .wrapper h1 {
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
   font-size: 2.5rem;
   line-height: 3rem;
   margin-bottom: 24px;
@@ -11,7 +11,7 @@
 }
 
 .wrapper h2 {
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
   font-size: 1.5rem;
   line-height: 2rem;
   color: var(--brand-warm-light-text);
