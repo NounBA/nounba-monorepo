@@ -1,3 +1,7 @@
+.woodWrapper {
+  background-image: url(../../assets/auction-bg@1x_01.png);
+  background-repeat: repeat;
+}
 .wrapper {
   padding-right: var(--bs-gutter-x,1rem);
   padding-left: var(--bs-gutter-x,1rem);

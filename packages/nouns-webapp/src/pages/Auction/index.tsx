@@ -27,8 +27,6 @@ const AuctionPage: React.FC<AuctionPageProps> = () => {
   const onDisplaySecondAuction = useOnDisplayAuction(AUCTION_NAMES.SECOND_AUCTION);
   const lastSecondAuctionNounId = useAppSelector(state => state.secondAuction.lastAuctionNounId);
 
-  let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -45,32 +43,34 @@ const AuctionPage: React.FC<AuctionPageProps> = () => {
     }
   }, [dispatch, lastSecondAuctionNounId]);
   return (
-    <div style={{ backgroundColor: stateBgColor }}>
-      <Container fluid="xl" className={classes.wrapper}>
-        <Row>
-          <Col lg={{ span: 6 }} className={classes.westernSide}>
-            <Auction
-              side={REGIONS.west}
-              auction={onDisplayFirstAuction}
-              auctionName={AUCTION_NAMES.FIRST_AUCTION}
-            />
-          </Col>
-          <Col lg={{ span: 6 }} className={classes.easternSide}>
-            <Auction
-              side={REGIONS.east}
-              auction={onDisplaySecondAuction}
-              auctionName={AUCTION_NAMES.SECOND_AUCTION}
-            />
-          </Col>
-        </Row>
-      </Container>
-      {/* TODO: show profileActivityFeed to the owner */}
-      {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
-      {/* <ProfileActivityFeed nounId={1} /> */}
-      {/* ) : (
+    <div style={{ backgroundColor: 'var(--brand-bg-gray)' }}>
+      <div className={classes.woodWrapper}>
+        <Container fluid="xl" className={classes.wrapper}>
+          <Row>
+            <Col lg={{ span: 6 }} className={classes.westernSide}>
+              <Auction
+                side={REGIONS.west}
+                auction={onDisplayFirstAuction}
+                auctionName={AUCTION_NAMES.FIRST_AUCTION}
+              />
+            </Col>
+            <Col lg={{ span: 6 }} className={classes.easternSide}>
+              <Auction
+                side={REGIONS.east}
+                auction={onDisplaySecondAuction}
+                auctionName={AUCTION_NAMES.SECOND_AUCTION}
+              />
+            </Col>
+          </Row>
+        </Container>
+        {/* TODO: show profileActivityFeed to the owner */}
+        {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
+        {/* <ProfileActivityFeed nounId={1} /> */}
+        {/* ) : (
       )} */}
-      <Banner />
-      <Documentation />
+        <Banner />
+        <Documentation />
+      </div>
     </div>
   );
 };
