@@ -26,7 +26,14 @@ interface INounsSeeder {
         uint48 accessory;
         uint48 head;
         uint48 glasses;
+        bool oneOfOne;
+        uint48 oneOfOneIndex;
     }
 
-    function generateSeed(uint256 nounId, INounsDescriptorMinimal descriptor) external view returns (Seed memory);
+    function generateSeed(
+        uint256 nounId,
+        INounsDescriptorMinimal descriptor,
+        bool isOneOfOne,
+        uint48 oneOfOneIndex
+    ) external view returns (Seed memory);
 }

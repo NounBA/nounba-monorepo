@@ -17,8 +17,8 @@
 
 pragma solidity ^0.8.6;
 
-import { Inflate } from '../libs/Inflate.sol';
-import { IInflator } from './IInflator.sol';
+import {Inflate} from "../libs/Inflate.sol";
+import {IInflator} from "./IInflator.sol";
 
 interface INounsArt {
     error SenderIsNotDescriptor();
@@ -52,6 +52,8 @@ interface INounsArt {
     event HeadsAdded(uint16 count);
 
     event GlassesAdded(uint16 count);
+
+    event OneOfOneAdded(uint16 count);
 
     struct NounArtStoragePage {
         uint16 imageCount;
@@ -104,6 +106,12 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addOneOfOnes(
+        bytes calldata encodedCompressed,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external;
+
     function addBodiesFromPointer(
         address pointer,
         uint80 decompressedLength,
@@ -130,6 +138,12 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addOneOfOnesFromPointer(
+        address pointer,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external;
+
     function backgroundsCount() external view returns (uint256);
 
     function backgrounds(uint256 index) external view returns (string memory);
@@ -142,6 +156,8 @@ interface INounsArt {
 
     function glasses(uint256 index) external view returns (bytes memory);
 
+    function oneOfOnes(uint256 index) external view returns (bytes memory);
+
     function getBodiesTrait() external view returns (Trait memory);
 
     function getAccessoriesTrait() external view returns (Trait memory);
@@ -149,4 +165,6 @@ interface INounsArt {
     function getHeadsTrait() external view returns (Trait memory);
 
     function getGlassesTrait() external view returns (Trait memory);
+
+    function getOneOfOnesTrait() external view returns (Trait memory);
 }
