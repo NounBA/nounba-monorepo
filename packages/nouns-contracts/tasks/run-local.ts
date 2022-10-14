@@ -16,11 +16,67 @@ task(
     nounsDescriptor: contracts.NounsDescriptorV2.instance.address,
   });
 
-  await contracts.NounsAuctionHouse.instance
+  const unpauseResult = await (await contracts.NounsAuctionHouse.instance
     .attach(contracts.NounsAuctionHouseProxy.instance.address)
     .unpause({
       gasLimit: 1_000_000,
+    })).wait();
+  console.log(unpauseResult);
+  console.log(unpauseResult.events.map((e: any) => e.args));
+
+  const auction1 = await contracts.NounsAuctionHouse.instance
+    .attach(contracts.NounsAuctionHouseProxy.instance.address)
+    .auction({
+      gasLimit: 1_000_000,
     });
+
+  console.log('Auction 1');
+  console.log(auction1);
+
+  await (await contracts.NounsToken.instance
+    .attach(contracts.NounsToken.instance.address)
+    .addAddressToWhitelist(contracts.NounsAuctionHouseProxy2.instance.address, {
+      gasLimit: 1_000_000,
+    })).wait();
+
+  const unpauseResult2 = await (await contracts.NounsAuctionHouse.instance
+    .attach(contracts.NounsAuctionHouseProxy2.instance.address)
+    .unpause({
+      gasLimit: 1_000_000,
+    })).wait();
+  console.log(unpauseResult2);
+  console.log(unpauseResult2.events.map((e: any) => e.args));
+
+  const auction2 = await contracts.NounsAuctionHouse.instance
+    .attach(contracts.NounsAuctionHouseProxy2.instance.address)
+    .auction({
+      gasLimit: 1_000_000,
+    });
+  console.log('Auction 2');
+  console.log(auction2);
+  const nounowner = await contracts.NounsToken.instance
+    .attach(contracts.NounsToken.instance.address)
+    .owner({
+      gasLimit: 1_000_000,
+    });
+  console.log(nounowner);
+
+
+  const seed0 = await contracts.NounsToken.instance
+    .attach(contracts.NounsToken.instance.address)
+    .seeds(0, {
+      gasLimit: 1_000_000,
+    });
+  console.log(seed0);
+
+  /*
+  const noun0 = await contracts.NounsToken.instance
+    .attach(contracts.NounsToken.instance.address)
+    .tokenURI(0, {
+      gasLimit: 9_000_000_000_000_000,
+    });
+  console.log(noun0);
+  */
 
   // Transfer ownership
   const executorAddress = contracts.NounsDAOExecutor.instance.address;
@@ -56,6 +112,7 @@ task(
     `Noun contracts deployed to local node at http://localhost:8545 (Chain ID: ${chainId})`,
   );
   console.log(`Auction House Proxy address: ${contracts.NounsAuctionHouseProxy.instance.address}`);
+  console.log(`Auction House Proxy 2 address: ${contracts.NounsAuctionHouseProxy2.instance.address}`);
   console.log(`Nouns ERC721 address: ${contracts.NounsToken.instance.address}`);
   console.log(`Nouns DAO Executor address: ${contracts.NounsDAOExecutor.instance.address}`);
   console.log(`Nouns DAO Proxy address: ${contracts.NounsDAOProxy.instance.address}`);
