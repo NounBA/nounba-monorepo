@@ -62,6 +62,7 @@ export function NounsI18nProvider({
 
   return (
     <I18nProvider forceRenderOnLocaleChange={forceRenderAfterLocaleChange} i18n={i18n}>
+      {/* @ts-ignore */}
       {children}
     </I18nProvider>
   );
