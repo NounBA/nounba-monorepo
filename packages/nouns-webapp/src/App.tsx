@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import NetworkAlert from './components/NetworkAlert';
 import Footer from './components/Footer';
 import AuctionPage from './pages/Auction';
+import NounBAPage from './pages/NounBA';
 import GovernancePage from './pages/Governance';
 import CreateProposalPage from './pages/CreateProposal';
 import VotePage from './pages/Vote';
@@ -54,12 +55,12 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/" component={AuctionPage} />
-            <Redirect from="/auction/:id" to="/noun/:id" />
             <Route
               exact
-              path="/noun/:id"
-              render={props => <AuctionPage initialAuctionId={Number(props.match.params.id)} />}
+              path="/nounba/:id"
+              render={props => <NounBAPage initialAuctionId={props.match.params.id} />}
             />
+            <Redirect from="/nounba" to="/" />
             <Route exact path="/nounders" component={NoundersPage} />
             <Route exact path="/create-proposal" component={CreateProposalPage} />
             <Route exact path="/vote" component={GovernancePage} />

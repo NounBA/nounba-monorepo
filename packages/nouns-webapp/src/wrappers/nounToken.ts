@@ -30,7 +30,15 @@ const abi = new utils.Interface(NounsTokenABI);
 const seedCacheKey = cacheKey(cache.seed, CHAIN_ID, config.addresses.nounsToken);
 
 const isSeedValid = (seed: Record<string, any> | undefined) => {
-  const expectedKeys = ['background', 'body', 'accessory', 'head', 'glasses'];
+  const expectedKeys = [
+    'background',
+    'body',
+    'accessory',
+    'head',
+    'glasses',
+    'oneOfOne',
+    'oneOfOneIndex',
+  ];
   const hasExpectedKeys = expectedKeys.every(key => (seed || {}).hasOwnProperty(key));
   const hasValidValues = Object.values(seed || {}).some(v => v !== 0);
   return hasExpectedKeys && hasValidValues;

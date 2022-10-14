@@ -7,24 +7,24 @@
 .headerRow span {
   color: #8c8d92;
   font-size: 24px;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 .headerRow h1 {
   color: #14161b;
   font-size: 56px;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 .subheading {
   color: var(--brand-dark-green);
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: 500;
   font-size: 1.2rem;
 }
 
 .boldText {
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
 }
 
@@ -70,22 +70,22 @@ p {
 
 .ethTreasuryAmt h1 {
   font-size: 36px;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 .usdBalance {
   font-size: 36px;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 .ethSymbol {
-  font-family: 'PT Root UI' !important;
+  font-family: 'DM Sans' !important;
   margin-right: 0.5rem;
 }
 
 .usdBalance {
   color: var(--brand-gray-light-text);
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 .treasuryInfoText {
@@ -93,7 +93,7 @@ p {
   padding-bottom: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: 500;
 }
 

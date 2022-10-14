@@ -3,26 +3,19 @@
 }
 
 .wrapper h1 {
-  font-family: 'Londrina Solid';
-  font-size: 68px;
-  margin-bottom: 20px;
+  font-family: 'DM Sans';
+  font-size: 2.5rem;
+  line-height: 3rem;
+  margin-bottom: 24px;
   margin-top: 0;
 }
 
 .wrapper h2 {
-  font-family: 'Londrina Solid';
-  font-size: 1.4rem;
+  font-family: 'DM Sans';
+  font-size: 1.5rem;
+  line-height: 2rem;
   color: var(--brand-warm-light-text);
+  margin-top: 18px;
   margin-bottom: 0;
 }
 
-@media (max-width: 992px) {
-  .wrapper h1 {
-    padding-top: 0;
-    font-size: 56px;
-  }
-  .wrapper h2 {
-    font-size: 1.16rem;
-    margin-top: 16px;
-  }
-}

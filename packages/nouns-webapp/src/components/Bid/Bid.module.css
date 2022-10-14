@@ -7,47 +7,49 @@
 }
 
 .bidBtn {
-  font-family: 'PT Root UI';
-  border-radius: 12px !important;
-  /* margin-left: 0.6rem !important; */
+  font-family: 'DM Sans';
   margin-top: 12px;
-  margin-top: 3px;
+  margin-top: 9px;
   width: 100%;
   padding: 10px 16px;
-  height: 3rem;
+  height: 56px;
   color: white;
-  border: transparent;
-  background-color: var(--brand-orange);
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: normal;
   font-size: 19px;
   transition: all 0.2s ease-in-out;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .bidBtn:disabled {
   cursor: not-allowed;
 }
 
-.westBtn:hover,
-.westBtn:active,
-.westBtn:focus,
+.westBtn,
 .westBtn:disabled {
   background-color: var(--brand-color-red) !important;
-  outline: none !important;
-  box-shadow: none !important;
+  border: 1px solid var(--brand-color-red) !important;
+}
+
+.westBtn:hover,
+.westBtn:active,
+.westBtn:focus {
+  background-color: var(--brand-white) !important;
+  color: var(--brand-color-red) !important;
+}
+
+.eastBtn,
+.eastBtn:disabled  {
+  background-color: var(--brand-color-blue) !important;
+  border: 1px solid var(--brand-color-blue) !important;
 }
 
 .eastBtn:hover,
 .eastBtn:active,
-.eastBtn:focus,
-.eastBtn:disabled {
-  background-color: var(--brand-color-blue) !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.bidBtn:disabled {
-  background-color: gray !important;
+.eastBtn:focus{
+  background-color: var(--brand-white) !important;
+  color: var(--brand-color-blue) !important;
 }
 
 .minBidCopy {
@@ -66,29 +68,29 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   width: 100%;
-  height: 54px;
+  height: 72px;
   color: #616161;
-  border-radius: 12px !important;
   box-shadow: inset 0px 0px 0px 1px transparent;
-  background-color: transparent;
+  background-color: #EEF2F6;
   outline: none !important;
   box-shadow: none !important;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.3rem;
   transition: all 0.2s ease-in-out;
   border: 1px solid #f9f9f9;
+  border-radius: var(--default-border-radius) !important;
+  padding-left: 5%;
 }
 
 .bidInput:focus {
   box-shadow: inset 0px 0px 0px 1px var(--brand-white) !important;
-  color: #fff;
-  background-color: transparent;
+  color: var(--brand-warm-light-text);
 }
 
 .customPlaceholder {
   color: var(--brand-cool-light-text);
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
   z-index: 3;
   user-select: none;
@@ -96,15 +98,17 @@
 
 .customPlaceholderBidAmt {
   position: absolute;
-  opacity: 0.3;
-  top: 15%;
-  left: 3%;
-  color: var(--brand-cool-light-text);
-  font-family: 'PT Root UI';
+  top: 30%;
+  left: 20px;
+  color: var(--brand-bg-gray-400);
+  font-family: 'DM Sans';
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.3rem;
   z-index: 1;
   pointer-events: none;
+}
+.etherSymbol {
+  font-family: sans-serif;
 }
 
 .activityRow .form-floating {
@@ -120,7 +124,7 @@
   border: transparent;
   background-color: var(--brand-orange);
   font-weight: bold;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-size: 18px;
   border-radius: 10px;
 }
@@ -165,10 +169,7 @@
   .customPlaceholder {
     left: 40%;
   }
-  .customPlaceholderBidAmt {
-    left: 3.5%;
-    top: 16%;
-  }
+  
   .emergencySettleWrapper {
     text-align: center;
   }
@@ -190,4 +191,26 @@
 }
 .connectToSettle {
   color: var(--brand-cool-accent);
+}
+.waitSettle {
+  background-color: var(--brand-bg-gray-light);
+  border-radius: var(--default-border-radius);
+  margin-top: 16px;
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: var(--brand-bg-gray-400);
+}
+.waitSettle h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0;
+}
+.waitSettle p {
+  color: var(--brand-warm-light-text);
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0 10%;
 }

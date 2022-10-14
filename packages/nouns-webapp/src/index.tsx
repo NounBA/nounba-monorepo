@@ -27,7 +27,7 @@ import { useEffect } from 'react';
 import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
 import config, { AUCTION_NAMES, CHAIN_ID, createNetworkHttpUrl } from './config';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch } from './hooks';
 import { LanguageProvider } from './i18n/LanguageProvider';
 import ChainSubscriber from './components/ChainSubscriber';
 
@@ -95,13 +95,12 @@ const Updaters = () => {
 };
 
 const PastAuctions: React.FC = () => {
-  const latestAuctionId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
   const { data } = useQuery(latestAuctionsQuery());
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     data && dispatch(addPastAuctions({ data }));
-  }, [data, latestAuctionId, dispatch]);
+  }, [data, dispatch]);
 
   return <></>;
 };

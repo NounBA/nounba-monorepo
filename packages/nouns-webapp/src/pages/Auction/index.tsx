@@ -19,116 +19,58 @@ interface AuctionPageProps {
   initialAuctionId?: number;
 }
 
-const AuctionPage: React.FC<AuctionPageProps> = props => {
-  // const { initialAuctionId } = props;
+const AuctionPage: React.FC<AuctionPageProps> = () => {
+  // const [selectedAuction, setSelectedAuction] = useState<REGIONS | null>(null);
   const onDisplayFirstAuction = useOnDisplayAuction();
   const lastFirstAuctionNounId = useAppSelector(state => state.firstAuction.lastAuctionNounId);
 
   const onDisplaySecondAuction = useOnDisplayAuction(AUCTION_NAMES.SECOND_AUCTION);
   const lastSecondAuctionNounId = useAppSelector(state => state.secondAuction.lastAuctionNounId);
 
-  // Used by activities
-  // const onDisplayFirstAuctionNounId = onDisplayFirstAuction?.nounId.toNumber();
-  // const onDisplaySecondAuctionNounId = onDisplaySecondAuction?.nounId.toNumber();
-  let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!lastFirstAuctionNounId) return;
-
-    // TODO: use routes to the selected noun
-    // if (initialAuctionId !== undefined) {
-    // handle out of bounds noun path ids
-    // if (initialAuctionId > lastAuctionNounId || initialAuctionId < 0) {
-    //   dispatch(setOnDisplayAuctionNounId(lastAuctionNounId));
-    //   dispatch(push(nounPath(lastAuctionNounId)));
-    // } else {
-    //   if (onDisplayAuction === undefined) {
-    //     // handle regular noun path ids on first load
-    //     dispatch(setOnDisplayAuctionNounId(initialAuctionId));
-    //   }
-    // }
-    // } else {
-    // no noun path id set
     if (lastFirstAuctionNounId) {
       dispatch(setOnDisplayFirstAuctionNounId(lastFirstAuctionNounId));
     }
-    // }
   }, [dispatch, lastFirstAuctionNounId]);
 
   useEffect(() => {
     if (!lastSecondAuctionNounId) return;
-
-    // TODO: use routes to the selected noun
-    // if (initialAuctionId !== undefined) {
-    // handle out of bounds noun path ids
-    // if (initialAuctionId > lastAuctionNounId || initialAuctionId < 0) {
-    //   dispatch(setOnDisplayAuctionNounId(lastAuctionNounId));
-    //   dispatch(push(nounPath(lastAuctionNounId)));
-    // } else {
-    //   if (onDisplayAuction === undefined) {
-    //     // handle regular noun path ids on first load
-    //     dispatch(setOnDisplayAuctionNounId(initialAuctionId));
-    //   }
-    // }
-    // } else {
-    // no noun path id set
     if (lastSecondAuctionNounId) {
       dispatch(setOnDisplaySecondAuctionNounId(lastSecondAuctionNounId));
     }
-    // }
   }, [dispatch, lastSecondAuctionNounId]);
-
-  // useEffect(() => {
-  //   if (!lastAuctionNounId) return;
-
-  //   if (initialAuctionId !== undefined) {
-  //     // handle out of bounds noun path ids
-  //     if (initialAuctionId > lastAuctionNounId || initialAuctionId < 0) {
-  //       dispatch(setOnDisplayAuctionNounId(lastAuctionNounId));
-  //       dispatch(push(nounPath(lastAuctionNounId)));
-  //     } else {
-  //       if (onDisplayAuction === undefined) {
-  //         // handle regular noun path ids on first load
-  //         dispatch(setOnDisplayAuctionNounId(initialAuctionId));
-  //       }
-  //     }
-  //   } else {
-  //     // no noun path id set
-  //     if (lastAuctionNounId) {
-  //       dispatch(setOnDisplayAuctionNounId(lastAuctionNounId));
-  //     }
-  //   }
-  // }, [lastAuctionNounId, dispatch, initialAuctionId, onDisplayAuction]);
-
   return (
-    <div style={{ backgroundColor: stateBgColor }}>
-      <Container fluid="xl">
-        <Row>
-          <Col lg={{ span: 6 }} className={classes.westernSide}>
-            <Auction
-              side={REGIONS.west}
-              auction={onDisplayFirstAuction}
-              auctionName={AUCTION_NAMES.FIRST_AUCTION}
-            />
-          </Col>
-          <Col lg={{ span: 6 }} className={classes.easternSide}>
-            <Auction
-              side={REGIONS.east}
-              auction={onDisplaySecondAuction}
-              auctionName={AUCTION_NAMES.SECOND_AUCTION}
-            />
-          </Col>
-        </Row>
-      </Container>
-      {/* TODO: show profileActivityFeed to the owner */}
-      {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
-      {/* <ProfileActivityFeed nounId={1} /> */}
-      {/* ) : (
+    <div style={{ backgroundColor: 'var(--brand-bg-gray)' }}>
+      <div className={classes.woodWrapper}>
+        <Container fluid="xl" className={classes.wrapper}>
+          <Row>
+            <Col lg={{ span: 6 }} className={classes.westernSide}>
+              <Auction
+                side={REGIONS.west}
+                auction={onDisplayFirstAuction}
+                auctionName={AUCTION_NAMES.FIRST_AUCTION}
+              />
+            </Col>
+            <Col lg={{ span: 6 }} className={classes.easternSide}>
+              <Auction
+                side={REGIONS.east}
+                auction={onDisplaySecondAuction}
+                auctionName={AUCTION_NAMES.SECOND_AUCTION}
+              />
+            </Col>
+          </Row>
+        </Container>
+        {/* TODO: show profileActivityFeed to the owner */}
+        {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
+        {/* <ProfileActivityFeed nounId={1} /> */}
+        {/* ) : (
       )} */}
-      <Banner />
-      <Documentation />
+        <Banner />
+        <Documentation />
+      </div>
     </div>
   );
 };
