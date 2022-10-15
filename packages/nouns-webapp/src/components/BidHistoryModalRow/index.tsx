@@ -1,6 +1,5 @@
 import classes from './BidHistoryModalRow.module.css';
 import React from 'react';
-import { ExternalLinkIcon } from '@heroicons/react/solid';
 import { buildEtherscanTxLink } from '../../utils/etherscan';
 import TruncatedAmount from '../TruncatedAmount';
 import BigNumber from 'bignumber.js';
