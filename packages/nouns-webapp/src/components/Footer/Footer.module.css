@@ -1,4 +1,6 @@
 .wrapper {
+  background-color: var(--brand-bg-gray);
+  border-top: 1px solid var(--brand-warm-light-text);
   display: flex;
   flex: 1;
 }
@@ -11,10 +13,10 @@
   margin: auto auto 0 auto;
   font-family: 'DM Sans' !important;
   font-weight: 500;
-  font-size: 18px;
-  padding-bottom: 4rem;
+  font-size: 1.25rem;
+  padding-bottom: 2rem;
   padding-top: 2rem;
-  color: var(--brand-black) !important;
+  color: var(--brand-white) !important;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -23,14 +25,14 @@
 
 .footerSignature a {
   text-decoration: none;
-  color: black;
+  color: var(--brand-white);
   margin: 8px 14px;
   transition: all 0.15s ease-in-out;
 }
 
 .footerSignature a:hover {
   text-decoration: none;
-  font-weight: bold;
+  color: var(--brand-color-blue);
 }
 
 .footerSignature img {
