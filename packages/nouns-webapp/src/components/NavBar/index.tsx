@@ -61,28 +61,26 @@ const NavBar = () => {
               {/* <h1 className={classes.navLogoTitle}>NounBA</h1> */}
             </Navbar.Brand>
           </div>
-          <Nav.Item>
-            {/* {treasuryBalance && ( */}
-            <Nav.Link
-              href={daoEtherscanLink}
-              className={classes.nounsNavLink}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <NavBarTreasury
-                treasuryBalance={'1000'}
-                // treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
-                treasuryStyle={nonWalletButtonStyle}
-              />
-            </Nav.Link>
-            {/* )} */}
-          </Nav.Item>
           <Navbar.Toggle
             className={classes.navBarToggle}
             aria-controls="basic-navbar-nav"
             onClick={() => setIsNavExpanded(!isNavExpanded)}
           />
           <Navbar.Collapse className={classes.navbarCollapse}>
+            {treasuryBalance && (
+              <Nav.Link
+                href={daoEtherscanLink}
+                className={classes.nounsNavLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <NavBarTreasury
+                  // treasuryBalance={'1000'}
+                  treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
+                  treasuryStyle={nonWalletButtonStyle}
+                />
+              </Nav.Link>
+            )}
             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
