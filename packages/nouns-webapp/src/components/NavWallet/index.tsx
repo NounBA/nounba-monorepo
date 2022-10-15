@@ -24,6 +24,7 @@ import {
 } from '../../utils/addressAndENSDisplayUtils';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
+import { LogOut, RefreshCw } from 'lucide-react';
 
 interface NavWalletProps {
   address: string;
@@ -159,7 +160,10 @@ const NavWallet: React.FC<NavWalletProps> = props => {
               ),
             )}
           >
-            <Trans>Switch wallet</Trans>
+            <Trans>Switch</Trans>
+            <span className={classes.subNavIcon}>
+              <RefreshCw size={24} />
+            </span>
           </div>
 
           <div
@@ -176,7 +180,10 @@ const NavWallet: React.FC<NavWalletProps> = props => {
               classes.disconnectText,
             )}
           >
-            <Trans>Disconnect</Trans>
+            <Trans>Sign Out</Trans>
+            <span className={classes.subNavIcon}>
+              <LogOut size={24} />
+            </span>
           </div>
         </div>
       </div>
