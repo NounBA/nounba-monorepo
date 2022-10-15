@@ -8,9 +8,11 @@ import classes from './StandaloneNoun.module.css';
 import { useDispatch } from 'react-redux';
 import { setOnDisplayAuctionNounId } from '../../state/slices/onDisplayAuction';
 import nounClasses from '../Noun/Noun.module.css';
+import clsx from 'clsx';
 
 interface StandaloneNounProps {
   nounId: EthersBN;
+  className?: string;
 }
 interface StandaloneCircularNounProps {
   nounId: EthersBN;
@@ -40,7 +42,7 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 };
 
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
-  const { nounId } = props;
+  const { nounId, className } = props;
   const seed = useNounSeed(nounId);
 
   const noun = seed && getNoun(nounId, seed);
@@ -54,7 +56,7 @@ const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProp
   return (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       <Noun imgPath={noun ? noun.image : ''} alt={noun ? noun.description : 'Noun'} />
@@ -95,7 +97,7 @@ export const StandaloneNounCircular: React.FC<StandaloneCircularNounProps> = (
 export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
   props: StandaloneNounProps,
 ) => {
-  const { nounId } = props;
+  const { nounId, className } = props;
   const seed = useNounSeed(nounId);
   const noun = seed && getNoun(nounId, seed);
 
@@ -107,7 +109,7 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
   return (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       <Noun

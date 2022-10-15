@@ -10,7 +10,6 @@
 }
 
 .content {
-  padding: 1rem;
   max-height: 50vh;
   overflow-y: hidden;
 }
@@ -24,15 +23,23 @@
   z-index: 100;
   background-color: rgba(244, 244, 248, 1);
   box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  border-radius: 24px;
+  border-radius: 4px;
   left: calc(50% - 20rem);
   width: 40rem;
   background-color: var(--brand-white);
 }
 
 .modal .header {
+  background-color: var(--brand-color-blue);
   display: flex;
+  padding: 32px;
+  position: relative;
+}
+.modal.eastAuction .header {
+  background-color: var(--brand-color-blue);
+}
+.modal.westAuction .header {
+  background-color: var(--brand-color-red);
 }
 
 .modal .title {
@@ -42,39 +49,28 @@
 }
 
 .modal .title h2 {
-  font-size: 24px;
-  margin-top: 0.5rem;
+  font-size: 1.5rem;
 }
 
 .modal .title h1 {
-  line-height: 25px;
-  height: 2rem;
-  font-size: 42px;
+  font-size: 2rem;
+  color: var(--brand-white);
 }
-.modal.westAuction .title h1,
-.modal.westAuction .title h2 {
-  color: var(--brand-color-red);
-}
-.modal.eastAuction .title h1,
-.modal.eastAuction .title h2 {
-  color: var(--brand-color-blue);
+.modal .title h2 {
+  color: var(--brand-white);
 }
 
 .nounWrapper {
-  height: 96px;
-  width: 96px;
+  height: 200px;
+  width: 200px;
   margin-right: 1rem;
 }
 
 .bidWrapper {
-  background-color: rgba(224, 224, 231, 1);
   overflow-y: scroll;
   box-shadow: inset 0px -12px 16px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  margin-top: 1rem;
-
   height: 35vh;
-  padding: 0.75rem;
+  padding: 32px;
 }
 
 .bidWrapper ul {
@@ -90,16 +86,19 @@
 
 .closeBtn {
   z-index: 100;
-  position: fixed;
+  right: 32px;
+  top: 32px;
+  position: absolute;
   height: 40px;
   width: 40px;
-  border-radius: 50%;
+  border-radius: 4px;
   transition: all 0.125s ease-in-out;
-  border: 0;
+  background-color: transparent;
+  border: 1px solid var(--brand-white);
+  color: var(--brand-white);
 }
 
 .closeBtn:hover {
-  background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
 }
 
@@ -112,6 +111,17 @@
   font-size: 24px;
   text-align: center;
   margin-top: 3rem;
+}
+
+.nounImage {
+  max-height: none;
+  min-height: auto;
+}
+.nounImage img {
+  max-height: none;
+  min-height: auto;
+  background-color: #E3E8EF;
+  border-radius: 4px;
 }
 
 @media (max-width: 992px) {

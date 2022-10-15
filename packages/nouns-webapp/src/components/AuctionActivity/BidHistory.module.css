@@ -50,11 +50,6 @@
   filter: brightness(110%);
 }
 
-.bidRowCool:hover,
-.bidRowWarm:hover {
-  filter: brightness(105%);
-}
-
 .bidItem {
   display: flex;
   align-items: center;
@@ -115,7 +110,7 @@
 .bidRowCool .bidAmount,
 .bidRowWarm .bidAmount,
 .linkSymbol {
-  color: var(--brand-white) !important;
+  color: var(--brand-white);
 }
 .linkSymbol:hover {
   color: var(--brand-white) !important;

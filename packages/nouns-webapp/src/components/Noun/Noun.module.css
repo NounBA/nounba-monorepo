@@ -6,6 +6,8 @@
   left: 0;
   width: 100%;
   height: auto;
+  max-height: 38vh;
+  min-height: 300px;
   vertical-align: middle;
 }
 

@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import classes from './Winner.module.css';
 import ShortAddress from '../ShortAddress';
@@ -96,7 +95,7 @@ const Winner: React.FC<WinnerProps> = props => {
           </h2>
         </div>
       </div>
-      {isWinnerYou && isMobile && (
+      {/* {isWinnerYou && isMobile && (
         <div>
           <a
             href="https://nouns.center/nouners"
@@ -109,7 +108,7 @@ const Winner: React.FC<WinnerProps> = props => {
             </Button>
           </a>
         </div>
-      )}
+      )} */}
     </>
   );
 };

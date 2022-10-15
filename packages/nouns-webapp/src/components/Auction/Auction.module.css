@@ -1,6 +1,8 @@
 .nounWrapper {
   align-self: flex-end;
   width: 100%;
+  max-height: 38vh;
+  min-height: 300px;
 }
 .infoWrapper {
   position: relative;
