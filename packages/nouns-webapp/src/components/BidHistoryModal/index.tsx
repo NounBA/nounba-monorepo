@@ -32,24 +32,27 @@ const BidHistoryModalOverlay: React.FC<{
 
   return (
     <>
-      <div className={classes.closeBtnWrapper}>
-        <button onClick={onDismiss} className={classes.closeBtn}>
-          <XIcon className={classes.icon} />
-        </button>
-      </div>
-
       <div className={`${classes.modal} ${conferenceAuctionClass}`}>
         <div className={classes.content}>
           <div className={classes.header}>
             <div className={classes.nounWrapper}>
-              <StandaloneNounRoundedCorners nounId={auction && auction.nounId} />
+              <StandaloneNounRoundedCorners
+                nounId={auction && auction.nounId}
+                className={classes.nounImage}
+              />
             </div>
 
             <div className={classes.title}>
               <h2>
                 <Trans>Bids for</Trans>
               </h2>
-              <h1>Noun {auction && auction.nounId.toString()}</h1>
+              <h1>NounBA {auction && auction.nounId.toString()}</h1>
+            </div>
+
+            <div className={classes.closeBtnWrapper}>
+              <button onClick={onDismiss} className={classes.closeBtn}>
+                <XIcon className={classes.icon} />
+              </button>
             </div>
           </div>
           <div className={classes.bidWrapper}>

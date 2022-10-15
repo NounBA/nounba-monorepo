@@ -15,6 +15,7 @@ import { useReverseENSLookUp } from '../../utils/ensLookup';
 import { containsBlockedText } from '../../utils/moderation/containsBlockedText';
 import { i18n } from '@lingui/core';
 import { shortENS, useShortAddress } from '../../utils/addressAndENSDisplayUtils';
+import { ExternalLink } from 'lucide-react';
 interface BidHistoryModalRowProps {
   bid: Bid;
   index: number;
@@ -69,7 +70,7 @@ const BidHistoryModalRow: React.FC<BidHistoryModalRowProps> = props => {
           <div className={auctionActivityClasses.linkSymbol}>
             <a href={txLink} target="_blank" rel="noreferrer">
               <div className={classes.linkIcon}>
-                <ExternalLinkIcon height={24} width={24} />
+                <ExternalLink size={24} />
               </div>
             </a>
           </div>

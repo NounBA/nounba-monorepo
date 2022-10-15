@@ -1,11 +1,10 @@
 .bidRow {
-  border-radius: 14px;
+  border-radius: 4px;
   height: 72px;
   width: 100%;
-  padding: 1rem;
-  margin-top: 0.75rem;
+  padding: 16px;
   border-bottom: 0px;
-  background-color: white;
+  background-color: #EEF2F6;
 }
 
 .bidderInfoWrapper {
@@ -17,7 +16,7 @@
   display: inline-block;
   padding: 0;
   line-height: 23px;
-  color: var(--brand-black) !important;
+  color: var(--brand-bg-gray) !important;
 }
 
 .bidDate {
@@ -33,9 +32,10 @@
 }
 
 .linkIcon {
-  color: var(--brand-gray-light-text);
+  color: var(--brand-bg-gray);
   transition: all 0.125s ease-in-out;
   margin-bottom: 0.1rem;
+  font-weight: normal;
 }
 
 .linkIcon:hover {
@@ -45,4 +45,6 @@
 
 .bidAmount {
   white-space: nowrap;
+  color: var(--brand-bg-gray) !important;
+  font-weight: normal;
 }
