@@ -1,3 +1,6 @@
+.wrapper {
+  background-color: var(--brand-bg-gray);
+}
 .headerWrapper h1 {
   font-family: 'DM Sans';
   font-size: 4rem;
@@ -11,23 +14,29 @@
   margin: 3rem 0;
 }
 
+.accordionBody {
+  padding-top: 0;
+  background-color: var(--brand-gray-background);
+}
 .accordionItem {
+  color: var(--brand-white);
   font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   letter-spacing: -0.25px;
   line-height: 28px;
-  font-size: 1.2rem !important;
-  border-radius: 10px !important;
-  background-color: var(--brand-white);
-  margin-bottom: 2.5rem;
+  font-size: 1.1rem !important;
+  border-radius: 4px !important;
+  background-color: var(--brand-bg-gray-light);
+  margin-bottom: 15px;
+  padding-top: 0 !important;
   border: none;
 }
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .headerWrapper {
     padding: 1rem;
   }
-}
+} */
 .aboutText {
   margin: 0px !important;
 }
@@ -38,42 +47,43 @@
 }
 
 .accordionHeader button:hover {
-  color: var(--brand-color-red) !important;
+  color: var(--brand-white) !important;
 }
 
 .accordionHeader button {
   border: none;
   background-color: transparent;
   font-family: 'DM Sans';
-  font-size: 2.5rem !important;
+  font-size: 1.5rem !important;
   cursor: pointer;
   line-height: normal;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
+
 .accordionHeader button:not(.collapsed) {
-  color: #212529;
-  background-color: transparent;
+  color: var(--brand-white);
+  background-color: transparent !important;
   box-shadow: none !important;
+  transition: all 1s ease-in-out;
 }
+.accordionHeader button[aria-expanded="true"]:not(.collapsed) {
+  background-color: var(--brand-gray-background) !important;
+  transition: all 0s ease-in-out;
+}
+
 
 /* override bootstrap color */
 .accordionHeader button:not(.collapsed)::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 }
 
-.accordionItem:nth-child(2n+1) .accordionHeader button:hover {
-  color: var(--brand-dark-red) !important;
-  box-shadow: none !important;
-}
-.accordionItem:nth-child(2n) .accordionHeader button:hover {
-  color: var(--brand-color-blue) !important;
-  box-shadow: none !important;
-}
-
-@media (max-width: 992px) {
+@media screen and (min-width: 992px) {
   .accordionHeader button {
-    padding-left: 20px;
+    font-size: 2rem !important;
+  }
+  .accordionItem {
+    font-size: 1.2rem !important;
   }
 }
