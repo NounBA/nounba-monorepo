@@ -19,7 +19,6 @@ interface StandaloneCircularNounProps {
 
 interface StandaloneNounWithSeedProps {
   nounId: EthersBN;
-  onLoadSeed?: (seed: INounSeed) => void;
   shouldLinkToProfile: boolean;
 }
 
@@ -28,7 +27,10 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
   const name = `Noun ${id}`;
   const description = `Noun ${id} is a member of the Nouns DAO`;
   const { parts, background } = getNounData(seed);
-  const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
+
+  const image = `data:image/svg+xml;base64,${btoa(
+    buildSVG(parts, data.palette, background, true),
+  )}`;
 
   return {
     name,
@@ -40,6 +42,7 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
   const seed = useNounSeed(nounId);
+
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -119,20 +122,17 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
 export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   props: StandaloneNounWithSeedProps,
 ) => {
-  const { nounId, onLoadSeed, shouldLinkToProfile } = props;
+  const { nounId, shouldLinkToProfile } = props;
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
-  if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="Noun" />;
-
-  onLoadSeed(seed);
+  if (!seed || seedIsInvalid || !nounId) return <Noun imgPath="" alt="Noun" />;
 
   const onClickHandler = () => {
     dispatch(setOnDisplayAuctionNounId(nounId.toNumber()));
   };
-
   const { image, description } = getNoun(nounId, seed);
 
   const noun = <Noun imgPath={image} alt={description} />;

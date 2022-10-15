@@ -16,6 +16,7 @@ const Tooltip: React.FC<TooltipProps> = props => {
       <ReactTooltip
         id={id}
         className={classes.hover}
+        // @ts-ignore
         getContent={dataTip => {
           return tooltipContent(dataTip);
         }}

@@ -60,7 +60,8 @@ const GovernancePage = () => {
               </Col>
               <Col className={classes.usdTreasuryAmt}>
                 <h1 className={classes.usdBalance}>
-                  {treasuryBalanceUSD &&
+                  {!isNaN(treasuryBalanceUSD) &&
+                    treasuryBalanceUSD &&
                     i18n.number(Number(treasuryBalanceUSD.toFixed(0)), {
                       style: 'currency',
                       currency: 'USD',

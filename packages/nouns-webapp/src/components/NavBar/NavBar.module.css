@@ -1,11 +1,12 @@
 .navBarBrand {
   position: relative;
   z-index: 2;
-  padding: 1rem 0rem;
+  padding: 24px 0;
+  margin-left: 20px;
   transition: all 0.15s ease-in-out;
   display: flex;
   align-items: center;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
   font-size: 40px;
 }
 
@@ -14,7 +15,7 @@
 }
 
 .navBarLogo {
-  width: 60px;
+  width: 210px;
   height: 60px;
 }
 
@@ -28,21 +29,9 @@
 .navBarCustom {
   padding-bottom: 0;
   padding-top: 0;
-  background-color: var(--brand-white);
+  background-color: var(--brand-bg-gray);
 }
 
-@media (max-width: 992px) {
-  .navBarLogo {
-    width: 40px;
-    height: 40px;
-  }
-
-  .navBarCustom {
-    margin-bottom: -1px;
-    margin-right: -5px;
-    padding-bottom: 0rem;
-  }
-}
 @media (max-width: 479px) {
   .navLogoTitle {display:none}
 }
@@ -60,7 +49,7 @@
 
 .disconnectBtn {
   cursor: pointer;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
 }
 
@@ -85,11 +74,10 @@
 .nounsNavLink,
 .nounsNavLink:active,
 .nounsNavLink:visited {
-  font-family: 'PT Root UI';
-  font-weight: bold;
+  font-family: 'DM Sans';
   font-size: 0.9rem;
   padding: 0.3rem 0.3rem !important;
-  color: black !important;
+  color: white !important;
 }
 
 .testnetImg {
@@ -112,12 +100,35 @@
 }
 
 .navBarToggle {
-  border-radius: 10px;
-  height: 44px;
-  padding: 0.25rem 0.5rem;
-  margin-right: 12px;
+  border-radius: var(--default-border-radius);
+  height: 56px;
+  width: 56px;
+  margin-right: 20px;
+  background-color: var(--brand-color-blue);
+}
+.navBarToggle span {
+  background-image: url("./../../assets/toggle-menu.svg") !important;
 }
 
 .navbarCollapse {
   flex-grow: unset;
+  padding-bottom: 15px;
+}
+.testnet {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+.testnet img {
+  margin: 0 20px 0 10px;
+}
+
+@media screen and (min-width: 992px) {
+  .navBarBrand {
+    padding: 16px 0;
+  }
+  .navbarCollapse{
+    padding-bottom: 0;
+  }
 }

@@ -5,7 +5,7 @@ import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun
 import { Bid, BidEvent } from '../utils/types';
 import { Auction } from './nounsAuction';
 
-const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
+export const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
   return {
     amount: BigNumber.from(reduxSafeAuction.amount),
     bidder: reduxSafeAuction.bidder,
@@ -28,7 +28,7 @@ const deserializeBid = (reduxSafeBid: BidEvent): Bid => {
     timestamp: BigNumber.from(reduxSafeBid.timestamp),
   };
 };
-const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
+export const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
   return reduxSafeBids
     .map(bid => deserializeBid(bid))
     .sort((a: Bid, b: Bid) => {

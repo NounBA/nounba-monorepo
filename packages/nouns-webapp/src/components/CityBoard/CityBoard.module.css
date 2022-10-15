@@ -1,12 +1,12 @@
 
 .containerWrapper {
   position: relative;
-  background-color: black;
+  background-color: var(--brand-bg-gray);
   /* padding-top: 59px; */
 }
 .containerWrapper::before {
   content: " ";
-  background-color: black;
+  background-color: var(--brand-bg-gray);
   position: absolute;
   left: -100vw;
   right: -100vw;
@@ -15,15 +15,16 @@
   z-index: 0;
 }
 .wrapper {
-  background-color: black;
   color: var(--brand-white);
   z-index: 1;
   position: relative;
   padding-bottom: 3rem;
 }
 .title {
+  background-color: var(--brand-bg-gray);
   font-size: 1.1rem;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
+  padding-top: 25px;
   color: #616161;
 }
 .list {
@@ -44,33 +45,44 @@
 }
 .city {
   width: 100%;
-  padding: 8px;
-  background-color: #1C1C1C;
-  border: 1px solid black !important;
-  border-radius: 10px !important;
+  height: 56px;
+  padding: 8px 14px 8px 8px;
+  background-color: var(--brand-bg-gray-light);
+  border: 1px solid var(--brand-gray-background) !important;
+  border-radius: var(--default-border-radius) !important;
   color: var(--brand-white);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+}
+.cityWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .city:not(:disabled):hover,
 .city:not(:disabled):focus,
 .city:not(:disabled):active,
 .city.isSelected {
-  background-color: #1C1C1C;
-  filter: brightness(120%);
+  background-color: var(--brand-bg-gray-light) !important;
   border-color: var(--brand-color-red) !important;
   cursor: pointer;
   outline: 0;
   box-shadow: none;
 }
 .city:disabled {
-  background-color: #1C1C1C;
+  background-color: var(--brand-bg-gray);
+  color: var(--brand-gray-background);
+}
+.city:disabled .avatar {
+  background-color: var(--brand-bg-gray-light);
+  border-color: var(--brand-gray-background);
 }
 .city.isSelected {
-  background-color: #363636 !important;
+  background-color: var(--brand-color-red) !important;
 }
 
 .blueList .city:not(:disabled):hover,
@@ -79,21 +91,20 @@
 .blueList .city.isSelected {
   border-color: var(--brand-color-blue) !important;
 }
+.blueList .city.isSelected {
+  background-color: var(--brand-color-blue) !important;
+}
 .avatar {
-  background-color: #686868;
-  border: 1px solid black;
+  background-color: var(--brand-bg-gray-500);
+  border: 1px solid #ffffff;
   width: 40px;
   height: 40px;
+  display: inline-block;
   border-radius: 100%;
   margin-right: 8px;
 }
 
 @media (min-width: 550px) {
-  .wrapper {
-    background-color: black;
-    color: var(--brand-white);
-    padding-bottom: 3rem;
-  }
   .list {
     flex-direction: row;
     flex-wrap: wrap;

@@ -103,6 +103,8 @@ export const auctionQuery = (auctionId: number) => gql`
 		  accessory
 		  head
 		  glasses
+      oneOfOne
+      oneOfOneIndex
 		}
 		owner {
 		  id
@@ -146,6 +148,8 @@ export const nounQuery = (id: string) => gql`
 		accessory
 		head
 		glasses
+    oneOfOne
+    oneOfOneIndex
 	}
 	  owner {
 		id

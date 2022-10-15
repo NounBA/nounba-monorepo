@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 import { useEtherBalance } from '@usedapp/core';
 // import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -12,13 +12,11 @@ import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
 import { ExternalURL, externalURL } from '../../utils/externalURL';
 import useLidoBalance from '../../hooks/useLidoBalance';
 import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { Trans } from '@lingui/macro';
 import { useState } from 'react';
+import { File, Users } from 'lucide-react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
@@ -49,19 +47,19 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar expand="xl" className={classes.navBarCustom} expanded={isNavExpanded}>
+      {Number(CHAIN_ID) !== 1 && (
+        <div className={classes.testnet}>
+          <img className={classes.testnetImg} src={testnetNoun} alt="testnet noun" />
+          TESTNET
+        </div>
+      )}
+      <Navbar expand="lg" className={classes.navBarCustom} expanded={isNavExpanded}>
         <Container style={{ maxWidth: 'unset' }}>
           <div className={classes.brandAndTreasuryWrapper}>
             <Navbar.Brand as={Link} to="/" className={classes.navBarBrand}>
               <img src={logo} className={classes.navBarLogo} alt="Nouns DAO logo" />
-              <h1 className={classes.navLogoTitle}>NounBA</h1>
+              {/* <h1 className={classes.navLogoTitle}>NounBA</h1> */}
             </Navbar.Brand>
-            {Number(CHAIN_ID) !== 1 && (
-              <Nav.Item>
-                <img className={classes.testnetImg} src={testnetNoun} alt="testnet noun" />
-                TESTNET
-              </Nav.Item>
-            )}
           </div>
           <Nav.Item>
             {treasuryBalance && (
@@ -88,7 +86,7 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faUsers} />}
+                buttonIcon={<Users size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
@@ -101,7 +99,7 @@ const NavBar = () => {
             >
               <NavBarButton
                 buttonText={<Trans>Docs</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faBookOpen} />}
+                buttonIcon={<File size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
