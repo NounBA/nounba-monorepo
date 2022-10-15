@@ -71,7 +71,7 @@ const Documentation = () => {
                     <li>69% to the treasury</li>
                     <li>9% to fantasy leagues (3% for 3 years)</li>
                     <li>12% to NounBA founders</li>
-                    <li>9% to Nouns DAO</li>
+                    <li>9% to NounBA DAO</li>
                     <li>1% to {protocolGuildLink}</li>
                   </ul>
                 </li>
@@ -79,7 +79,7 @@ const Documentation = () => {
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
                 </li>
                 <li>
-                  <Trans>NounBA DAO uses Nouns DAO’s fork of Compound Governance.</Trans>
+                  <Trans>NounBA DAO uses NounBA DAO’s fork of Compound Governance.</Trans>
                 </li>
                 <li>
                   <Trans>1 NounBA is equal to 1 vote.</Trans>
@@ -103,7 +103,7 @@ const Documentation = () => {
                 <Trans>
                   The Nouns Auction Contract will act as a self-sufficient Noun generation and
                   distribution mechanism, auctioning one Noun every 24 hours, forever. 100% of
-                  auction proceeds (ETH) are automatically deposited in the Nouns DAO treasury,
+                  auction proceeds (ETH) are automatically deposited in the NounBA DAO treasury,
                   where they are governed by Noun owners.
                 </Trans>
               </p>
@@ -124,7 +124,7 @@ const Documentation = () => {
                 <li>69% to the treasury</li>
                 <li>9% to fantasy leagues (3% for 3 years)</li>
                 <li>12% to NounBA founders</li>
-                <li>9% to Nouns DAO</li>
+                <li>9% to NounBA DAO</li>
                 <li>1% to {protocolGuildLink}</li>
               </ul>
             </Accordion.Body>
@@ -135,7 +135,7 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
               <Trans>
-                NounBA DAO utilizes Nouns DAO's fork of {compoundGovLink} and is the main governing
+                NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
                 body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
                 from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of
                 NounBA DAO and entitled to one vote in all governance matters. NounBA votes are

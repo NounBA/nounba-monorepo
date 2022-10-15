@@ -29,12 +29,12 @@ const GovernancePage = () => {
             <Trans>Governance</Trans>
           </span>
           <h1>
-            <Trans>Nouns DAO</Trans>
+            <Trans>NounBA DAO</Trans>
           </h1>
         </Row>
         <p className={classes.subheading}>
           <Trans>
-            Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on
+            Nouns govern <span className={classes.boldText}>NounBA DAO</span>. Nouns can vote on
             proposals or delegate their vote to a third party. A minimum of{' '}
             <span className={classes.boldText}>
               {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
@@ -72,7 +72,7 @@ const GovernancePage = () => {
           </Col>
           <Col className={classes.treasuryInfoText}>
             <Trans>
-              This treasury exists for <span className={classes.boldText}>Nouns DAO</span>{' '}
+              This treasury exists for <span className={classes.boldText}>NounBA DAO</span>{' '}
               participants to allocate resources for the long-term growth and prosperity of the
               Nouns project.
             </Trans>
