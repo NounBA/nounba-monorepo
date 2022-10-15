@@ -33,7 +33,8 @@
 }
 
 .disconnectText:hover {
-  color: var(--brand-color-red) !important;
+  background-color: white;
+  color: var(--brand-bg-gray) !important;
   transition: all 0.125s ease-in-out;
   cursor: pointer;
 }
@@ -66,4 +67,8 @@
   justify-content: flex-start;
   color: var(--brand-color-red);
   margin-left: 4px;
+}
+
+.subNavIcon {
+  margin-left: 12px;
 }

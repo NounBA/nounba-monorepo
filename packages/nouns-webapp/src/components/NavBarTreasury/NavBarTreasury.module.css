@@ -1,13 +1,14 @@
 .wrapper {
-  height: 40px;
-  border-radius: 10px;
+  height: 56px;
+  border-radius: 4px;
   font-size: 16px;
   font-family: 'DM Sans';
   font-weight: bold;
-  padding: 0px 10px 0px 10px;
+  padding: 0 16px;
   transition: all 0.125s ease-in-out;
   box-shadow: none;
   border: none;
+  border: 1px solid var(--brand-gray-background);
 }
 
 .button {
@@ -20,10 +21,8 @@
 }
 
 .treasuryHeader {
-  font-size: 16px;
-  margin-left: 0.25rem;
-  margin-right: 0.4rem;
-  margin-top: 1px;
+  font-size: 1.5rem;
+  margin-right: 8px;
 }
 
 .warmInfo .icon {
@@ -32,33 +31,21 @@
 }
 
 .treasuryBalance {
-  font-size: 16.5px;
-  letter-spacing: 0.3px;
-  margin-left: 0.4rem;
-  margin-right: 0.25rem;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 480px) {
-  .wrapper {
-    margin-left: -0.5rem;
-    padding: 0px 7px 0px 6px;
-  }
-
   .treasuryHeader {
     display: none;
   }
 }
 
 .warmInfo .treasuryBalance {
-  color: var(--brand-warm-dark-text);
+  color: var(--brand-white);
 }
 
 .coolInfo .treasuryBalance {
   color: var(--brand-cool-dark-text);
-}
-
-.treasuryHeader {
-  opacity: 0.5;
 }
 
 .button:hover {
@@ -77,16 +64,9 @@
 }
 
 .warmInfo {
-  /* border: 1px solid var(--brand-warm-border);
-  border-radius: 10px; */
-  color: var(--brand-warm-light-text);
+  color: var(--brand-bg-gray-400);
   background-color: transparent !important;
-}
-
-.warmInfo:hover {
-  /* background-color: var(--brand-warm-accent); */
-  color: var(--brand-warm-dark-text);
-  color: black;
+  font-weight: normal;
 }
 
 .whiteInfo {
@@ -99,4 +79,7 @@
 
 .whiteInfo:hover {
   background-color: #e2e3e8;
+}
+.etherSymbol {
+  font-family: sans-serif;
 }

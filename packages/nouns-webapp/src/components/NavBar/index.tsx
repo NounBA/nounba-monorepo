@@ -61,7 +61,12 @@ const NavBar = () => {
               {/* <h1 className={classes.navLogoTitle}>NounBA</h1> */}
             </Navbar.Brand>
           </div>
-          <Nav.Item>
+          <Navbar.Toggle
+            className={classes.navBarToggle}
+            aria-controls="basic-navbar-nav"
+            onClick={() => setIsNavExpanded(!isNavExpanded)}
+          />
+          <Navbar.Collapse className={classes.navbarCollapse}>
             {treasuryBalance && (
               <Nav.Link
                 href={daoEtherscanLink}
@@ -76,13 +81,6 @@ const NavBar = () => {
                 />
               </Nav.Link>
             )}
-          </Nav.Item>
-          <Navbar.Toggle
-            className={classes.navBarToggle}
-            aria-controls="basic-navbar-nav"
-            onClick={() => setIsNavExpanded(!isNavExpanded)}
-          />
-          <Navbar.Collapse className={classes.navbarCollapse}>
             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}

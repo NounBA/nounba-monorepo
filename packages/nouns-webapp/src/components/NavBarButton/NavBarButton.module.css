@@ -70,12 +70,6 @@
   background-color: var(--brand-gray-background);
 }
 
-.warmInfo:hover {
-  background-color: var(--brand-white);
-  border-color: var(--brand-gray-background);
-  color: var(--brand-gray-background);
-}
-
 .warmWallet {
   background-color: var(--brand-warm-accent);
   border: 1px solid var(--brand-warm-border);
