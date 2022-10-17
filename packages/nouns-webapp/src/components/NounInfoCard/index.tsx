@@ -1,11 +1,10 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import clsx from 'clsx';
 
 import classes from './NounInfoCard.module.css';
 
-import _AddressIcon from '../../assets/icons/Address.svg';
-import _BidsIcon from '../../assets/icons/Bids.svg';
-
+import { ExternalLink } from 'lucide-react';
 import NounInfoRowBirthday from '../NounInfoRowBirthday';
 import NounInfoRowHolder from '../NounInfoRowHolder';
 import NounInfoRowButton from '../NounInfoRowButton';
@@ -27,24 +26,33 @@ const NounInfoCard: React.FC<NounInfoCardProps> = props => {
 
   return (
     <>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowBirthday />
-      </Col>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowHolder />
-      </Col>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowButton
-          iconImgSource={_BidsIcon}
-          btnText={<Trans>Bid history</Trans>}
-          onClickHandler={bidHistoryOnClickHandler}
-        />
-        <NounInfoRowButton
-          iconImgSource={_AddressIcon}
-          btnText={<Trans>Etherscan</Trans>}
-          onClickHandler={etherscanButtonClickHandler}
-        />
-      </Col>
+      <Row>
+        <Col xs={6} className={classes.nounInfoRow}>
+          <NounInfoRowBirthday />
+        </Col>
+        <Col xs={6} className={clsx(classes.nounInfoRow, classes.lastCol)}>
+          <NounInfoRowHolder />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
+          <NounInfoRowButton
+            btnText={<Trans>View all bids</Trans>}
+            onClickHandler={bidHistoryOnClickHandler}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
+          <NounInfoRowButton
+            icon={<ExternalLink size={24} className={classes.buttonIcon} />}
+            btnText={<Trans>Check on Etherscan</Trans>}
+            onClickHandler={etherscanButtonClickHandler}
+            className={classes.blueButton}
+          />
+        </Col>
+      </Row>
     </>
   );
 };

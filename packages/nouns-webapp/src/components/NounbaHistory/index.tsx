@@ -71,7 +71,12 @@ const NounbaHistory = () => {
 
   const nounContent = currentAuction && (
     <div className={classes.nounWrapper}>
-      <StandaloneNounWithSeed nounId={currentAuction.nounId} shouldLinkToProfile={false} />
+      <StandaloneNounWithSeed
+        nounId={currentAuction.nounId}
+        shouldLinkToProfile={false}
+        wrapperClassName={classes.nounbaProfileWrapper}
+        className={classes.nounbaProfile}
+      />
     </div>
   );
 
@@ -84,11 +89,9 @@ const NounbaHistory = () => {
   return (
     <Container fluid="xl">
       <Row>
-        <Col lg={{ span: 6 }}>
-          <div className={classes.wrapper}>{currentAuction ? nounContent : loadingNoun}</div>
-        </Col>
+        <Col lg={{ span: 5 }}>{currentAuction ? nounContent : loadingNoun}</Col>
 
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6, offset: 1 }}>
           <div className={classes.infoWrapper}>
             <div className={classes.auctionInfo}>
               {currentAuction && currentAuctionActivityContent}

@@ -2,9 +2,6 @@ import { BigNumber } from '@ethersproject/bignumber';
 import React, { useContext } from 'react';
 
 import classes from './NounInfoRowBirthday.module.css';
-import _BirthdayIcon from '../../assets/icons/Birthday.svg';
-
-import { Image } from 'react-bootstrap';
 import { AuctionState } from '../../state/slices/auction/auctionWrapper';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
@@ -32,10 +29,9 @@ const NounInfoRowBirthday = () => {
 
   return (
     <div className={classes.birthdayInfoContainer}>
-      <span>
-        <Image src={_BirthdayIcon} className={classes.birthdayIcon} />
-      </span>
-      <Trans>Born</Trans>
+      <div className={classes.title}>
+        <Trans>Born</Trans>
+      </div>
       <span className={classes.nounInfoRowBirthday}>
         {i18n.date(birthday, { month: 'long', year: 'numeric', day: '2-digit' })}
       </span>

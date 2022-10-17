@@ -1,13 +1,9 @@
-.navArrowsContainer {
-  
-}
-
 .arrow {
   -webkit-appearance: none;
   padding: 0;
   display: inline-block;
-  width: 56px;
-  height: 56px;
+  width: 35px;
+  height: 35px;
   border: none;
   background-size: contain;
   background-repeat: no-repeat;
@@ -16,7 +12,7 @@
   color: var(--brand-white);
   background-color: var(--brand-gray-background);
   font-weight: normal;
-  margin-left: 16px;
+  margin-left: 6px;
 }
 .arrow.leftArrowWarm,
 .arrow.rightArrowWarm {
@@ -25,6 +21,13 @@
 }
 .arrow[disabled] {
   opacity: 0.5;
+}
+@media screen and (min-width: 480px) {
+  .arrow {
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+  }
 }
 /* Disable hover on mobile because it was leading to
 buttons looking disabled when they were not */

@@ -46,12 +46,12 @@ const Holder: React.FC<HolderProps> = props => {
   return (
     <>
       <Row className={clsx(classes.wrapper, classes.section)}>
-        <Col xs={1} lg={12} className={classes.leftCol}>
+        <Col xs={12} className={classes.leftCol}>
           <h4 className={classes.holderCopy}>
             <Trans>Held by</Trans>
           </h4>
         </Col>
-        <Col xs="auto" lg={12}>
+        <Col xs={12}>
           <h2 className={classes.holderContent}>{nonNounderNounContent}</h2>
         </Col>
       </Row>

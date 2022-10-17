@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { Image } from 'react-bootstrap';
 import { Trans } from '@lingui/macro';
 import _LinkIcon from '../../assets/icons/Link.svg';
-import _HeartIcon from '../../assets/icons/Heart.svg';
 import classes from './NounInfoRowHolder.module.css';
 
 import config from '../../config';
@@ -39,13 +38,10 @@ const NounInfoRowHolder = () => {
       id="holder-etherscan-tooltip"
     >
       <div className={classes.nounHolderInfoContainer}>
-        <span>
-          <Image src={_HeartIcon} className={classes.heartIcon} />
-        </span>
-        <span>
+        <div className={classes.title}>
           <Trans>Winner</Trans>
-        </span>
-        <span>
+        </div>
+        <div className={classes.nounAddress}>
           <a
             className={classes.nounHolderEtherscanLinkCool}
             href={etherscanURL}
@@ -58,10 +54,10 @@ const NounInfoRowHolder = () => {
               shortAddressComponent
             )}
           </a>
-        </span>
-        <span className={classes.linkIconSpan}>
-          <Image src={_LinkIcon} className={classes.linkIcon} />
-        </span>
+          <span className={classes.linkIconSpan}>
+            <Image src={_LinkIcon} className={classes.linkIcon} />
+          </span>
+        </div>
       </div>
     </Tooltip>
   );

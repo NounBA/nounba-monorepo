@@ -130,21 +130,25 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
               <AuctionActivityNounTitle isCool={isCool} nounId={auction.nounId} />
             </Col>
           </Row>
-          <div className={classes.activityCustomRow}>
-            <CurrentBid
-              currentBid={new BigNumber(auction.amount.toString())}
-              auctionEnded={auctionEnded}
-            />
-            <div className={classes.auctionTimerCol}>
-              {auctionEnded && (
-                <>
-                  {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
-                  {isPastAuction && <Holder holder={auction.bidder} />}
-                </>
-              )}
-              {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
-            </div>
-          </div>
+          <Row className={classes.activityCustomRow}>
+            <Col xs={6}>
+              <CurrentBid
+                currentBid={new BigNumber(auction.amount.toString())}
+                auctionEnded={auctionEnded}
+              />
+            </Col>
+            <Col xs={6}>
+              <div className={classes.auctionTimerCol}>
+                {auctionEnded && (
+                  <>
+                    {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
+                    {isPastAuction && <Holder holder={auction.bidder} />}
+                  </>
+                )}
+                {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
+              </div>
+            </Col>
+          </Row>
         </div>
         {!isPastAuction && isLastAuction && (
           <>
@@ -157,7 +161,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
         )}
         <Row className={classes.activityRow}>
           <Col lg={12}>
-            <div className={classes.bidHistorySection}>
+            <div className={clsx(classes.bidHistorySection, isPastAuction && classes.noMargin)}>
               {!isLastAuction ? (
                 <NounInfoCard
                   nounId={auction.nounId.toNumber()}

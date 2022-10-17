@@ -22,6 +22,8 @@ interface StandaloneCircularNounProps {
 interface StandaloneNounWithSeedProps {
   nounId: EthersBN;
   shouldLinkToProfile: boolean;
+  className?: string;
+  wrapperClassName?: string;
 }
 
 export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
@@ -124,7 +126,7 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
 export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   props: StandaloneNounWithSeedProps,
 ) => {
-  const { nounId, shouldLinkToProfile } = props;
+  const { nounId, shouldLinkToProfile, className, wrapperClassName } = props;
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
@@ -137,11 +139,18 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   };
   const { image, description } = getNoun(nounId, seed);
 
-  const noun = <Noun imgPath={image} alt={description} />;
+  const noun = (
+    <Noun
+      wrapperClassName={wrapperClassName}
+      className={className}
+      imgPath={image}
+      alt={description}
+    />
+  );
   const nounWithLink = (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       {noun}
