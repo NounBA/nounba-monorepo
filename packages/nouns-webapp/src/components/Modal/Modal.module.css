@@ -20,7 +20,7 @@
   backdrop-filter: blur(10px);
   padding: 3rem 2rem;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 4px;
   left: calc(50% - 17.5rem);
   width: 35rem;
 }

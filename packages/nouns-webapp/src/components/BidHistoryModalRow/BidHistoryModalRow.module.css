@@ -1,14 +1,16 @@
 .bidRow {
   border-radius: 4px;
-  height: 72px;
+  height: 96px;
   width: 100%;
   padding: 16px;
   border-bottom: 0px;
+  margin-bottom: 16px;
   background-color: #EEF2F6;
 }
 
 .bidderInfoWrapper {
   display: flex;
+  align-items: center;;
 }
 
 .bidderInfoText {
