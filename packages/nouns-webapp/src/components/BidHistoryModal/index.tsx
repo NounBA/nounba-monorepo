@@ -64,7 +64,7 @@ const BidHistoryModalOverlay: React.FC<{
             {bids && bids.length > 0 ? (
               <ul>
                 {bids?.map((bid: Bid, i: number) => {
-                  return <BidHistoryModalRow index={i} bid={bid} />;
+                  return <BidHistoryModalRow key={bid.timestamp.toNumber()} index={i} bid={bid} />;
                 })}
               </ul>
             ) : (

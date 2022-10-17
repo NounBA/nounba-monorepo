@@ -26,7 +26,7 @@ const Winner: React.FC<WinnerProps> = props => {
   // const activeLocale = useActiveLocale();
 
   const nonNounderNounContent = isWinnerYou ? (
-    <h2
+    <div
       className={classes.winnerContent}
       style={{
         color: 'var(--brand-white)',
@@ -47,7 +47,7 @@ const Winner: React.FC<WinnerProps> = props => {
           </a>
         </Col>
       )} */}
-    </h2>
+    </div>
   ) : (
     <ShortAddress size={40} address={winner} avatar={!isMobile} />
   );
