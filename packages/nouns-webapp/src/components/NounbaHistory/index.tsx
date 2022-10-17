@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import clsx from 'clsx';
 
 import AuctionActivity from '../AuctionActivity';
 import classes from './NounbaHistory.module.css';
@@ -81,7 +82,10 @@ const NounbaHistory = () => {
 
   const loadingNoun = (
     <div className={classes.nounWrapper}>
-      <LoadingNoun />
+      <LoadingNoun
+        wrapperClassName={clsx(classes.nounbaProfileWrapper, classes.loadingSkeleton)}
+        className={classes.nounbaProfile}
+      />
     </div>
   );
 
