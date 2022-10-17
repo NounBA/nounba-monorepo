@@ -162,26 +162,26 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
         <Row className={classes.activityRow}>
           <Col lg={12}>
             <div className={clsx(classes.bidHistorySection, isPastAuction && classes.noMargin)}>
-              {!isLastAuction ? (
+              {(!isLastAuction || isPastAuction) && (
                 <NounInfoCard
                   nounId={auction.nounId.toNumber()}
                   bidHistoryOnClickHandler={showBidModalHandler}
                 />
-              ) : (
-                displayGraphDepComps && (
-                  <BidHistory
-                    auctionId={auction.nounId.toString()}
-                    max={3}
-                    classes={bidHistoryClasses}
-                    auctionName={auction.auctionName}
-                  />
-                )
+              )}
+              {isLastAuction && displayGraphDepComps && (
+                <BidHistory
+                  auctionId={auction.nounId.toString()}
+                  max={3}
+                  classes={bidHistoryClasses}
+                  auctionName={auction.auctionName}
+                />
               )}
               {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,
             else show etherscan contract link */}
-              {isLastAuction &&
+              {!isPastAuction &&
+                isLastAuction &&
                 !auction.amount.eq(0) &&
-                (!isPastAuction && displayGraphDepComps ? (
+                (displayGraphDepComps ? (
                   <BidHistoryBtn onClick={showBidModalHandler} />
                 ) : (
                   <BidHistoryBtn onClick={openEtherscanBidHistory} />

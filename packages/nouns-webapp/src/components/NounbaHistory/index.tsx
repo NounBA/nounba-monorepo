@@ -31,8 +31,7 @@ const NounbaHistory = () => {
     ),
   );
 
-  if (status === STATUS.LOADING) return <></>;
-  if (!currentAuction || status === STATUS.ERROR) history.push('/');
+  if (status === STATUS.ERROR) history.push('/');
 
   const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId ?? 0);
 
@@ -89,12 +88,14 @@ const NounbaHistory = () => {
   return (
     <Container fluid="xl">
       <Row>
-        <Col lg={{ span: 5 }}>{currentAuction ? nounContent : loadingNoun}</Col>
+        <Col lg={{ span: 5 }}>
+          {status === STATUS.LOADING || currentAuction ? nounContent : loadingNoun}
+        </Col>
 
         <Col lg={{ span: 6, offset: 1 }}>
           <div className={classes.infoWrapper}>
             <div className={classes.auctionInfo}>
-              {currentAuction && currentAuctionActivityContent}
+              {status === STATUS.SUCCESS && currentAuction && currentAuctionActivityContent}
             </div>
           </div>
         </Col>

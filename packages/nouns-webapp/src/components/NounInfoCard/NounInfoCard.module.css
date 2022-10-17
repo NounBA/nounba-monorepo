@@ -45,7 +45,7 @@
   display: flex; 
 }
 .blueButton {
-  background-color: var(--brand-color-blue);
+  background-color: var(--brand-color-blue) !important;
 }
 .buttonIcon {
   margin-left: 12px;
