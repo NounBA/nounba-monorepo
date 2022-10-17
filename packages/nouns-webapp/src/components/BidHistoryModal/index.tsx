@@ -47,6 +47,11 @@ const BidHistoryModalOverlay: React.FC<{
                 <Trans>Bids for</Trans>
               </h2>
               <h1>NounBA {auction && auction.nounId.toString()}</h1>
+              <div>
+                <div className={classes.sideTag}>
+                  {getSide(auction.nounId.toNumber()) === REGIONS.west ? 'West' : 'East'}
+                </div>
+              </div>
             </div>
 
             <div className={classes.closeBtnWrapper}>

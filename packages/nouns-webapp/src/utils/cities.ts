@@ -49,6 +49,6 @@ export const allCities: { [n: number]: { id: number; displayName: string } } = {
   ...listById(east),
 };
 
-export const getSide = (nounId: number) => (nounId % 2 ? REGIONS.east : REGIONS.west);
+export const getSide = (nounId: number) => (nounId % 2 ? REGIONS.west : REGIONS.east);
 
 export default cities;
