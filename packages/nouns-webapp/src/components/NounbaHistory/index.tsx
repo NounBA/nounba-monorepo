@@ -53,7 +53,7 @@ const NounbaHistory = () => {
       isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
-      displayGraphDepComps={true}
+      displayGraphDepComps={false}
       side={side}
       isPastAuction
     />
@@ -84,11 +84,11 @@ const NounbaHistory = () => {
   return (
     <Container fluid="xl">
       <Row>
-        <Col lg={{ span: 6, offset: 1 }}>
+        <Col lg={{ span: 6 }}>
           <div className={classes.wrapper}>{currentAuction ? nounContent : loadingNoun}</div>
         </Col>
 
-        <Col lg={{ span: 5 }}>
+        <Col lg={{ span: 6 }}>
           <div className={classes.infoWrapper}>
             <div className={classes.auctionInfo}>
               {currentAuction && currentAuctionActivityContent}

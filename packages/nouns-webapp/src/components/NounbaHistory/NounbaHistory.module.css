@@ -4,11 +4,14 @@
 }
 .infoWrapper {
   position: relative;
-  padding-top: 59px;
+  padding: 82px 0;
 }
 .auctionInfo {
   z-index: 1;
   position: relative;
+  background-color: var(--brand-bg-gray-light);
+  padding: 32px;
+  border-radius: var(--default-border-radius);
 }
 
 .nounContentCol {

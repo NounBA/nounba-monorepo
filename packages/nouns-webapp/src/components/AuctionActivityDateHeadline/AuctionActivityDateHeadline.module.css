@@ -1,12 +1,13 @@
 .date {
   font-family: 'DM Sans';
-  font-weight: bold;
-  font-size: 17px;
+  font-weight: normal;
+  font-size: 20px;
+  color: var(--brand-white) !important;
   line-height: 27px;
   margin-top: 0.22rem;
 }
 
 .wrapper {
-  margin-left: 5rem;
+  margin-right: 0;
   width: auto;
 }

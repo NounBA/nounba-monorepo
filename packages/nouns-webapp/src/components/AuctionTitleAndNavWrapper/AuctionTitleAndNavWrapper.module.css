@@ -1,5 +1,7 @@
 .auctionTitleAndNavContainer {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 992px) {

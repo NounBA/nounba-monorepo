@@ -105,3 +105,17 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.sideTitle {
+ font-size: 3rem;
+}
+.eastTitle {
+  color: var(--brand-color-blue);
+}
+.westTitle {
+  color: var(--brand-color-red);
+}
+.navSide {
+  display: flex;
+  align-items: center;
+}

@@ -1,5 +1,6 @@
 .wrapper {
-  background-color: var(--brand-bg-color);
+  background-image: url(../../assets/auction-bg@1x_01.png);
+  background-repeat: repeat;
 }
 .westernSide .bidButtonSide:hover,
 .westernSide .bidButtonSide:active,
