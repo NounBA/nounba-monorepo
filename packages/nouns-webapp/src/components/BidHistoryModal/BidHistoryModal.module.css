@@ -119,6 +119,7 @@
   min-height: auto;
   background-color: #E3E8EF;
   border-radius: 4px;
+  max-width: 100%;
 }
 
 .sideTag {

@@ -24,7 +24,6 @@ const Noun: React.FC<{
         className={`${classes.img} ${className}`}
         src={imgPath ? imgPath : loadingNoun}
         alt={alt}
-        fluid
       />
     </div>
   );

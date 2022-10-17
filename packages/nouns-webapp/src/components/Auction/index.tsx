@@ -43,7 +43,9 @@ const Auction: React.FC<AuctionProps> = props => {
   return (
     <>
       <div className={classes.wrapper}>
-        {currentAuction ? nounContent : loadingNoun}
+        {/* {currentAuction ? nounContent : loadingNoun} */}
+        {nounContent}
+        {/* {loadingNoun} */}
         <div className={classes.conferenceTitleWrapper}>
           <div
             className={`${classes.conferenceTitle} ${
