@@ -1,16 +1,12 @@
 .nounInfoRowBirthday {
   font-family: 'DM Sans';
   font-weight: bold;
-  margin-left: 5px;
+  font-size: 1.25rem;
+  color: var(--brand-white);
 }
-
-.birthdayInfoContainer {
-  display: inline;
-  width: 350px;
-  height: 25px;
-}
-
-.birthdayIcon {
-  margin-bottom: 4px;
-  margin-right: 7px;
+.title {
+  font-family: 'DM Sans';
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: var(--brand-warm-light-text);
 }

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import clsx from 'clsx';
 
 import AuctionActivity from '../AuctionActivity';
 import classes from './NounbaHistory.module.css';
@@ -31,8 +32,7 @@ const NounbaHistory = () => {
     ),
   );
 
-  if (status === STATUS.LOADING) return <></>;
-  if (!currentAuction || status === STATUS.ERROR) history.push('/');
+  if (status === STATUS.ERROR) history.push('/');
 
   const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId ?? 0);
 
@@ -53,7 +53,7 @@ const NounbaHistory = () => {
       isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
-      displayGraphDepComps={true}
+      displayGraphDepComps={false}
       side={side}
       isPastAuction
     />
@@ -71,27 +71,35 @@ const NounbaHistory = () => {
 
   const nounContent = currentAuction && (
     <div className={classes.nounWrapper}>
-      <StandaloneNounWithSeed nounId={currentAuction.nounId} shouldLinkToProfile={false} />
+      <StandaloneNounWithSeed
+        nounId={currentAuction.nounId}
+        shouldLinkToProfile={false}
+        wrapperClassName={classes.nounbaProfileWrapper}
+        className={classes.nounbaProfile}
+      />
     </div>
   );
 
   const loadingNoun = (
     <div className={classes.nounWrapper}>
-      <LoadingNoun />
+      <LoadingNoun
+        wrapperClassName={clsx(classes.nounbaProfileWrapper, classes.loadingSkeleton)}
+        className={classes.nounbaProfile}
+      />
     </div>
   );
 
   return (
     <Container fluid="xl">
       <Row>
-        <Col lg={{ span: 6, offset: 1 }}>
-          <div className={classes.wrapper}>{currentAuction ? nounContent : loadingNoun}</div>
+        <Col lg={{ span: 5 }}>
+          {status === STATUS.LOADING || currentAuction ? nounContent : loadingNoun}
         </Col>
 
-        <Col lg={{ span: 5 }}>
+        <Col lg={{ span: 6, offset: 1 }}>
           <div className={classes.infoWrapper}>
             <div className={classes.auctionInfo}>
-              {currentAuction && currentAuctionActivityContent}
+              {status === STATUS.SUCCESS && currentAuction && currentAuctionActivityContent}
             </div>
           </div>
         </Col>

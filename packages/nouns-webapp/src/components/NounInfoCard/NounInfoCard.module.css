@@ -26,13 +26,28 @@
   font-family: 'DM Sans';
   font-weight: 500;
   padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding-top: 0;
   font-size: 18px;
   display: flex;
+}
+.nounInfoRow.noMargin {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .nounInfoRowText {
   padding-left: 4;
   font-family: 'DM Sans';
   font-family: bold;
+}
+
+.infoWrapper {
+  display: flex; 
+}
+.blueButton {
+  background-color: var(--brand-color-blue) !important;
+}
+.buttonIcon {
+  margin-left: 12px;
+  margin-top: -4px;
 }

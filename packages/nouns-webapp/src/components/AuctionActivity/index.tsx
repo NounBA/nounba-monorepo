@@ -1,5 +1,6 @@
 import { Auction } from '../../wrappers/nounsAuction';
 import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
 import { Row, Col } from 'react-bootstrap';
 import classes from './AuctionActivity.module.css';
@@ -20,6 +21,7 @@ import Holder from '../Holder';
 import AuctionTitleAndNavWrapper from '../AuctionTitleAndNavWrapper';
 import AuctionNavigation from '../AuctionNavigation';
 import AuctionActivityDateHeadline from '../AuctionActivityDateHeadline';
+import NounInfoCard from '../NounInfoCard';
 
 const openEtherscanBidHistory = () => {
   const url = buildEtherscanAddressLink(config.addresses.nounsAuctionHouseProxy);
@@ -49,6 +51,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
     isFirstAuction,
   } = props;
 
+  const title = side === REGIONS.west ? 'West' : 'East';
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
   const [auctionEnded, setAuctionEnded] = useState(false);
@@ -103,13 +106,23 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
             {onNextAuctionClick && onPrevAuctionClick && (
               <>
                 <AuctionTitleAndNavWrapper>
-                  <AuctionNavigation
-                    isFirstAuction={isFirstAuction ?? false}
-                    isLastAuction={isLastAuction ?? false}
-                    onNextAuctionClick={onNextAuctionClick}
-                    onPrevAuctionClick={onPrevAuctionClick}
-                  />
-                  <AuctionActivityDateHeadline startTime={auction.startTime} />
+                  <h1
+                    className={clsx(
+                      classes.sideTitle,
+                      side === REGIONS.east ? classes.eastTitle : classes.westTitle,
+                    )}
+                  >
+                    {title}
+                  </h1>
+                  <div className={classes.navSide}>
+                    <AuctionActivityDateHeadline startTime={auction.startTime} />
+                    <AuctionNavigation
+                      isFirstAuction={isFirstAuction ?? false}
+                      isLastAuction={isLastAuction ?? false}
+                      onNextAuctionClick={onNextAuctionClick}
+                      onPrevAuctionClick={onPrevAuctionClick}
+                    />
+                  </div>
                 </AuctionTitleAndNavWrapper>
               </>
             )}
@@ -117,21 +130,25 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
               <AuctionActivityNounTitle isCool={isCool} nounId={auction.nounId} />
             </Col>
           </Row>
-          <div className={classes.activityCustomRow}>
-            <CurrentBid
-              currentBid={new BigNumber(auction.amount.toString())}
-              auctionEnded={auctionEnded}
-            />
-            <div className={classes.auctionTimerCol}>
-              {auctionEnded && (
-                <>
-                  {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
-                  {isPastAuction && <Holder holder={auction.bidder} />}
-                </>
-              )}
-              {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
-            </div>
-          </div>
+          <Row className={classes.activityCustomRow}>
+            <Col xs={6}>
+              <CurrentBid
+                currentBid={new BigNumber(auction.amount.toString())}
+                auctionEnded={auctionEnded}
+              />
+            </Col>
+            <Col xs={6}>
+              <div className={classes.auctionTimerCol}>
+                {auctionEnded && (
+                  <>
+                    {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
+                    {isPastAuction && <Holder holder={auction.bidder} />}
+                  </>
+                )}
+                {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
+              </div>
+            </Col>
+          </Row>
         </div>
         {!isPastAuction && isLastAuction && (
           <>
@@ -144,13 +161,19 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
         )}
         <Row className={classes.activityRow}>
           <Col lg={12}>
-            <div className={classes.bidHistorySection}>
-              {displayGraphDepComps && (
+            <div className={clsx(classes.bidHistorySection, isPastAuction && classes.noMargin)}>
+              {(!isLastAuction || isPastAuction) && (
+                <NounInfoCard
+                  nounId={auction.nounId.toNumber()}
+                  bidHistoryOnClickHandler={showBidModalHandler}
+                />
+              )}
+              {isLastAuction && displayGraphDepComps && (
                 <BidHistory
                   auctionId={auction.nounId.toString()}
-                  auctionName={auction.auctionName}
                   max={3}
                   classes={bidHistoryClasses}
+                  auctionName={auction.auctionName}
                 />
               )}
               {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,

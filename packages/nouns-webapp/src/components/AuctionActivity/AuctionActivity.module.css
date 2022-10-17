@@ -105,3 +105,28 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
 }
+.bidHistorySection.noMargin {
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.sideTitle {
+ font-size: 1.8rem;
+ margin-bottom: 0;
+}
+.eastTitle {
+  color: var(--brand-color-blue);
+}
+.westTitle {
+  color: var(--brand-color-red);
+}
+.navSide {
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 480px) {
+  .sideTitle {
+    font-size: 3rem;
+   }
+}

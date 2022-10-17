@@ -68,7 +68,7 @@ export function useAuctionHistory(nounbaId: string) {
     const nounId = BigNumber.from(nounbaId);
     const currentSide = getSide(nounId.toNumber());
     const auctionAddress =
-      currentSide === REGIONS.east
+      currentSide === REGIONS.west
         ? config.addresses.nounsAuctionHouseProxy
         : config.addresses.nounsAuctionHouseProxy2;
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(auctionAddress, wsProvider);
