@@ -5,9 +5,6 @@
   display: flex;
   align-items: flex-end;
 }
-.loadingSkeleton {
-  align-items: flex-end;
-}
 .nounbaProfileWrapper {
   height: 90%;
 }
@@ -29,6 +26,10 @@
   background-color: var(--brand-bg-gray-light);
   padding: 32px;
   border-radius: var(--default-border-radius);
+  min-height: 534px;
+}
+.auctionInfo.loaded {
+  min-height: auto;
 }
 
 .nounContentCol {

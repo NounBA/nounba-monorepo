@@ -93,12 +93,12 @@ const NounbaHistory = () => {
     <Container fluid="xl">
       <Row>
         <Col lg={{ span: 5 }}>
-          {status === STATUS.LOADING || currentAuction ? nounContent : loadingNoun}
+          {status === STATUS.SUCCESS && currentAuction ? nounContent : loadingNoun}
         </Col>
 
         <Col lg={{ span: 6, offset: 1 }}>
           <div className={classes.infoWrapper}>
-            <div className={classes.auctionInfo}>
+            <div className={clsx(classes.auctionInfo, status === STATUS.SUCCESS && classes.loaded)}>
               {status === STATUS.SUCCESS && currentAuction && currentAuctionActivityContent}
             </div>
           </div>

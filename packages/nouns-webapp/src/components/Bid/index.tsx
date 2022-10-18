@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks';
 import React, { useEffect, useState, useRef, ChangeEvent, useCallback, useMemo } from 'react';
 import { utils, BigNumber as EthersBN } from 'ethers';
 import BigNumber from 'bignumber.js';
+import { ExternalLink } from 'lucide-react';
 import classes from './Bid.module.css';
 import { Spinner, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import { useAuctionMinBidIncPercentage } from '../../wrappers/nounsAuction';
@@ -19,6 +20,8 @@ import { Trans } from '@lingui/macro';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 import { useLocation } from 'react-router-dom';
+import { buildEtherscanTxLink } from '../../utils/etherscan';
+import NounInfoRowButton from '../NounInfoRowButton';
 
 const computeMinimumNextBid = (
   currentBid: BigNumber,
@@ -161,10 +164,25 @@ const Bid: React.FC<{
     // allows user to rebid against themselves so long as it is not the same tx
     const isCorrectTx = currentBid(bidInputRef).isEqualTo(new BigNumber(auction.amount.toString()));
     if (isMiningUserTx && auction.bidder === account && isCorrectTx) {
+      console.log(placeBidState);
+      const txLink = buildEtherscanTxLink(placeBidState.transaction?.hash ?? '');
+      console.log(txLink);
       placeBidState.status = 'Success';
       setModal({
         title: <Trans>Success</Trans>,
-        message: <Trans>Bid was placed successfully!</Trans>,
+        message: (
+          <div>
+            <Trans>Bid was placed successfully!</Trans>
+            <NounInfoRowButton
+              icon={<ExternalLink size={24} className={classes.buttonIcon} />}
+              btnText={<Trans>Check on Etherscan</Trans>}
+              onClickHandler={() => {
+                window.open(txLink);
+              }}
+              className={classes.modalButton}
+            />
+          </div>
+        ),
         show: true,
       });
       setBidButtonContent({ loading: false, content: <Trans>Place bid</Trans> });
