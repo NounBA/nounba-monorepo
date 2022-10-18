@@ -44,6 +44,7 @@ export function useAuctionHistory(nounbaId: string) {
   const [side, setSide] = useState(REGIONS.east);
   const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
 
+  let isMounted = true;
   const processBidFilter = async (
     nounId: BigNumberish,
     sender: string,
@@ -53,6 +54,7 @@ export function useAuctionHistory(nounbaId: string) {
   ) => {
     const timestamp = (await event.getBlock()).timestamp;
     const transactionHash = event.transactionHash;
+    if (!isMounted) return;
     setBids(currentBids => {
       return deserializeBids([
         ...currentBids,
@@ -84,7 +86,7 @@ export function useAuctionHistory(nounbaId: string) {
       const createdAuction = await nounsAuctionHouseContract.queryFilter(auctionCreatedFilter);
       const settledAuction = await nounsAuctionHouseContract.queryFilter(settledFilter);
 
-      if (settledAuction.length < 1) {
+      if (settledAuction.length < 1 && isMounted) {
         setStatus(STATUS.ERROR);
         return;
       }
@@ -92,6 +94,7 @@ export function useAuctionHistory(nounbaId: string) {
       const block = await settledAuction[0].getBlock();
       const currentSide = getSide(nounId.toNumber());
 
+      if (!isMounted) return;
       setSide(currentSide);
       setAuction(
         deserializeSettledAuction({
@@ -121,11 +124,17 @@ export function useAuctionHistory(nounbaId: string) {
     };
 
     try {
+      if (!isMounted) return;
       loadAuction();
       loadBids();
     } catch (error) {
+      if (!isMounted) return;
       setStatus(STATUS.ERROR);
     }
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      isMounted = false;
+    };
   }, [nounbaId]);
 
   return {
