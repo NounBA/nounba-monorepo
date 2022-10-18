@@ -29,8 +29,8 @@
   min-height: 44px;
   padding-top: 4px;
   background-color: #EEF2F6;
-  border: 2px solid #EEF2F6;
-  transform: all 0.2s ease-in-out;
+  border: 1px solid #EEF2F6;
+  transition: all 0.2s ease-in-out;
 }
 
 .modal button:hover {

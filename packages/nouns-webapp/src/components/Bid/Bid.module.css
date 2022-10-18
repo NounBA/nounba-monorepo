@@ -159,7 +159,22 @@
 .bidInput[type='number'] {
   -moz-appearance: textfield;
 }
-
+.modalButton {
+  background-color: #EEF2F6 !important;
+  color: var(--brand-bg-gray) !important;
+  font-size: 1.25rem;
+  border: 1px solid #EEF2F6;
+  margin-top: 30px !important;
+  margin-bottom: -32px;
+}
+.modalButton:hover {
+  color: var(--brand-black) !important;
+  background-color: var(--brand-white) !important;
+  border-color: var(--brand-black) !important;
+}
+.modalButton div {
+  margin-right: 15px;
+}
 @media (max-width: 992px) {
   .bidInput {
     border: none;
