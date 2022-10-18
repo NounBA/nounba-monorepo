@@ -88,7 +88,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
     }
   }, [auctionTimer, auction]);
 
-  if (!auction) return null;
+  if (!auction) return <AuctionActivityWrapper />;
 
   return (
     <>
