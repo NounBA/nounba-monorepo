@@ -1,6 +1,5 @@
 import classes from './Modal.module.css';
 import ReactDOM from 'react-dom';
-import xIcon from '../../assets/x-icon.png';
 import React from 'react';
 import { X } from 'lucide-react';
 

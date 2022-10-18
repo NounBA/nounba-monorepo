@@ -132,6 +132,7 @@ export function useAuctionHistory(nounbaId: string) {
       setStatus(STATUS.ERROR);
     }
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       isMounted = false;
     };
   }, [nounbaId]);
