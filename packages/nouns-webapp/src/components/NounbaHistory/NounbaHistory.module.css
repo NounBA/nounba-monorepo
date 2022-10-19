@@ -6,6 +6,10 @@
   align-items: flex-end;
   position: relative;
 }
+.nounWrapper img {
+  width: 100%;
+  max-height: none;
+}
 .nounbaProfileWrapper {
   width: 100%;
   position: absolute;
