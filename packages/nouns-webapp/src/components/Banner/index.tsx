@@ -19,14 +19,12 @@ const Banner = () => (
             <header>
               <img src={logoText} className={classes.logoText} alt="NounBA logo" />
               <h1 className={classes.title}>
-                <Trans>A nounish community of NBA fans</Trans>
+                <Trans>A nounish community of basketball fans</Trans>
               </h1>
             </header>
             <p className={classes.text}>
               <Trans>
-                NounBA is a nounish community of basketball fans. The NounBA DAO uses a league style
-                governance structure to coordinate competing communities of basketball fans to
-                participate in the Nouns ecosystem.
+                The NounBA DAO coordinates basketball fans to participate in the Nouns ecosystem.
               </Trans>
             </p>
           </div>
