@@ -1,0 +1,103 @@
+.woodWrapper {
+  background-image: url(../../assets/auction-bg@1x_01.png);
+  background-repeat: repeat;
+  background-size: 20%;
+}
+.wrapper {
+  padding-right: var(--bs-gutter-x,1rem);
+  padding-left: var(--bs-gutter-x,1rem);
+}
+.bannerContainer {
+  background-color: var(--brand-color-red);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 45px 72px;
+  text-align: left;
+  height: auto;
+  border-radius: 44px;
+  color: var(--brand-white);
+  margin-top: 1rem;
+}
+.bannerContainer .title {
+  font-weight: bold;
+}
+.bannerBlue {
+  background-color: var(--brand-color-blue);
+  justify-content: center;
+  /* align-items: center; */
+  height: 100%;
+  padding: 10% 15% 10% 10%;
+}
+.bannerGray {
+  background-color: var(--brand-bg-gray);
+  padding: 48px 72px;
+}
+.bannerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin-bottom: 1rem;
+}
+.title {
+  font-family: 'DM Sans';
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 16px 0 0;
+}
+.text {
+  font-size: 1rem;
+}
+
+.logoBall {
+  max-width: 100%;
+  max-height: 250px;
+  /* max-height: 400px; */
+}
+.logoText {
+  max-height: 70px;
+  max-width: 100%;
+}
+.row {
+  align-items: stretch;
+  display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+  .row {
+    display: flex;
+  }
+  .logoBall {
+    max-height: 400px;
+  }
+
+  .wrapper {
+    padding: 2rem 1rem;
+  }
+  .bannerContainer {
+    margin-top: 0;
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  .logoText {
+    max-height: none;
+  }
+}
+@media screen and (min-width: 992px) {
+  .logoText {
+    max-height: 139px;
+  }  
+  .title {
+    font-size: 1.6rem;
+    margin: 24px 0 0;
+  }
+  .text {
+    font-size: 1.25rem;
+  }
+  .logoBall {
+    max-width: 100%;
+    max-height: 549px;
+  }
+}

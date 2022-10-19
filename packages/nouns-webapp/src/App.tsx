@@ -24,6 +24,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { AvatarProvider } from '@davatar/react';
 import dayjs from 'dayjs';
 import DelegatePage from './pages/DelegatePage';
+import SoonPage from './pages/Soon';
 
 function App() {
   const { account, chainId, library } = useEthers();
@@ -60,7 +61,7 @@ function App() {
               path="/nounba/:id"
               render={props => <NounBAPage initialAuctionId={props.match.params.id} />}
             />
-            <Redirect from="/nounba" to="/" />
+            <Route exact path="/soon" component={SoonPage} />
             <Route exact path="/nounders" component={NoundersPage} />
             <Route exact path="/create-proposal" component={CreateProposalPage} />
             <Route exact path="/vote" component={GovernancePage} />
