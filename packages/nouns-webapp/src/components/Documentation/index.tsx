@@ -59,7 +59,7 @@ const Documentation = () => {
                 </li>
                 <li>
                   <Trans>
-                    NounBA artwork is inspired by Nouns DAO, both of which are in the public domain
+                    NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
                     {publicDomainLink}.
                   </Trans>
                 </li>
