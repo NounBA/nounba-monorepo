@@ -55,19 +55,20 @@ function App() {
         >
           <NavBar />
           <Switch>
-            <Route exact path="/" component={AuctionPage} />
+            {/* <Route exact path="/" component={AuctionPage} />
             <Route
               exact
               path="/nounba/:id"
               render={props => <NounBAPage initialAuctionId={props.match.params.id} />}
-            />
+            /> */}
             <Route exact path="/soon" component={SoonPage} />
-            <Route exact path="/nounders" component={NoundersPage} />
+            <Redirect from="/" to={'/soon'} />
+            {/* <Route exact path="/nounders" component={NoundersPage} />
             <Route exact path="/create-proposal" component={CreateProposalPage} />
             <Route exact path="/vote" component={GovernancePage} />
             <Route exact path="/vote/:id" component={VotePage} />
             <Route exact path="/playground" component={Playground} />
-            <Route exact path="/delegate" component={DelegatePage} />
+            <Route exact path="/delegate" component={DelegatePage} /> */}
             <Route component={NotFoundPage} />
           </Switch>
           <Footer />

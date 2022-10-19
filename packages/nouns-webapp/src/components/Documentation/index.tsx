@@ -64,9 +64,6 @@ const Documentation = () => {
                   </Trans>
                 </li>
                 <li>
-                  <Trans>34 NounBAs will be auctioned between Oct 25-Nov 10, 2022</Trans>
-                </li>
-                <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
                 </li>
                 <li>
@@ -92,15 +89,6 @@ const Documentation = () => {
               <Trans>Auction Details</Trans>
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
-              <p className={classes.aboutText}>
-                <Trans>
-                  34 NounBAs will be auctioned between Oct 25-Nov 10, 2022. Starting on Oct 9 at
-                  [start time], 2 simultaneous [duration in hours] auctions will be kicked off. Each
-                  time an auction is settled, a new NounBA will be minted and a new [duration in
-                  hours] auction will begin. Bids within the last [duration in minutes] reset the
-                  auction timer to [duration in minutes].
-                </Trans>
-              </p>
               <p>
                 <Trans>The auction proceeds will be distributed as follows:</Trans>
               </p>
@@ -111,6 +99,9 @@ const Documentation = () => {
                 <li>9% to NounBA DAO</li>
                 <li>1% to {protocolGuildLink}</li>
               </ul>
+              <p className={classes.aboutText}>
+                <Trans>Auction schedule to be announced soon.</Trans>
+              </p>
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className={classes.accordionItem}>

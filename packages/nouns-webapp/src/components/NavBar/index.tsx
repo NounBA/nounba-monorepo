@@ -1,50 +1,37 @@
-import { useAppSelector } from '../../hooks';
+import { useState } from 'react';
 import classes from './NavBar.module.css';
 import logo from '../../assets/logo.svg';
-import { useEtherBalance } from '@usedapp/core';
-// import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Nav, Navbar, Container } from 'react-bootstrap';
 import testnetNoun from '../../assets/testnet-noun.png';
-import config, { CHAIN_ID } from '../../config';
-import { utils } from 'ethers';
-import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
-import { ExternalURL, externalURL } from '../../utils/externalURL';
-import useLidoBalance from '../../hooks/useLidoBalance';
-import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
-import NavBarTreasury from '../NavBarTreasury';
-import NavWallet from '../NavWallet';
-import { Trans } from '@lingui/macro';
-import { useState } from 'react';
-// import { File, Users } from 'lucide-react';
-import { File } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Navbar, Container } from 'react-bootstrap';
+import { CHAIN_ID } from '../../config';
+// import { Nav, Navbar, Container } from 'react-bootstrap';
+// import config, { CHAIN_ID } from '../../config';
+// import { useAppSelector } from '../../hooks';
+// import { useEtherBalance } from '@usedapp/core';
+// import { utils } from 'ethers';
+// import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
+// import { ExternalURL, externalURL } from '../../utils/externalURL';
+// import useLidoBalance from '../../hooks/useLidoBalance';
+// import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
+// import NavBarTreasury from '../NavBarTreasury';
+// import NavWallet from '../NavWallet';
+// import { Trans } from '@lingui/macro';
+// import { File } from 'lucide-react';
 
 const NavBar = () => {
-  const activeAccount = useAppSelector(state => state.account.activeAccount);
-  // const isCool = useAppSelector(state => state.application.isCoolBackground);
-  // const history = useHistory();
-  const ethBalance = useEtherBalance(config.addresses.nounsDaoExecutor);
-  const lidoBalanceAsETH = useLidoBalance();
-  const treasuryBalance = ethBalance && lidoBalanceAsETH && ethBalance.add(lidoBalanceAsETH);
-  const daoEtherscanLink = buildEtherscanHoldingsLink(config.addresses.nounsDaoExecutor);
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  // const activeAccount = useAppSelector(state => state.account.activeAccount);
+  // const ethBalance = useEtherBalance(config.addresses.nounsDaoExecutor);
+  // const lidoBalanceAsETH = useLidoBalance();
+  // const treasuryBalance = ethBalance && lidoBalanceAsETH && ethBalance.add(lidoBalanceAsETH);
+  // const daoEtherscanLink = buildEtherscanHoldingsLink(config.addresses.nounsDaoExecutor);
+  // const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [isNavExpanded] = useState(false);
 
-  // const useStateBg =
-  //   history.location.pathname === '/' ||
-  //   history.location.pathname.includes('/noun/') ||
-  //   history.location.pathname.includes('/auction/');
+  // const nonWalletButtonStyle =
+  //   NavBarButtonStyle.WARM_INFO;
 
-  // const nonWalletButtonStyle = !useStateBg
-  //   ? NavBarButtonStyle.WHITE_INFO
-  //   : isCool
-  //   ? NavBarButtonStyle.COOL_INFO
-  //   : NavBarButtonStyle.WARM_INFO;
-  const nonWalletButtonStyle =
-    // NavBarButtonStyle.WHITE_INFO
-    // NavBarButtonStyle.COOL_INFO;
-    NavBarButtonStyle.WARM_INFO;
-
-  const closeNav = () => setIsNavExpanded(false);
+  // const closeNav = () => setIsNavExpanded(false);
 
   return (
     <>
@@ -62,6 +49,7 @@ const NavBar = () => {
               {/* <h1 className={classes.navLogoTitle}>NounBA</h1> */}
             </Navbar.Brand>
           </div>
+          {/*
           <Navbar.Toggle
             className={classes.navBarToggle}
             aria-controls="basic-navbar-nav"
@@ -82,13 +70,13 @@ const NavBar = () => {
                 />
               </Nav.Link>
             )}
-            {/* <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
+             <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
                 buttonIcon={<Users size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
-            </Nav.Link> */}
+            </Nav.Link>
             <Nav.Link
               href={externalURL(ExternalURL.notion)}
               className={classes.nounsNavLink}
@@ -103,7 +91,7 @@ const NavBar = () => {
               />
             </Nav.Link>
             <NavWallet address={activeAccount || '0'} buttonStyle={nonWalletButtonStyle} />{' '}
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
         </Container>
       </Navbar>
     </>
