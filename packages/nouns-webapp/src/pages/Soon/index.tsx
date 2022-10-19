@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import clsx from 'clsx';
-import fireLogo from '../../assets/fire-basketball.svg';
+import fireLogo from '../../assets/fire-basketball.png';
 import logoText from '../../assets/logo-text.svg';
 
 import Documentation from '../../components/Documentation';

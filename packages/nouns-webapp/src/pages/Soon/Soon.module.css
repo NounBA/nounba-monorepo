@@ -30,7 +30,7 @@
 .bannerBlue {
   background-color: var(--brand-color-blue);
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
   height: 100%;
   padding: 10% 15% 10% 10%;
 }
@@ -56,9 +56,10 @@
 }
 
 .logoBall {
-  max-width: 100%;
-  max-height: 250px;
-  /* max-height: 400px; */
+  max-height: none;
+  max-width: 378px;
+  width: 100%;
+  margin-left: -10%;
 }
 .logoText {
   max-height: 70px;
@@ -73,9 +74,9 @@
   .row {
     display: flex;
   }
-  .logoBall {
+  /* .logoBall {
     max-height: 400px;
-  }
+  } */
 
   .wrapper {
     padding: 2rem 1rem;
@@ -100,8 +101,8 @@
   .text {
     font-size: 1.25rem;
   }
-  .logoBall {
+  /* .logoBall {
     max-width: 100%;
     max-height: 549px;
-  }
+  } */
 }
