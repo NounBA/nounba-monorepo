@@ -6,8 +6,12 @@ import logoText from '../../assets/logo-text.svg';
 import Documentation from '../../components/Documentation';
 
 import classes from './Soon.module.css';
+import Link from '../../components/Link';
+import { ExternalURL, externalURL } from '../../utils/externalURL';
 
 const SoonPage: React.FC = () => {
+  const twitterURL = externalURL(ExternalURL.twitter);
+  const discordURL = externalURL(ExternalURL.discord);
   return (
     <div style={{ backgroundColor: 'var(--brand-bg-gray)' }}>
       <div className={classes.woodWrapper}>
@@ -23,17 +27,23 @@ const SoonPage: React.FC = () => {
                 <div className={clsx(classes.bannerContainer)}>
                   <header>
                     <img src={logoText} className={classes.logoText} alt="NounBA logo" />
-                    <h1 className={classes.title}> A nounish community of basketball fans.</h1>
-                    <p className={classes.text}>Coming soon.</p>
+                    <h1 className={classes.title}>
+                      A nounish community of basketball fans, arriving on-chain soon
+                    </h1>
+                    <br />
+                    <p className={classes.text}>
+                      Join us on <Link text={'Twitter'} url={twitterURL} leavesPage={true} /> and{' '}
+                      <Link text={'Discord'} url={discordURL} leavesPage={true} />
+                    </p>
                   </header>
                 </div>
                 <div className={clsx(classes.bannerContainer, classes.bannerGray)}>
                   <p className={classes.text}>
-                    The NounBA DAO will coordinate basketball fans to participate in the Nouns
-                    ecosystem.
+                    The NounBA DAO is launching soon to coordinate basketball fans to participate in
+                    the Nouns ecosystem.
                   </p>
                   <p className={classes.text}>
-                    The NounBA auction schedule will be announced shortly.
+                    A schedule for NounBA auctions will be announced shortly.
                   </p>
                 </div>
               </div>

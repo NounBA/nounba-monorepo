@@ -58,11 +58,10 @@ const Documentation = () => {
                   <Trans>NounBA is not affiliated with any league in any way.</Trans>
                 </li>
                 <li>
-                  <Trans>
-                    NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
-                    {publicDomainLink}.
-                  </Trans>
+                  NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
+                  {publicDomainLink}.
                 </li>
+                <li>34 NounBAs will be auctioned on a schedule to be announced soon</li>
                 <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
                 </li>
@@ -100,7 +99,7 @@ const Documentation = () => {
                 <li>1% to {protocolGuildLink}</li>
               </ul>
               <p className={classes.aboutText}>
-                <Trans>Auction schedule to be announced soon.</Trans>
+                <Trans>34 NounBAs will be auctioned on a schedule to be announced soon.</Trans>
               </p>
             </Accordion.Body>
           </Accordion.Item>
@@ -109,14 +108,12 @@ const Documentation = () => {
               <Trans>NounBA DAO</Trans>
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
-              <Trans>
-                NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
-                body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
-                from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of
-                NounBA DAO and entitled to one vote in all governance matters. NounBA votes are
-                non-transferable (if you sell your NounBA the vote goes with it) but delegatable,
-                which means you can assign your vote to someone else as long as you own your NounBA.
-              </Trans>
+              NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
+              body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
+              from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of NounBA
+              DAO and entitled to one vote in all governance matters. NounBA votes are
+              non-transferable (if you sell your NounBA the vote goes with it) but delegatable,
+              which means you can assign your vote to someone else as long as you own your NounBA.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3" className={classes.accordionItem}>

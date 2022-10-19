@@ -20,6 +20,10 @@
   color: var(--brand-white);
   margin-top: 1rem;
 }
+.bannerContainer a,
+.bannerContainer a:hover {
+  color: var(--brand-white)
+}
 .bannerContainer .title {
   font-weight: bold;
 }
