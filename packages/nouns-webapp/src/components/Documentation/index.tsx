@@ -55,25 +55,16 @@ const Documentation = () => {
             <Accordion.Body className={classes.accordionBody}>
               <ul>
                 <li>
+                  <Trans>NounBA is not affiliated with any league in any way.</Trans>
+                </li>
+                <li>
                   <Trans>
-                    NounBA is a fan organization, not directly affiliated with any leagues.
+                    NounBA artwork is inspired by Nouns DAO, both of which are in the public domain
+                    {publicDomainLink}.
                   </Trans>
                 </li>
                 <li>
-                  <Trans>Nouns artwork is in the {publicDomainLink}.</Trans>
-                </li>
-                <li>
-                  <Trans>34 NounBAs will be auctioned between Oct 9-17, 2022.</Trans>
-                </li>
-                <li>
-                  <Trans>The auction proceeds will be distributed as follows:</Trans>
-                  <ul>
-                    <li>69% to the treasury</li>
-                    <li>9% to fantasy leagues (3% for 3 years)</li>
-                    <li>12% to NounBA founders</li>
-                    <li>9% to NounBA DAO</li>
-                    <li>1% to {protocolGuildLink}</li>
-                  </ul>
+                  <Trans>34 NounBAs will be auctioned between Oct 25-Nov 10, 2022</Trans>
                 </li>
                 <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
@@ -85,10 +76,12 @@ const Documentation = () => {
                   <Trans>1 NounBA is equal to 1 vote.</Trans>
                 </li>
                 <li>
-                  <Trans>The treasury is controlled exclusively by NounBAs via governance.</Trans>
+                  <Trans>The treasury is controlled by NounBAs via governance.</Trans>
                 </li>
                 <li>
-                  <Trans>NounBA founders receive 6 NounBAs, bringing the total supply to 40.</Trans>
+                  <Trans>
+                    Each of the 6 NounBA Founders receive 1 NounBA, bringing the total supply to 40.
+                  </Trans>
                 </li>
               </ul>
             </Accordion.Body>
@@ -96,25 +89,16 @@ const Documentation = () => {
 
           <Accordion.Item eventKey="1" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader}>
-              <Trans>34 Auctions</Trans>
+              <Trans>Auction Details</Trans>
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
               <p className={classes.aboutText}>
                 <Trans>
-                  The Nouns Auction Contract will act as a self-sufficient Noun generation and
-                  distribution mechanism, auctioning one Noun every 24 hours, forever. 100% of
-                  auction proceeds (ETH) are automatically deposited in the NounBA DAO treasury,
-                  where they are governed by Noun owners.
-                </Trans>
-              </p>
-
-              <p className={classes.aboutText}>
-                <Trans>
-                  34 NounBAs will be auctioned between Oct 9-17, 2022. Starting on Oct 9 at [start
-                  time], 2 simultaneous [duration in hours] auctions will be kicked off. Each time
-                  an auction is settled, a new NounBA will be minted and a new [duration in hours]
-                  auction will begin. Bids within the last [duration in minutes] reset the auction
-                  timer to [duration in minutes].
+                  34 NounBAs will be auctioned between Oct 25-Nov 10, 2022. Starting on Oct 9 at
+                  [start time], 2 simultaneous [duration in hours] auctions will be kicked off. Each
+                  time an auction is settled, a new NounBA will be minted and a new [duration in
+                  hours] auction will begin. Bids within the last [duration in minutes] reset the
+                  auction timer to [duration in minutes].
                 </Trans>
               </p>
               <p>
@@ -154,7 +138,7 @@ const Documentation = () => {
                   In addition to the precautions taken by Compound Governance, the NounBA founders
                   have given themselves a special veto right to stop proposals that introduce
                   non-trivial legal or existential risks to the NounBA DAO, including (but not
-                  necessarily limited to) proposals that
+                  necessarily limited to) proposals that.
                 </Trans>
               </p>
               <ul>
@@ -198,9 +182,9 @@ const Documentation = () => {
               <p>
                 <Trans>
                   NounBAs are stored directly on Ethereum and do not utilize pointers to other
-                  networks such as IPFS. This is possible because NounBA artwork is compressed and
-                  stored on-chain using a custom run-length encoding (RLE), which is a form of
-                  lossless compression.
+                  networks such as IPFS. This is possible because similar to Nouns, NounBA artwork
+                  is compressed and stored on-chain using a custom run-length encoding (RLE), which
+                  is a form of lossless compression.
                 </Trans>
               </p>
 
@@ -217,7 +201,7 @@ const Documentation = () => {
           </Accordion.Item>
           <Accordion.Item eventKey="6" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader}>
-              <Trans>NounBA Founder’s Reward</Trans>
+              <Trans>NounBA Founders</Trans>
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
               <p>
@@ -231,22 +215,18 @@ const Documentation = () => {
                   <Link text="@dh_amiyoko" url="https://twitter.com/dh_amiyoko" leavesPage={true} />
                 </li>
                 <li>
+                  <Link text="@facuserif" url="https://twitter.com/facuserif" leavesPage={true} />
+                </li>
+                <li>
                   <Link text="@jokuyiga" url="https://twitter.com/jokuyiga" leavesPage={true} />
                 </li>
                 <li>
                   <Link text="@kyza" url="https://twitter.com/kyza" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="@neuroswish" url="https://twitter.com/neuroswish" leavesPage={true} />
-                </li>
-                <li>
                   <Link text="@TheArodEth" url="https://twitter.com/TheArodEth" leavesPage={true} />
                 </li>
               </ul>
-              <p>
-                NounBA founders will be compensated with 6 NounBAs and 12% of the 34 auction
-                proceeds.
-              </p>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
