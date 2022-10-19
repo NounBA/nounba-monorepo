@@ -16,7 +16,8 @@ import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { Trans } from '@lingui/macro';
 import { useState } from 'react';
-import { File, Users } from 'lucide-react';
+// import { File, Users } from 'lucide-react';
+import { File } from 'lucide-react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
@@ -81,13 +82,13 @@ const NavBar = () => {
                 />
               </Nav.Link>
             )}
-            <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
+            {/* <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
                 buttonIcon={<Users size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link
               href={externalURL(ExternalURL.notion)}
               className={classes.nounsNavLink}
