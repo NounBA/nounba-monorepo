@@ -168,8 +168,7 @@ const Documentation = () => {
                 <Trans>
                   NounBA is made up of 40 1-of-1 artworks. 30 of the artworks draw inspiration from
                   basketball teams. No copyright or official team IP is featured (e.g. names,
-                  logos). NounBA traits match the structure of Noun traits (background, body,
-                  accessory, head, glasses).
+                  logos).
                 </Trans>
               </p>
             </Accordion.Body>
