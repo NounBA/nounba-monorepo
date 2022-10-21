@@ -32,6 +32,7 @@
     "nftDescriptor": "0x53B645b7F2e9aFF51754bC46C9E0574f32Fffc53",
     "nounsAuctionHouse": "0x8478246c53283aD5C4771434710E1942714aD283",
     "nounsAuctionHouseProxy": "0x9d617eCF3Ccd0b683e6800a39a2614d2472f78e9",
+    "nounsAuctionHouseProxy2": "0xdc9763e9e0cfc88aa9e217925d04ad7a9e2f3163",
     "nounsAuctionHouseProxyAdmin": "0x9bC0123D7b53C64Bde2ef5e61757fD58edE5c32B",
     "nounsDaoExecutor": "0x3c3F8DF5ED10D3A3031de048F6Ba8fceeDD04196",
     "nounsDAOProxy": "0xbC2e44C3f5518ee3fa155B247F63f4773E1Ebe7B",
