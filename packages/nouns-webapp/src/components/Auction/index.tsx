@@ -7,6 +7,7 @@ import { LoadingNoun } from '../Noun';
 
 import { REGIONS, AUCTION_NAMES } from '../../config';
 import CityBoard from '../CityBoard';
+import { useNounSeed } from '../../wrappers/nounToken';
 
 interface AuctionProps {
   auction?: IAuction;
@@ -16,10 +17,11 @@ interface AuctionProps {
 
 const Auction: React.FC<AuctionProps> = props => {
   const { auction: currentAuction, auctionName, side } = props;
+  const seed = useNounSeed(currentAuction?.nounId);
 
   const lastNounId = useAppSelector(state => state[auctionName].lastAuctionNounId);
 
-  const currentAuctionActivityContent = currentAuction && lastNounId && (
+  const currentAuctionActivityContent = currentAuction && lastNounId !== undefined && (
     <AuctionActivity
       auction={currentAuction}
       isFirstAuction={currentAuction.nounId.eq(0)}
@@ -43,7 +45,7 @@ const Auction: React.FC<AuctionProps> = props => {
   return (
     <>
       <div className={classes.wrapper}>
-        {currentAuction ? nounContent : loadingNoun}
+        {currentAuction && seed ? nounContent : loadingNoun}
         <div className={classes.conferenceTitleWrapper}>
           <div
             className={`${classes.conferenceTitle} ${
@@ -55,11 +57,15 @@ const Auction: React.FC<AuctionProps> = props => {
         </div>
         <div className={classes.infoWrapper}>
           <div className={classes.auctionInfo}>
-            {currentAuction && currentAuctionActivityContent}
+            {currentAuction && seed && currentAuctionActivityContent}
           </div>
         </div>
       </div>
-      <CityBoard side={side} auctionID={currentAuction?.nounId.toNumber() ?? 0} />
+      <CityBoard
+        side={side}
+        auctionID={currentAuction?.nounId.toNumber() ?? 0}
+        tokenIndex={seed?.oneOfOneIndex}
+      />
     </>
   );
 };

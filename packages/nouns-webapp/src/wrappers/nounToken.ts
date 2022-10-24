@@ -1,5 +1,5 @@
 import { useContractCall, useContractFunction, useEthers } from '@usedapp/core';
-import { BigNumber as EthersBN, ethers, utils } from 'ethers';
+import { BigNumber, BigNumber as EthersBN, ethers, utils } from 'ethers';
 import { NounsTokenABI, NounsTokenFactory } from '@nouns/contracts';
 import config, { cache, cacheKey, CHAIN_ID } from '../config';
 import { useQuery } from '@apollo/client';
@@ -78,13 +78,12 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
   }, {});
 };
 
-const useNounSeeds = () => {
+export const useNounSeeds = () => {
   const cache = localStorage.getItem(seedCacheKey);
   const cachedSeeds = cache ? JSON.parse(cache) : undefined;
   const { data } = useQuery(seedsQuery(), {
     skip: !!cachedSeeds,
   });
-
   useEffect(() => {
     if (!cachedSeeds && data?.seeds?.length) {
       localStorage.setItem(seedCacheKey, JSON.stringify(seedArrayToObject(data.seeds)));
@@ -94,9 +93,10 @@ const useNounSeeds = () => {
   return cachedSeeds;
 };
 
-export const useNounSeed = (nounId: EthersBN) => {
+export const useNounSeed = (nounId?: EthersBN) => {
   const seeds = useNounSeeds();
-  const seed = seeds?.[nounId.toString()];
+  const nounIdString = (nounId ?? BigNumber.from(0)).toString();
+  const seed = seeds?.[nounIdString];
   // prettier-ignore
   const request = seed ? false : {
     abi,
@@ -110,7 +110,7 @@ export const useNounSeed = (nounId: EthersBN) => {
     if (seedCache && isSeedValid(response)) {
       const updatedSeedCache = JSON.stringify({
         ...JSON.parse(seedCache),
-        [nounId.toString()]: {
+        [nounIdString]: {
           accessory: response.accessory,
           background: response.background,
           body: response.body,

@@ -6,7 +6,7 @@ import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import classes from './CityBoard.module.css';
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import citiesByRegion from '../../utils/cities';
-import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
 import { REGIONS } from '../../config';
 
 type CityItemProps = {
@@ -41,17 +41,21 @@ const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityIte
 type CityBoardProps = {
   auctionID: number;
   side: REGIONS;
+  tokenIndex?: number;
 };
 
 const setScroll = (element: HTMLDivElement, target: number) => {
   element.scrollTop = target;
 };
 
-const CityBoard = ({ auctionID, side }: CityBoardProps) => {
-  const [currentID, setCurrentID] = useState(auctionID);
+const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
   const cities = useMemo(() => citiesByRegion[side], [side]);
   const listRef = useRef<HTMLDivElement>(null);
   const selectedCityRef = useRef<HTMLAnchorElement>(null);
+  const cityIndex = useMemo(
+    () => cities.findIndex(city => city.tokenIndex === tokenIndex),
+    [cities, tokenIndex],
+  );
 
   const scrollToCity = useCallback(() => {
     if (selectedCityRef.current !== null && listRef.current !== null) {
@@ -61,7 +65,6 @@ const CityBoard = ({ auctionID, side }: CityBoardProps) => {
 
   useEffect(() => {
     if (auctionID) {
-      setCurrentID(auctionID);
       setTimeout(scrollToCity, 1000);
     }
   }, [auctionID, scrollToCity]);
@@ -80,16 +83,18 @@ const CityBoard = ({ auctionID, side }: CityBoardProps) => {
           className={clsx(classes.list, side === REGIONS.east && classes.blueList)}
           ref={listRef}
         >
-          {cities.map(city => (
-            <CityItem
-              key={city.id}
-              id={city.id}
-              name={city.displayName}
-              isSelected={city.id === currentID}
-              isDisabled={city.id > currentID}
-              cityRef={city.id === currentID ? selectedCityRef : null}
-            />
-          ))}
+          {cities.map((city, index) =>
+            city.displayName.indexOf('Dev') !== -1 ? null : (
+              <CityItem
+                key={city.tokenIndex}
+                id={city.id}
+                name={city.displayName}
+                isSelected={city.tokenIndex === tokenIndex}
+                isDisabled={index > cityIndex}
+                cityRef={city.tokenIndex === tokenIndex ? selectedCityRef : null}
+              />
+            ),
+          )}
         </ListGroup>
       </section>
     </div>

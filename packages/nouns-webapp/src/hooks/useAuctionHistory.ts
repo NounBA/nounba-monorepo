@@ -10,6 +10,7 @@ import { Bid } from '../utils/types';
 import { Auction } from '../wrappers/nounsAuction';
 import { getSide } from '../utils/cities';
 import { deserializeBids } from '../wrappers/onDisplayAuction';
+import { useNounSeed } from '../wrappers/nounToken';
 
 const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
 
@@ -43,6 +44,7 @@ export function useAuctionHistory(nounbaId: string) {
   const [auction, setAuction] = useState<Auction>();
   const [side, setSide] = useState(REGIONS.east);
   const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
+  const seed = useNounSeed(auction?.nounId);
 
   let isMounted = true;
   const processBidFilter = async (
@@ -68,7 +70,7 @@ export function useAuctionHistory(nounbaId: string) {
     setBids([]);
 
     const nounId = BigNumber.from(nounbaId);
-    const currentSide = getSide(nounId.toNumber());
+    const currentSide = getSide(seed?.oneOfOneIndex);
     const auctionAddress =
       currentSide === REGIONS.west
         ? config.addresses.nounsAuctionHouseProxy
@@ -86,15 +88,16 @@ export function useAuctionHistory(nounbaId: string) {
       const createdAuction = await nounsAuctionHouseContract.queryFilter(auctionCreatedFilter);
       const settledAuction = await nounsAuctionHouseContract.queryFilter(settledFilter);
 
-      if (settledAuction.length < 1 && isMounted) {
+      if (!isMounted) return;
+
+      if (settledAuction.length < 1) {
         setStatus(STATUS.ERROR);
         return;
       }
 
       const block = await settledAuction[0].getBlock();
-      const currentSide = getSide(nounId.toNumber());
+      const currentSide = getSide(seed?.oneOfOneIndex);
 
-      if (!isMounted) return;
       setSide(currentSide);
       setAuction(
         deserializeSettledAuction({
