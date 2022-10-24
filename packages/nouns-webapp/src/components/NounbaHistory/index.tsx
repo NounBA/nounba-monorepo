@@ -27,13 +27,12 @@ const NounbaHistory = () => {
 
   const lastDisplayAuctionId = useAppSelector(state =>
     Math.min(
-      state[AUCTION_NAMES.FIRST_AUCTION].lastAuctionNounId ?? 1,
-      state[AUCTION_NAMES.SECOND_AUCTION].lastAuctionNounId ?? 1,
+      state[AUCTION_NAMES.FIRST_AUCTION].lastAuctionNounId ?? 0,
+      state[AUCTION_NAMES.SECOND_AUCTION].lastAuctionNounId ?? 0,
     ),
   );
 
-  if (status === STATUS.ERROR) history.push('/');
-
+  // if (status === STATUS.ERROR) history.push('/');
   const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId ?? 0);
 
   const prevAuctionHandler = () => {
@@ -48,7 +47,7 @@ const NounbaHistory = () => {
   const currentAuctionActivityContent = currentAuction && (
     <AuctionActivity
       auction={currentAuction}
-      isFirstAuction={auctionIdBigNumber.eq(1)}
+      isFirstAuction={auctionIdBigNumber.eq(0)}
       // TODO: use lastNounId from Auctions
       isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
       onPrevAuctionClick={prevAuctionHandler}
