@@ -30,18 +30,15 @@ const AuctionPage: React.FC<AuctionPageProps> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!lastFirstAuctionNounId) return;
-    if (lastFirstAuctionNounId) {
-      dispatch(setOnDisplayFirstAuctionNounId(lastFirstAuctionNounId));
-    }
+    if (lastFirstAuctionNounId === undefined) return;
+    dispatch(setOnDisplayFirstAuctionNounId(lastFirstAuctionNounId));
   }, [dispatch, lastFirstAuctionNounId]);
 
   useEffect(() => {
-    if (!lastSecondAuctionNounId) return;
-    if (lastSecondAuctionNounId) {
-      dispatch(setOnDisplaySecondAuctionNounId(lastSecondAuctionNounId));
-    }
+    if (lastSecondAuctionNounId === undefined) return;
+    dispatch(setOnDisplaySecondAuctionNounId(lastSecondAuctionNounId));
   }, [dispatch, lastSecondAuctionNounId]);
+
   return (
     <div style={{ backgroundColor: 'var(--brand-bg-gray)' }}>
       <div className={classes.woodWrapper}>
