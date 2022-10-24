@@ -7,7 +7,7 @@ import { Auction } from '../../wrappers/nounsAuction';
 type Context = {
   auction?: Auction;
   bids: Bid[];
-  side: REGIONS;
+  side?: REGIONS;
   status: STATUS;
 };
 
