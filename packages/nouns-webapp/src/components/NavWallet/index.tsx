@@ -128,7 +128,7 @@ const NavWallet: React.FC<NavWalletProps> = props => {
           <div className={classes.icon}>
             {' '}
             {/* <Davatar size={21} address={address} provider={provider} /> */}
-            <Identicon size={64} address={address} provider={provider} />
+            <Identicon size={21} address={address} provider={provider} />
           </div>
           <div className={navDropdownClasses.dropdownBtnContent}>{ens ? ens : shortAddress}</div>
           <div className={buttonUp ? navDropdownClasses.arrowUp : navDropdownClasses.arrowDown}>
