@@ -1,4 +1,4 @@
-import Davatar from '@davatar/react';
+// import Davatar from '@davatar/react';
 import { useEthers } from '@usedapp/core';
 import React, { useState } from 'react';
 import { useReverseENSLookUp } from '../../utils/ensLookup';
@@ -25,6 +25,7 @@ import {
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 import { LogOut, RefreshCw } from 'lucide-react';
+import Identicon from '../Identicon';
 
 interface NavWalletProps {
   address: string;
@@ -126,7 +127,8 @@ const NavWallet: React.FC<NavWalletProps> = props => {
         <div className={navDropdownClasses.button}>
           <div className={classes.icon}>
             {' '}
-            <Davatar size={21} address={address} provider={provider} />
+            {/* <Davatar size={21} address={address} provider={provider} /> */}
+            <Identicon size={64} address={address} provider={provider} />
           </div>
           <div className={navDropdownClasses.dropdownBtnContent}>{ens ? ens : shortAddress}</div>
           <div className={buttonUp ? navDropdownClasses.arrowUp : navDropdownClasses.arrowDown}>
@@ -217,7 +219,7 @@ const NavWallet: React.FC<NavWalletProps> = props => {
             <div className={navDropdownClasses.button}>
               <div className={classes.icon}>
                 {' '}
-                <Davatar size={21} address={address} provider={provider} />
+                {/* <Davatar size={21} address={address} provider={provider} /> */}
               </div>
               <div className={navDropdownClasses.dropdownBtnContent}>
                 {ens ? renderENS(ens) : renderAddress(address)}
