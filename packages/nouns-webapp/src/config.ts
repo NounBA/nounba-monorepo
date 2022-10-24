@@ -65,7 +65,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Goerli]: {
     jsonRpcUri: createNetworkHttpUrl('goerli'),
     wsRpcUri: createNetworkWsUrl('goerli'),
-    subgraphApiUri: '',
+    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/okuyiga/nounba-subgraph-goerli',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Mainnet]: {
