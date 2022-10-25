@@ -63,6 +63,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
       {},
     ),
   );
+  console.log(pastAuctionsBySeed);
   const listRef = useRef<HTMLDivElement>(null);
   const selectedCityRef = useRef<HTMLAnchorElement>(null);
   const cityIndex = useMemo(
