@@ -15,6 +15,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { isNounbaNoun } from '../../utils/nounderNoun';
 import { getNoun } from '../StandaloneNoun';
 import { useNounSeed } from '../../wrappers/nounToken';
+import loadingNoun from '../../assets/loading-skull-noun.gif';
 
 type CityItemProps = {
   name: string;
@@ -34,11 +35,12 @@ const CityItem = ({
 }: CityItemProps) => {
   const history = useHistory();
   const seed = useNounSeed(BigNumber.from(id));
-  const { image } = getNoun(
-    BigNumber.from(tokenIndex),
-    { ...seed, oneOfOneIndex: tokenIndex },
-    true,
-  );
+  let image = loadingNoun;
+  try {
+    image = getNoun(BigNumber.from(tokenIndex), { ...seed, oneOfOneIndex: tokenIndex }, true).image;
+  } catch (error) {
+    image = loadingNoun;
+  }
 
   const onClickHandler = () => {
     if (!isSelected) history.push(`/nounba/${id}`);

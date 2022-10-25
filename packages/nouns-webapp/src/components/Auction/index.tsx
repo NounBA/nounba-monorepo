@@ -18,7 +18,6 @@ interface AuctionProps {
 const Auction: React.FC<AuctionProps> = props => {
   const { auction: currentAuction, auctionName, side } = props;
   const seed = useNounSeed(currentAuction?.nounId);
-
   const lastNounId = useAppSelector(state => state[auctionName].lastAuctionNounId);
 
   const currentAuctionActivityContent = currentAuction && lastNounId !== undefined && (
