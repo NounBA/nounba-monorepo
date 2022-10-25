@@ -14,6 +14,7 @@ import { setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId } from '..
 
 import classes from './Auction.module.css';
 import { AUCTION_NAMES, REGIONS } from '../../config';
+import ScrollToTop from '../../components/ScrollToTop';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -41,6 +42,7 @@ const AuctionPage: React.FC<AuctionPageProps> = () => {
 
   return (
     <div style={{ backgroundColor: 'var(--brand-bg-gray)' }}>
+      <ScrollToTop />
       <div className={classes.woodWrapper}>
         <Container fluid="xl" className={classes.wrapper}>
           <Row>

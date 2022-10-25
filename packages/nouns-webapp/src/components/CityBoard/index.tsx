@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import Image from 'react-bootstrap/Image';
 import classes from './CityBoard.module.css';
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import citiesByRegion from '../../utils/cities';
@@ -12,19 +13,37 @@ import { useAppSelector } from '../../hooks';
 import { AuctionState } from '../../state/slices/auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
 import { isNounbaNoun } from '../../utils/nounderNoun';
+import { getNoun } from '../StandaloneNoun';
+import { useNounSeed } from '../../wrappers/nounToken';
 
 type CityItemProps = {
   name: string;
+  tokenIndex: number;
   id: number;
   isDisabled?: boolean;
   isSelected?: boolean;
   cityRef?: RefObject<HTMLAnchorElement> | null;
 };
-const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityItemProps) => {
+const CityItem = ({
+  id,
+  tokenIndex,
+  name,
+  isDisabled = false,
+  isSelected,
+  cityRef,
+}: CityItemProps) => {
   const history = useHistory();
+  const seed = useNounSeed(BigNumber.from(id));
+  const { image } = getNoun(
+    BigNumber.from(tokenIndex),
+    { ...seed, oneOfOneIndex: tokenIndex },
+    true,
+  );
+
   const onClickHandler = () => {
     if (!isSelected) history.push(`/nounba/${id}`);
   };
+  if (isNounbaNoun(name)) return null;
   return (
     <ListGroupItem className={classes.itemWrapper} ref={cityRef}>
       <Button
@@ -33,7 +52,8 @@ const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityIte
         onClick={onClickHandler}
       >
         <div className={classes.cityWrapper}>
-          <span className={classes.avatar} />
+          {/* <span className={classes.avatar} /> */}
+          <Image className={classes.avatar} src={image} alt={'Noun'} />
           {name}
         </div>
         {!isDisabled && !isSelected && <FontAwesomeIcon icon={faExternalLinkAlt} />}
@@ -98,18 +118,17 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
           className={clsx(classes.list, side === REGIONS.east && classes.blueList)}
           ref={listRef}
         >
-          {cities.map((city, index) =>
-            isNounbaNoun(city.displayName) ? null : (
-              <CityItem
-                key={city.tokenIndex}
-                id={getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)}
-                name={city.displayName}
-                isSelected={city.tokenIndex === tokenIndex}
-                isDisabled={index > cityIndex}
-                cityRef={city.tokenIndex === tokenIndex ? selectedCityRef : null}
-              />
-            ),
-          )}
+          {cities.map((city, index) => (
+            <CityItem
+              id={getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)}
+              tokenIndex={city.tokenIndex}
+              key={city.tokenIndex}
+              name={city.displayName}
+              isSelected={city.tokenIndex === tokenIndex}
+              isDisabled={index > cityIndex}
+              cityRef={city.tokenIndex === tokenIndex ? selectedCityRef : null}
+            />
+          ))}
         </ListGroup>
       </section>
     </div>
