@@ -8,6 +8,9 @@ import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import citiesByRegion from '../../utils/cities';
 import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
 import { REGIONS } from '../../config';
+import { useAppSelector } from '../../hooks';
+import { AuctionState } from '../../state/slices/auction/auctionWrapper';
+import { BigNumber } from '@ethersproject/bignumber';
 
 type CityItemProps = {
   name: string;
@@ -19,7 +22,7 @@ type CityItemProps = {
 const CityItem = ({ id, name, isDisabled = false, isSelected, cityRef }: CityItemProps) => {
   const history = useHistory();
   const onClickHandler = () => {
-    history.push(`/nounba/${id}`);
+    if (!isSelected) history.push(`/nounba/${id}`);
   };
   return (
     <ListGroupItem className={classes.itemWrapper} ref={cityRef}>
@@ -48,8 +51,18 @@ const setScroll = (element: HTMLDivElement, target: number) => {
   element.scrollTop = target;
 };
 
+const getAuctionTokenId = (list: { [key: string]: AuctionState }, tokenIndex: number) => {
+  const nounId = list[tokenIndex]?.activeAuction?.nounId;
+  return nounId !== undefined ? BigNumber.from(nounId).toNumber() : 0;
+};
 const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
   const cities = useMemo(() => citiesByRegion[side], [side]);
+  const pastAuctionsBySeed = useAppSelector<{ [key: string]: AuctionState }>(state =>
+    state.pastAuctions.pastAuctions.reduce(
+      (prev, auction) => ({ ...prev, [auction.seed.oneOfOneIndex]: auction }),
+      {},
+    ),
+  );
   const listRef = useRef<HTMLDivElement>(null);
   const selectedCityRef = useRef<HTMLAnchorElement>(null);
   const cityIndex = useMemo(
@@ -87,7 +100,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
             city.displayName.indexOf('Dev') !== -1 ? null : (
               <CityItem
                 key={city.tokenIndex}
-                id={city.id}
+                id={getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)}
                 name={city.displayName}
                 isSelected={city.tokenIndex === tokenIndex}
                 isDisabled={index > cityIndex}

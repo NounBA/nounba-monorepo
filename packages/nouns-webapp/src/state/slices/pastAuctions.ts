@@ -39,6 +39,9 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
       onDisplayAuctionNounId: auction.onDisplayAuctionNounId,
       contractAddress: auction.contractAddress,
       auctionName: auction.auctionName,
+      seed: {
+        oneOfOneIndex: auction.noun.seed.oneOfOneIndex,
+      },
     };
   });
   return pastAuctions;

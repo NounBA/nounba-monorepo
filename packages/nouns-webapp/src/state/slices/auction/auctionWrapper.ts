@@ -12,6 +12,9 @@ import { Auction as IAuction } from '../../../wrappers/nounsAuction';
 export interface AuctionState {
   activeAuction?: IAuction;
   bids: BidEvent[];
+  seed: {
+    oneOfOneIndex: string;
+  };
   lastAuctionNounId: number | undefined;
   onDisplayAuctionNounId: number | undefined;
   contractAddress: string;
@@ -21,6 +24,9 @@ export interface AuctionState {
 const initialState: AuctionState = {
   activeAuction: undefined,
   bids: [],
+  seed: {
+    oneOfOneIndex: '',
+  },
   lastAuctionNounId: undefined,
   onDisplayAuctionNounId: undefined,
   contractAddress: '',

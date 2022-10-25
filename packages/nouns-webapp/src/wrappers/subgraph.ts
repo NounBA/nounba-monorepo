@@ -185,6 +185,9 @@ export const latestAuctionsQuery = () => gql`
         owner {
           id
         }
+        seed {
+          oneOfOneIndex
+        }
       }
       bids {
         id
