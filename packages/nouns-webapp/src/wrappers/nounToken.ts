@@ -120,7 +120,7 @@ export const useNounSeed = (nounId?: EthersBN) => {
           oneOfOneIndex: response.oneOfOneIndex,
         },
       });
-      localStorage.setItem(seedCacheKey, updatedSeedCache);
+      if (response.oneOfOneIndex > 0) localStorage.setItem(seedCacheKey, updatedSeedCache);
     }
     return response;
   }

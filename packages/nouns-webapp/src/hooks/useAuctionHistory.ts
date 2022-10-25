@@ -42,9 +42,9 @@ export enum STATUS {
 export function useAuctionHistory(nounbaId: string) {
   const [bids, setBids] = useState<Bid[]>([]);
   const [auction, setAuction] = useState<Auction>();
-  const [side, setSide] = useState(REGIONS.east);
+  const [side, setSide] = useState<REGIONS>();
   const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
-  const seed = useNounSeed(auction?.nounId);
+  const seed = useNounSeed(BigNumber.from(nounbaId));
 
   let isMounted = true;
   const processBidFilter = async (
@@ -66,15 +66,21 @@ export function useAuctionHistory(nounbaId: string) {
   };
 
   useEffect(() => {
+    if (seed?.oneOfOneIndex !== undefined) {
+      setSide(getSide(seed.oneOfOneIndex));
+    }
+  }, [seed?.oneOfOneIndex]);
+
+  useEffect(() => {
     setStatus(STATUS.LOADING);
+    if (side === undefined) return;
     setBids([]);
 
     const nounId = BigNumber.from(nounbaId);
-    const currentSide = getSide(seed?.oneOfOneIndex);
     const auctionAddress =
-      currentSide === REGIONS.west
-        ? config.addresses.nounsAuctionHouseProxy
-        : config.addresses.nounsAuctionHouseProxy2;
+      side === REGIONS.east
+        ? config.addresses.nounsAuctionHouseProxy2
+        : config.addresses.nounsAuctionHouseProxy;
     const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(auctionAddress, wsProvider);
     const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(nounId, null, null, null);
     const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(nounId, null, null);
@@ -88,17 +94,15 @@ export function useAuctionHistory(nounbaId: string) {
       const createdAuction = await nounsAuctionHouseContract.queryFilter(auctionCreatedFilter);
       const settledAuction = await nounsAuctionHouseContract.queryFilter(settledFilter);
 
-      if (!isMounted) return;
-
       if (settledAuction.length < 1) {
-        setStatus(STATUS.ERROR);
+        if (isMounted) setStatus(STATUS.ERROR);
         return;
       }
 
       const block = await settledAuction[0].getBlock();
-      const currentSide = getSide(seed?.oneOfOneIndex);
 
-      setSide(currentSide);
+      if (!isMounted) return;
+
       setAuction(
         deserializeSettledAuction({
           amount: settledAuction[0].args.amount,
@@ -109,9 +113,7 @@ export function useAuctionHistory(nounbaId: string) {
           settled: true,
           contractAddress: '',
           auctionName:
-            currentSide === REGIONS.west
-              ? AUCTION_NAMES.FIRST_AUCTION
-              : AUCTION_NAMES.SECOND_AUCTION,
+            side === REGIONS.east ? AUCTION_NAMES.SECOND_AUCTION : AUCTION_NAMES.FIRST_AUCTION,
         }),
       );
 
@@ -127,7 +129,7 @@ export function useAuctionHistory(nounbaId: string) {
     };
 
     try {
-      if (!isMounted) return;
+      if (!isMounted || !seed) return;
       loadAuction();
       loadBids();
     } catch (error) {
@@ -138,7 +140,7 @@ export function useAuctionHistory(nounbaId: string) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       isMounted = false;
     };
-  }, [nounbaId]);
+  }, [nounbaId, side]);
 
   return {
     bids,

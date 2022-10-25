@@ -81,7 +81,11 @@
   background-color: var(--brand-bg-gray-light);
   border-color: var(--brand-gray-background);
 }
-.city.isSelected {
+.city.isSelected,
+.city.isSelected:hover,
+.city.isSelected:active,
+.city.isSelected:focus {
+  cursor: default !important;
   background-color: var(--brand-color-red) !important;
 }
 

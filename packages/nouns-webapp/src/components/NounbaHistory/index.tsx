@@ -18,7 +18,7 @@ import { LoadingNoun } from '../Noun';
 
 import PastAuctionContext from '../../contexts/PastAuctionContext';
 import { STATUS } from '../../hooks/useAuctionHistory';
-import { AUCTION_NAMES } from '../../config';
+import { AUCTION_NAMES, REGIONS } from '../../config';
 
 const NounbaHistory = () => {
   const { auction: currentAuction, side, status } = useContext(PastAuctionContext);
@@ -53,7 +53,7 @@ const NounbaHistory = () => {
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
       displayGraphDepComps={false}
-      side={side}
+      side={side || REGIONS.west}
       isPastAuction
     />
   );
