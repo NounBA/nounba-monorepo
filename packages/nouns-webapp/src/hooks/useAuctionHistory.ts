@@ -8,9 +8,11 @@ import config, { AUCTION_NAMES, REGIONS } from '../config';
 import { reduxSafeBid } from '../state/slices/auction/auctionWrapper';
 import { Bid } from '../utils/types';
 import { Auction } from '../wrappers/nounsAuction';
-import { getSide } from '../utils/cities';
+import { allCities, CityType, getSide } from '../utils/cities';
 import { deserializeBids } from '../wrappers/onDisplayAuction';
 import { useNounSeed } from '../wrappers/nounToken';
+import { useAppSelector } from '../hooks';
+import { generateEmptyNounderAuction, isNounbaNoun } from '../utils/nounderNoun';
 
 const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
 
@@ -31,6 +33,7 @@ export enum STATUS {
   LOADING,
   SUCCESS,
   ERROR,
+  DEV_TOKEN,
 }
 
 /**
@@ -45,6 +48,8 @@ export function useAuctionHistory(nounbaId: string) {
   const [side, setSide] = useState<REGIONS>();
   const [status, setStatus] = useState<STATUS>(STATUS.LOADING);
   const seed = useNounSeed(BigNumber.from(nounbaId));
+  const [city, setCity] = useState<CityType | undefined>();
+  const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
 
   let isMounted = true;
   const processBidFilter = async (
@@ -68,6 +73,7 @@ export function useAuctionHistory(nounbaId: string) {
   useEffect(() => {
     if (seed?.oneOfOneIndex !== undefined) {
       setSide(getSide(seed.oneOfOneIndex));
+      setCity(allCities[seed.oneOfOneIndex]);
     }
   }, [seed?.oneOfOneIndex]);
 
@@ -130,6 +136,15 @@ export function useAuctionHistory(nounbaId: string) {
 
     try {
       if (!isMounted || !seed) return;
+      if (city && isNounbaNoun(city.displayName)) {
+        setAuction(
+          deserializeSettledAuction(
+            generateEmptyNounderAuction(BigNumber.from(nounbaId), pastAuctions),
+          ),
+        );
+        setStatus(STATUS.DEV_TOKEN);
+        return;
+      }
       loadAuction();
       loadBids();
     } catch (error) {
@@ -140,7 +155,7 @@ export function useAuctionHistory(nounbaId: string) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       isMounted = false;
     };
-  }, [nounbaId, side]);
+  }, [nounbaId, side, city]);
 
   return {
     bids,

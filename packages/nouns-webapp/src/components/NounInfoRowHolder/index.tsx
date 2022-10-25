@@ -49,7 +49,7 @@ const NounInfoRowHolder = () => {
             rel="noreferrer"
           >
             {winner.toLowerCase() === config.addresses.nounsAuctionHouseProxy.toLowerCase() ? (
-              <Trans>Nouns Auction House</Trans>
+              <Trans>NounBA Auction House</Trans>
             ) : (
               shortAddressComponent
             )}

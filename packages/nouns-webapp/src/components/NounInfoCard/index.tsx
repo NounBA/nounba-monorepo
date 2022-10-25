@@ -16,10 +16,11 @@ import { Trans } from '@lingui/macro';
 interface NounInfoCardProps {
   nounId: number;
   bidHistoryOnClickHandler: () => void;
+  hideBids?: boolean;
 }
 
 const NounInfoCard: React.FC<NounInfoCardProps> = props => {
-  const { nounId, bidHistoryOnClickHandler } = props;
+  const { nounId, bidHistoryOnClickHandler, hideBids } = props;
 
   const etherscanButtonClickHandler = () =>
     window.open(buildEtherscanTokenLink(config.addresses.nounsToken, nounId));
@@ -30,19 +31,22 @@ const NounInfoCard: React.FC<NounInfoCardProps> = props => {
         <Col xs={6} className={classes.nounInfoRow}>
           <NounInfoRowBirthday />
         </Col>
-        <Col xs={6} className={clsx(classes.nounInfoRow, classes.lastCol)}>
-          <NounInfoRowHolder />
-        </Col>
+        {!hideBids && (
+          <Col xs={6} className={clsx(classes.nounInfoRow, classes.lastCol)}>
+            <NounInfoRowHolder />
+          </Col>
+        )}
       </Row>
-
-      <Row>
-        <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
-          <NounInfoRowButton
-            btnText={<Trans>View all bids</Trans>}
-            onClickHandler={bidHistoryOnClickHandler}
-          />
-        </Col>
-      </Row>
+      {!hideBids && (
+        <Row>
+          <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
+            <NounInfoRowButton
+              btnText={<Trans>View all bids</Trans>}
+              onClickHandler={bidHistoryOnClickHandler}
+            />
+          </Col>
+        </Row>
+      )}
       <Row>
         <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
           <NounInfoRowButton

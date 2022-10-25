@@ -108,7 +108,7 @@ const Documentation = () => {
                 <li>69% to the treasury</li>
                 <li>9% to fantasy leagues (3% for 3 years)</li>
                 <li>12% to NounBA founders</li>
-                <li>9% to NounBA DAO</li>
+                <li>9% to NounsDAO</li>
                 <li>1% to {protocolGuildLink}</li>
               </ul>
             </Accordion.Body>
