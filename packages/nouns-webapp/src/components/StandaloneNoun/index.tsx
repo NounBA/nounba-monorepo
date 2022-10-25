@@ -1,14 +1,14 @@
 import { ImageData as data, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
 import { BigNumber as EthersBN } from 'ethers';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import clsx from 'clsx';
 import { INounSeed, useNounSeed } from '../../wrappers/nounToken';
 import Noun from '../Noun';
-import { Link } from 'react-router-dom';
 import classes from './StandaloneNoun.module.css';
-import { useDispatch } from 'react-redux';
 import { setOnDisplayAuctionNounId } from '../../state/slices/onDisplayAuction';
 import nounClasses from '../Noun/Noun.module.css';
-import clsx from 'clsx';
 
 interface StandaloneNounProps {
   nounId: EthersBN;

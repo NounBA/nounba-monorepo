@@ -8,14 +8,18 @@ export const isNounderNoun = (nounId: BigNumber) => {
   // return nounId?.mod(10)?.eq(0) || nounId.eq(0);
 };
 
+export const isNounbaNoun = (displayName: string) => {
+  return displayName.includes('Dev');
+};
+
 const emptyNounderAuction = (onDisplayAuctionId: number): Auction => {
   return {
     amount: BigNumber.from(0).toJSON(),
-    bidder: '',
+    bidder: 'NounBA Team',
     startTime: BigNumber.from(0).toJSON(),
     endTime: BigNumber.from(0).toJSON(),
     nounId: BigNumber.from(onDisplayAuctionId).toJSON(),
-    settled: false,
+    settled: true,
     contractAddress: '',
     auctionName: AUCTION_NAMES.FIRST_AUCTION,
   };
@@ -41,7 +45,10 @@ export const generateEmptyNounderAuction = (
   // use nounderAuction.nounId + 1 to get mint time
   const auctionAbove = findAuction(nounId.add(1), pastAuctions);
   const auctionAboveStartTime = auctionAbove && BigNumber.from(auctionAbove.startTime);
-  if (auctionAboveStartTime) nounderAuction.startTime = auctionAboveStartTime.toJSON();
+  if (auctionAboveStartTime) {
+    nounderAuction.startTime = auctionAboveStartTime.toJSON();
+    nounderAuction.endTime = auctionAboveStartTime.toJSON();
+  }
 
   return nounderAuction;
 };

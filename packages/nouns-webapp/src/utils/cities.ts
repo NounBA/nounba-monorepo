@@ -1,5 +1,7 @@
 import { REGIONS } from '../config';
 
+export type CityType = { tokenIndex: number; displayName: string };
+
 export const west = [
   { id: 1, displayName: 'Dev 1', tokenIndex: 1 },
   { id: 2, displayName: 'Houston', tokenIndex: 2 },
@@ -47,10 +49,11 @@ export const east = [
 
 export const cities = { [REGIONS.east]: east, [REGIONS.west]: west };
 
-const listById = (cities: { tokenIndex: number; displayName: string }[]) =>
+const listById = (cities: CityType[]) =>
   cities.reduce((prev, city) => ({ ...prev, [city.tokenIndex]: city }), {});
 
-export const allCities: { [n: number]: { tokenIndex: number; displayName: string } } = {
+export type AllCitiesType = { [n: number]: CityType };
+export const allCities: AllCitiesType = {
   ...listById(west),
   ...listById(east),
 };

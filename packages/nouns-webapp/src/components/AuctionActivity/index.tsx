@@ -37,6 +37,7 @@ interface AuctionActivityProps {
   displayGraphDepComps: boolean;
   side: REGIONS;
   isPastAuction?: boolean;
+  isNounbaNoun?: boolean;
 }
 
 const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityProps) => {
@@ -49,6 +50,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
     onPrevAuctionClick,
     onNextAuctionClick,
     isFirstAuction,
+    isNounbaNoun,
   } = props;
 
   const title = side === REGIONS.west ? 'West' : 'East';
@@ -131,18 +133,21 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
             </Col>
           </Row>
           <Row className={classes.activityCustomRow}>
-            <Col xs={6}>
-              <CurrentBid
-                currentBid={new BigNumber(auction.amount.toString())}
-                auctionEnded={auctionEnded}
-              />
-            </Col>
-            <Col xs={6}>
+            {!isNounbaNoun && (
+              <Col xs={6}>
+                <CurrentBid
+                  currentBid={new BigNumber(auction.amount.toString())}
+                  auctionEnded={auctionEnded}
+                />
+              </Col>
+            )}
+            <Col xs={isNounbaNoun ? 12 : 6}>
               <div className={classes.auctionTimerCol}>
                 {auctionEnded && (
                   <>
                     {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
-                    {isPastAuction && <Holder holder={auction.bidder} />}
+                    {isPastAuction && !isNounbaNoun && <Holder holder={auction.bidder} />}
+                    {isPastAuction && isNounbaNoun && <Winner winner={auction.bidder} isNounders />}
                   </>
                 )}
                 {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
@@ -166,6 +171,7 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
                 <NounInfoCard
                   nounId={auction.nounId.toNumber()}
                   bidHistoryOnClickHandler={showBidModalHandler}
+                  hideBids={isNounbaNoun}
                 />
               )}
               {isLastAuction && displayGraphDepComps && (

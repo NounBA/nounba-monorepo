@@ -11,6 +11,7 @@ import { REGIONS } from '../../config';
 import { useAppSelector } from '../../hooks';
 import { AuctionState } from '../../state/slices/auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
+import { isNounbaNoun } from '../../utils/nounderNoun';
 
 type CityItemProps = {
   name: string;
@@ -63,7 +64,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
       {},
     ),
   );
-  console.log(pastAuctionsBySeed);
+
   const listRef = useRef<HTMLDivElement>(null);
   const selectedCityRef = useRef<HTMLAnchorElement>(null);
   const cityIndex = useMemo(
@@ -98,7 +99,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
           ref={listRef}
         >
           {cities.map((city, index) =>
-            city.displayName.indexOf('Dev') !== -1 ? null : (
+            isNounbaNoun(city.displayName) ? null : (
               <CityItem
                 key={city.tokenIndex}
                 id={getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)}

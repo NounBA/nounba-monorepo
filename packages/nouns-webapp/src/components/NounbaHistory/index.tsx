@@ -44,6 +44,8 @@ const NounbaHistory = () => {
     currentAuction && history.push(`/nounba/${currentAuction.nounId.toNumber() + 1}`);
   };
 
+  const isLoaded = status === STATUS.SUCCESS || status === STATUS.DEV_TOKEN;
+
   const currentAuctionActivityContent = currentAuction && (
     <AuctionActivity
       auction={currentAuction}
@@ -55,14 +57,15 @@ const NounbaHistory = () => {
       displayGraphDepComps={false}
       side={side || REGIONS.west}
       isPastAuction
+      isNounbaNoun={status === STATUS.DEV_TOKEN}
     />
   );
-  // const nounderNounContent = currentAuction && lastNounId && (
+  // const nounderNounContent = currentAuction && status === STATUS.DEV_TOKEN && (
   //   <NounderNounContent
   //     mintTimestamp={currentAuction.startTime}
   //     nounId={currentAuction.nounId}
   //     isFirstAuction={currentAuction.nounId.eq(0)}
-  //     isLastAuction={currentAuction.nounId.eq(lastNounId)}
+  //     isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
   //     onPrevAuctionClick={prevAuctionHandler}
   //     onNextAuctionClick={nextAuctionHandler}
   //   />
@@ -92,14 +95,14 @@ const NounbaHistory = () => {
     <Container fluid="xl">
       <Row>
         <Col lg={{ span: 6 }}>
-          {status === STATUS.SUCCESS && currentAuction ? nounContent : loadingNoun}
-          {/* {status === STATUS.SUCCESS && currentAuction ? nounContent : loadingNoun} */}
+          {!isLoaded && loadingNoun}
+          {isLoaded && currentAuction && nounContent}
         </Col>
 
         <Col lg={{ span: 6 }}>
           <div className={classes.infoWrapper}>
-            <div className={clsx(classes.auctionInfo, status === STATUS.SUCCESS && classes.loaded)}>
-              {status === STATUS.SUCCESS && currentAuction && currentAuctionActivityContent}
+            <div className={clsx(classes.auctionInfo, isLoaded && classes.loaded)}>
+              {isLoaded && currentAuction && currentAuctionActivityContent}
             </div>
           </div>
         </Col>
