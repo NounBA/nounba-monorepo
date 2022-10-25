@@ -9,7 +9,7 @@ export const isNounderNoun = (nounId: BigNumber) => {
 };
 
 export const isNounbaNoun = (displayName: string) => {
-  return displayName.includes('Dev');
+  return displayName.includes('Referee');
 };
 
 const emptyNounderAuction = (onDisplayAuctionId: number): Auction => {
