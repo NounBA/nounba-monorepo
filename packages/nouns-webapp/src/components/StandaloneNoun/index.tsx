@@ -26,14 +26,14 @@ interface StandaloneNounWithSeedProps {
   wrapperClassName?: string;
 }
 
-export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
+export const getNoun = (nounId: string | EthersBN, seed: INounSeed, hasBg = false) => {
   const id = nounId.toString();
   const name = `Nounba ${id}`;
   const description = `Nounba ${id} is a member of the NounBA DAO`;
   const { parts, background } = getNounData(seed);
 
   const image = `data:image/svg+xml;base64,${btoa(
-    buildSVG(parts, data.palette, background, true),
+    buildSVG(parts, data.palette, background, !hasBg),
   )}`;
 
   return {
