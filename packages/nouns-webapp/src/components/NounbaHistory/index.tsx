@@ -43,8 +43,8 @@ const NounbaHistory = () => {
     dispatch(setNextOnDisplayAuctionNounId());
     currentAuction && history.push(`/nounba/${currentAuction.nounId.toNumber() + 1}`);
   };
-
-  const isLoaded = status === STATUS.SUCCESS || status === STATUS.DEV_TOKEN;
+  const isDevToken = status === STATUS.DEV_TOKEN;
+  const isLoaded = status === STATUS.SUCCESS || isDevToken;
 
   const currentAuctionActivityContent = currentAuction && (
     <AuctionActivity
@@ -57,7 +57,7 @@ const NounbaHistory = () => {
       displayGraphDepComps={false}
       side={side || REGIONS.west}
       isPastAuction
-      isNounbaNoun={status === STATUS.DEV_TOKEN}
+      isNounbaNoun={isDevToken}
     />
   );
   // const nounderNounContent = currentAuction && status === STATUS.DEV_TOKEN && (
@@ -100,7 +100,7 @@ const NounbaHistory = () => {
         </Col>
 
         <Col lg={{ span: 6 }}>
-          <div className={classes.infoWrapper}>
+          <div className={clsx(classes.infoWrapper, isDevToken && classes.isDevToken)}>
             <div className={clsx(classes.auctionInfo, isLoaded && classes.loaded)}>
               {isLoaded && currentAuction && currentAuctionActivityContent}
             </div>

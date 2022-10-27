@@ -5,7 +5,8 @@
   width: 100%;
   height: 100%;
   z-index: 10;
-  background: var(--brand-bg-gray);
+  background: rgba(18, 25, 38, 0.8);
+  backdrop-filter: blur(10px);
 }
 
 .modal {
@@ -16,7 +17,6 @@
   left: 10%;
   z-index: 100;
   background-color: var(--brand-white);
-  backdrop-filter: blur(10px);
   padding: 32px;
   text-align: left;
   border-radius: 4px;

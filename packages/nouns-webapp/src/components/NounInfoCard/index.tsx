@@ -28,11 +28,11 @@ const NounInfoCard: React.FC<NounInfoCardProps> = props => {
   return (
     <>
       <Row>
-        <Col xs={6} className={classes.nounInfoRow}>
+        <Col xs={5} className={classes.nounInfoRow}>
           <NounInfoRowBirthday />
         </Col>
         {!hideBids && (
-          <Col xs={6} className={clsx(classes.nounInfoRow, classes.lastCol)}>
+          <Col xs={7} className={clsx(classes.nounInfoRow, classes.lastCol)}>
             <NounInfoRowHolder />
           </Col>
         )}
