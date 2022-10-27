@@ -134,14 +134,14 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
           </Row>
           <Row className={classes.activityCustomRow}>
             {!isNounbaNoun && (
-              <Col xs={6}>
+              <Col xs={5}>
                 <CurrentBid
                   currentBid={new BigNumber(auction.amount.toString())}
                   auctionEnded={auctionEnded}
                 />
               </Col>
             )}
-            <Col xs={isNounbaNoun ? 12 : 6}>
+            <Col xs={isNounbaNoun ? 12 : 7}>
               <div className={classes.auctionTimerCol}>
                 {auctionEnded && (
                   <>

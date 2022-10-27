@@ -24,6 +24,9 @@
   position: relative;
   padding: 82px 0;
 }
+.isDevToken {
+  padding: 118px 0;
+}
 .auctionInfo {
   z-index: 1;
   position: relative;

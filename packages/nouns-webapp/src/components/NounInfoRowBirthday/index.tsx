@@ -33,7 +33,7 @@ const NounInfoRowBirthday = () => {
         <Trans>Born</Trans>
       </div>
       <span className={classes.nounInfoRowBirthday}>
-        {i18n.date(birthday, { month: 'long', year: 'numeric', day: '2-digit' })}
+        {i18n.date(birthday, { month: 'short', year: 'numeric', day: '2-digit' })}
       </span>
     </div>
   );
