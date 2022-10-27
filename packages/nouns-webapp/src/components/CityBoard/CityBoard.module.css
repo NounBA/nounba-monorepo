@@ -78,6 +78,7 @@
   color: var(--brand-gray-background);
 }
 .city:disabled .avatar {
+  padding: 4px;
   background-color: var(--brand-bg-gray-light);
   border-color: var(--brand-gray-background);
 }

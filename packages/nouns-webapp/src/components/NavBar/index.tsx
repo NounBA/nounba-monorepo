@@ -9,15 +9,16 @@ import testnetNoun from '../../assets/testnet-noun.png';
 import config, { CHAIN_ID } from '../../config';
 import { utils } from 'ethers';
 import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
-import { ExternalURL, externalURL } from '../../utils/externalURL';
+import { NavBarButtonStyle } from '../NavBarButton';
+// import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
+// import { ExternalURL, externalURL } from '../../utils/externalURL';
+// import { Trans } from '@lingui/macro';
+// import { File } from 'lucide-react';
 import useLidoBalance from '../../hooks/useLidoBalance';
-import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
-import { Trans } from '@lingui/macro';
 import { useState } from 'react';
 // import { File, Users } from 'lucide-react';
-import { File } from 'lucide-react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
@@ -44,7 +45,7 @@ const NavBar = () => {
     // NavBarButtonStyle.COOL_INFO;
     NavBarButtonStyle.WARM_INFO;
 
-  const closeNav = () => setIsNavExpanded(false);
+  // const closeNav = () => setIsNavExpanded(false);
 
   return (
     <>
@@ -89,7 +90,7 @@ const NavBar = () => {
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link> */}
-            <Nav.Link
+            {/* <Nav.Link
               href={externalURL(ExternalURL.notion)}
               className={classes.nounsNavLink}
               target="_blank"
@@ -101,7 +102,7 @@ const NavBar = () => {
                 buttonIcon={<File size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
-            </Nav.Link>
+            </Nav.Link> */}
             <NavWallet address={activeAccount || '0'} buttonStyle={nonWalletButtonStyle} />{' '}
           </Navbar.Collapse>
         </Container>
