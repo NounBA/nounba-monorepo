@@ -16,6 +16,7 @@ import { isNounbaNoun } from '../../utils/nounderNoun';
 import { getNoun } from '../StandaloneNoun';
 import { useNounSeed } from '../../wrappers/nounToken';
 import loadingNoun from '../../assets/loading-skull-noun.gif';
+import comingAuctionNoun from '../../assets/coming-auction.svg';
 
 type CityItemProps = {
   name: string;
@@ -36,10 +37,18 @@ const CityItem = ({
   const history = useHistory();
   const seed = useNounSeed(BigNumber.from(id));
   let image = loadingNoun;
-  try {
-    image = getNoun(BigNumber.from(tokenIndex), { ...seed, oneOfOneIndex: tokenIndex }, true).image;
-  } catch (error) {
-    image = loadingNoun;
+  if (!isDisabled) {
+    try {
+      image = getNoun(
+        BigNumber.from(tokenIndex),
+        { ...seed, oneOfOneIndex: tokenIndex },
+        true,
+      ).image;
+    } catch (error) {
+      image = loadingNoun;
+    }
+  } else {
+    image = comingAuctionNoun;
   }
 
   const onClickHandler = () => {
