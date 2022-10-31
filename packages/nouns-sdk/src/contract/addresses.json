@@ -26,17 +26,17 @@
     "nounsDAOLogicV1": "0x27c9e62fc1F1334eb2A090506675Ec31df878E00"
   },
   "5": {
-    "nounsToken": "0xF7c470769D23B994dBf9e1E1604eac28EBaF59f1",
-    "nounsSeeder": "0xA07C9D2C60Ac60F30bcf702cD5E4FdA7a87cb017",
-    "nounsDescriptor": "0x276A0247a3BE55F3E62E7d8E97b0a55777e5eC46",
-    "nftDescriptor": "0x392FEa19E6A9A64F00ACf3f22F9cd8A82a475996",
-    "nounsAuctionHouse": "0xe617bAb8B3cAb19559CbB36ae316a4DE92E96Bdd",
-    "nounsAuctionHouseProxy": "0xa289018Db937Db7B47B7d4fCd64E9a9Af31767A3",
-    "nounsAuctionHouseProxy2": "0x22Ca39A412767D8e16d05350833c39B166b48D86",
-    "nounsAuctionHouseProxyAdmin": "0x912a6bdc50a00239bc337DA1E8890613d7d430e6",
-    "nounsDaoExecutor": "0xD4cC6A3A6DBA5eDb56F85FE9237f7cFb2724Ba7D",
-    "nounsDAOProxy": "0x61fa7Eda7feFaB5A3E58E0EF2557816ebe60CdF1",
-    "nounsDAOLogicV1": "0x8a67A2342F630571F2Edc41EFeF1F404E45c94b7"
+    "nounsToken": "0xb864e286dF995E4104A77b75612e1a7A8D122f96",
+    "nounsSeeder": "0xa573FFF6E7D0A83d5C73233D51f0d6AB3416D660",
+    "nounsDescriptor": "0xAbae7DE9B141A4FEb3A71b94E4cFBde6e04987aE",
+    "nftDescriptor": "0xf1295a2B22a4CdC1E094C395E573E549D4951d5f",
+    "nounsAuctionHouse": "0x8464A765eD3a5ec51942E616fFB2995D7dEe2834",
+    "nounsAuctionHouseProxy": "0xA5AF9a023784e90203dB865023acf6287D1df3BD",
+    "nounsAuctionHouseProxy2": "0xab111734771685EC4e58f269a3f2d378aC6dAad8",
+    "nounsAuctionHouseProxyAdmin": "0x6662525da19a5CD8e5C667Fa505CD5D30C230c18",
+    "nounsDaoExecutor": "0x5B8430258eEc4F08AC4160A0b23CbdfAd9e4DC67",
+    "nounsDAOProxy": "0x9e6839d95979A48d9cE969Ff5F7a07e82B8575f5",
+    "nounsDAOLogicV1": "0xf796EE307245D54C00339904aa76D38E0f1D6a24"
   },
   "31337": {
     "nounsToken": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
