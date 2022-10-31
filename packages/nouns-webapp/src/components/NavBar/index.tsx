@@ -78,7 +78,7 @@ const NavBar = () => {
               >
                 <NavBarTreasury
                   // treasuryBalance={'1000'}
-                  treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(0)}
+                  treasuryBalance={Number(utils.formatEther(treasuryBalance)).toFixed(2)}
                   treasuryStyle={nonWalletButtonStyle}
                 />
               </Nav.Link>
