@@ -28,7 +28,7 @@ const SoonPage: React.FC = () => {
                   <header>
                     <img src={logoText} className={classes.logoText} alt="NounBA logo" />
                     <h1 className={classes.title}>
-                      A nounish community of basketball fans, arriving on-chain soon
+                      A nounish community of basketball fans, arriving on-chain Nov 2
                     </h1>
                     <br />
                     <p className={classes.text}>
@@ -39,11 +39,11 @@ const SoonPage: React.FC = () => {
                 </div>
                 <div className={clsx(classes.bannerContainer, classes.bannerGray)}>
                   <p className={classes.text}>
-                    The NounBA DAO is launching soon to coordinate basketball fans to participate in
-                    the Nouns ecosystem.
+                    The NounBA DAO is launching on Nov 2, 2022 to coordinate basketball fans to
+                    participate in the Nouns ecosystem.
                   </p>
                   <p className={classes.text}>
-                    A schedule for NounBA auctions will be announced shortly.
+                    See the auction schedule in the Auction Details below.
                   </p>
                 </div>
               </div>

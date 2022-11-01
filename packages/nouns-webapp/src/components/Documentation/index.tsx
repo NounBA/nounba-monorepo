@@ -61,7 +61,7 @@ const Documentation = () => {
                   NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
                   {publicDomainLink}.
                 </li>
-                <li>34 NounBAs will be auctioned on a schedule to be announced soon</li>
+                <li>34 NounBAs will be auctioned, 2 per day from November 2-19, 2022</li>
                 <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
                 </li>
@@ -99,7 +99,10 @@ const Documentation = () => {
                 <li>1% to {protocolGuildLink}</li>
               </ul>
               <p className={classes.aboutText}>
-                <Trans>34 NounBAs will be auctioned on a schedule to be announced soon.</Trans>
+                <Trans>
+                  34 NounBAs will be auctioned between November 2-19, 2022. Each day, 2 simultaneous
+                  24-hour auctions will kick off as the previous auctions are settled.
+                </Trans>
               </p>
             </Accordion.Body>
           </Accordion.Item>
@@ -154,9 +157,7 @@ const Documentation = () => {
             <Accordion.Body className={classes.accordionBody}>
               <p>
                 <Trans>
-                  NounBA is made up of 40 1-of-1 artworks. 30 of the artworks draw inspiration from
-                  basketball teams. No copyright or official team IP is featured (e.g. names,
-                  logos).
+                  NounBA is made up of 40 1-of-1 artworks inspired by basketball culture.
                 </Trans>
               </p>
             </Accordion.Body>
