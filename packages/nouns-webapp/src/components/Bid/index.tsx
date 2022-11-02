@@ -1,22 +1,27 @@
+import queryString from 'query-string';
 import { Auction, AuctionHouseContractFunction } from '../../wrappers/nounsAuction';
 import { useEthers, useContractFunction } from '@usedapp/core';
 import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
+import { NounsAuctionHouseFactory } from '@nouns/sdk';
 import { useAppSelector } from '../../hooks';
-import React, { useEffect, useState, useRef, ChangeEvent, useCallback } from 'react';
+import React, { useEffect, useState, useRef, ChangeEvent, useCallback, useMemo } from 'react';
 import { utils, BigNumber as EthersBN } from 'ethers';
 import BigNumber from 'bignumber.js';
+import { ExternalLink } from 'lucide-react';
 import classes from './Bid.module.css';
 import { Spinner, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import { useAuctionMinBidIncPercentage } from '../../wrappers/nounsAuction';
 import { useAppDispatch } from '../../hooks';
 import { AlertModal, setAlertModal } from '../../state/slices/application';
-import { NounsAuctionHouseFactory } from '@nouns/sdk';
-import config from '../../config';
+import config, { REGIONS } from '../../config';
 import WalletConnectModal from '../WalletConnectModal';
 import SettleManuallyBtn from '../SettleManuallyBtn';
 import { Trans } from '@lingui/macro';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
+import { useLocation } from 'react-router-dom';
+import { buildEtherscanTxLink } from '../../utils/etherscan';
+import NounInfoRowButton from '../NounInfoRowButton';
 
 const computeMinimumNextBid = (
   currentBid: BigNumber,
@@ -49,13 +54,17 @@ const currentBid = (bidInputRef: React.RefObject<HTMLInputElement>) => {
 const Bid: React.FC<{
   auction: Auction;
   auctionEnded: boolean;
+  side: REGIONS;
 }> = props => {
+  let { auction, auctionEnded, side } = props;
+  const location = useLocation();
   const activeAccount = useAppSelector(state => state.account.activeAccount);
   const { library } = useEthers();
-  let { auction, auctionEnded } = props;
   const activeLocale = useActiveLocale();
   const nounsAuctionHouseContract = new NounsAuctionHouseFactory().attach(
-    config.addresses.nounsAuctionHouseProxy,
+    !auction.contractAddress || auction.contractAddress === ''
+      ? config.addresses.nounsAuctionHouseProxy
+      : auction.contractAddress,
   );
 
   const account = useAppSelector(state => state.account.activeAccount);
@@ -70,6 +79,11 @@ const Bid: React.FC<{
   });
 
   const [showConnectModal, setShowConnectModal] = useState(false);
+
+  const isTimeToSettle = useMemo(
+    () => queryString.parse(location.search).settle === 'true',
+    [location.search],
+  );
 
   const hideModalHandler = () => {
     setShowConnectModal(false);
@@ -154,10 +168,25 @@ const Bid: React.FC<{
     // allows user to rebid against themselves so long as it is not the same tx
     const isCorrectTx = currentBid(bidInputRef).isEqualTo(new BigNumber(auction.amount.toString()));
     if (isMiningUserTx && auction.bidder === account && isCorrectTx) {
+      console.log(placeBidState);
+      const txLink = buildEtherscanTxLink(placeBidState.transaction?.hash ?? '');
+      console.log(txLink);
       placeBidState.status = 'Success';
       setModal({
         title: <Trans>Success</Trans>,
-        message: <Trans>Bid was placed successfully!</Trans>,
+        message: (
+          <div>
+            <Trans>Bid was placed successfully!</Trans>
+            <NounInfoRowButton
+              icon={<ExternalLink size={24} className={classes.buttonIcon} />}
+              btnText={<Trans>Check on Etherscan</Trans>}
+              onClickHandler={() => {
+                window.open(txLink);
+              }}
+              className={classes.modalButton}
+            />
+          </div>
+        ),
         show: true,
       });
       setBidButtonContent({ loading: false, content: <Trans>Place bid</Trans> });
@@ -240,11 +269,6 @@ const Bid: React.FC<{
   const isDisabled =
     placeBidState.status === 'Mining' || settleAuctionState.status === 'Mining' || !activeAccount;
 
-  const fomoNounsBtnOnClickHandler = () => {
-    // Open Fomo Nouns in a new tab
-    window.open('https://fomonouns.wtf', '_blank')?.focus();
-  };
-
   const isWalletConnected = activeAccount !== undefined;
 
   return (
@@ -252,59 +276,68 @@ const Bid: React.FC<{
       {showConnectModal && activeAccount === undefined && (
         <WalletConnectModal onDismiss={hideModalHandler} />
       )}
-      <InputGroup>
-        {!auctionEnded && (
-          <>
-            <span className={classes.customPlaceholderBidAmt}>
-              {!auctionEnded && !bidInput ? (
-                <>
-                  Ξ {minBidEth(minBid)}{' '}
-                  <span
-                    className={
-                      activeLocale === 'ja-JP' ? responsiveUiUtilsClasses.disableSmallScreens : ''
-                    }
-                  >
-                    <Trans>or more</Trans>
-                  </span>
-                </>
-              ) : (
-                ''
-              )}
-            </span>
-            <FormControl
-              className={classes.bidInput}
-              type="number"
-              min="0"
-              onChange={bidInputHandler}
-              ref={bidInputRef}
-              value={bidInput}
-            />
-          </>
-        )}
-        {!auctionEnded ? (
-          <Button
-            className={auctionEnded ? classes.bidBtnAuctionEnded : classes.bidBtn}
-            onClick={auctionEnded ? settleAuctionHandler : placeBidHandler}
-            disabled={isDisabled}
-          >
-            {bidButtonContent.loading ? <Spinner animation="border" /> : bidButtonContent.content}
-          </Button>
-        ) : (
-          <>
-            <Col lg={12} className={classes.voteForNextNounBtnWrapper}>
-              <Button className={classes.bidBtnAuctionEnded} onClick={fomoNounsBtnOnClickHandler}>
-                <Trans>Vote for the next Noun</Trans> ⌐◧-◧
-              </Button>
-            </Col>
-            {/* Only show force settle button if wallet connected */}
-            {isWalletConnected && (
-              <Col lg={12}>
+      {!auctionEnded && (
+        <InputGroup className={classes.bidInputGroup}>
+          {!auctionEnded && (
+            <>
+              <span className={classes.customPlaceholderBidAmt}>
+                {!auctionEnded && !bidInput ? (
+                  <>
+                    <span className={classes.etherSymbol}>Ξ</span> {minBidEth(minBid)}{' '}
+                    <span
+                      className={
+                        activeLocale === 'ja-JP' ? responsiveUiUtilsClasses.disableSmallScreens : ''
+                      }
+                    >
+                      <Trans>or more</Trans>
+                    </span>
+                  </>
+                ) : (
+                  ''
+                )}
+              </span>
+              <FormControl
+                className={classes.bidInput}
+                type="number"
+                min="0"
+                onChange={bidInputHandler}
+                ref={bidInputRef}
+                value={bidInput}
+              />
+            </>
+          )}
+        </InputGroup>
+      )}
+      {!auctionEnded ? (
+        <Button
+          className={`${classes.bidBtn} ${
+            side === REGIONS.east ? classes.eastBtn : classes.westBtn
+          }`}
+          onClick={placeBidHandler}
+          disabled={isDisabled}
+        >
+          {bidButtonContent.loading ? <Spinner animation="border" /> : bidButtonContent.content}
+        </Button>
+      ) : (
+        <>
+          {/* Only show force settle button if wallet connected */}
+
+          <Col lg={12}>
+            <div className={classes.waitSettle}>
+              <h1>The auction has ended</h1>
+              <p>Next auction will be settled by the NounBA team.</p>
+              {isTimeToSettle && isWalletConnected && (
                 <SettleManuallyBtn settleAuctionHandler={settleAuctionHandler} auction={auction} />
-              </Col>
-            )}
-          </>
-        )}
-      </InputGroup>
+              )}
+              {isTimeToSettle && !isWalletConnected && (
+                <p className={classes.connectToSettle}>
+                  <Trans>Connect to settle</Trans>
+                </p>
+              )}
+            </div>
+          </Col>
+        </>
+      )}
     </>
   );
 };

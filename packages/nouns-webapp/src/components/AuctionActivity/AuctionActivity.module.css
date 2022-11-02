@@ -8,12 +8,9 @@
   margin-bottom: 0.5rem;
 }
 
-.activityRow {
-  margin-bottom: 0rem;
-}
-
 h1 {
   font-size: 3rem;
+  font-weight: 700;
 }
 
 h2 {
@@ -48,58 +45,19 @@ h4 {
   width: 150px;
   height: 150px;
 }
-
-.currentBidCol {
-  border-right: 1px solid #79809c49;
-  margin-left: 6px;
-  margin-top: 6px;
+.activityCustomRow {
+  display: flex;
 }
-
-.auctionTimerCol {
-  padding-left: 0rem;
-}
-
 .section h4 {
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-size: 17px;
   line-height: 25px;
 }
 
 .section h2 {
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
   font-size: 32px;
-}
-
-@media (max-width: 992px) {
-  h1 {
-    padding-top: 12px;
-  }
-
-  .wrapper {
-    padding: 1rem;
-  }
-
-  .auctionTimerCol {
-    margin-left: 6px;
-    margin-top: 6px;
-    padding-left: 0rem;
-  }
-
-  .currentBidCol {
-    border-right: 0px;
-    padding-left: 0rem;
-  }
-
-  .fomoNounsLink {
-    padding-left: 14px;
-  }
-}
-
-@media (max-width: 400px) {
-  .fomoNounsLink {
-    font-size: 14px;
-  }
 }
 
 /* Fix Firefox navigation arrow alignment issues */
@@ -122,7 +80,7 @@ h4 {
 
 .fomoNounsLink a,
 .fomoNounsLink:active a {
-  font-family: 'PT Root UI', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   padding-left: 0.5rem;
   text-decoration: none;
@@ -135,4 +93,40 @@ h4 {
   text-decoration: none;
   color: black;
   opacity: 1;
+}
+
+.bidHistorySection {
+  background-color: var(--brand-bg-gray-light);
+  border-radius: var(--default-border-radius);
+  height: 296px;
+  padding: 24px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bidHistorySection.noMargin {
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.sideTitle {
+ font-size: 1.8rem;
+ margin-bottom: 0;
+}
+.eastTitle {
+  color: var(--brand-color-blue);
+}
+.westTitle {
+  color: var(--brand-color-red);
+}
+.navSide {
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 480px) {
+  .sideTitle {
+    font-size: 3rem;
+   }
 }

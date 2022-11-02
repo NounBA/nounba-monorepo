@@ -1,4 +1,4 @@
-export { default as ImageData } from './image-data.json';
+export { default as ImageData } from './image-data-nounba.json';
 export {
   getNounData,
   getRandomNounSeed,

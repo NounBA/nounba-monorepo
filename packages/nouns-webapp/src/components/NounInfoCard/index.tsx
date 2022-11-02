@@ -1,15 +1,13 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import clsx from 'clsx';
 
 import classes from './NounInfoCard.module.css';
 
-import _AddressIcon from '../../assets/icons/Address.svg';
-import _BidsIcon from '../../assets/icons/Bids.svg';
-
+import { ExternalLink } from 'lucide-react';
 import NounInfoRowBirthday from '../NounInfoRowBirthday';
 import NounInfoRowHolder from '../NounInfoRowHolder';
 import NounInfoRowButton from '../NounInfoRowButton';
-import { useAppSelector } from '../../hooks';
 
 import config from '../../config';
 import { buildEtherscanTokenLink } from '../../utils/etherscan';
@@ -18,36 +16,47 @@ import { Trans } from '@lingui/macro';
 interface NounInfoCardProps {
   nounId: number;
   bidHistoryOnClickHandler: () => void;
+  hideBids?: boolean;
 }
 
 const NounInfoCard: React.FC<NounInfoCardProps> = props => {
-  const { nounId, bidHistoryOnClickHandler } = props;
+  const { nounId, bidHistoryOnClickHandler, hideBids } = props;
 
   const etherscanButtonClickHandler = () =>
     window.open(buildEtherscanTokenLink(config.addresses.nounsToken, nounId));
 
-  const lastAuctionNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
-
   return (
     <>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowBirthday nounId={nounId} />
-      </Col>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowHolder nounId={nounId} />
-      </Col>
-      <Col lg={12} className={classes.nounInfoRow}>
-        <NounInfoRowButton
-          iconImgSource={_BidsIcon}
-          btnText={lastAuctionNounId === nounId ? <Trans>Bids</Trans> : <Trans>Bid history</Trans>}
-          onClickHandler={bidHistoryOnClickHandler}
-        />
-        <NounInfoRowButton
-          iconImgSource={_AddressIcon}
-          btnText={<Trans>Etherscan</Trans>}
-          onClickHandler={etherscanButtonClickHandler}
-        />
-      </Col>
+      <Row>
+        <Col xs={5} className={classes.nounInfoRow}>
+          <NounInfoRowBirthday />
+        </Col>
+        {!hideBids && (
+          <Col xs={7} className={clsx(classes.nounInfoRow, classes.lastCol)}>
+            <NounInfoRowHolder />
+          </Col>
+        )}
+      </Row>
+      {!hideBids && (
+        <Row>
+          <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
+            <NounInfoRowButton
+              btnText={<Trans>View all bids</Trans>}
+              onClickHandler={bidHistoryOnClickHandler}
+            />
+          </Col>
+        </Row>
+      )}
+      <Row>
+        <Col lg={12} className={clsx(classes.nounInfoRow, classes.noMargin)}>
+          <NounInfoRowButton
+            icon={<ExternalLink size={24} className={classes.buttonIcon} />}
+            btnText={<Trans>Check on Etherscan</Trans>}
+            onClickHandler={etherscanButtonClickHandler}
+            className={classes.blueButton}
+          />
+        </Col>
+      </Row>
     </>
   );
 };

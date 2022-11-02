@@ -1,4 +1,5 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
+import { AUCTION_NAMES } from '../config';
 
 export interface BidEvent {
   nounId: BigNumberish;
@@ -14,6 +15,8 @@ export interface AuctionCreateEvent {
   startTime: BigNumberish;
   endTime: BigNumberish;
   settled: boolean;
+  contractAddress: string;
+  auctionName: AUCTION_NAMES;
 }
 
 export interface AuctionSettledEvent {

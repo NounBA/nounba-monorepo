@@ -1,7 +1,6 @@
 import React from 'react';
 import ShortAddress from '../ShortAddress';
 import dayjs from 'dayjs';
-import link from '../../assets/icons/Link.svg';
 import { buildEtherscanTxLink } from '../../utils/etherscan';
 import TruncatedAmount from '../TruncatedAmount';
 import BigNumber from 'bignumber.js';
@@ -9,6 +8,8 @@ import { Bid } from '../../utils/types';
 import { BigNumber as EthersBN } from '@ethersproject/bignumber';
 import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { useAppSelector } from '../../hooks';
+import { AUCTION_NAMES } from '../../config';
+import { ExternalLink } from 'lucide-react';
 
 const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   const bidAmount = <TruncatedAmount amount={new BigNumber(EthersBN.from(bid.value).toString())} />;
@@ -17,7 +18,6 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   ).format('hh:mm a')}`;
 
   const txLink = buildEtherscanTxLink(bid.transactionHash);
-  const isMobile = window.innerWidth < 992;
 
   return (
     <li key={index} className={isCool ? classes.bidRowCool : classes.bidRowWarm}>
@@ -25,7 +25,7 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
         <div className={classes.leftSectionWrapper}>
           <div className={classes.bidder}>
             <div>
-              <ShortAddress address={bid.sender} avatar={isMobile ? false : true} />
+              <ShortAddress address={bid.sender} avatar={true} size={24} />
             </div>
           </div>
           <div className={classes.bidDate}>{date}</div>
@@ -34,7 +34,7 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
           <div className={classes.bidAmount}>{bidAmount}</div>
           <div className={classes.linkSymbol}>
             <a href={txLink} target="_blank" rel="noreferrer">
-              <img src={link} width={24} alt="link symbol" />
+              <ExternalLink size={24} />
             </a>
           </div>
         </div>
@@ -43,10 +43,16 @@ const bidItem = (bid: Bid, index: number, classes: any, isCool?: boolean) => {
   );
 };
 
-const BidHistory: React.FC<{ auctionId: string; max: number; classes?: any }> = props => {
-  const { auctionId, max, classes } = props;
+const BidHistory: React.FC<{
+  auctionId: string;
+  max: number;
+  classes?: any;
+  auctionName: AUCTION_NAMES;
+}> = props => {
+  const { auctionId, max, classes, auctionName } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
-  const bids = useAuctionBids(EthersBN.from(auctionId));
+
+  const bids = useAuctionBids(EthersBN.from(auctionId), auctionName);
   const bidContent =
     bids &&
     bids
@@ -56,7 +62,17 @@ const BidHistory: React.FC<{ auctionId: string; max: number; classes?: any }> = 
       })
       .slice(0, max);
 
-  return <ul className={classes.bidCollection}>{bidContent}</ul>;
+  return (
+    <>
+      {bids && bids.length > 0 && <ul className={classes.bidCollection}>{bidContent}</ul>}
+      {bids && bids.length < 1 && (
+        <div className={classes.noBids}>
+          <h1>No bids so far</h1>
+          <p>Click the "Place Bid" button above and be first to bid on the current East auction!</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default BidHistory;

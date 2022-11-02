@@ -10,7 +10,7 @@ import {
 } from '@usedapp/core';
 import { utils, BigNumber as EthersBN } from 'ethers';
 import { defaultAbiCoder, Result } from 'ethers/lib/utils';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLogs } from '../hooks/useLogs';
 import * as R from 'ramda';
 import config, { CHAIN_ID } from '../config';
@@ -336,40 +336,50 @@ const getProposalState = (
 };
 
 export const useAllProposalsViaSubgraph = (): ProposalData => {
+  const [proposals, setProposals] = useState([]);
+  const [isPopulated, setIsPopulated] = useState(false);
   const { loading, data, error } = useQuery(proposalsQuery());
+
   const blockNumber = useBlockNumber();
   const { timestamp } = useBlockMeta();
 
-  const proposals = data?.proposals?.map((proposal: ProposalSubgraphEntity) => {
-    const description = proposal.description?.replace(/\\n/g, '\n');
-    return {
-      id: proposal.id,
-      title: R.pipe(extractTitle, removeMarkdownStyle)(description) ?? 'Untitled',
-      description: description ?? 'No description.',
-      proposer: proposal.proposer.id,
-      status: getProposalState(blockNumber, timestamp, proposal),
-      proposalThreshold: parseInt(proposal.proposalThreshold),
-      quorumVotes: parseInt(proposal.quorumVotes),
-      forCount: parseInt(proposal.forVotes),
-      againstCount: parseInt(proposal.againstVotes),
-      abstainCount: parseInt(proposal.abstainVotes),
-      createdBlock: parseInt(proposal.createdBlock),
-      startBlock: parseInt(proposal.startBlock),
-      endBlock: parseInt(proposal.endBlock),
-      eta: proposal.executionETA ? new Date(Number(proposal.executionETA) * 1000) : undefined,
-      details: formatProposalTransactionDetails(proposal),
-      transactionHash: proposal.createdTransactionHash,
-    };
-  });
+  useEffect(() => {
+    if (isPopulated || loading || !data.proposals || !timestamp) return;
+
+    const newProposals = data?.proposals?.map((proposal: ProposalSubgraphEntity) => {
+      const description = proposal.description?.replace(/\\n/g, '\n');
+      return {
+        id: proposal.id,
+        title: R.pipe(extractTitle, removeMarkdownStyle)(description) ?? 'Untitled',
+        description: description ?? 'No description.',
+        proposer: proposal.proposer.id,
+        status: getProposalState(blockNumber, timestamp, proposal),
+        proposalThreshold: parseInt(proposal.proposalThreshold),
+        quorumVotes: parseInt(proposal.quorumVotes),
+        forCount: parseInt(proposal.forVotes),
+        againstCount: parseInt(proposal.againstVotes),
+        abstainCount: parseInt(proposal.abstainVotes),
+        createdBlock: parseInt(proposal.createdBlock),
+        startBlock: parseInt(proposal.startBlock),
+        endBlock: parseInt(proposal.endBlock),
+        eta: proposal.executionETA ? new Date(Number(proposal.executionETA) * 1000) : undefined,
+        details: formatProposalTransactionDetails(proposal),
+        transactionHash: proposal.createdTransactionHash,
+      };
+    });
+    setProposals(newProposals);
+    setIsPopulated(true);
+  }, [blockNumber, data, isPopulated, loading, timestamp]);
 
   return {
     loading,
     error,
-    data: proposals ?? [],
+    data: proposals,
   };
 };
 
 export const useAllProposalsViaChain = (skip = false): ProposalData => {
+  const [data, setData] = useState<ProposalData>({ data: [], loading: false });
   const proposalCount = useProposalCount();
   const votingDelay = useVotingDelay(nounsDaoContract.address);
 
@@ -393,13 +403,14 @@ export const useAllProposalsViaChain = (skip = false): ProposalData => {
   const formattedLogs = useFormattedProposalCreatedLogs(skip);
 
   // Early return until events are fetched
-  return useMemo(() => {
+  useEffect(() => {
     const logs = formattedLogs ?? [];
     if (proposals.length && !logs.length) {
-      return { data: [], loading: true };
+      setData({ data: [], loading: true });
+      return;
     }
 
-    return {
+    setData({
       data: proposals.map((proposal, i) => {
         const description = logs[i]?.description?.replace(/\\n/g, '\n');
         return {
@@ -422,14 +433,26 @@ export const useAllProposalsViaChain = (skip = false): ProposalData => {
         };
       }),
       loading: false,
-    };
+    });
   }, [formattedLogs, proposalStates, proposals, votingDelay]);
+
+  return data;
 };
 
 export const useAllProposals = (): ProposalData => {
-  const subgraph = useAllProposalsViaSubgraph();
-  const onchain = useAllProposalsViaChain(!subgraph.error);
-  return subgraph?.error ? onchain : subgraph;
+  // const [proposalData, setProposalData] = useState<ProposalData>({ data: [], loading: true });
+  // const [isPopulated, setIsPopulated] = useState(false);
+  // const subgraph = useAllProposalsViaSubgraph();
+  const onchain = useAllProposalsViaChain(false);
+
+  // useEffect(() => {
+  //   if (isPopulated) return;
+  //   setIsPopulated(true);
+  //   // setProposalData(subgraph?.error ? onchain : subgraph);
+  //   setProposalData(onchain);
+  // }, [isPopulated, onchain]);
+
+  return onchain;
 };
 
 export const useProposal = (id: string | number): Proposal | undefined => {

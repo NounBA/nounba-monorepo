@@ -1,8 +1,15 @@
 :root {
   --brand-bg-green: #edf2f0;
+  --brand-bg-gray: #121926;
+  --brand-bg-gray-light: #202939;
+  --brand-bg-gray-400: #9AA3B2;
+  --brand-bg-gray-500: #697586;
   --brand-dark-red: #d63c5e;
   --brand-light-green: #6da886;
   --brand-black: #212529;
+  --brand-white: #ffffff;
+  --brand-orange: #ff7324;
+  --brand-bg-color: #d5d7e1;
   /* Colors from Figma  */
   --brand-cool-background: #d5d7e0;
   --brand-cool-border: rgb(189, 192, 207);
@@ -12,18 +19,20 @@
   --brand-warm-background: #d5d7e0;
   --brand-warm-border: rgb(207, 189, 186);
   --brand-warm-dark-text: #221b1a;
-  --brand-warm-light-text: #8f7e7c;
+  --brand-warm-light-text: #4B5565;
   --brand-warm-accent: #f9f1f1;
   --brand-gray-dark-text: #14161b;
   --brand-gray-border: #e2e3eb;
-  --brand-gray-background: #f4f4f8;
+  --brand-gray-background: #364152;
   --brand-gray-light-text: #8c8d92;
   --brand-gray-light-text-translucent: rgb(140, 141, 146, 0.1);
   --brand-gray-hover: #fafafb;
-  --brand-color-red: #e40536;
-  --brand-color-blue: #4965f0;
-  --brand-color-green: #43b369;
+  --brand-color-red: #F04438;
+  --brand-color-blue: #004EEB;
+  --brand-color-green: #43b369; 
   --brand-color-red-translucent: rgba(214, 60, 94, 0.1);
   --brand-color-blue-translucent: rgba(73, 101, 240, 0.1);
   --brand-color-green-translucent: rgba(67, 179, 105, 0.1);
+
+  --default-border-radius: 4px;
 }

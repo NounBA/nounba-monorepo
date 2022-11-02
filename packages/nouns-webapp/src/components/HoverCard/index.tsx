@@ -18,6 +18,7 @@ const HoverCard: React.FC<HoverCardProps> = props => {
         arrowColor={'rgba(0,0,0,0)'}
         className={classes.hover}
         effect={'solid'}
+        // @ts-ignore
         getContent={dataTip => {
           return hoverCardContent(dataTip);
         }}

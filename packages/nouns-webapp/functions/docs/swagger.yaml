@@ -179,6 +179,10 @@ components:
           type: integer
         glasses:
           type: integer
+        oneOfOne: 
+          type: boolean
+        oneOfOneIndex: 
+          type: integer
     NormalizedNoun:
       type: object
       description: A Noun record

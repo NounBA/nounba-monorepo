@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuctionState } from './auction';
+import { AuctionState } from './auction/auctionWrapper';
 import { BigNumber } from '@ethersproject/bignumber';
 
 interface PastAuctionsState {
@@ -22,6 +22,8 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
         endTime: BigNumber.from(auction.endTime).toJSON(),
         nounId: BigNumber.from(auction.id).toJSON(),
         settled: false,
+        contractAddress: auction.contractAddress,
+        auctionName: auction.auctionName,
       },
       bids: auction.bids.map((bid: any) => {
         return {
@@ -33,6 +35,13 @@ const reduxSafePastAuctions = (data: any): AuctionState[] => {
           timestamp: BigNumber.from(bid.blockTimestamp).toJSON(),
         };
       }),
+      lastAuctionNounId: auction.lastAuctionNounId,
+      onDisplayAuctionNounId: auction.onDisplayAuctionNounId,
+      contractAddress: auction.contractAddress,
+      auctionName: auction.auctionName,
+      seed: {
+        oneOfOneIndex: auction.noun.seed.oneOfOneIndex,
+      },
     };
   });
   return pastAuctions;

@@ -1,21 +1,61 @@
-.wrapper h1 {
-  font-family: 'Londrina Solid';
-  font-size: 5rem;
+.bannerSection {
+  background-color: var(--brand-bg-gray);
+  position: relative;
+  color: var(--brand-white);
+  text-align: center;
+  padding-top: 56px;
+}
+.bannerWrapper {
+  display: flex;    
+  align-items: stretch;
+}
+.bannerContainer {
+  background-color: var(--brand-color-red);
+  box-sizing: border-box;
+  border-radius: var(--default-border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 35px 25px;
+  text-align: left;
+  height: 95%;
+}
+.bannerBlue {
+  background-color: var(--brand-color-blue);
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.title {
+  font-family: 'DM Sans';
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 16px 0;
+}
+.text {
+  font-size: 1rem;
 }
 
-@media (max-width: 992px) {
-  .wrapper {
-    padding: 2rem;
-  }
-
-  .wrapper h1 {
-    font-size: 3.75rem;
-  }
+.logoBall {
+  height: 70%;
+}
+.logoText {
+  max-height: 70px;
+  max-width: 100%;
 }
 
-@media (min-width: 992px) {
-  .wrapper h1 {
-    font-size: 6rem;
-    margin-left: 2rem;
+@media screen and (min-width: 992px) {
+  .bannerContainer {
+    padding: 56px;
+  }
+  .logoText {
+    max-height: 139px;
+  }  
+  .title {
+    font-size: 1.6rem;
+    margin: 24px 0;
+  }
+  .text {
+    font-size: 1.25rem;
   }
 }

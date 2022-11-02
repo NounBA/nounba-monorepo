@@ -1,5 +1,6 @@
 import { Auction } from '../../wrappers/nounsAuction';
 import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
 import { Row, Col } from 'react-bootstrap';
 import classes from './AuctionActivity.module.css';
@@ -9,21 +10,18 @@ import AuctionTimer from '../AuctionTimer';
 import CurrentBid from '../CurrentBid';
 import Winner from '../Winner';
 import BidHistory from '../BidHistory';
-import AuctionNavigation from '../AuctionNavigation';
 import AuctionActivityWrapper from '../AuctionActivityWrapper';
-import AuctionTitleAndNavWrapper from '../AuctionTitleAndNavWrapper';
 import AuctionActivityNounTitle from '../AuctionActivityNounTitle';
-import AuctionActivityDateHeadline from '../AuctionActivityDateHeadline';
 import BidHistoryBtn from '../BidHistoryBtn';
-import config from '../../config';
+import config, { REGIONS } from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import NounInfoCard from '../NounInfoCard';
 import { useAppSelector } from '../../hooks';
 import BidHistoryModal from '../BidHistoryModal';
-import { Trans } from '@lingui/macro';
 import Holder from '../Holder';
+import AuctionTitleAndNavWrapper from '../AuctionTitleAndNavWrapper';
+import AuctionNavigation from '../AuctionNavigation';
+import AuctionActivityDateHeadline from '../AuctionActivityDateHeadline';
+import NounInfoCard from '../NounInfoCard';
 
 const openEtherscanBidHistory = () => {
   const url = buildEtherscanAddressLink(config.addresses.nounsAuctionHouseProxy);
@@ -32,23 +30,30 @@ const openEtherscanBidHistory = () => {
 
 interface AuctionActivityProps {
   auction: Auction;
-  isFirstAuction: boolean;
-  isLastAuction: boolean;
-  onPrevAuctionClick: () => void;
-  onNextAuctionClick: () => void;
+  isFirstAuction?: boolean;
+  isLastAuction?: boolean;
+  onPrevAuctionClick?: () => void;
+  onNextAuctionClick?: () => void;
   displayGraphDepComps: boolean;
+  side: REGIONS;
+  isPastAuction?: boolean;
+  isNounbaNoun?: boolean;
 }
 
 const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityProps) => {
   const {
     auction,
-    isFirstAuction,
     isLastAuction,
+    displayGraphDepComps,
+    side,
+    isPastAuction,
     onPrevAuctionClick,
     onNextAuctionClick,
-    displayGraphDepComps,
+    isFirstAuction,
+    isNounbaNoun,
   } = props;
 
+  const title = side === REGIONS.west ? 'West' : 'East';
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
   const [auctionEnded, setAuctionEnded] = useState(false);
@@ -85,96 +90,109 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
     }
   }, [auctionTimer, auction]);
 
-  if (!auction) return null;
+  if (!auction) return <AuctionActivityWrapper />;
 
   return (
     <>
       {showBidHistoryModal && (
-        <BidHistoryModal onDismiss={dismissBidModalHanlder} auction={auction} />
+        <BidHistoryModal
+          onDismiss={dismissBidModalHanlder}
+          auction={auction}
+          isPastAuction={isPastAuction}
+        />
       )}
 
       <AuctionActivityWrapper>
         <div className={classes.informationRow}>
           <Row className={classes.activityRow}>
-            <AuctionTitleAndNavWrapper>
-              {displayGraphDepComps && (
-                <AuctionNavigation
-                  isFirstAuction={isFirstAuction}
-                  isLastAuction={isLastAuction}
-                  onNextAuctionClick={onNextAuctionClick}
-                  onPrevAuctionClick={onPrevAuctionClick}
-                />
-              )}
-              <AuctionActivityDateHeadline startTime={auction.startTime} />
-            </AuctionTitleAndNavWrapper>
+            {onNextAuctionClick && onPrevAuctionClick && (
+              <>
+                <AuctionTitleAndNavWrapper>
+                  <h1
+                    className={clsx(
+                      classes.sideTitle,
+                      side === REGIONS.east ? classes.eastTitle : classes.westTitle,
+                    )}
+                  >
+                    {title}
+                  </h1>
+                  <div className={classes.navSide}>
+                    <AuctionActivityDateHeadline startTime={auction.startTime} />
+                    <AuctionNavigation
+                      isFirstAuction={isFirstAuction ?? false}
+                      isLastAuction={isLastAuction ?? false}
+                      onNextAuctionClick={onNextAuctionClick}
+                      onPrevAuctionClick={onPrevAuctionClick}
+                    />
+                  </div>
+                </AuctionTitleAndNavWrapper>
+              </>
+            )}
             <Col lg={12}>
               <AuctionActivityNounTitle isCool={isCool} nounId={auction.nounId} />
             </Col>
           </Row>
-          <Row className={classes.activityRow}>
-            <Col lg={4} className={classes.currentBidCol}>
-              <CurrentBid
-                currentBid={new BigNumber(auction.amount.toString())}
-                auctionEnded={auctionEnded}
-              />
-            </Col>
-            <Col lg={6} className={classes.auctionTimerCol}>
-              {auctionEnded ? (
-                isLastAuction ? (
-                  <Winner winner={auction.bidder} />
-                ) : (
-                  <Holder nounId={auction.nounId.toNumber()} />
-                )
-              ) : (
-                <AuctionTimer auction={auction} auctionEnded={auctionEnded} />
-              )}
+          <Row className={classes.activityCustomRow}>
+            {!isNounbaNoun && (
+              <Col xs={5}>
+                <CurrentBid
+                  currentBid={new BigNumber(auction.amount.toString())}
+                  auctionEnded={auctionEnded}
+                />
+              </Col>
+            )}
+            <Col xs={isNounbaNoun ? 12 : 7}>
+              <div className={classes.auctionTimerCol}>
+                {auctionEnded && (
+                  <>
+                    {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
+                    {isPastAuction && !isNounbaNoun && <Holder holder={auction.bidder} />}
+                    {isPastAuction && isNounbaNoun && <Winner winner={auction.bidder} isNounders />}
+                  </>
+                )}
+                {!auctionEnded && <AuctionTimer auction={auction} auctionEnded={auctionEnded} />}
+              </div>
             </Col>
           </Row>
         </div>
-        {!auctionEnded && (
-          <Row className={classes.activityRow}>
-            <Col lg={12} className={classes.fomoNounsLink}>
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <a href={'https://fomonouns.wtf'} target={'_blank'} rel="noreferrer">
-                <Trans>Help mint the next Noun</Trans>
-              </a>
-            </Col>
-          </Row>
-        )}
-        {isLastAuction && (
+        {!isPastAuction && isLastAuction && (
           <>
             <Row className={classes.activityRow}>
               <Col lg={12}>
-                <Bid auction={auction} auctionEnded={auctionEnded} />
+                <Bid auction={auction} auctionEnded={auctionEnded} side={side} />
               </Col>
             </Row>
           </>
         )}
         <Row className={classes.activityRow}>
           <Col lg={12}>
-            {!isLastAuction ? (
-              <NounInfoCard
-                nounId={auction.nounId.toNumber()}
-                bidHistoryOnClickHandler={showBidModalHandler}
-              />
-            ) : (
-              displayGraphDepComps && (
+            <div className={clsx(classes.bidHistorySection, isPastAuction && classes.noMargin)}>
+              {(!isLastAuction || isPastAuction) && (
+                <NounInfoCard
+                  nounId={auction.nounId.toNumber()}
+                  bidHistoryOnClickHandler={showBidModalHandler}
+                  hideBids={isNounbaNoun}
+                />
+              )}
+              {isLastAuction && displayGraphDepComps && (
                 <BidHistory
                   auctionId={auction.nounId.toString()}
                   max={3}
                   classes={bidHistoryClasses}
+                  auctionName={auction.auctionName}
                 />
-              )
-            )}
-            {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,
+              )}
+              {/* If no bids, show nothing. If bids avail:graph is stable? show bid history modal,
             else show etherscan contract link */}
-            {isLastAuction &&
-              !auction.amount.eq(0) &&
-              (displayGraphDepComps ? (
-                <BidHistoryBtn onClick={showBidModalHandler} />
-              ) : (
-                <BidHistoryBtn onClick={openEtherscanBidHistory} />
-              ))}
+              {!isPastAuction &&
+                isLastAuction &&
+                !auction.amount.eq(0) &&
+                (displayGraphDepComps ? (
+                  <BidHistoryBtn onClick={showBidModalHandler} />
+                ) : (
+                  <BidHistoryBtn onClick={openEtherscanBidHistory} />
+                ))}
+            </div>
           </Col>
         </Row>
       </AuctionActivityWrapper>

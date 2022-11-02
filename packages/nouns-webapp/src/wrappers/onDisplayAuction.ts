@@ -1,10 +1,11 @@
 import { BigNumber } from '@ethersproject/bignumber';
+import { AUCTION_NAMES } from '../config';
 import { useAppSelector } from '../hooks';
 import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun';
 import { Bid, BidEvent } from '../utils/types';
 import { Auction } from './nounsAuction';
 
-const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
+export const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
   return {
     amount: BigNumber.from(reduxSafeAuction.amount),
     bidder: reduxSafeAuction.bidder,
@@ -12,6 +13,8 @@ const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
     endTime: BigNumber.from(reduxSafeAuction.endTime),
     nounId: BigNumber.from(reduxSafeAuction.nounId),
     settled: false,
+    contractAddress: reduxSafeAuction.contractAddress,
+    auctionName: reduxSafeAuction.auctionName,
   };
 };
 
@@ -25,7 +28,7 @@ const deserializeBid = (reduxSafeBid: BidEvent): Bid => {
     timestamp: BigNumber.from(reduxSafeBid.timestamp),
   };
 };
-const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
+export const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
   return reduxSafeBids
     .map(bid => deserializeBid(bid))
     .sort((a: Bid, b: Bid) => {
@@ -33,12 +36,17 @@ const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
     });
 };
 
-const useOnDisplayAuction = (): Auction | undefined => {
-  const lastAuctionNounId = useAppSelector(state => state.auction.activeAuction?.nounId);
-  const onDisplayAuctionNounId = useAppSelector(
-    state => state.onDisplayAuction.onDisplayAuctionNounId,
+const useOnDisplayAuction = (
+  currentAuctionName: AUCTION_NAMES = AUCTION_NAMES.FIRST_AUCTION,
+): Auction | undefined => {
+  const lastAuctionNounId = useAppSelector(
+    state => state[currentAuctionName].activeAuction?.nounId,
   );
-  const currentAuction = useAppSelector(state => state.auction.activeAuction);
+  const onDisplayAuctionNounId = useAppSelector(
+    state => state[currentAuctionName].onDisplayAuctionNounId,
+  );
+  const currentAuction = useAppSelector(state => state[currentAuctionName].activeAuction);
+  const contractAddress = useAppSelector(state => state[currentAuctionName].contractAddress);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
 
   if (
@@ -51,7 +59,7 @@ const useOnDisplayAuction = (): Auction | undefined => {
 
   // current auction
   if (BigNumber.from(onDisplayAuctionNounId).eq(lastAuctionNounId)) {
-    return deserializeAuction(currentAuction);
+    return deserializeAuction({ ...currentAuction, contractAddress });
   }
 
   // nounder auction
@@ -73,9 +81,12 @@ const useOnDisplayAuction = (): Auction | undefined => {
   return reduxSafeAuction ? deserializeAuction(reduxSafeAuction) : undefined;
 };
 
-export const useAuctionBids = (auctionNounId: BigNumber): Bid[] | undefined => {
-  const lastAuctionNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
-  const lastAuctionBids = useAppSelector(state => state.auction.bids);
+export const useAuctionBids = (
+  auctionNounId: BigNumber,
+  currentAuctionName: AUCTION_NAMES = AUCTION_NAMES.FIRST_AUCTION,
+): Bid[] | undefined => {
+  const lastAuctionNounId = useAppSelector(state => state[currentAuctionName].lastAuctionNounId);
+  const lastAuctionBids = useAppSelector(state => state[currentAuctionName].bids);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
 
   // auction requested is active auction

@@ -32,6 +32,10 @@ export const getContractsForChainOrThrow = (
       addresses.nounsAuctionHouseProxy,
       signerOrProvider as Signer | Provider,
     ),
+    nounsAuctionHouseContract2: NounsAuctionHouseFactory.connect(
+      addresses.nounsAuctionHouseProxy2,
+      signerOrProvider as Signer | Provider,
+    ),
     nounsDescriptorContract: NounsDescriptorFactory.connect(
       addresses.nounsDescriptor,
       signerOrProvider as Signer | Provider,

@@ -1,7 +1,7 @@
 .nounInfoHeader {
   display: inline-block;
   padding-left: 0rem;
-  font-family: 'Londrina Solid';
+  font-family: 'DM Sans';
 }
 
 @media only screen and (max-width: 600px) {
@@ -23,16 +23,31 @@
 }
 
 .nounInfoRow {
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: 500;
   padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding-top: 0;
   font-size: 18px;
   display: flex;
+}
+.nounInfoRow.noMargin {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .nounInfoRowText {
   padding-left: 4;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-family: bold;
+}
+
+.infoWrapper {
+  display: flex; 
+}
+.blueButton {
+  background-color: var(--brand-color-blue) !important;
+}
+.buttonIcon {
+  margin-left: 12px;
+  margin-top: -4px;
 }

@@ -1,6 +1,5 @@
 import classes from './BidHistoryModalRow.module.css';
 import React from 'react';
-import { ExternalLinkIcon } from '@heroicons/react/solid';
 import { buildEtherscanTxLink } from '../../utils/etherscan';
 import TruncatedAmount from '../TruncatedAmount';
 import BigNumber from 'bignumber.js';
@@ -9,12 +8,14 @@ import { Bid } from '../../utils/types';
 import clsx from 'clsx';
 import auctionActivityClasses from '../AuctionActivity/BidHistory.module.css';
 import _trophy from '../../assets/icons/trophy.svg';
-import Davatar from '@davatar/react';
+// import Davatar from '@davatar/react';
 import { useEthers } from '@usedapp/core';
 import { useReverseENSLookUp } from '../../utils/ensLookup';
 import { containsBlockedText } from '../../utils/moderation/containsBlockedText';
 import { i18n } from '@lingui/core';
 import { shortENS, useShortAddress } from '../../utils/addressAndENSDisplayUtils';
+import { ExternalLink } from 'lucide-react';
+import Identicon from '../Identicon';
 interface BidHistoryModalRowProps {
   bid: Bid;
   index: number;
@@ -37,7 +38,8 @@ const BidHistoryModalRow: React.FC<BidHistoryModalRowProps> = props => {
         <div className={auctionActivityClasses.leftSectionWrapper}>
           <div className={auctionActivityClasses.bidder}>
             <div className={classes.bidderInfoWrapper}>
-              <Davatar size={40} address={bid.sender} provider={provider} />
+              {/* <Davatar size={64} address={bid.sender} provider={provider} /> */}
+              <Identicon size={64} address={bid.sender} provider={provider} />
               <div className={classes.bidderInfoText}>
                 <span>
                   {ens && !ensMatchesBlocklistRegex ? shortENS(ens) : shortAddress}
@@ -69,7 +71,7 @@ const BidHistoryModalRow: React.FC<BidHistoryModalRowProps> = props => {
           <div className={auctionActivityClasses.linkSymbol}>
             <a href={txLink} target="_blank" rel="noreferrer">
               <div className={classes.linkIcon}>
-                <ExternalLinkIcon height={24} width={24} />
+                <ExternalLink size={24} />
               </div>
             </a>
           </div>
