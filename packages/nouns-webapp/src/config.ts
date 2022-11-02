@@ -71,7 +71,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Mainnet]: {
     jsonRpcUri: createNetworkHttpUrl('mainnet'),
     wsRpcUri: createNetworkWsUrl('mainnet'),
-    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/nounsdao/nouns-subgraph',
+    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/okuyiga/nounba-subgraph',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Hardhat]: {
@@ -111,7 +111,7 @@ const config = {
   app: app[CHAIN_ID],
   addresses: getAddresses(),
 };
-
+console.log(config);
 export enum REGIONS {
   west,
   east,
