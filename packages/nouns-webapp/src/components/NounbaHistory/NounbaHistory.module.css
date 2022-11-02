@@ -1,0 +1,124 @@
+.nounWrapper {
+  align-self: flex-end;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+.nounWrapper img {
+  width: 100%;
+  max-height: none;
+}
+.nounbaProfileWrapper {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.nounbaProfile {
+  max-height: none;
+  min-height: auto;
+  width: 100%;
+}
+.infoWrapper {
+  position: relative;
+  padding: 82px 0;
+}
+.isDevToken {
+  padding: 118px 0;
+}
+.auctionInfo {
+  z-index: 1;
+  position: relative;
+  background-color: var(--brand-bg-gray-light);
+  padding: 32px;
+  border-radius: var(--default-border-radius);
+  min-height: 534px;
+}
+.auctionInfo.loaded {
+  min-height: auto;
+}
+
+.nounContentCol {
+  display: flex;
+}
+
+.auctionActivityCol {
+  padding-right: 5rem;
+  padding-bottom: 0rem;
+  min-height: 520px;
+  align-self: flex-end !important;
+}
+
+.conferenceTitleWrapper {
+  z-index: 2;
+  position: relative;
+}
+.conferenceTitle {
+  margin: 0 0 -59px;
+  height: 118px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--brand-white);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.eastSide {
+  background-color: var(--brand-color-blue);
+}
+.westSide {
+  background-color: var(--brand-color-red);
+}
+
+@media (max-width: 992px) {
+  .auctionActivityCol {
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+    width: 100%;
+    background-color: white;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -41px;
+    height: 82px;
+    font-size: 1.7rem;
+  }
+  .nounbaProfileWrapper {
+    position: relative;
+  }
+  .nounbaProfile {
+    width: 50%;
+  }
+}
+
+@media (max-width: 568px) {
+  .auctionActivityCol {
+    width: 100%;
+    margin-left: unset;
+    margin-right: unset;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    padding-right: unset;
+    padding-left: 0;
+  }
+
+  .nounContentCol {
+    padding: 0rem;
+  }
+  .infoWrapper {
+    padding-top: 0;
+  }
+  .conferenceTitle {
+    margin: 0 0 -25px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+}

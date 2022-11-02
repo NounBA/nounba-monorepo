@@ -1,12 +1,19 @@
 import classes from './Noun.module.css';
 import React from 'react';
-import loadingNoun from '../../assets/loading-skull-noun.gif';
+import clsx from 'clsx';
 import Image from 'react-bootstrap/Image';
+import loadingNoun from '../../assets/loading-skull-noun.gif';
 
-export const LoadingNoun = () => {
+export const LoadingNoun = (props: { wrapperClassName?: string; className?: string }) => {
+  const { wrapperClassName, className } = props;
   return (
-    <div className={classes.imgWrapper}>
-      <Image className={classes.img} src={loadingNoun} alt={'loading noun'} fluid />
+    <div className={clsx(classes.imgWrapper, wrapperClassName)}>
+      <Image
+        className={clsx(classes.img, className)}
+        src={loadingNoun}
+        alt={'loading noun'}
+        fluid
+      />
     </div>
   );
 };
@@ -24,7 +31,6 @@ const Noun: React.FC<{
         className={`${classes.img} ${className}`}
         src={imgPath ? imgPath : loadingNoun}
         alt={alt}
-        fluid
       />
     </div>
   );

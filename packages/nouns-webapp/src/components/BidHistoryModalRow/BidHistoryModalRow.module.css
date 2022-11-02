@@ -1,15 +1,16 @@
 .bidRow {
-  border-radius: 14px;
-  height: 72px;
+  border-radius: 4px;
+  height: 96px;
   width: 100%;
-  padding: 1rem;
-  margin-top: 0.75rem;
+  padding: 16px;
   border-bottom: 0px;
-  background-color: white;
+  margin-bottom: 16px;
+  background-color: #EEF2F6;
 }
 
 .bidderInfoWrapper {
   display: flex;
+  align-items: center;;
 }
 
 .bidderInfoText {
@@ -17,12 +18,13 @@
   display: inline-block;
   padding: 0;
   line-height: 23px;
+  color: var(--brand-bg-gray) !important;
 }
 
 .bidDate {
   color: rgba(140, 141, 146, 1);
   font-weight: 500;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-size: 13px;
 }
 
@@ -32,9 +34,10 @@
 }
 
 .linkIcon {
-  color: var(--brand-gray-light-text);
+  color: var(--brand-bg-gray);
   transition: all 0.125s ease-in-out;
   margin-bottom: 0.1rem;
+  font-weight: normal;
 }
 
 .linkIcon:hover {
@@ -44,4 +47,6 @@
 
 .bidAmount {
   white-space: nowrap;
+  color: var(--brand-bg-gray) !important;
+  font-weight: normal;
 }

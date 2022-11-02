@@ -1,8 +1,13 @@
 .navBarBrand {
   position: relative;
   z-index: 2;
-  padding: 1rem 0rem;
+  padding: 24px 0;
+  margin-left: 20px;
   transition: all 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  font-family: 'DM Sans';
+  font-size: 40px;
 }
 
 .navBarBrand:hover {
@@ -10,25 +15,25 @@
 }
 
 .navBarLogo {
-  width: 75px;
-  height: 75px;
+  width: 210px;
+  height: 60px;
+}
+
+.navLogoTitle {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0;
+  font-size: 2.5rem;
 }
 
 .navBarCustom {
-  padding-bottom: 1rem;
+  padding-bottom: 0;
+  padding-top: 0;
+  background-color: var(--brand-bg-gray);
 }
 
-@media (max-width: 992px) {
-  .navBarLogo {
-    width: 65px;
-    height: 65px;
-  }
-
-  .navBarCustom {
-    margin-bottom: -1px;
-    margin-right: -5px;
-    padding-bottom: 0rem;
-  }
+@media (max-width: 479px) {
+  .navLogoTitle {display:none}
 }
 
 /* connect button displays differently to default NavBarItems, thus the !importants */
@@ -44,7 +49,7 @@
 
 .disconnectBtn {
   cursor: pointer;
-  font-family: 'PT Root UI';
+  font-family: 'DM Sans';
   font-weight: bold;
 }
 
@@ -69,11 +74,10 @@
 .nounsNavLink,
 .nounsNavLink:active,
 .nounsNavLink:visited {
-  font-family: 'PT Root UI';
-  font-weight: bold;
+  font-family: 'DM Sans';
   font-size: 0.9rem;
-  padding: 0.3rem 0.3rem !important;
-  color: black !important;
+  padding: 0.3rem !important;
+  color: white !important;
 }
 
 .testnetImg {
@@ -96,8 +100,43 @@
 }
 
 .navBarToggle {
-  border-radius: 10px;
-  height: 44px;
-  padding: 0.25rem 0.5rem;
-  margin-right: 12px;
+  border-radius: var(--default-border-radius);
+  height: 56px;
+  width: 56px;
+  margin-right: 20px;
+  background-color: var(--brand-color-blue);
+}
+.navBarToggle span {
+  background-image: url("./../../assets/toggle-menu.svg") !important;
+}
+
+.navbarCollapse {
+  flex-grow: unset;
+  padding-bottom: 15px;
+}
+.testnet {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+.testnet img {
+  margin: 0 20px 0 10px;
+}
+
+
+.treasuryAndNavWrapper {
+  display: flex;
+}
+.treasuryLink {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+@media screen and (min-width: 992px) {
+  .navBarBrand {
+    padding: 16px 0;
+  }
+  .navbarCollapse{
+    padding-bottom: 0;
+  }
 }

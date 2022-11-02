@@ -3,7 +3,6 @@ import duration from 'dayjs/plugin/duration';
 import { Auction } from '../../wrappers/nounsAuction';
 import classes from './AuctionTimer.module.css';
 import { useState, useEffect, useRef } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import clsx from 'clsx';
 import { Trans } from '@lingui/macro';
@@ -63,14 +62,14 @@ const AuctionTimer: React.FC<{
   if (!auction) return null;
 
   return (
-    <Row
+    <div
       className={clsx(classes.wrapper, classes.section)}
       onClick={() => setTimerToggle(!timerToggle)}
     >
-      <Col xs={timerToggle ? 4 : 6} lg={12} className={classes.leftCol}>
+      <div className={classes.leftCol}>
         <h4
           style={{
-            color: isCool ? 'var(--brand-cool-light-text)' : 'var(--brand-warm-light-text)',
+            color: isCool ? 'var(--brand-warm-light-text)' : 'var(--brand-warm-light-text)',
           }}
         >
           {timerToggle ? (
@@ -86,13 +85,13 @@ const AuctionTimer: React.FC<{
             </>
           )}
         </h4>
-      </Col>
-      <Col xs="auto" lg={12}>
+      </div>
+      <div>
         {timerToggle ? (
           <h2
             className={clsx(classes.timerWrapper, classes.timeLeft)}
             style={{
-              color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
+              color: 'var(--brand-white)',
             }}
           >
             <div className={classes.timerSection}>
@@ -124,7 +123,7 @@ const AuctionTimer: React.FC<{
           <h2
             className={classes.timerWrapper}
             style={{
-              color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
+              color: 'var(--brand-white)',
             }}
           >
             <div className={clsx(classes.timerSection, classes.clockSection)}>
@@ -132,8 +131,8 @@ const AuctionTimer: React.FC<{
             </div>
           </h2>
         )}
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

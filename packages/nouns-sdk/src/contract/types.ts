@@ -13,6 +13,7 @@ export interface ContractAddresses {
   nftDescriptor: string;
   nounsAuctionHouse: string;
   nounsAuctionHouseProxy: string;
+  nounsAuctionHouseProxy2: string;
   nounsAuctionHouseProxyAdmin: string;
   nounsDaoExecutor: string;
   nounsDAOProxy: string;
@@ -22,6 +23,7 @@ export interface ContractAddresses {
 export interface Contracts {
   nounsTokenContract: ReturnType<typeof NounsTokenFactory.connect>;
   nounsAuctionHouseContract: ReturnType<typeof NounsAuctionHouseFactory.connect>;
+  nounsAuctionHouseContract2: ReturnType<typeof NounsAuctionHouseFactory.connect>;
   nounsDescriptorContract: ReturnType<typeof NounsDescriptorFactory.connect>;
   nounsSeederContract: ReturnType<typeof NounsSeederFactory.connect>;
   nounsDaoContract: ReturnType<typeof NounsDaoLogicV1Factory.connect>;

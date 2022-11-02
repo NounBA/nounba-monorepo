@@ -1,5 +1,5 @@
 import { useContractCall, useContractFunction, useEthers } from '@usedapp/core';
-import { BigNumber as EthersBN, ethers, utils } from 'ethers';
+import { BigNumber, BigNumber as EthersBN, ethers, utils } from 'ethers';
 import { NounsTokenABI, NounsTokenFactory } from '@nouns/contracts';
 import config, { cache, cacheKey, CHAIN_ID } from '../config';
 import { useQuery } from '@apollo/client';
@@ -18,6 +18,8 @@ export interface INounSeed {
   body: number;
   glasses: number;
   head: number;
+  oneOfOne: boolean;
+  oneOfOneIndex: number;
 }
 
 export enum NounsTokenContractFunction {
@@ -28,7 +30,15 @@ const abi = new utils.Interface(NounsTokenABI);
 const seedCacheKey = cacheKey(cache.seed, CHAIN_ID, config.addresses.nounsToken);
 
 const isSeedValid = (seed: Record<string, any> | undefined) => {
-  const expectedKeys = ['background', 'body', 'accessory', 'head', 'glasses'];
+  const expectedKeys = [
+    'background',
+    'body',
+    'accessory',
+    'head',
+    'glasses',
+    'oneOfOne',
+    'oneOfOneIndex',
+  ];
   const hasExpectedKeys = expectedKeys.every(key => (seed || {}).hasOwnProperty(key));
   const hasValidValues = Object.values(seed || {}).some(v => v !== 0);
   return hasExpectedKeys && hasValidValues;
@@ -61,18 +71,19 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
       accessory: Number(seed.accessory),
       head: Number(seed.head),
       glasses: Number(seed.glasses),
+      oneOfOne: seed.oneOfOne,
+      oneOfOneIndex: Number(seed.oneOfOneIndex),
     };
     return acc;
   }, {});
 };
 
-const useNounSeeds = () => {
+export const useNounSeeds = () => {
   const cache = localStorage.getItem(seedCacheKey);
   const cachedSeeds = cache ? JSON.parse(cache) : undefined;
   const { data } = useQuery(seedsQuery(), {
     skip: !!cachedSeeds,
   });
-
   useEffect(() => {
     if (!cachedSeeds && data?.seeds?.length) {
       localStorage.setItem(seedCacheKey, JSON.stringify(seedArrayToObject(data.seeds)));
@@ -82,9 +93,10 @@ const useNounSeeds = () => {
   return cachedSeeds;
 };
 
-export const useNounSeed = (nounId: EthersBN) => {
+export const useNounSeed = (nounId?: EthersBN) => {
   const seeds = useNounSeeds();
-  const seed = seeds?.[nounId.toString()];
+  const nounIdString = (nounId ?? BigNumber.from(0)).toString();
+  const seed = seeds?.[nounIdString];
   // prettier-ignore
   const request = seed ? false : {
     abi,
@@ -98,15 +110,17 @@ export const useNounSeed = (nounId: EthersBN) => {
     if (seedCache && isSeedValid(response)) {
       const updatedSeedCache = JSON.stringify({
         ...JSON.parse(seedCache),
-        [nounId.toString()]: {
+        [nounIdString]: {
           accessory: response.accessory,
           background: response.background,
           body: response.body,
           glasses: response.glasses,
           head: response.head,
+          oneOfOne: response.oneOfOne,
+          oneOfOneIndex: response.oneOfOneIndex,
         },
       });
-      localStorage.setItem(seedCacheKey, updatedSeedCache);
+      if (response.oneOfOneIndex > 0) localStorage.setItem(seedCacheKey, updatedSeedCache);
     }
     return response;
   }

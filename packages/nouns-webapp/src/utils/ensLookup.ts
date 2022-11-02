@@ -1,3 +1,4 @@
+import { Web3Provider } from '@ethersproject/providers';
 import { useEthers } from '@usedapp/core';
 import { useEffect, useState } from 'react';
 import { cache, cacheKey, CHAIN_ID } from '../config';
@@ -28,7 +29,7 @@ export const useReverseENSLookUp = (address: string) => {
       // If address not in local storage, attempt to resolve via RPC call.
       // At this stage if the item is in local storage we know it isn't expired.
       if (!localStorage.getItem(ensCacheKey(address))) {
-        lookupNNSOrENS(library, address)
+        lookupNNSOrENS(library as Web3Provider, address)
           .then(name => {
             if (!name) return;
             if (mounted) {

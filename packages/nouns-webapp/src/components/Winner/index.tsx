@@ -1,11 +1,9 @@
-import { Button, Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import classes from './Winner.module.css';
 import ShortAddress from '../ShortAddress';
 import clsx from 'clsx';
 import { isMobileScreen } from '../../utils/isMobile';
 import { Trans } from '@lingui/macro';
-import { useActiveLocale } from '../../hooks/useActivateLocale';
 import React from 'react';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import Tooltip from '../Tooltip';
@@ -25,21 +23,17 @@ const Winner: React.FC<WinnerProps> = props => {
   const isWinnerYou =
     activeAccount !== undefined && activeAccount.toLocaleLowerCase() === winner.toLocaleLowerCase();
 
-  const activeLocale = useActiveLocale();
+  // const activeLocale = useActiveLocale();
 
   const nonNounderNounContent = isWinnerYou ? (
-    <Row className={classes.youSection}>
-      <Col lg={activeLocale === 'ja-JP' ? 8 : 4} className={classes.youCopy}>
-        <h2
-          className={classes.winnerContent}
-          style={{
-            color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
-          }}
-        >
-          <Trans>You</Trans>
-        </h2>
-      </Col>
-      {!isMobile && (
+    <div
+      className={classes.winnerContent}
+      style={{
+        color: 'var(--brand-white)',
+      }}
+    >
+      <Trans>You</Trans>
+      {/* {!isMobile && (
         <Col>
           <a
             href="https://nouns.center/nouners"
@@ -52,15 +46,15 @@ const Winner: React.FC<WinnerProps> = props => {
             </Button>
           </a>
         </Col>
-      )}
-    </Row>
+      )} */}
+    </div>
   ) : (
-    <ShortAddress size={40} address={winner} avatar={true} />
+    <ShortAddress size={40} address={winner} avatar={!isMobile} />
   );
 
   const nounderNounContent = (
     <a
-      href={buildEtherscanAddressLink('nounders.eth')}
+      href={buildEtherscanAddressLink('nounba.eth')}
       target={'_blank'}
       rel="noreferrer"
       className={classes.link}
@@ -72,37 +66,37 @@ const Winner: React.FC<WinnerProps> = props => {
         }}
         id="holder-etherscan-tooltip"
       >
-        nounders.eth
+        nounba.eth
       </Tooltip>
     </a>
   );
 
   return (
     <>
-      <Row className={clsx(classes.wrapper, classes.section)}>
-        <Col xs={1} lg={12} className={classes.leftCol}>
+      <div className={clsx(classes.wrapper, classes.section)}>
+        <div className={classes.leftCol}>
           <h4
             style={{
-              color: isCool ? 'var(--brand-cool-light-text)' : 'var(--brand-warm-light-text)',
+              color: isCool ? 'var(--brand-warm-light-text)' : 'var(--brand-warm-light-text)',
             }}
             className={classes.winnerCopy}
           >
             <Trans>Winner</Trans>
           </h4>
-        </Col>
-        <Col xs="auto" lg={12}>
+        </div>
+        <div>
           <h2
             className={classes.winnerContent}
             style={{
-              color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
+              color: 'var(--brand-white)',
             }}
           >
             {isNounders ? nounderNounContent : nonNounderNounContent}
           </h2>
-        </Col>
-      </Row>
-      {isWinnerYou && isMobile && (
-        <Row>
+        </div>
+      </div>
+      {/* {isWinnerYou && isMobile && (
+        <div>
           <a
             href="https://nouns.center/nouners"
             target="_blank"
@@ -113,8 +107,8 @@ const Winner: React.FC<WinnerProps> = props => {
               <Trans>What now?</Trans>
             </Button>
           </a>
-        </Row>
-      )}
+        </div>
+      )} */}
     </>
   );
 };

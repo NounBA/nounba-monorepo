@@ -1,11 +1,7 @@
 .auctionTitleAndNavContainer {
   display: flex;
-}
-
-@media (max-width: 992px) {
-  .auctionTitleAndNavContainer h1 {
-    font-size: 2.75rem;
-  }
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Fix Firefox navigation arrow alignment issues */

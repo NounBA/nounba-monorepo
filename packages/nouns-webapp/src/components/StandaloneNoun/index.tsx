@@ -1,16 +1,18 @@
 import { ImageData as data, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
 import { BigNumber as EthersBN } from 'ethers';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import clsx from 'clsx';
 import { INounSeed, useNounSeed } from '../../wrappers/nounToken';
 import Noun from '../Noun';
-import { Link } from 'react-router-dom';
 import classes from './StandaloneNoun.module.css';
-import { useDispatch } from 'react-redux';
 import { setOnDisplayAuctionNounId } from '../../state/slices/onDisplayAuction';
 import nounClasses from '../Noun/Noun.module.css';
 
 interface StandaloneNounProps {
   nounId: EthersBN;
+  className?: string;
 }
 interface StandaloneCircularNounProps {
   nounId: EthersBN;
@@ -19,16 +21,20 @@ interface StandaloneCircularNounProps {
 
 interface StandaloneNounWithSeedProps {
   nounId: EthersBN;
-  onLoadSeed?: (seed: INounSeed) => void;
   shouldLinkToProfile: boolean;
+  className?: string;
+  wrapperClassName?: string;
 }
 
-export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
+export const getNoun = (nounId: string | EthersBN, seed: INounSeed, hasBg = false) => {
   const id = nounId.toString();
-  const name = `Noun ${id}`;
-  const description = `Noun ${id} is a member of the Nouns DAO`;
+  const name = `Nounba ${id}`;
+  const description = `Nounba ${id} is a member of the NounBA DAO`;
   const { parts, background } = getNounData(seed);
-  const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
+
+  const image = `data:image/svg+xml;base64,${btoa(
+    buildSVG(parts, data.palette, background, !hasBg),
+  )}`;
 
   return {
     name,
@@ -38,8 +44,9 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 };
 
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
-  const { nounId } = props;
+  const { nounId, className } = props;
   const seed = useNounSeed(nounId);
+
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -51,7 +58,7 @@ const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProp
   return (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       <Noun imgPath={noun ? noun.image : ''} alt={noun ? noun.description : 'Noun'} />
@@ -92,7 +99,7 @@ export const StandaloneNounCircular: React.FC<StandaloneCircularNounProps> = (
 export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
   props: StandaloneNounProps,
 ) => {
-  const { nounId } = props;
+  const { nounId, className } = props;
   const seed = useNounSeed(nounId);
   const noun = seed && getNoun(nounId, seed);
 
@@ -104,7 +111,7 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
   return (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       <Noun
@@ -119,27 +126,33 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
 export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   props: StandaloneNounWithSeedProps,
 ) => {
-  const { nounId, onLoadSeed, shouldLinkToProfile } = props;
+  const { nounId, shouldLinkToProfile, className, wrapperClassName } = props;
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
-  if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="Noun" />;
-
-  onLoadSeed(seed);
+  if (!seed || seedIsInvalid || !nounId) {
+    return <Noun imgPath="" alt="Noun" />;
+  }
 
   const onClickHandler = () => {
     dispatch(setOnDisplayAuctionNounId(nounId.toNumber()));
   };
-
   const { image, description } = getNoun(nounId, seed);
 
-  const noun = <Noun imgPath={image} alt={description} />;
+  const noun = (
+    <Noun
+      wrapperClassName={wrapperClassName}
+      className={className}
+      imgPath={image}
+      alt={description}
+    />
+  );
   const nounWithLink = (
     <Link
       to={'/noun/' + nounId.toString()}
-      className={classes.clickableNoun}
+      className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >
       {noun}
