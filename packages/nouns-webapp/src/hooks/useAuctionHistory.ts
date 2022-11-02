@@ -155,7 +155,7 @@ export function useAuctionHistory(nounbaId: string) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       isMounted = false;
     };
-  }, [nounbaId, side, city]);
+  }, [nounbaId, side, city, pastAuctions]);
 
   return {
     bids,
