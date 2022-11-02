@@ -9,6 +9,7 @@ import { Trans } from '@lingui/macro';
 const Footer = () => {
   const twitterURL = externalURL(ExternalURL.twitter);
   const discordURL = externalURL(ExternalURL.discord);
+  const openseaURL = externalURL(ExternalURL.opensea);
   const etherscanURL = buildEtherscanAddressLink(config.addresses.nounsToken);
   // const discourseURL = externalURL(ExternalURL.discourse);
 
@@ -19,6 +20,7 @@ const Footer = () => {
           <Link text={<Trans>Discord</Trans>} url={discordURL} leavesPage={true} />
           <Link text={<Trans>Twitter</Trans>} url={twitterURL} leavesPage={true} />
           <Link text={<Trans>Etherscan</Trans>} url={etherscanURL} leavesPage={true} />
+          <Link text={<Trans>Opensea</Trans>} url={openseaURL} leavesPage={true} />
           {/* <Link text={<Trans>Forums</Trans>} url={discourseURL} leavesPage={false} /> */}
         </footer>
       </Container>
