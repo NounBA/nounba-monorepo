@@ -13,8 +13,3 @@ code {
 .__react_component_tooltip.show {
   opacity: 1 !important;
 }
-
-/* TODO: remove this code before production */
-iframe {
-  pointer-events: none;
-}
