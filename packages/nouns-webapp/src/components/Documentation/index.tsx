@@ -58,13 +58,11 @@ const Documentation = () => {
                   <Trans>NounBA is not affiliated with any league in any way.</Trans>
                 </li>
                 <li>
-                  <Trans>
-                    NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
-                    {publicDomainLink}.
-                  </Trans>
+                  NounBA artwork is inspired by Nouns DAO, both of which are in the{' '}
+                  {publicDomainLink}.
                 </li>
                 <li>
-                  <Trans>34 NounBAs will be auctioned between Oct 25-Nov 10, 2022</Trans>
+                  <Trans>34 NounBAs will be auctioned, 2 per day from November 2-19, 2022</Trans>
                 </li>
                 <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
@@ -94,11 +92,10 @@ const Documentation = () => {
             <Accordion.Body className={classes.accordionBody}>
               <p className={classes.aboutText}>
                 <Trans>
-                  34 NounBAs will be auctioned between Oct 25-Nov 10, 2022. Starting on Oct 9 at
-                  [start time], 2 simultaneous [duration in hours] auctions will be kicked off. Each
-                  time an auction is settled, a new NounBA will be minted and a new [duration in
-                  hours] auction will begin. Bids within the last [duration in minutes] reset the
-                  auction timer to [duration in minutes].
+                  34 NounBAs will be auctioned between Nov 2-19, 2022. Starting on Nov 2, two
+                  simultaneous 24 hour auctions will be kicked off. Each time an auction is settled,
+                  a new NounBA will be minted and a new 24 hour auction will begin. Bids within the
+                  last 5 minutes will reset the auction timer to 5 minutes.
                 </Trans>
               </p>
               <p>
@@ -118,14 +115,12 @@ const Documentation = () => {
               <Trans>NounBA DAO</Trans>
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
-              <Trans>
-                NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
-                body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
-                from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of
-                NounBA DAO and entitled to one vote in all governance matters. NounBA votes are
-                non-transferable (if you sell your NounBA the vote goes with it) but delegatable,
-                which means you can assign your vote to someone else as long as you own your NounBA.
-              </Trans>
+              NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
+              body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
+              from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of NounBA
+              DAO and entitled to one vote in all governance matters. NounBA votes are
+              non-transferable (if you sell your NounBA the vote goes with it) but delegatable,
+              which means you can assign your vote to someone else as long as you own your NounBA.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3" className={classes.accordionItem}>
@@ -166,9 +161,7 @@ const Documentation = () => {
             <Accordion.Body className={classes.accordionBody}>
               <p>
                 <Trans>
-                  NounBA is made up of 40 1-of-1 artworks. 30 of the artworks draw inspiration from
-                  basketball teams. No copyright or official team IP is featured (e.g. names,
-                  logos).
+                  NounBA is made up of 40 1-of-1 artworks inspired by basketball culture.
                 </Trans>
               </p>
             </Accordion.Body>
