@@ -26,7 +26,10 @@ const BidHistoryModalOverlay: React.FC<{
   const auctionBids = useAuctionBids(auction.nounId, auction.auctionName);
 
   const bids = isPastAuction ? contextBids : auctionBids;
-  const conferenceAuctionClass = side === REGIONS.west ? classes.westAuction : classes.eastAuction;
+  const conferenceAuctionClass =
+    (isPastAuction && side === REGIONS.west) || auction.auctionName === 'firstAuction'
+      ? classes.westAuction
+      : classes.eastAuction;
 
   return (
     <>
