@@ -53,10 +53,19 @@ const listById = (cities: CityType[]) =>
   cities.reduce((prev, city) => ({ ...prev, [city.tokenIndex]: city }), {});
 
 export type AllCitiesType = { [n: number]: CityType };
+
 export const allCities: AllCitiesType = {
   ...listById(west),
   ...listById(east),
 };
+
+export const cityList = [...west, ...east];
+
+export const referees = cityList
+  .filter(city => city.displayName.includes('Referee'))
+  .sort((city1, city2) => city1.id - city2.id);
+
+export const cityListOrdered = cityList.sort((city1, city2) => city1.tokenIndex - city2.tokenIndex);
 
 export const getSide = (tokenIndex: number) => (tokenIndex < 21 ? REGIONS.west : REGIONS.east);
 
