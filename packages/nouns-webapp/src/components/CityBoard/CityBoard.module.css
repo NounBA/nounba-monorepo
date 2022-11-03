@@ -20,6 +20,9 @@
   position: relative;
   padding-bottom: 3rem;
 }
+.wrapperWithoutSpace {
+  padding-bottom: 0;
+}
 .title {
   background-color: var(--brand-bg-gray);
   font-size: 1.1rem;
