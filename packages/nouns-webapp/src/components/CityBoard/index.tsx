@@ -135,7 +135,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
 
   return (
     <div className={classes.containerWrapper}>
-      <section className={classes.wrapper}>
+      <section className={clsx(classes.wrapper, !isReferee && classes.wrapperWithoutSpace)}>
         <h1 className={classes.title}>
           {!isReferee && (
             <>
