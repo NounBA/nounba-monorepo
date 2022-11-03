@@ -165,6 +165,10 @@ export const nounsIndex = () => gql`
       owner {
         id
       }
+      seed {
+        oneOfOneIndex
+        id
+      }
     }
   }
 `;

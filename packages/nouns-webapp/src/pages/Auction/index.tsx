@@ -15,6 +15,7 @@ import { setOnDisplayAuctionNounId as setOnDisplaySecondAuctionNounId } from '..
 import classes from './Auction.module.css';
 import { AUCTION_NAMES, REGIONS } from '../../config';
 import ScrollToTop from '../../components/ScrollToTop';
+import CityBoard from '../../components/CityBoard';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -61,6 +62,7 @@ const AuctionPage: React.FC<AuctionPageProps> = () => {
               />
             </Col>
           </Row>
+          <CityBoard side={'referee'} auctionID={0} tokenIndex={0} />
         </Container>
         {/* TODO: show profileActivityFeed to the owner */}
         {/* {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? ( */}
