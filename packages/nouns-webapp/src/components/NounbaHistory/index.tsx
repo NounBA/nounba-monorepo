@@ -36,12 +36,16 @@ const NounbaHistory = () => {
   const auctionIdBigNumber = BigNumber.from(currentAuction?.nounId ?? 0);
 
   const prevAuctionHandler = () => {
+    if (!currentAuction) return;
     dispatch(setPrevOnDisplayAuctionNounId());
-    currentAuction && history.push(`/nounba/${currentAuction.nounId.toNumber() - 1}`);
+    const prevId = currentAuction.nounId.toNumber() - 1;
+    history.push(`/nounba/${auctionIdBigNumber.eq(2) ? 0 : prevId}`);
   };
   const nextAuctionHandler = () => {
+    if (!currentAuction) return;
     dispatch(setNextOnDisplayAuctionNounId());
-    currentAuction && history.push(`/nounba/${currentAuction.nounId.toNumber() + 1}`);
+    const nextId = currentAuction.nounId.toNumber() + 1;
+    history.push(`/nounba/${auctionIdBigNumber.eq(0) ? 2 : nextId}`);
   };
   const isDevToken = status === STATUS.DEV_TOKEN;
   const isLoaded = status === STATUS.SUCCESS || isDevToken;
@@ -51,7 +55,10 @@ const NounbaHistory = () => {
       auction={currentAuction}
       isFirstAuction={auctionIdBigNumber.eq(0)}
       // TODO: use lastNounId from Auctions
-      isLastAuction={auctionIdBigNumber.eq(lastDisplayAuctionId - 1)}
+      isLastAuction={
+        auctionIdBigNumber.eq(2) ||
+        (auctionIdBigNumber.eq(lastDisplayAuctionId - 1) && !auctionIdBigNumber.eq(0))
+      }
       onPrevAuctionClick={prevAuctionHandler}
       onNextAuctionClick={nextAuctionHandler}
       displayGraphDepComps={false}
