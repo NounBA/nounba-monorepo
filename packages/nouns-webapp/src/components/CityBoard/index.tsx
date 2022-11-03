@@ -6,7 +6,8 @@ import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'react-bootstrap/Image';
 import classes from './CityBoard.module.css';
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import citiesByRegion from '../../utils/cities';
+import { useQuery } from '@apollo/client';
+import citiesByRegion, { referees } from '../../utils/cities';
 import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
 import { REGIONS } from '../../config';
 import { useAppSelector } from '../../hooks';
@@ -17,6 +18,7 @@ import { getNoun } from '../StandaloneNoun';
 import { useNounSeed } from '../../wrappers/nounToken';
 import loadingNoun from '../../assets/loading-skull-noun.gif';
 import comingAuctionNoun from '../../assets/coming-auction.svg';
+import { nounsIndex } from '../../wrappers/subgraph';
 
 type CityItemProps = {
   name: string;
@@ -54,7 +56,7 @@ const CityItem = ({
   const onClickHandler = () => {
     if (!isSelected) history.push(`/nounba/${id}`);
   };
-  if (isNounbaNoun(name)) return null;
+  // if (isNounbaNoun(name)) return null;
   return (
     <ListGroupItem className={classes.itemWrapper} ref={cityRef}>
       <Button
@@ -73,9 +75,10 @@ const CityItem = ({
   );
 };
 
+const referee = 'referee';
 type CityBoardProps = {
   auctionID: number;
-  side: REGIONS;
+  side: REGIONS | 'referee';
   tokenIndex?: number;
 };
 
@@ -88,7 +91,22 @@ const getAuctionTokenId = (list: { [key: string]: AuctionState }, tokenIndex: nu
   return nounId !== undefined ? BigNumber.from(nounId).toNumber() : 0;
 };
 const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
-  const cities = useMemo(() => citiesByRegion[side], [side]);
+  const isReferee = side === referee;
+  const { data } = useQuery(nounsIndex());
+  const nounsBySeed = useMemo(() => {
+    if (!data?.nouns) return {};
+    return data.nouns.reduce(
+      // @ts-ignore
+      (prev, noun) => ({ ...prev, [noun.seed?.oneOfOneIndex ?? '1']: noun }),
+      {},
+    );
+  }, [data]);
+
+  const cities = useMemo(
+    () =>
+      isReferee ? referees : citiesByRegion[side].filter(city => !isNounbaNoun(city.displayName)),
+    [isReferee, side],
+  );
   const pastAuctionsBySeed = useAppSelector<{ [key: string]: AuctionState }>(state =>
     state.pastAuctions.pastAuctions.reduce(
       (prev, auction) => ({ ...prev, [auction.seed.oneOfOneIndex]: auction }),
@@ -98,10 +116,6 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
 
   const listRef = useRef<HTMLDivElement>(null);
   const selectedCityRef = useRef<HTMLAnchorElement>(null);
-  const cityIndex = useMemo(
-    () => cities.findIndex(city => city.tokenIndex === tokenIndex),
-    [cities, tokenIndex],
-  );
 
   const scrollToCity = useCallback(() => {
     if (selectedCityRef.current !== null && listRef.current !== null) {
@@ -123,23 +137,37 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
     <div className={classes.containerWrapper}>
       <section className={classes.wrapper}>
         <h1 className={classes.title}>
-          {side === REGIONS.east ? 'East' : 'West'} <Trans>team current bid</Trans>
+          {!isReferee && (
+            <>
+              {side === REGIONS.east ? 'East' : 'West'} <Trans>team current bid</Trans>
+            </>
+          )}
+          {isReferee && 'Referees'}
         </h1>
         <ListGroup
-          className={clsx(classes.list, side === REGIONS.east && classes.blueList)}
+          className={clsx(
+            classes.list,
+            side === REGIONS.east && classes.blueList,
+            isReferee && classes.refereeList,
+          )}
           ref={listRef}
         >
-          {cities.map((city, index) => (
-            <CityItem
-              id={getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)}
-              tokenIndex={city.tokenIndex}
-              key={city.tokenIndex}
-              name={city.displayName}
-              isSelected={city.tokenIndex === tokenIndex}
-              isDisabled={index > cityIndex}
-              cityRef={city.tokenIndex === tokenIndex ? selectedCityRef : null}
-            />
-          ))}
+          {cities.map(city => {
+            return (
+              <CityItem
+                id={
+                  nounsBySeed[city.tokenIndex]?.id ??
+                  getAuctionTokenId(pastAuctionsBySeed, city.tokenIndex)
+                }
+                tokenIndex={city.tokenIndex}
+                key={city.tokenIndex}
+                name={city.displayName}
+                isSelected={city.tokenIndex === tokenIndex}
+                isDisabled={!!!nounsBySeed[city.tokenIndex]}
+                cityRef={city.tokenIndex === tokenIndex ? selectedCityRef : null}
+              />
+            );
+          })}
         </ListGroup>
       </section>
     </div>
