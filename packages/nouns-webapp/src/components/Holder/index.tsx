@@ -37,7 +37,7 @@ const Holder: React.FC<HolderProps> = props => {
         }}
         id="holder-etherscan-tooltip"
       >
-        {!isWinnerYou && <ShortAddress size={40} address={holder} avatar={true} />}
+        {!isWinnerYou && <ShortAddress size={30} address={holder} avatar={true} />}
         {isWinnerYou && 'You'}
       </Tooltip>
     </a>
