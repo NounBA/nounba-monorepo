@@ -10,7 +10,6 @@ import BidHistoryModalRow from '../BidHistoryModalRow';
 import { Trans } from '@lingui/macro';
 import { REGIONS } from '../../config';
 import PastAuctionContext from '../../contexts/PastAuctionContext';
-import { getSide } from '../../utils/cities';
 
 export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
   return <div className={classes.backdrop} onClick={props.onDismiss} />;
@@ -26,10 +25,11 @@ const BidHistoryModalOverlay: React.FC<{
   const auctionBids = useAuctionBids(auction.nounId, auction.auctionName);
 
   const bids = isPastAuction ? contextBids : auctionBids;
-  const conferenceAuctionClass =
-    (isPastAuction && side === REGIONS.west) || auction.auctionName === 'firstAuction'
-      ? classes.westAuction
-      : classes.eastAuction;
+
+  const isWest =
+    (isPastAuction && side === REGIONS.west) ||
+    (!isPastAuction && auction.auctionName === 'firstAuction');
+  const conferenceAuctionClass = isWest ? classes.westAuction : classes.eastAuction;
 
   return (
     <>
@@ -49,9 +49,7 @@ const BidHistoryModalOverlay: React.FC<{
               </h2>
               <h1>NounBA {auction && auction.nounId.toString()}</h1>
               <div>
-                <div className={classes.sideTag}>
-                  {getSide(auction.nounId.toNumber()) === REGIONS.west ? 'West' : 'East'}
-                </div>
+                <div className={classes.sideTag}>{isWest ? 'West' : 'East'}</div>
               </div>
             </div>
 
