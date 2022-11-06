@@ -29,6 +29,6 @@ jobs:
           context: .
           file: ./Dockerfile.bots
           push: true
-          tags: user/app:latest
+          tags: williansabiaobee/nounba:tagname
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
