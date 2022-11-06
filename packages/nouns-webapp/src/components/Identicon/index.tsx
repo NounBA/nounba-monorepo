@@ -1,5 +1,5 @@
-// import Davatar, { Image } from '@davatar/react';
-import { Image } from '@davatar/react';
+import Davatar, { Image } from '@davatar/react';
+// import { Image } from '@davatar/react';
 import { Web3Provider } from '@ethersproject/providers';
 import { Component } from 'react';
 
@@ -28,8 +28,8 @@ class IdenticonInner extends Component<IdenticonInnerProps> {
   }
 
   renderDavatar(address: string, provider: Web3Provider, size: number) {
-    // return <Davatar address={address} size={size} provider={provider} />;
-    return <Image address={address} size={size} />;
+    return <Davatar address={address} size={size} provider={provider} />;
+    // return <Image address={address} size={size} />;
   }
 
   renderJazzicon(address: string, size: number) {
