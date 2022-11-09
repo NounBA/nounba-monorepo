@@ -9,7 +9,7 @@ export const west = [
   { id: 5, displayName: 'Portland', tokenIndex: 4 },
   { id: 7, displayName: 'Sacramento', tokenIndex: 5 },
   { id: 9, displayName: 'Los Angeles', tokenIndex: 6 },
-  { id: 11, displayName: 'Spurs', tokenIndex: 7 },
+  { id: 11, displayName: 'San Antonio', tokenIndex: 7 },
   { id: 13, displayName: 'Referee 3', tokenIndex: 8 },
   { id: 15, displayName: 'LA', tokenIndex: 9 },
   { id: 17, displayName: 'New Orleans', tokenIndex: 10 },
