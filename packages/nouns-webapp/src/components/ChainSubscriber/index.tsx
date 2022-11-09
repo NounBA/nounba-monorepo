@@ -17,7 +17,7 @@ type ChainSubscriberArgs = {
   auctionNames: AUCTION_NAMES[];
 };
 
-const BLOCKS_PER_DAY = 6_500;
+const BLOCKS_PER_DAY = 7600;
 
 export const ChainSubscriber = ({
   wsProvider,
@@ -41,6 +41,7 @@ export const ChainSubscriber = ({
     const extendedFilter = nounsAuctionHouseContract.filters.AuctionExtended(null, null);
     const createdFilter = nounsAuctionHouseContract.filters.AuctionCreated(null, null, null);
     const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(null, null, null);
+
     const processBidFilter = async (
       nounId: BigNumberish,
       sender: string,
@@ -50,6 +51,7 @@ export const ChainSubscriber = ({
     ) => {
       const timestamp = (await event.getBlock()).timestamp;
       const transactionHash = event.transactionHash;
+
       dispatch(
         actions.appendBid(
           reduxSafeBid({ nounId, sender, value, extended, transactionHash, timestamp }),
