@@ -325,7 +325,7 @@ const Bid: React.FC<{
           <Col lg={12}>
             <div className={classes.waitSettle}>
               <h1>The auction has ended</h1>
-              <p>Next auction will be settled by the NounBA team.</p>
+              <p>This auction will be settled by the NounBA team.</p>
               {isTimeToSettle && isWalletConnected && (
                 <SettleManuallyBtn settleAuctionHandler={settleAuctionHandler} auction={auction} />
               )}
