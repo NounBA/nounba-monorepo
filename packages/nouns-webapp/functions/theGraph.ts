@@ -25,6 +25,11 @@ export interface NormalizedNoun {
   votes: NormalizedVote[];
   seed: Seed;
 }
+export interface NormalizedAuction {
+  settled: boolean;
+  id: number;
+  index: number;
+}
 
 const nounsGql = `
 {
@@ -55,6 +60,20 @@ const nounsGql = `
 }
 `;
 
+const auctionsGql = `
+{
+  auctions(where: {settled: false}, orderBy: id, orderDirection: desc) {
+    settled
+    id
+    noun {
+      seed {
+        oneOfOneIndex
+      }
+    }
+  }
+}
+`;
+
 export const normalizeVote = (vote: any): NormalizedVote => ({
   proposalId: Number(vote.proposal.id),
   supportDetailed: Number(vote.supportDetailed),
@@ -77,10 +96,17 @@ export const normalizeNoun = (noun: any): NormalizedNoun => ({
   votes: normalizeVotes(noun.votes),
   seed: normalizeSeed(noun.seed),
 });
+export const normalizeAuction = (auction: any): NormalizedAuction => ({
+  id: Number(auction.id),
+  settled: auction.settled,
+  index: Number(auction.noun.seed.oneOfOneIndex),
+});
 
 export const normalizeNouns = R.map(normalizeNoun);
 
 export const normalizeVotes = R.map(normalizeVote);
+
+export const normalizeAuctions = R.map(normalizeAuction);
 
 export const ownerFilterFactory = (address: string) =>
   R.filter((noun: any) => bigNumbersEqual(address, noun.owner));
@@ -97,4 +123,9 @@ export const isNounDelegate = (address: string, nouns: NormalizedNoun[]) =>
 export const nounsQuery = async () =>
   normalizeNouns(
     (await axios.post(config.app.subgraphApiUri, { query: nounsGql })).data.data.nouns,
+  );
+
+export const nounsAuctions = async () =>
+  normalizeAuctions(
+    (await axios.post(config.app.subgraphApiUri, { query: auctionsGql })).data.data.auctions,
   );
