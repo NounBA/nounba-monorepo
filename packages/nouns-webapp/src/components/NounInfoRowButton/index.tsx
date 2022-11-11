@@ -13,6 +13,7 @@ interface NounInfoRowButtonProps {
 const NounInfoRowButton: React.FC<NounInfoRowButtonProps> = props => {
   const { icon, btnText, onClickHandler, className } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
+
   return (
     <div
       className={clsx(isCool ? classes.nounButtonCool : classes.nounButtonWarm, className)}
