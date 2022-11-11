@@ -9,7 +9,7 @@ import testnetNoun from '../../assets/testnet-noun.png';
 import config, { CHAIN_ID } from '../../config';
 import { utils } from 'ethers';
 import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
-import { NavBarButtonStyle } from '../NavBarButton';
+import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 // import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 // import { ExternalURL, externalURL } from '../../utils/externalURL';
 // import { Trans } from '@lingui/macro';
@@ -18,6 +18,8 @@ import useLidoBalance from '../../hooks/useLidoBalance';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { useState } from 'react';
+import { Bell } from 'lucide-react';
+import NotifyModal from '../NotifyModal';
 // import { File, Users } from 'lucide-react';
 
 const NavBar = () => {
@@ -29,6 +31,11 @@ const NavBar = () => {
   const treasuryBalance = ethBalance && lidoBalanceAsETH && ethBalance.add(lidoBalanceAsETH);
   const daoEtherscanLink = buildEtherscanHoldingsLink(config.addresses.nounsDaoExecutor);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [showConnectModal, setShowConnectModal] = useState(false);
+
+  const setModalStateHandler = (state: boolean) => {
+    setShowConnectModal(state);
+  };
 
   // const useStateBg =
   //   history.location.pathname === '/' ||
@@ -54,6 +61,10 @@ const NavBar = () => {
           <img className={classes.testnetImg} src={testnetNoun} alt="testnet noun" />
           TESTNET
         </div>
+      )}
+
+      {showConnectModal && activeAccount === undefined && (
+        <NotifyModal onDismiss={() => setModalStateHandler(false)} />
       )}
       <Navbar expand="lg" className={classes.navBarCustom} expanded={isNavExpanded}>
         <Container style={{ maxWidth: 'unset' }}>
@@ -83,6 +94,13 @@ const NavBar = () => {
                 />
               </Nav.Link>
             )}
+            <Nav.Link className={classes.nounsNavLink} onClick={() => setModalStateHandler(true)}>
+              <NavBarButton
+                buttonText={'Updates'}
+                buttonIcon={<Bell size={24} />}
+                buttonStyle={nonWalletButtonStyle}
+              />
+            </Nav.Link>
             {/* <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
