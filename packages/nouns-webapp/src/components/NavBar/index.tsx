@@ -63,9 +63,7 @@ const NavBar = () => {
         </div>
       )}
 
-      {showConnectModal && activeAccount === undefined && (
-        <NotifyModal onDismiss={() => setModalStateHandler(false)} />
-      )}
+      {showConnectModal && <NotifyModal onDismiss={() => setModalStateHandler(false)} />}
       <Navbar expand="lg" className={classes.navBarCustom} expanded={isNavExpanded}>
         <Container style={{ maxWidth: 'unset' }}>
           <div className={classes.brandAndTreasuryWrapper}>
