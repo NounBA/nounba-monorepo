@@ -1,6 +1,11 @@
 .proposals {
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--brand-gray-background);
+  border-radius: var(--default-border-radius);
+  margin-top: 24px;
+  margin-bottom: 32px;
+  padding: 32px;
 }
 
 .proposals > div {
@@ -12,7 +17,7 @@
 
 .heading {
   font-family: 'DM Sans';
-  font-size: 40px;
+  font-size: 25px;
   margin: 0 !important;
 }
 
@@ -21,38 +26,38 @@
   height: 3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  border-radius: 12px;
-  background-color: var(--brand-color-green);
-  border: var(--brand-color-green);
+  border-radius: var(--default-border-radius);
+  background-color: var(--brand-color-blue);
+  border: var(--brand-color-blue);
 }
 .generateBtn:focus,
 .generateBtn:hover {
-  background-color: var(--brand-color-green) !important;
-  box-shadow: 0 0 0 0.2rem rgb(67, 179, 105, 0.75);
+  background-color: var(--brand-color-blue) !important;
 }
 .generateBtn:active {
-  background-color: var(--brand-color-green) !important;
+  background-color: var(--brand-color-blue) !important;
 }
 
 .generateBtnDisabled {
-  max-width: 10rem;
-  height: 3rem;
+  max-width: 13rem;
+  height: 56px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
-  background-color: #f4f4f8;
-  border: #f4f4f8;
-  color: #8c8d92;
-  border: 1px solid #e2e3e8;
+  border-radius: var(--default-border-radius);
+  background-color: var(--brand-bg-gray-light);
+  color: var(--brand-bg-gray-400);
+  border: 1px solid var(--brand-bg-gray-light);
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'DM Sans';
+  padding: 0 20px;
 }
 .generateBtnDisabled:focus,
 .generateBtnDisabled:hover,
 .generateBtnDisabled:active {
   cursor: not-allowed;
-  background-color: #f4f4f8 !important;
-  border: #f4f4f8 !important;
-  color: #8c8d92 !important;
-  border: 1px solid #e2e3e8 !important;
+  background-color: var(--brand-bg-gray-light) !important;
+  border-color: var(--brand-bg-gray-light) !important;
+  color: var(--brand-bg-gray-400) !important;
   outline: none;
   box-shadow: none;
 }
@@ -62,13 +67,12 @@
   margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid #e2e3e8;
   box-sizing: border-box;
-  border-radius: 16px;
-  background: #f4f4f8;
-  font-size: 22px;
+  border-radius: var(--default-border-radius);
+  background: var(--brand-bg-gray-light);
+  font-size: 25px;
   font-family: 'DM Sans';
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .proposalInfoWrapper {
@@ -80,7 +84,7 @@
 }
 
 .proposalLink:hover {
-  background: white;
+  /* background: white; */
   cursor: pointer;
 }
 
@@ -110,9 +114,9 @@
   margin-right: 1rem;
   font-family: 'DM Sans';
   font-weight: 500;
-  color: var(--brand-gray-light-text);
-  font-size: 16px;
-  line-height: 22.4px;
+  color: var(--brand-bg-gray-500);
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .mobileCountdownWrapper {
@@ -176,12 +180,21 @@
 }
 
 .proposalId {
-  color: #8c8d92;
-  margin-right: 0.5rem;
+  color: var(--brand-white);
+  background-color: var(--brand-gray-background);
+  border-radius: 48px;
+  width: 64px;
+  height: 64px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .proposalTitle {
   width: 80%;
+  display: flex;
+  align-items: center;
 }
 
 .proposalStatusWrapper {
@@ -202,8 +215,8 @@
 }
 
 .countdownPill {
-  background-color: var(--brand-gray-light-text-translucent);
-  color: #00000080;
+  background-color: var(--brand-bg-gray-500);
+  color: var(--brand-white);
   width: fit-content;
   margin-left: -0.5rem;
 }
@@ -236,7 +249,7 @@
   height: 3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  border-radius: 12px;
+  border-radius: var(--default-border-radius);
 }
 
 .changeDelegateBtn:focus,

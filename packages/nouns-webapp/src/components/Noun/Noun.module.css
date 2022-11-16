@@ -16,6 +16,7 @@
 
 .circular {
   border-radius: 50%;
+  min-height: unset;
 }
 
 .delegateViewCircular {
@@ -26,6 +27,7 @@
 .circleWithBorder {
   border-radius: 50%;
   border: 2px solid #ffffff;
+  min-height: unset;
 }
 
 .rounded {

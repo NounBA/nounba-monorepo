@@ -1,5 +1,5 @@
-import { Col, Row } from 'react-bootstrap';
-import Section from '../../layout/Section';
+import { Col, Container, Row } from 'react-bootstrap';
+// import Section from '../../layout/Section';
 import { useAllProposals, useProposalThreshold } from '../../wrappers/nounsDao';
 import Proposals from '../../components/Proposals';
 import classes from './Governance.module.css';
@@ -8,6 +8,9 @@ import clsx from 'clsx';
 import { useTreasuryBalance, useTreasuryUSDValue } from '../../hooks/useTreasuryBalance';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
+import Image from 'react-bootstrap/Image';
+import ballsImage from '../../assets/three-balls.svg';
+import Line from '../../components/Line';
 
 const GovernancePage = () => {
   const { data: proposals } = useAllProposals();
@@ -18,69 +21,80 @@ const GovernancePage = () => {
   const treasuryBalanceUSD = useTreasuryUSDValue();
 
   // Note: We have to extract this copy out of the <span> otherwise the Lingui macro gets confused
-  const nounSingular = <Trans>Noun</Trans>;
-  const nounPlural = <Trans>Nouns</Trans>;
+  const nounSingular = <Trans>NounBA</Trans>;
+  const nounPlural = <Trans>NounBAs</Trans>;
 
   return (
-    <Section fullWidth={false} className={classes.section}>
-      <Col lg={10} className={classes.wrapper}>
-        <Row className={classes.headerRow}>
-          <span>
-            <Trans>Governance</Trans>
-          </span>
-          <h1>
-            <Trans>NounBA DAO</Trans>
-          </h1>
-        </Row>
-        <p className={classes.subheading}>
-          <Trans>
-            Nouns govern <span className={classes.boldText}>NounBA DAO</span>. Nouns can vote on
-            proposals or delegate their vote to a third party. A minimum of{' '}
-            <span className={classes.boldText}>
-              {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
-            </span>{' '}
-            is required to submit proposals.
-          </Trans>
-        </p>
-
-        <Row className={classes.treasuryInfoCard}>
-          <Col lg={8} className={classes.treasuryAmtWrapper}>
-            <Row className={classes.headerRow}>
+    <>
+      <Line />
+      <Container style={{ maxWidth: 'unset' }} className={classes.section}>
+        <Row className="align-items-justify">
+          <Col lg={6} className={classes.card}>
+            <div className={classes.headerRow}>
+              <Image
+                className={classes.image}
+                width={'100%'}
+                src={ballsImage}
+                alt={'Balls illustration'}
+              />
+              <span>
+                <Trans>Governance</Trans>
+              </span>
+              <h1>
+                <Trans>NounBA DAO</Trans>
+              </h1>
+            </div>
+            <p className={classes.subheading}>
+              <Trans>
+                NounBAs govern <span className={classes.boldText}>NounBA DAO</span>. NounBAs can
+                vote on proposals or delegate their vote to a third party. A minimum of{' '}
+                <span className={classes.boldText}>
+                  {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
+                </span>{' '}
+                is required to submit proposals.
+              </Trans>
+            </p>
+          </Col>
+          <Col
+            lg={6}
+            className={clsx(classes.card, classes.cardWithSpace, classes.treasuryWrapper)}
+          >
+            <div className={classes.headerRow}>
               <span>
                 <Trans>Treasury</Trans>
               </span>
-            </Row>
-            <Row>
-              <Col className={clsx(classes.ethTreasuryAmt)} lg={3}>
-                <h1 className={classes.ethSymbol}>Ξ</h1>
-                <h1>
+              <p className={classes.subheading}>
+                This treasury exists for NounBAs DAO participants to allocate resources for the
+                long-term growth and prosperity of the NounBAs project.
+              </p>
+            </div>
+            <div>
+              <div className={clsx(classes.treasuryCards)}>
+                <div className={classes.ethSymbol}>Ξ</div>
+                <div>
                   {treasuryBalance &&
                     i18n.number(Number(Number(utils.formatEther(treasuryBalance)).toFixed(0)))}
-                </h1>
-              </Col>
-              <Col className={classes.usdTreasuryAmt}>
-                <h1 className={classes.usdBalance}>
+                </div>
+              </div>
+              <div className={clsx(classes.treasuryCards, classes.treasuryCardRed)}>
+                <div className={classes.ethSymbol}>$</div>
+                <div>
                   {!isNaN(treasuryBalanceUSD) &&
                     treasuryBalanceUSD &&
                     i18n.number(Number(treasuryBalanceUSD.toFixed(0)), {
                       style: 'currency',
                       currency: 'USD',
                     })}
-                </h1>
-              </Col>
-            </Row>
-          </Col>
-          <Col className={classes.treasuryInfoText}>
-            <Trans>
-              This treasury exists for <span className={classes.boldText}>NounBA DAO</span>{' '}
-              participants to allocate resources for the long-term growth and prosperity of the
-              Nouns project.
-            </Trans>
+                </div>
+              </div>
+            </div>
           </Col>
         </Row>
-        <Proposals proposals={proposals} />
-      </Col>
-    </Section>
+        <Row className="align-items-justify">
+          <Proposals proposals={proposals} />
+        </Row>
+      </Container>
+    </>
   );
 };
 export default GovernancePage;

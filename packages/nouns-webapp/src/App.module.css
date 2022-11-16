@@ -1,6 +1,8 @@
 @import './css/colors.css';
 
 .wrapper {
+  background-color: var(--brand-bg-gray);
+  color: var(--brand-white);
   display: flex;
   flex-direction: column;
   min-height: 100vh;

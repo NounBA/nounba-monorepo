@@ -1,26 +1,26 @@
-import { useAppSelector } from '../../hooks';
-import classes from './NavBar.module.css';
-import logo from '../../assets/logo.svg';
+import { useState } from 'react';
 import { useEtherBalance } from '@usedapp/core';
 // import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
+import { Users, Bell } from 'lucide-react';
+import { Trans } from '@lingui/macro';
+import { utils } from 'ethers';
+import { useAppSelector } from '../../hooks';
+import classes from './NavBar.module.css';
+import logo from '../../assets/logo.svg';
 import testnetNoun from '../../assets/testnet-noun.png';
 import config, { CHAIN_ID } from '../../config';
-import { utils } from 'ethers';
 import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
 import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 // import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 // import { ExternalURL, externalURL } from '../../utils/externalURL';
-// import { Trans } from '@lingui/macro';
 // import { File } from 'lucide-react';
 import useLidoBalance from '../../hooks/useLidoBalance';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
-import { useState } from 'react';
-import { Bell } from 'lucide-react';
+
 import NotifyModal from '../NotifyModal';
-// import { File, Users } from 'lucide-react';
 
 const NavBar = () => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
@@ -52,7 +52,7 @@ const NavBar = () => {
     // NavBarButtonStyle.COOL_INFO;
     NavBarButtonStyle.WARM_INFO;
 
-  // const closeNav = () => setIsNavExpanded(false);
+  const closeNav = () => setIsNavExpanded(false);
 
   return (
     <>
@@ -99,13 +99,13 @@ const NavBar = () => {
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
-            {/* <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
+            <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
                 buttonIcon={<Users size={24} />}
                 buttonStyle={nonWalletButtonStyle}
               />
-            </Nav.Link> */}
+            </Nav.Link>
             {/* <Nav.Link
               href={externalURL(ExternalURL.notion)}
               className={classes.nounsNavLink}
