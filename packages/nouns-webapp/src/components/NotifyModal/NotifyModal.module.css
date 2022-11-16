@@ -1,0 +1,32 @@
+.text {
+  font-weight: normal;
+  padding: 0 !important;
+}
+
+.buttonIcon {
+  margin-left: 12px;
+  margin-top: -4px;
+}
+
+.modalButton {
+  background-color: #EEF2F6 !important;
+  color: var(--brand-bg-gray) !important;
+  font-size: 1.25rem;
+  border: 1px solid #EEF2F6;
+  margin-top: 16px !important;
+}
+.modalButton:hover {
+  color: var(--brand-black) !important;
+  background-color: var(--brand-white) !important;
+  border-color: var(--brand-black) !important;
+}
+.blueButton {
+  background-color: var(--brand-color-blue) !important;
+  color: var(--brand-white) !important;
+  border-color: var(--brand-blue) !important;
+}
+.blueButton:hover {
+  background-color: #0040C1 !important;
+  color: var(--brand-white) !important;
+  border-color: var(--brand-white) !important;
+}
