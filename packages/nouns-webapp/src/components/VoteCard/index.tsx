@@ -102,8 +102,8 @@ const VoteCard: React.FC<VoteCardProps> = props => {
   return (
     <Col lg={4} className={classes.wrapper}>
       <Card className={classes.voteCountCard}>
-        <Card.Body className="p-2">
-          <Card.Text className="py-2 m-0">
+        <Card.Body className="p-0">
+          <Card.Text className="pt-0 pb-2 m-0">
             <span
               className={`${
                 isEnUS ? classes.voteCardHeaderTextEn : classes.voteCardHeaderTextNonEn

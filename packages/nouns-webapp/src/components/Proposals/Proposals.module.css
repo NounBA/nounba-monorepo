@@ -1,9 +1,13 @@
+.noProposals {
+  background-color: #202939;
+  color: var(--brand-white);
+  border: none;
+}
 .proposals {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--brand-gray-background);
   border-radius: var(--default-border-radius);
-  margin-top: 24px;
   margin-bottom: 32px;
   padding: 32px;
 }

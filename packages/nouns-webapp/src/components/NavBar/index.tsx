@@ -65,7 +65,7 @@ const NavBar = () => {
 
       {showConnectModal && <NotifyModal onDismiss={() => setModalStateHandler(false)} />}
       <Navbar expand="lg" className={classes.navBarCustom} expanded={isNavExpanded}>
-        <Container style={{ maxWidth: 'unset' }}>
+        <Container fluid="xl">
           <div className={classes.brandAndTreasuryWrapper}>
             <Navbar.Brand as={Link} to="/" className={classes.navBarBrand}>
               <img src={logo} className={classes.navBarLogo} alt="Nouns DAO logo" />

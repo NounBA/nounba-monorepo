@@ -270,7 +270,7 @@ const VotePage = ({
           proposalId={proposal?.id}
           availableVotes={availableVotes || 0}
         />
-        <Col lg={10} className={classes.wrapper}>
+        <Col lg={12} className={classes.wrapper}>
           {proposal && (
             <ProposalHeader
               proposal={proposal}
@@ -280,7 +280,7 @@ const VotePage = ({
             />
           )}
         </Col>
-        <Col lg={10} className={clsx(classes.proposal, classes.wrapper)}>
+        <Col lg={12} className={clsx(classes.proposal, classes.wrapper)}>
           {isAwaitingStateChange() && (
             <Row className={clsx(classes.section, classes.transitionStateButtonSection)}>
               <Col className="d-grid">

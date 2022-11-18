@@ -1,14 +1,18 @@
+.section {
+  padding: 0 18px 0 30px;
+}
+.cardWrapper {
+  margin-bottom: 24px;
+}
 .card {
   background-color: var(--brand-bg-gray-light);
   padding: 56px;
-  width: 49%;
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
 }
 .image {
   margin-bottom: 32px;
-}
-.cardWithSpace {
-  margin-left: 2%;
 }
 .treasuryWrapper {
   display: flex;
@@ -49,13 +53,6 @@
 
 p {
   padding-top: 1rem;
-}
-
-@media (max-width: 992px) {
-  .section {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
 }
 
 .treasuryCards {

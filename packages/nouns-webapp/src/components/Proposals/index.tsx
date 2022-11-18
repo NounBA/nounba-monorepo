@@ -237,7 +237,7 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
             );
           })
       ) : (
-        <Alert variant="secondary">
+        <Alert className={classes.noProposals} variant="secondary">
           <Alert.Heading>
             <Trans>No proposals found</Trans>
           </Alert.Heading>

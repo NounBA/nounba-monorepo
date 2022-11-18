@@ -27,71 +27,73 @@ const GovernancePage = () => {
   return (
     <>
       <Line />
-      <Container style={{ maxWidth: 'unset' }} className={classes.section}>
+      <Container fluid="xl" className={classes.section}>
         <Row className="align-items-justify">
-          <Col lg={6} className={classes.card}>
-            <div className={classes.headerRow}>
-              <Image
-                className={classes.image}
-                width={'100%'}
-                src={ballsImage}
-                alt={'Balls illustration'}
-              />
-              <span>
-                <Trans>Governance</Trans>
-              </span>
-              <h1>
-                <Trans>NounBA DAO</Trans>
-              </h1>
-            </div>
-            <p className={classes.subheading}>
-              <Trans>
-                NounBAs govern <span className={classes.boldText}>NounBA DAO</span>. NounBAs can
-                vote on proposals or delegate their vote to a third party. A minimum of{' '}
-                <span className={classes.boldText}>
-                  {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
-                </span>{' '}
-                is required to submit proposals.
-              </Trans>
-            </p>
-          </Col>
-          <Col
-            lg={6}
-            className={clsx(classes.card, classes.cardWithSpace, classes.treasuryWrapper)}
-          >
-            <div className={classes.headerRow}>
-              <span>
-                <Trans>Treasury</Trans>
-              </span>
+          <Col sm={12} lg={6} className={classes.cardWrapper}>
+            <div className={classes.card}>
+              <div className={classes.headerRow}>
+                <Image
+                  className={classes.image}
+                  width={'100%'}
+                  src={ballsImage}
+                  alt={'Balls illustration'}
+                />
+                <span>
+                  <Trans>Governance</Trans>
+                </span>
+                <h1>
+                  <Trans>NounBA DAO</Trans>
+                </h1>
+              </div>
               <p className={classes.subheading}>
-                This treasury exists for NounBAs DAO participants to allocate resources for the
-                long-term growth and prosperity of the NounBAs project.
+                <Trans>
+                  NounBAs govern <span className={classes.boldText}>NounBA DAO</span>. NounBAs can
+                  vote on proposals or delegate their vote to a third party. A minimum of{' '}
+                  <span className={classes.boldText}>
+                    {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
+                  </span>{' '}
+                  is required to submit proposals.
+                </Trans>
               </p>
             </div>
-            <div>
-              <div className={clsx(classes.treasuryCards)}>
-                <div className={classes.ethSymbol}>Ξ</div>
-                <div>
-                  {treasuryBalance &&
-                    i18n.number(Number(Number(utils.formatEther(treasuryBalance)).toFixed(0)))}
-                </div>
+          </Col>
+          <Col sm={12} lg={6} className={classes.cardWrapper}>
+            <div className={clsx(classes.card, classes.treasuryWrapper)}>
+              <div className={classes.headerRow}>
+                <span>
+                  <Trans>Treasury</Trans>
+                </span>
+                <p className={classes.subheading}>
+                  This treasury exists for NounBAs DAO participants to allocate resources for the
+                  long-term growth and prosperity of the NounBAs project.
+                </p>
               </div>
-              <div className={clsx(classes.treasuryCards, classes.treasuryCardRed)}>
-                <div className={classes.ethSymbol}>$</div>
-                <div>
-                  {!isNaN(treasuryBalanceUSD) &&
-                    treasuryBalanceUSD &&
-                    i18n.number(Number(treasuryBalanceUSD.toFixed(0)), {
-                      style: 'currency',
-                      currency: 'USD',
-                    })}
+              <div>
+                <div className={clsx(classes.treasuryCards)}>
+                  <div className={classes.ethSymbol}>Ξ</div>
+                  <div>
+                    {treasuryBalance &&
+                      i18n.number(Number(Number(utils.formatEther(treasuryBalance)).toFixed(2)))}
+                  </div>
+                </div>
+                <div className={clsx(classes.treasuryCards, classes.treasuryCardRed)}>
+                  <div>
+                    {!isNaN(treasuryBalanceUSD) &&
+                      treasuryBalanceUSD &&
+                      i18n.number(Number(treasuryBalanceUSD.toFixed(0)), {
+                        style: 'currency',
+                        currency: 'USD',
+                      })}
+                  </div>
                 </div>
               </div>
             </div>
           </Col>
         </Row>
         <Row className="align-items-justify">
-          <Proposals proposals={proposals} />
+          <Col sm={12}>
+            <Proposals proposals={proposals} />
+          </Col>
         </Row>
       </Container>
     </>
