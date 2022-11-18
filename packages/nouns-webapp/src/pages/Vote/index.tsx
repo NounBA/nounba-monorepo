@@ -33,6 +33,7 @@ import { getNounVotes } from '../../utils/getNounsVotes';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import { ReactNode } from 'react-markdown/lib/react-markdown';
+import Line from '../../components/Line';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -260,152 +261,155 @@ const VotePage = ({
   const abstainNouns = getNounVotes(data, 2);
 
   return (
-    <Section fullWidth={false} className={classes.votePage}>
-      <VoteModal
-        show={showVoteModal}
-        onHide={() => setShowVoteModal(false)}
-        proposalId={proposal?.id}
-        availableVotes={availableVotes || 0}
-      />
-      <Col lg={10} className={classes.wrapper}>
-        {proposal && (
-          <ProposalHeader
-            proposal={proposal}
-            isActiveForVoting={isActiveForVoting}
-            isWalletConnected={isWalletConnected}
-            submitButtonClickHandler={() => setShowVoteModal(true)}
-          />
-        )}
-      </Col>
-      <Col lg={10} className={clsx(classes.proposal, classes.wrapper)}>
-        {isAwaitingStateChange() && (
-          <Row className={clsx(classes.section, classes.transitionStateButtonSection)}>
-            <Col className="d-grid">
-              <Button
-                onClick={moveStateAction}
-                disabled={isQueuePending || isExecutePending}
-                variant="dark"
-                className={classes.transitionStateButton}
-              >
-                {isQueuePending || isExecutePending ? (
-                  <Spinner animation="border" />
-                ) : (
-                  <Trans>{moveStateButtonAction} Proposal ⌐◧-◧</Trans>
-                )}
-              </Button>
+    <>
+      <Line />
+      <Section fullWidth={false} className={classes.votePage}>
+        <VoteModal
+          show={showVoteModal}
+          onHide={() => setShowVoteModal(false)}
+          proposalId={proposal?.id}
+          availableVotes={availableVotes || 0}
+        />
+        <Col lg={12} className={classes.wrapper}>
+          {proposal && (
+            <ProposalHeader
+              proposal={proposal}
+              isActiveForVoting={isActiveForVoting}
+              isWalletConnected={isWalletConnected}
+              submitButtonClickHandler={() => setShowVoteModal(true)}
+            />
+          )}
+        </Col>
+        <Col lg={12} className={clsx(classes.proposal, classes.wrapper)}>
+          {isAwaitingStateChange() && (
+            <Row className={clsx(classes.section, classes.transitionStateButtonSection)}>
+              <Col className="d-grid">
+                <Button
+                  onClick={moveStateAction}
+                  disabled={isQueuePending || isExecutePending}
+                  variant="dark"
+                  className={classes.transitionStateButton}
+                >
+                  {isQueuePending || isExecutePending ? (
+                    <Spinner animation="border" />
+                  ) : (
+                    <Trans>{moveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                  )}
+                </Button>
+              </Col>
+            </Row>
+          )}
+
+          <p
+            onClick={() => setIsDelegateView(!isDelegateView)}
+            className={classes.toggleDelegateVoteView}
+          >
+            {isDelegateView ? (
+              <Trans>Switch to Noun view</Trans>
+            ) : (
+              <Trans>Switch to delegate view</Trans>
+            )}
+          </p>
+          <Row>
+            <VoteCard
+              proposal={proposal}
+              percentage={forPercentage}
+              nounIds={forNouns}
+              variant={VoteCardVariant.FOR}
+              delegateView={isDelegateView}
+              delegateGroupedVoteData={data}
+            />
+            <VoteCard
+              proposal={proposal}
+              percentage={againstPercentage}
+              nounIds={againstNouns}
+              variant={VoteCardVariant.AGAINST}
+              delegateView={isDelegateView}
+              delegateGroupedVoteData={data}
+            />
+            <VoteCard
+              proposal={proposal}
+              percentage={abstainPercentage}
+              nounIds={abstainNouns}
+              variant={VoteCardVariant.ABSTAIN}
+              delegateView={isDelegateView}
+              delegateGroupedVoteData={data}
+            />
+          </Row>
+
+          {/* TODO abstract this into a component  */}
+          <Row>
+            <Col xl={4} lg={12}>
+              <Card className={classes.voteInfoCard}>
+                <Card.Body className="p-2">
+                  <div className={classes.voteMetadataRow}>
+                    <div className={classes.voteMetadataRowTitle}>
+                      <h1>
+                        <Trans>Threshold</Trans>
+                      </h1>
+                    </div>
+                    <div className={classes.thresholdInfo}>
+                      <span>
+                        <Trans>Quorum</Trans>
+                      </span>
+                      <h3>
+                        <Trans>{i18n.number(proposal.quorumVotes)} votes</Trans>
+                      </h3>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xl={4} lg={12}>
+              <Card className={classes.voteInfoCard}>
+                <Card.Body className="p-2">
+                  <div className={classes.voteMetadataRow}>
+                    <div className={classes.voteMetadataRowTitle}>
+                      <h1>{startOrEndTimeCopy()}</h1>
+                    </div>
+                    <div className={classes.voteMetadataTime}>
+                      <span>
+                        {startOrEndTimeTime() &&
+                          i18n.date(new Date(startOrEndTimeTime()?.toISOString() || 0), {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            timeZoneName: 'short',
+                          })}
+                      </span>
+                      <h3>
+                        {startOrEndTimeTime() &&
+                          i18n.date(new Date(startOrEndTimeTime()?.toISOString() || 0), {
+                            dateStyle: 'long',
+                          })}
+                      </h3>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xl={4} lg={12}>
+              <Card className={classes.voteInfoCard}>
+                <Card.Body className="p-2">
+                  <div className={classes.voteMetadataRow}>
+                    <div className={classes.voteMetadataRowTitle}>
+                      <h1>Snapshot</h1>
+                    </div>
+                    <div className={classes.snapshotBlock}>
+                      <span>
+                        <Trans>Taken at block</Trans>
+                      </span>
+                      <h3>{proposal.createdBlock}</h3>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
-        )}
 
-        <p
-          onClick={() => setIsDelegateView(!isDelegateView)}
-          className={classes.toggleDelegateVoteView}
-        >
-          {isDelegateView ? (
-            <Trans>Switch to Noun view</Trans>
-          ) : (
-            <Trans>Switch to delegate view</Trans>
-          )}
-        </p>
-        <Row>
-          <VoteCard
-            proposal={proposal}
-            percentage={forPercentage}
-            nounIds={forNouns}
-            variant={VoteCardVariant.FOR}
-            delegateView={isDelegateView}
-            delegateGroupedVoteData={data}
-          />
-          <VoteCard
-            proposal={proposal}
-            percentage={againstPercentage}
-            nounIds={againstNouns}
-            variant={VoteCardVariant.AGAINST}
-            delegateView={isDelegateView}
-            delegateGroupedVoteData={data}
-          />
-          <VoteCard
-            proposal={proposal}
-            percentage={abstainPercentage}
-            nounIds={abstainNouns}
-            variant={VoteCardVariant.ABSTAIN}
-            delegateView={isDelegateView}
-            delegateGroupedVoteData={data}
-          />
-        </Row>
-
-        {/* TODO abstract this into a component  */}
-        <Row>
-          <Col xl={4} lg={12}>
-            <Card className={classes.voteInfoCard}>
-              <Card.Body className="p-2">
-                <div className={classes.voteMetadataRow}>
-                  <div className={classes.voteMetadataRowTitle}>
-                    <h1>
-                      <Trans>Threshold</Trans>
-                    </h1>
-                  </div>
-                  <div className={classes.thresholdInfo}>
-                    <span>
-                      <Trans>Quorum</Trans>
-                    </span>
-                    <h3>
-                      <Trans>{i18n.number(proposal.quorumVotes)} votes</Trans>
-                    </h3>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xl={4} lg={12}>
-            <Card className={classes.voteInfoCard}>
-              <Card.Body className="p-2">
-                <div className={classes.voteMetadataRow}>
-                  <div className={classes.voteMetadataRowTitle}>
-                    <h1>{startOrEndTimeCopy()}</h1>
-                  </div>
-                  <div className={classes.voteMetadataTime}>
-                    <span>
-                      {startOrEndTimeTime() &&
-                        i18n.date(new Date(startOrEndTimeTime()?.toISOString() || 0), {
-                          hour: 'numeric',
-                          minute: '2-digit',
-                          timeZoneName: 'short',
-                        })}
-                    </span>
-                    <h3>
-                      {startOrEndTimeTime() &&
-                        i18n.date(new Date(startOrEndTimeTime()?.toISOString() || 0), {
-                          dateStyle: 'long',
-                        })}
-                    </h3>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xl={4} lg={12}>
-            <Card className={classes.voteInfoCard}>
-              <Card.Body className="p-2">
-                <div className={classes.voteMetadataRow}>
-                  <div className={classes.voteMetadataRowTitle}>
-                    <h1>Snapshot</h1>
-                  </div>
-                  <div className={classes.snapshotBlock}>
-                    <span>
-                      <Trans>Taken at block</Trans>
-                    </span>
-                    <h3>{proposal.createdBlock}</h3>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <ProposalContent proposal={proposal} />
-      </Col>
-    </Section>
+          <ProposalContent proposal={proposal} />
+        </Col>
+      </Section>
+    </>
   );
 };
 

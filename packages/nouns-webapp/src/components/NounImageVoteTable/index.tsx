@@ -12,7 +12,7 @@ interface NounImageVoteTableProps {
   nounIds: string[];
   propId: number;
 }
-const NOUNS_PER_VOTE_CARD_DESKTOP = 15;
+const NOUNS_PER_VOTE_CARD_DESKTOP = 12;
 
 const isXLScreen = window.innerWidth > 1200;
 
@@ -24,7 +24,7 @@ const NounImageVoteTable: React.FC<NounImageVoteTableProps> = props => {
 
   const content = (page: number) => {
     const rows = 3;
-    const rowLength = isXLScreen ? 5 : 4;
+    const rowLength = isXLScreen ? 4 : 3;
 
     const paddedNounIds = shuffledNounIds
       .map((nounId: string) => {

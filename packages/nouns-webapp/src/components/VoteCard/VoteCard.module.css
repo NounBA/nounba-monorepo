@@ -29,9 +29,9 @@
 
 .voteCountCard {
   margin-top: 1rem;
-  padding: 0.5rem;
+  padding: 2rem;
   border-radius: 12px;
-  background-color: #f4f4f8;
+  background-color: var(--brand-bg-gray-light);
   min-height: 18rem;
 }
 
