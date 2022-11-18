@@ -146,7 +146,9 @@ const AuctionActivity: React.FC<AuctionActivityProps> = (props: AuctionActivityP
                 {auctionEnded && (
                   <>
                     {!isPastAuction && isLastAuction && <Winner winner={auction.bidder} />}
-                    {isPastAuction && !isNounbaNoun && <Holder holder={auction.bidder} />}
+                    {isPastAuction && !isNounbaNoun && (
+                      <Holder nounId={auction.nounId.toNumber()} />
+                    )}
                     {isPastAuction && isNounbaNoun && <Winner winner={auction.bidder} isNounders />}
                   </>
                 )}
