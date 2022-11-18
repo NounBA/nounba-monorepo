@@ -7,21 +7,36 @@ import { Trans } from '@lingui/macro';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import React, { useMemo } from 'react';
 import Tooltip from '../Tooltip';
+import { useQuery } from '@apollo/client';
+import { nounQuery } from '../../wrappers/subgraph';
 
 interface HolderProps {
-  holder: string;
+  nounId: number;
 }
 
 const Holder: React.FC<HolderProps> = props => {
-  const { holder } = props;
+  const { nounId } = props;
   const activeAccount = useAppSelector(state => state.account.activeAccount);
+  const { loading, error, data } = useQuery(nounQuery(nounId.toString()));
+  const holder = useMemo(() => data && data.noun.owner.id, [data]);
 
   const isWinnerYou = useMemo(
     () =>
       activeAccount !== undefined &&
+      holder !== undefined &&
       activeAccount.toLocaleLowerCase() === holder.toLocaleLowerCase(),
     [activeAccount, holder],
   );
+
+  if (loading) {
+    return <></>;
+  } else if (error) {
+    return (
+      <div>
+        <Trans>Failed to fetch Noun info</Trans>
+      </div>
+    );
+  }
 
   const nonNounderNounContent = (
     <a
