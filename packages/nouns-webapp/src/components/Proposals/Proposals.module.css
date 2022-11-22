@@ -26,8 +26,9 @@
 }
 
 .generateBtn {
-  max-width: 10rem;
-  height: 3rem;
+  max-width: 12rem;
+  padding: 0 20px;
+  height: 56px;
   font-weight: bold;
   margin-bottom: 0.5rem;
   border-radius: var(--default-border-radius);
@@ -242,26 +243,25 @@
 }
 
 .delegateBtnWrapper {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .changeDelegateBtn {
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: rgb(95, 95, 95);
-  max-width: 10rem;
-  height: 3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   border-radius: var(--default-border-radius);
+  padding: 0 20px;
+  height: 56px;
+  border: 1px solid var(--brand-gray-background);
+  color: var(--brand-white);
+  background-color: var(--brand-gray-background);
 }
 
 .changeDelegateBtn:focus,
 .changeDelegateBtn:hover {
-  background-color: #e2e3e8;
-  color: black;
+  background-color: var(--brand-gray-background);
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-gray-background);
 }
 .changeDelegateBtn:active {
   background-color: #e2e3e8 !important;

@@ -5,7 +5,7 @@ import { GrayCircle } from '../GrayCircle';
 import { pseudoRandomPredictableShuffle } from '../../utils/pseudoRandomPredictableShuffle';
 import HoverCard from '../HoverCard';
 import NounHoverCard from '../NounHoverCard';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import VoteCardPager from '../VoteCardPager';
 
 interface NounImageVoteTableProps {
@@ -18,41 +18,44 @@ const isXLScreen = window.innerWidth > 1200;
 
 const NounImageVoteTable: React.FC<NounImageVoteTableProps> = props => {
   const { nounIds, propId } = props;
-
+  // console.log(nounIds);
   const shuffledNounIds = pseudoRandomPredictableShuffle(nounIds, propId);
   const [page, setPage] = useState(0);
 
-  const content = (page: number) => {
-    const rows = 3;
-    const rowLength = isXLScreen ? 4 : 3;
+  const content = useMemo(
+    () => (page: number) => {
+      const rows = 3;
+      const rowLength = isXLScreen ? 4 : 3;
 
-    const paddedNounIds = shuffledNounIds
-      .map((nounId: string) => {
-        return (
-          <HoverCard
-            hoverCardContent={(tip: string) => <NounHoverCard nounId={tip} />}
-            tip={nounId.toString()}
-            id="nounHoverCard"
-          >
-            <StandaloneNounCircular nounId={EthersBN.from(nounId)} />
-          </HoverCard>
-        );
-      })
-      .slice(page * NOUNS_PER_VOTE_CARD_DESKTOP, (page + 1) * NOUNS_PER_VOTE_CARD_DESKTOP)
-      .concat(Array(NOUNS_PER_VOTE_CARD_DESKTOP).fill(<GrayCircle />));
+      const paddedNounIds = shuffledNounIds
+        .map((nounId: string) => {
+          return (
+            <HoverCard
+              hoverCardContent={(tip: string) => <NounHoverCard nounId={tip} />}
+              tip={nounId.toString()}
+              id="nounHoverCard"
+            >
+              <StandaloneNounCircular nounId={EthersBN.from(nounId)} />
+            </HoverCard>
+          );
+        })
+        .slice(page * NOUNS_PER_VOTE_CARD_DESKTOP, (page + 1) * NOUNS_PER_VOTE_CARD_DESKTOP)
+        .concat(Array(NOUNS_PER_VOTE_CARD_DESKTOP).fill(<GrayCircle />));
 
-    return Array(rows)
-      .fill(0)
-      .map((_, i) => (
-        <tr key={i}>
-          {Array(rowLength)
-            .fill(0)
-            .map((_, j) => (
-              <td key={j}>{paddedNounIds[i * rowLength + j]}</td>
-            ))}
-        </tr>
-      ));
-  };
+      return Array(rows)
+        .fill(0)
+        .map((_, i) => (
+          <tr key={i}>
+            {Array(rowLength)
+              .fill(0)
+              .map((_, j) => (
+                <td key={j}>{paddedNounIds[i * rowLength + j]}</td>
+              ))}
+          </tr>
+        ));
+    },
+    [shuffledNounIds],
+  );
 
   return (
     <>

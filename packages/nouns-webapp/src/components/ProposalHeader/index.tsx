@@ -149,16 +149,15 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       </div>
 
       {/* <div className={classes.submitProposalButton}>{voteButton}</div> */}
-      <div className={classes.submitProposalButton}>
-        {proposal && isActiveForVoting && hasVoted && (
-          <div className={classes.helperText}>{getTranslatedVoteCopyFromString(proposalVote)}</div>
-        )}
+      {proposal && isActiveForVoting && (
+        <div className={classes.submitProposalButton}>
+          {hasVoted && (
+            <div className={classes.helperText}>
+              {getTranslatedVoteCopyFromString(proposalVote)}
+            </div>
+          )}
 
-        {proposal &&
-          isActiveForVoting &&
-          proposalCreationTimestamp &&
-          !!availableVotes &&
-          !hasVoted && (
+          {proposalCreationTimestamp && !!availableVotes && !hasVoted && (
             <div className={classes.helperTextSmall}>
               <Trans>
                 Only NounBAs you owned or were delegated to you before{' '}
@@ -170,8 +169,9 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
               </Trans>
             </div>
           )}
-        {isActiveForVoting && voteButton}
-      </div>
+          {isActiveForVoting && voteButton}
+        </div>
+      )}
     </>
   );
 };
