@@ -37,12 +37,19 @@
   margin-top: 0.1rem;
 }
 
-.connectWalletText {
+.helperText,
+.helperTextSmall {
   color: var(--brand-bg-gray-500);
   font-family: 'DM Sans';
   font-weight: 400;
   font-size: 20px;
   min-width: 12rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.helperTextSmall {
+  font-size: 16px;
 }
 
 .noVotesText {
@@ -112,16 +119,6 @@
   border: 1px solid #364152;
   border-radius: 4px;
   margin: 18px 0;
-}
-
-@media (max-width: 992px) {
-  .submitBtn {
-    max-width: 100%;
-  }
-
-  .submitBtnDisabled {
-    max-width: 100%;
-  }
 }
 
 .voterIneligibleAlert {

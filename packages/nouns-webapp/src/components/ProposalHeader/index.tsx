@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ProposalStatus from '../ProposalStatus';
 import classes from './ProposalHeader.module.css';
@@ -66,7 +66,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
           )}
         </>
       ) : (
-        <div className={classes.connectWalletText}>
+        <div className={classes.helperText}>
           <Trans>Connect a wallet to vote.</Trans>
         </div>
       )}
@@ -149,26 +149,29 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       </div>
 
       {/* <div className={classes.submitProposalButton}>{voteButton}</div> */}
-      <div className={classes.mobileSubmitProposalButton}>{isActiveForVoting && voteButton}</div>
+      <div className={classes.submitProposalButton}>
+        {proposal && isActiveForVoting && hasVoted && (
+          <div className={classes.helperText}>{getTranslatedVoteCopyFromString(proposalVote)}</div>
+        )}
 
-      {proposal && isActiveForVoting && hasVoted && (
-        <Alert variant="success" className={classes.voterIneligibleAlert}>
-          {getTranslatedVoteCopyFromString(proposalVote)}
-        </Alert>
-      )}
-
-      {proposal && isActiveForVoting && proposalCreationTimestamp && !!availableVotes && !hasVoted && (
-        <Alert variant="success" className={classes.voterIneligibleAlert}>
-          <Trans>
-            Only Nouns you owned or were delegated to you before{' '}
-            {i18n.date(new Date(proposalCreationTimestamp * 1000), {
-              dateStyle: 'long',
-              timeStyle: 'long',
-            })}{' '}
-            are eligible to vote.
-          </Trans>
-        </Alert>
-      )}
+        {proposal &&
+          isActiveForVoting &&
+          proposalCreationTimestamp &&
+          !!availableVotes &&
+          !hasVoted && (
+            <div className={classes.helperTextSmall}>
+              <Trans>
+                Only NounBAs you owned or were delegated to you before{' '}
+                {i18n.date(new Date(proposalCreationTimestamp * 1000), {
+                  dateStyle: 'long',
+                  timeStyle: 'long',
+                })}{' '}
+                are eligible to vote.
+              </Trans>
+            </div>
+          )}
+        {isActiveForVoting && voteButton}
+      </div>
     </>
   );
 };

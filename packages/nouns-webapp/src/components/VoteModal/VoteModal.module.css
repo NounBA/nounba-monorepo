@@ -22,18 +22,18 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
   border-radius: 12px;
-  background-color: var(--brand-color-green) !important;
-  border: var(--brand-color-green) !important;
+  background-color: var(--brand-color-blue) !important;
+  border: var(--brand-color-blue) !important;
   color: white !important;
 }
 .submitBtn:focus,
 .submitBtn:hover {
-  background-color: var(--brand-color-green) !important;
-  box-shadow: 0 0 0 0.2rem rgb(67, 179, 105, 0.75);
-  border: var(--brand-color-green) !important;
+  background-color: var(--brand-color-blue) !important;
+  /* box-shadow: 0 0 0 0.2rem rgb(67, 179, 105, 0.75); */
+  border: var(--brand-color-blue) !important;
 }
 .submitBtn:active {
-  background-color: var(--brand-color-green) !important;
+  background-color: var(--brand-color-blue) !important;
 }
 
 .submitBtnDisabled {
@@ -106,8 +106,7 @@
 .voteReasonTextarea {
   padding-top: 2rem !important;
   height: 6.5rem !important;
-  border-radius: 10px;
-  border: none;
+  border-radius: 4px;
   font-weight: bold;
   font-size: 1rem;
 }
