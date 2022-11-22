@@ -100,7 +100,7 @@ const VoteCard: React.FC<VoteCardProps> = props => {
   }, [library, ensCached, delegateGroupedVoteData]);
 
   return (
-    <Col lg={4} className={classes.wrapper}>
+    <Col sm={4} className={classes.wrapper}>
       <Card className={classes.voteCountCard}>
         <Card.Body className="p-0">
           <Card.Text className="pt-0 pb-2 m-0">

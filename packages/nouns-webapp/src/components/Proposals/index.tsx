@@ -158,7 +158,7 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
                 <Trans>Submit Proposal</Trans>
               </Button>
             </div>
-            {!isMobile && hasNounBalance && (
+            {hasNounBalance && (
               <div className={classes.delegateBtnWrapper}>
                 <Button
                   className={classes.changeDelegateBtn}
@@ -172,13 +172,6 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
         )}
       </div>
       {isMobile && <div className={classes.nullStateCopy}>{nullStateCopy()}</div>}
-      {isMobile && hasNounBalance && (
-        <div>
-          <Button className={classes.changeDelegateBtn} onClick={() => setShowDelegateModal(true)}>
-            <Trans>Delegate</Trans>
-          </Button>
-        </div>
-      )}
       {proposals?.length ? (
         proposals
           .slice(0)
