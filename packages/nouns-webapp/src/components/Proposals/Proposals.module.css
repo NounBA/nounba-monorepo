@@ -137,51 +137,8 @@
   padding-top: 0.8rem;
 }
 
-@media (max-width: 992px) {
-  .desktopCountdownWrapper {
-    display: none;
-  }
-
-  .mobileCountdownWrapper {
-    display: flex;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nullStateCopy {
-    margin-top: 0rem;
-  }
-
-  .proposalTitle {
-    max-width: 65%;
-    overflow-wrap: break-word;
-  }
-
-  .nounInWalletBtnWrapper {
-    width: 100%;
-  }
-
-  .headerWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .forceFlexRow {
-    flex-direction: row;
-  }
-
-  .heading {
-    width: 100%;
-  }
-
-  .nullStateSubmitProposalBtnWrapper {
-    text-align: right;
-  }
-}
-
 .nullBtnWrapper {
-  min-width: 10rem;
+  min-width: 13rem;
 }
 
 .proposalId {
@@ -266,4 +223,68 @@
 }
 .changeDelegateBtn:active {
   background-color: #e2e3e8 !important;
+}
+
+@media (max-width: 992px) {
+  .desktopCountdownWrapper {
+    display: none;
+  }
+
+  .mobileCountdownWrapper {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nullStateCopy {
+    margin-top: 0rem;
+  }
+
+  .proposalTitle {
+    overflow-wrap: break-word;
+    width: 100%;
+    font-size: 20px;
+    align-items: flex-start;
+  }
+
+  .nounInWalletBtnWrapper {
+    width: 100%;
+  }
+
+  .headerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading {
+    width: 100%;
+  }
+  .nullStateSubmitProposalBtnWrapper {
+    flex-direction: column-reverse;
+    width: 100%;
+  }  
+  .generateBtnDisabled,
+  .generateBtn,
+  .changeDelegateBtn {
+    width: 100%;
+    max-width: unset;
+  }
+  .delegateBtnWrapper {
+    padding: 1rem 0;
+  }
+  .proposalInfoWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .proposalId {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    margin: 3px 11px 0 0;
+  }
+  .votePillWrapper {
+    margin-left: 0;
+    margin-right: 10px;
+  }
 }

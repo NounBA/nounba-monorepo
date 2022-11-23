@@ -16,6 +16,7 @@ import ShortAddress from '../ShortAddress';
 import HoverCard from '../HoverCard';
 import ByLineHoverCard from '../ByLineHoverCard';
 import { ArrowLeft } from 'lucide-react';
+import { isMobileScreen } from '../../utils/isMobile';
 
 interface ProposalHeaderProps {
   proposal: Proposal;
@@ -53,6 +54,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
   const hasVoted = useHasVotedOnProposal(proposal?.id);
   const proposalVote = useProposalVote(proposal?.id);
   const proposalCreationTimestamp = useBlockTimestamp(proposal?.createdBlock);
+  const isMobile = isMobileScreen();
   const disableVoteButton = !isWalletConnected || !availableVotes || hasVoted;
 
   const voteButton = (
@@ -107,7 +109,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
           <div className="d-flex justify-content-start align-items-start">
             <Link to={'/vote'}>
               <button className={clsx(classes.backButton, navBarButtonClasses.whiteInfo)}>
-                <ArrowLeft size={24} />
+                <ArrowLeft size={isMobile ? 20 : 24} />
               </button>
             </Link>
             <div className={classes.headerRow}>
@@ -121,14 +123,23 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
                   </div>
                 </div>
               </span>
-              <div className={classes.proposalTitleWrapper}>
-                <div className={classes.proposalTitle}>
-                  <h1>{proposal.title} </h1>
+              {!isMobile && (
+                <div className={classes.proposalTitleWrapper}>
+                  <div className={classes.proposalTitle}>
+                    <h1 className={classes.title}>{proposal.title}</h1>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
+        {isMobile && (
+          <div className={classes.proposalTitleWrapper}>
+            <div className={classes.proposalTitle}>
+              <h1 className={classes.title}>{proposal.title}</h1>
+            </div>
+          </div>
+        )}
 
         <div className={classes.byLineWrapper}>
           <h3>Proposed by</h3>

@@ -218,13 +218,22 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
                   {isPropInStateToHaveCountDown && (
                     <div className={classes.desktopCountdownWrapper}>{countdownPill}</div>
                   )}
-                  <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
-                    <ProposalStatus status={p.status}></ProposalStatus>
-                  </div>
+                  {!isMobile && (
+                    <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
+                      <ProposalStatus status={p.status}></ProposalStatus>
+                    </div>
+                  )}
                 </div>
 
                 {isPropInStateToHaveCountDown && (
-                  <div className={classes.mobileCountdownWrapper}>{countdownPill}</div>
+                  <div className={classes.mobileCountdownWrapper}>
+                    {isMobile && (
+                      <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
+                        <ProposalStatus status={p.status}></ProposalStatus>
+                      </div>
+                    )}
+                    {countdownPill}
+                  </div>
                 )}
               </div>
             );

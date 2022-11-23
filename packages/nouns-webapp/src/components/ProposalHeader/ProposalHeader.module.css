@@ -24,7 +24,7 @@
   font-size: 24px;
   font-family: 'DM Sans';
 }
-.headerRow h1 {
+.title {
   color: var(--brand-white);
   font-size: 32px;
   font-family: 'DM Sans';
@@ -182,15 +182,11 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 991px) {
   .byLineWrapper {
     flex-direction: column;
   }
-
-  .byLineContentWrapper {
-    margin-left: 2.5rem;
-  }
-
+  
   .proposalByLineWrapperJp {
     flex-direction: column;
     display: flex;
@@ -202,5 +198,29 @@
 
   .proposedByJp {
     margin-left: 0.5rem;
+  }
+  .backButton {
+    width: 40px;
+    height: 40px;
+  }
+  .headerRow span {
+    margin-top: 4px;
+    display: inline-block;
+  }
+  .proposalTitleWrapper {
+    padding-right: 0;
+  }
+  .proposalTitle {
+    margin-right: 0;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .wrapper {
+    padding: 28px;
+  }
+  .byLineWrapper h3 {
+    margin-left: 0;
+    font-size: 20px;
   }
 }

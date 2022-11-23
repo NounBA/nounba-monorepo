@@ -14,6 +14,7 @@ import { ensCacheKey } from '../../utils/ensLookup';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import { lookupNNSOrENS } from '../../utils/lookupNNSOrENS';
 import { Web3Provider } from '@ethersproject/providers';
+import { isMobileScreen } from '../../utils/isMobile';
 
 export enum VoteCardVariant {
   FOR,
@@ -142,22 +143,23 @@ const VoteCard: React.FC<VoteCardProps> = props => {
             </span>
           </Card.Text>
 
-          <Card.Text className={clsx('py-2 m-0', classes.mobileVoteCountWrapper)}>
-            <span className={classes.voteCardVoteCount}>
-              {delegateView
-                ? i18n.number(filteredDelegateGroupedVoteData.length)
-                : i18n.number(voteCount)}
-            </span>
-            <span
-              className={clsx(
-                classes.voteCardVoteCount,
-                isEnUS ? classes.unitTextEn : classes.unitTextNonEn,
-              )}
-            >
-              {delegateView && <Trans>Addresses</Trans>}
-            </span>
-          </Card.Text>
-
+          {isMobileScreen() && (
+            <Card.Text className={clsx('py-2 m-0', classes.mobileVoteCountWrapper)}>
+              <span className={classes.voteCardVoteCount}>
+                {delegateView
+                  ? i18n.number(filteredDelegateGroupedVoteData.length)
+                  : i18n.number(voteCount)}
+              </span>
+              <span
+                className={clsx(
+                  classes.voteCardVoteCount,
+                  isEnUS ? classes.unitTextEn : classes.unitTextNonEn,
+                )}
+              >
+                {delegateView && <Trans>Addresses</Trans>}
+              </span>
+            </Card.Text>
+          )}
           <VoteProgressBar variant={variant} percentage={percentage} />
           <Row className={classes.nounProfilePics}>
             {delegateView ? (
