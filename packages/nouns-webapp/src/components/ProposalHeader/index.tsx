@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ProposalStatus from '../ProposalStatus';
 import classes from './ProposalHeader.module.css';
@@ -16,6 +16,7 @@ import ShortAddress from '../ShortAddress';
 import HoverCard from '../HoverCard';
 import ByLineHoverCard from '../ByLineHoverCard';
 import { ArrowLeft } from 'lucide-react';
+import { isMobileScreen } from '../../utils/isMobile';
 
 interface ProposalHeaderProps {
   proposal: Proposal;
@@ -53,6 +54,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
   const hasVoted = useHasVotedOnProposal(proposal?.id);
   const proposalVote = useProposalVote(proposal?.id);
   const proposalCreationTimestamp = useBlockTimestamp(proposal?.createdBlock);
+  const isMobile = isMobileScreen();
   const disableVoteButton = !isWalletConnected || !availableVotes || hasVoted;
 
   const voteButton = (
@@ -66,7 +68,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
           )}
         </>
       ) : (
-        <div className={classes.connectWalletText}>
+        <div className={classes.helperText}>
           <Trans>Connect a wallet to vote.</Trans>
         </div>
       )}
@@ -107,7 +109,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
           <div className="d-flex justify-content-start align-items-start">
             <Link to={'/vote'}>
               <button className={clsx(classes.backButton, navBarButtonClasses.whiteInfo)}>
-                <ArrowLeft size={24} />
+                <ArrowLeft size={isMobile ? 20 : 24} />
               </button>
             </Link>
             <div className={classes.headerRow}>
@@ -121,14 +123,23 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
                   </div>
                 </div>
               </span>
-              <div className={classes.proposalTitleWrapper}>
-                <div className={classes.proposalTitle}>
-                  <h1>{proposal.title} </h1>
+              {!isMobile && (
+                <div className={classes.proposalTitleWrapper}>
+                  <div className={classes.proposalTitle}>
+                    <h1 className={classes.title}>{proposal.title}</h1>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
+        {isMobile && (
+          <div className={classes.proposalTitleWrapper}>
+            <div className={classes.proposalTitle}>
+              <h1 className={classes.title}>{proposal.title}</h1>
+            </div>
+          </div>
+        )}
 
         <div className={classes.byLineWrapper}>
           <h3>Proposed by</h3>
@@ -149,25 +160,28 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       </div>
 
       {/* <div className={classes.submitProposalButton}>{voteButton}</div> */}
-      <div className={classes.mobileSubmitProposalButton}>{isActiveForVoting && voteButton}</div>
+      {proposal && isActiveForVoting && (
+        <div className={classes.submitProposalButton}>
+          {hasVoted && (
+            <div className={classes.helperText}>
+              {getTranslatedVoteCopyFromString(proposalVote)}
+            </div>
+          )}
 
-      {proposal && isActiveForVoting && hasVoted && (
-        <Alert variant="success" className={classes.voterIneligibleAlert}>
-          {getTranslatedVoteCopyFromString(proposalVote)}
-        </Alert>
-      )}
-
-      {proposal && isActiveForVoting && proposalCreationTimestamp && !!availableVotes && !hasVoted && (
-        <Alert variant="success" className={classes.voterIneligibleAlert}>
-          <Trans>
-            Only Nouns you owned or were delegated to you before{' '}
-            {i18n.date(new Date(proposalCreationTimestamp * 1000), {
-              dateStyle: 'long',
-              timeStyle: 'long',
-            })}{' '}
-            are eligible to vote.
-          </Trans>
-        </Alert>
+          {proposalCreationTimestamp && !!availableVotes && !hasVoted && (
+            <div className={classes.helperTextSmall}>
+              <Trans>
+                Only NounBAs you owned or were delegated to you before{' '}
+                {i18n.date(new Date(proposalCreationTimestamp * 1000), {
+                  dateStyle: 'long',
+                  timeStyle: 'long',
+                })}{' '}
+                are eligible to vote.
+              </Trans>
+            </div>
+          )}
+          {isActiveForVoting && voteButton}
+        </div>
       )}
     </>
   );

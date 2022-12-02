@@ -26,8 +26,9 @@
 }
 
 .generateBtn {
-  max-width: 10rem;
-  height: 3rem;
+  max-width: 12rem;
+  padding: 0 20px;
+  height: 56px;
   font-weight: bold;
   margin-bottom: 0.5rem;
   border-radius: var(--default-border-radius);
@@ -136,51 +137,8 @@
   padding-top: 0.8rem;
 }
 
-@media (max-width: 992px) {
-  .desktopCountdownWrapper {
-    display: none;
-  }
-
-  .mobileCountdownWrapper {
-    display: flex;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nullStateCopy {
-    margin-top: 0rem;
-  }
-
-  .proposalTitle {
-    max-width: 65%;
-    overflow-wrap: break-word;
-  }
-
-  .nounInWalletBtnWrapper {
-    width: 100%;
-  }
-
-  .headerWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .forceFlexRow {
-    flex-direction: row;
-  }
-
-  .heading {
-    width: 100%;
-  }
-
-  .nullStateSubmitProposalBtnWrapper {
-    text-align: right;
-  }
-}
-
 .nullBtnWrapper {
-  min-width: 10rem;
+  min-width: 13rem;
 }
 
 .proposalId {
@@ -193,6 +151,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .proposalTitle {
@@ -242,27 +201,90 @@
 }
 
 .delegateBtnWrapper {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .changeDelegateBtn {
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: rgb(95, 95, 95);
-  max-width: 10rem;
-  height: 3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   border-radius: var(--default-border-radius);
+  padding: 0 20px;
+  height: 56px;
+  border: 1px solid var(--brand-gray-background);
+  color: var(--brand-white);
+  background-color: var(--brand-gray-background);
 }
 
 .changeDelegateBtn:focus,
 .changeDelegateBtn:hover {
-  background-color: #e2e3e8;
-  color: black;
+  background-color: var(--brand-gray-background);
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-gray-background);
 }
 .changeDelegateBtn:active {
   background-color: #e2e3e8 !important;
+}
+
+@media (max-width: 992px) {
+  .desktopCountdownWrapper {
+    display: none;
+  }
+
+  .mobileCountdownWrapper {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nullStateCopy {
+    margin-top: 0rem;
+  }
+
+  .proposalTitle {
+    overflow-wrap: break-word;
+    width: 100%;
+    font-size: 20px;
+    align-items: flex-start;
+  }
+
+  .nounInWalletBtnWrapper {
+    width: 100%;
+  }
+
+  .headerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading {
+    width: 100%;
+  }
+  .nullStateSubmitProposalBtnWrapper {
+    flex-direction: column-reverse;
+    width: 100%;
+  }  
+  .generateBtnDisabled,
+  .generateBtn,
+  .changeDelegateBtn {
+    width: 100%;
+    max-width: unset;
+  }
+  .delegateBtnWrapper {
+    padding: 1rem 0;
+  }
+  .proposalInfoWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .proposalId {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    margin: 3px 11px 0 0;
+  }
+  .votePillWrapper {
+    margin-left: 0;
+    margin-right: 10px;
+  }
 }

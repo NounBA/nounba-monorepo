@@ -29,7 +29,7 @@ const GovernancePage = () => {
       <Line />
       <Container fluid="xl" className={classes.section}>
         <Row className="align-items-justify">
-          <Col sm={12} lg={6} className={classes.cardWrapper}>
+          <Col xs={12} md={6} className={classes.cardWrapper}>
             <div className={classes.card}>
               <div className={classes.headerRow}>
                 <Image
@@ -57,7 +57,7 @@ const GovernancePage = () => {
               </p>
             </div>
           </Col>
-          <Col sm={12} lg={6} className={classes.cardWrapper}>
+          <Col xs={12} md={6} className={classes.cardWrapper}>
             <div className={clsx(classes.card, classes.treasuryWrapper)}>
               <div className={classes.headerRow}>
                 <span>

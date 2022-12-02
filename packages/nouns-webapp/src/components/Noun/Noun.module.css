@@ -43,6 +43,12 @@
   height: 64px;
   border-radius: 4px !important;
   margin-bottom:8px;
+  background-color: #364152;
+  max-width: 100%;
+  max-height: 100%;
+}
+.withImage {
+  background-color: #E3E8EF;
 }
 
 .delegateViewCircularNounWrapper {

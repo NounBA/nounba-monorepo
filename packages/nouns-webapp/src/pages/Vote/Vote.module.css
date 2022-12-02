@@ -1,5 +1,7 @@
-.wrapper {
-  padding: 0;
+.section {
+  word-wrap: break-word; 
+  padding: 0 30px;
+  margin-top: 2rem;
 }
 .votePage a {
   color: var(--brand-white);
@@ -32,11 +34,6 @@
   justify-content: space-between;
 }
 
-.section {
-  word-wrap: break-word;
-  padding-top: 2rem;
-  margin-top: 2rem;
-}
 
 .section h5 {
   font-size: 1.7rem;
@@ -52,23 +49,22 @@
   margin: 1rem 0 0 0;
 }
 
-.wrapper {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .transitionStateButton {
+  background-color: var(--brand-gray-background);
   height: 50px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: 'DM Sans';
   font-weight: bold;
   font-size: 24px;
   transition: all 0.125s ease-in-out;
 }
 
+.transitionStateButton:active,
+.transitionStateButton:focus,
 .transitionStateButton:hover {
-  opacity: 0.5;
+  opacity: 0.8;
   cursor: pointer;
+  background-color: var(--brand-gray-background) !important;
 }
 
 .transitionStateButtonSection {
