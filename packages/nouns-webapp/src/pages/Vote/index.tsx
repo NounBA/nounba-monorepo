@@ -49,7 +49,8 @@ const VotePage = ({
 
   const [showVoteModal, setShowVoteModal] = useState<boolean>(false);
   // Toggle between Noun centric view and delegate view
-  const [isDelegateView, setIsDelegateView] = useState(false);
+  // const [isDelegateView, setIsDelegateView] = useState(false);
+  const isDelegateView = false;
 
   const [isQueuePending, setQueuePending] = useState<boolean>(false);
   const [isExecutePending, setExecutePending] = useState<boolean>(false);
@@ -280,9 +281,9 @@ const VotePage = ({
               />
             )}
           </Col>
-          <Col lg={12} className={clsx(classes.proposal, classes.wrapper)}>
+          <Col sm={12} className={clsx(classes.proposal, classes.wrapper)}>
             {isAwaitingStateChange() && (
-              <Row className={clsx(classes.section, classes.transitionStateButtonSection)}>
+              <Row className={clsx(classes.transitionStateButtonSection)}>
                 <Col className="d-grid">
                   <Button
                     onClick={moveStateAction}
@@ -300,7 +301,7 @@ const VotePage = ({
               </Row>
             )}
 
-            <p
+            {/* <p
               onClick={() => setIsDelegateView(!isDelegateView)}
               className={classes.toggleDelegateVoteView}
             >
@@ -309,7 +310,7 @@ const VotePage = ({
               ) : (
                 <Trans>Switch to delegate view</Trans>
               )}
-            </p>
+            </p> */}
             <Row>
               <VoteCard
                 proposal={proposal}

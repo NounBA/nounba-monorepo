@@ -22,6 +22,7 @@ const HoverCard: React.FC<HoverCardProps> = props => {
         getContent={dataTip => {
           return hoverCardContent(dataTip);
         }}
+        delayHide={10000}
       />
       <div data-tip={tip} data-for={id}>
         {props.children}
