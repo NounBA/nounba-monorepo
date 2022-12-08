@@ -1,16 +1,38 @@
-.transactionFormModal {
-  max-width: 600px;
-}
-
 .stepProgressBar {
-  padding: 0 0 2rem 0 !important;
+  padding: 2rem 0 3rem 0 !important;
 }
 
 .inputGroupText {
-  border-radius: 0.25rem 0 0 0.25rem;
+  border-radius: 4px 0 0 4px;
   border-right: none;
 }
 
 .functionName {
   white-space: nowrap;
+}
+
+.btn {
+  background-color: #EEF2F6 !important;
+  color: var(--brand-bg-gray) !important;
+  font-size: 1.25rem;
+  border: 1px solid #EEF2F6;
+  margin-top: 16px !important;
+  border-radius: 4px;
+  height: 56px;
+  padding: 0 28px !important;
+}
+.btn:hover {
+  color: var(--brand-black) !important;
+  background-color: var(--brand-white) !important;
+  border-color: var(--brand-black) !important;
+}
+.blueButton {
+  background-color: var(--brand-color-blue) !important;
+  color: var(--brand-white) !important;
+  border-color: var(--brand-blue) !important;
+}
+.blueButton:hover {
+  background-color: #0040C1 !important;
+  color: var(--brand-white) !important;
+  border-color: var(--brand-white) !important;
 }

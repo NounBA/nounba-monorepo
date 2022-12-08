@@ -113,6 +113,7 @@
 }
 
 .delegateBack {
+  cursor: pointer;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: var(--brand-cool-dark-text);
@@ -125,13 +126,13 @@
 }
 
 .delegatePrimary {
-  background-color: var(--brand-cool-dark-text);
+  background-color: var(--brand-color-blue);
   color: white;
   width: 315px;
 }
 
 .delegatePrimary:hover {
-  filter: brightness(200%);
+  background-color: #0040C1;
 }
 
 .delegateSecondary {
@@ -142,7 +143,7 @@
 }
 
 .delegateSecondary:hover {
-  filter: brightness(200%);
+  background-color: #0040C1;
 }
 
 .delegateDisabled {
