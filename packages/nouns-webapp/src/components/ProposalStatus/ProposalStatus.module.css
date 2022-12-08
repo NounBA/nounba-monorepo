@@ -1,14 +1,11 @@
 .proposalStatus {
   font-family: 'DM Sans';
-  font-weight: bold;
+  font-weight: 400;
   color: white;
-  border-radius: 8px;
+  border-radius: 48px;
   font-size: 14px;
   border: 0rem;
-  padding-left: 0.65rem;
-  padding-right: 0.65rem;
-  padding-top: 0.36rem;
-  padding-bottom: 0.36rem;
+  padding:8px 16px;
 }
 
 .primary {

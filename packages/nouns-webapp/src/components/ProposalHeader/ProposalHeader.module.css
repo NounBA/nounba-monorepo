@@ -1,24 +1,35 @@
-.backButton {
+.wrapper {
+  background-color: var(--brand-bg-gray-light);
+  color: var(--brand-white);
+  padding: 32px;
+}
+.backButton,
+.backButton:hover,
+.backButton:active {
+  background-color: var(--brand-gray-background);
+  color: var(--brand-white);
   -webkit-appearance: none;
   padding: 0;
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
   font-weight: bold;
   margin-right: 1rem;
   margin-top: 0.1rem;
 }
 
 .headerRow span {
-  color: #8c8d92;
+  color: var(--brand-white);
   font-size: 24px;
   font-family: 'DM Sans';
 }
-.headerRow h1 {
-  color: #14161b;
-  font-size: 42px;
+.title {
+  color: var(--brand-white);
+  font-size: 32px;
   font-family: 'DM Sans';
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .proposalStatus {
@@ -26,13 +37,19 @@
   margin-top: 0.1rem;
 }
 
-.connectWalletText {
-  color: var(--brand-gray-light-text);
+.helperText,
+.helperTextSmall {
+  color: var(--brand-bg-gray-500);
   font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 20px;
   min-width: 12rem;
-  margin-bottom: 1.15rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.helperTextSmall {
+  font-size: 16px;
 }
 
 .noVotesText {
@@ -49,31 +66,30 @@
   max-width: 8rem;
   min-width: 8rem;
   height: 3rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
-  background-color: var(--brand-color-green);
-  border: var(--brand-color-green);
+  font-weight: 400;
+  margin-bottom: 0;
+  border-radius: 4px;
+  background-color: var(--brand-color-blue);
+  border: var(--brand-color-blue);
 }
 .submitBtn:focus,
 .submitBtn:hover {
-  background-color: var(--brand-color-green) !important;
-  box-shadow: 0 0 0 0.2rem rgb(67, 179, 105, 0.75);
+  background-color: var(--brand-color-blue) !important;
 }
 .submitBtn:active {
-  background-color: var(--brand-color-green) !important;
+  background-color: var(--brand-color-blue) !important;
 }
 .submitBtnDisabled {
-  background-color: var(--brand-gray-light-text) !important;
+  background-color: var(--brand-bg-gray-light) !important;
+  color: var(--brand-bg-gray-400);
   width: 100%;
-  max-width: 8rem;
-  min-width: 8rem;
-  height: 3rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
-  border: var(--brand-dark-red);
-  opacity: 0.5;
+  max-width: 170px;
+  min-width: 170px;
+  margin-left: 16px;
+  height: 56px;
+  font-weight: 400;
+  font-size: 20px;
+  border: none;
   box-shadow: none !important;
 }
 
@@ -93,19 +109,16 @@
   margin-right: 0.5rem;
 }
 
-.mobileSubmitProposalButton {
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
-
-@media (max-width: 992px) {
-  .submitBtn {
-    max-width: 100%;
-  }
-
-  .submitBtnDisabled {
-    max-width: 100%;
-  }
+.submitProposalButton {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 32px;
+  border: 1px solid #364152;
+  border-radius: 4px;
+  margin: 18px 0;
 }
 
 .voterIneligibleAlert {
@@ -125,7 +138,8 @@
 .byLineWrapper h3 {
   font-family: 'DM Sans';
   color: var(--brand-gray-light-text);
-  margin-left: 3rem;
+  margin-left: 72px;
+  margin-bottom: 0;
   font-size: 24px;
 }
 
@@ -148,7 +162,7 @@
 }
 
 .proposedByJp {
-  color: var(--brand-gray-light-text);
+  color: var(--brand-white);
 }
 
 .proposerLinkJp {
@@ -168,15 +182,11 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 991px) {
   .byLineWrapper {
     flex-direction: column;
   }
-
-  .byLineContentWrapper {
-    margin-left: 2.5rem;
-  }
-
+  
   .proposalByLineWrapperJp {
     flex-direction: column;
     display: flex;
@@ -188,5 +198,29 @@
 
   .proposedByJp {
     margin-left: 0.5rem;
+  }
+  .backButton {
+    width: 40px;
+    height: 40px;
+  }
+  .headerRow span {
+    margin-top: 4px;
+    display: inline-block;
+  }
+  .proposalTitleWrapper {
+    padding-right: 0;
+  }
+  .proposalTitle {
+    margin-right: 0;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .wrapper {
+    padding: 28px;
+  }
+  .byLineWrapper h3 {
+    margin-left: 0;
+    font-size: 20px;
   }
 }

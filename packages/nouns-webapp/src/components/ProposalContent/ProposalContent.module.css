@@ -5,31 +5,35 @@
 }
 
 .section h5 {
-  font-size: 1.7rem;
+  font-size: 1.55rem;
   margin-top: 1rem;
   font-family: 'DM Sans';
 }
 
 .markdown {
   font-family: 'DM Sans';
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .markdown h1 {
-  font-size: 1.7rem;
+  font-size: 2rem;
   margin-top: 1rem;
   font-weight: bold;
 }
 
+.markdown p {
+  color: #9AA3B2;
+}
+
 .markdown h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-top: 1rem;
   font-weight: bold;
 }
 
 .markdown h3 {
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 
 .markdown img {

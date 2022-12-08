@@ -9,10 +9,10 @@ import {
   FormGroup,
   FormLabel,
   InputGroup,
-  Modal,
   Row,
 } from 'react-bootstrap';
 import { useStepProgress, Step, StepProgressBar } from 'react-stepz';
+import Modal from '../Modal';
 import { buildEtherscanAddressLink, buildEtherscanApiQuery } from '../../utils/etherscan';
 import { ProposalTransaction } from '../../wrappers/nounsDao';
 import classes from './ProposalTransactionFormModal.module.css';
@@ -20,6 +20,7 @@ import BigNumber from 'bignumber.js';
 import 'bs-custom-file-input';
 import 'react-stepz/dist/index.css';
 import { Trans } from '@lingui/macro';
+import clsx from 'clsx';
 
 interface ProposalTransactionFormModalProps {
   show: boolean;
@@ -189,168 +190,167 @@ const ProposalTransactionFormModal = ({
     }
   };
 
+  if (!show) return <></>;
   return (
     <Modal
-      show={show}
-      onHide={() => {
+      onDismiss={() => {
         onHide();
         clearState();
       }}
-      dialogClassName={classes.transactionFormModal}
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <Trans>Add a Proposal Transaction</Trans>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <StepProgressBar className={classes.stepProgressBar} steps={steps} />
-        {/* @ts-ignore */}
-        <Step step={0}>
-          <label htmlFor="callee-address">
-            <Trans>Address (Callee or Recipient)</Trans>
-          </label>
-          <FormControl
-            value={address}
-            type="text"
-            id="callee-address"
-            onChange={e => setAddress(e.target.value)}
-          />
-        </Step>
-        {/* @ts-ignore */}
-        <Step step={1}>
-          <label htmlFor="eth-value">
-            <Trans>Value in ETH (Optional)</Trans>
-          </label>
-          <FormControl value={value} id="eth-value" onChange={e => setValue(e.target.value)} />
-        </Step>
-        {/* @ts-ignore */}
-        <Step step={2}>
-          <label htmlFor="function">
-            <Trans>Function (Optional)</Trans>
-          </label>
-          <FormControl
-            value={func}
-            as="select"
-            id="function"
-            onChange={e => setFunction(e.target.value)}
-          >
-            <option className="text-muted">Select Contract Function</option>
-            {abi && Object.keys(abi.functions).map(func => <option value={func}>{func}</option>)}
-          </FormControl>
-          <label style={{ marginTop: '1rem' }} htmlFor="import-abi">
-            {abiFileName === 'etherscan-abi-download.json' ? abiFileName : 'ABI'}
-          </label>
-          <Form.Control
-            type="file"
-            id="import-abi"
-            accept="application/JSON"
-            isValid={isABIUploadValid}
-            isInvalid={isABIUploadValid === false}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => validateAndSetABI(e.target.files?.[0])}
-          />
-        </Step>
-        {/* @ts-ignore */}
-        <Step step={3}>
-          {abi?.functions[func]?.inputs?.length ? (
-            <FormGroup as={Row}>
-              {abi?.functions[func]?.inputs.map((input, i) => (
-                <>
-                  <FormLabel column sm="3">
-                    {input.name}
-                  </FormLabel>
-                  <Col sm="9">
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className={classes.inputGroupText}>
-                        {input.type}
-                      </InputGroup.Text>
-                      <FormControl
-                        value={args[i] ?? ''}
-                        onChange={e => setArgument(i, e.target.value)}
-                      />
-                    </InputGroup>
-                  </Col>
-                </>
-              ))}
-            </FormGroup>
-          ) : (
-            <Trans>No arguments required </Trans>
-          )}
-        </Step>
-        {/* @ts-ignore */}
-        <Step step={4}>
-          <Row>
-            <Col sm="3">
-              <b>
-                <Trans>Address</Trans>
-              </b>
-            </Col>
-            <Col sm="9" className="text-break">
-              <a href={buildEtherscanAddressLink(address)} target="_blank" rel="noreferrer">
-                {address}
-              </a>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="3">
-              <b>
-                <Trans>Value</Trans>
-              </b>
-            </Col>
-            <Col sm="9">{value ? `${value} ETH` : <Trans>None</Trans>}</Col>
-          </Row>
-          <Row>
-            <Col sm="3">
-              <b>
-                <Trans>Function</Trans>
-              </b>
-            </Col>
-            <Col sm="9" className="text-break">
-              {func || <Trans>None</Trans>}
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="3">
-              <b>
-                <Trans>Arguments</Trans>
-              </b>
-            </Col>
-            <Col sm="9">
-              <hr />
-            </Col>
-            <Col sm="9">{abi?.functions[func]?.inputs?.length ? '' : <Trans>None</Trans>}</Col>
-          </Row>
-          {abi?.functions[func]?.inputs.map((input, i) => (
-            <Row key={i}>
-              <Col sm="3" className={classes.functionName}>
-                {i + 1}. {input.name}
+      title={'Add a Proposal Transaction'}
+      // dialogClassName={classes.transactionFormModal}
+      content={
+        <div>
+          <StepProgressBar className={classes.stepProgressBar} steps={steps} />
+          {/* @ts-ignore */}
+          <Step step={0}>
+            <label htmlFor="callee-address">
+              <Trans>Address (Callee or Recipient)</Trans>
+            </label>
+            <FormControl
+              value={address}
+              type="text"
+              id="callee-address"
+              onChange={e => setAddress(e.target.value)}
+            />
+          </Step>
+          {/* @ts-ignore */}
+          <Step step={1}>
+            <label htmlFor="eth-value">
+              <Trans>Value in ETH (Optional)</Trans>
+            </label>
+            <FormControl value={value} id="eth-value" onChange={e => setValue(e.target.value)} />
+          </Step>
+          {/* @ts-ignore */}
+          <Step step={2}>
+            <label htmlFor="function">
+              <Trans>Function (Optional)</Trans>
+            </label>
+            <FormControl
+              value={func}
+              as="select"
+              id="function"
+              onChange={e => setFunction(e.target.value)}
+            >
+              <option className="text-muted">Select Contract Function</option>
+              {abi && Object.keys(abi.functions).map(func => <option value={func}>{func}</option>)}
+            </FormControl>
+            <label style={{ marginTop: '1rem' }} htmlFor="import-abi">
+              {abiFileName === 'etherscan-abi-download.json' ? abiFileName : 'ABI'}
+            </label>
+            <Form.Control
+              type="file"
+              id="import-abi"
+              accept="application/JSON"
+              isValid={isABIUploadValid}
+              isInvalid={isABIUploadValid === false}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                validateAndSetABI(e.target.files?.[0])
+              }
+            />
+          </Step>
+          {/* @ts-ignore */}
+          <Step step={3}>
+            {abi?.functions[func]?.inputs?.length ? (
+              <FormGroup as={Row}>
+                {abi?.functions[func]?.inputs.map((input, i) => (
+                  <>
+                    <FormLabel column sm="3">
+                      {input.name}
+                    </FormLabel>
+                    <Col sm="9">
+                      <InputGroup className="mb-2">
+                        <InputGroup.Text className={classes.inputGroupText}>
+                          {input.type}
+                        </InputGroup.Text>
+                        <FormControl
+                          value={args[i] ?? ''}
+                          onChange={e => setArgument(i, e.target.value)}
+                        />
+                      </InputGroup>
+                    </Col>
+                  </>
+                ))}
+              </FormGroup>
+            ) : (
+              <Trans>No arguments required </Trans>
+            )}
+          </Step>
+          {/* @ts-ignore */}
+          <Step step={4}>
+            <Row>
+              <Col sm="3">
+                <b>
+                  <Trans>Address</Trans>
+                </b>
               </Col>
               <Col sm="9" className="text-break">
-                {args[i]}
+                <a href={buildEtherscanAddressLink(address)} target="_blank" rel="noreferrer">
+                  {address}
+                </a>
               </Col>
             </Row>
-          ))}
-        </Step>
-        <div className="d-flex justify-content-between align-items-center pt-3">
-          <Button
-            onClick={stepBackwards}
-            variant="outline-secondary"
-            size="lg"
-            disabled={currentStep === 0}
-          >
-            <Trans>Back</Trans>
-          </Button>
-          <Button onClick={stepForwardOrCallback} variant="primary" size="lg">
-            {currentStep !== steps.length - 1 ? (
-              <Trans>Next</Trans>
-            ) : (
-              <Trans>Add Transaction</Trans>
+            <Row>
+              <Col sm="3">
+                <b>
+                  <Trans>Value</Trans>
+                </b>
+              </Col>
+              <Col sm="9">{value ? `${value} ETH` : <Trans>None</Trans>}</Col>
+            </Row>
+            <Row>
+              <Col sm="3">
+                <b>
+                  <Trans>Function</Trans>
+                </b>
+              </Col>
+              <Col sm="9" className="text-break">
+                {func || <Trans>None</Trans>}
+              </Col>
+            </Row>
+            <Row>
+              <Col sm="3">
+                <b>
+                  <Trans>Arguments</Trans>
+                </b>
+              </Col>
+              <Col sm="9">
+                <hr />
+              </Col>
+              <Col sm="9">{abi?.functions[func]?.inputs?.length ? '' : <Trans>None</Trans>}</Col>
+            </Row>
+            {abi?.functions[func]?.inputs.map((input, i) => (
+              <Row key={i}>
+                <Col sm="3" className={classes.functionName}>
+                  {i + 1}. {input.name}
+                </Col>
+                <Col sm="9" className="text-break">
+                  {args[i]}
+                </Col>
+              </Row>
+            ))}
+          </Step>
+          <div className="d-flex justify-content-between align-items-center pt-3">
+            {currentStep === 0 && <div />}
+            {currentStep !== 0 && (
+              <Button className={classes.btn} onClick={stepBackwards} disabled={currentStep === 0}>
+                <Trans>Back</Trans>
+              </Button>
             )}
-          </Button>
+            <Button
+              onClick={stepForwardOrCallback}
+              className={clsx(classes.btn, classes.blueButton)}
+            >
+              {currentStep !== steps.length - 1 ? (
+                <Trans>Next</Trans>
+              ) : (
+                <Trans>Add Transaction</Trans>
+              )}
+            </Button>
+          </div>
         </div>
-      </Modal.Body>
-    </Modal>
+      }
+    />
   );
 };
 export default ProposalTransactionFormModal;

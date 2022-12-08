@@ -162,7 +162,6 @@ const CreateProposalPage = () => {
         <div className="d-grid">
           <Button
             className={classes.addTransactionButton}
-            variant="dark"
             onClick={() => setShowTransactionFormModal(true)}
           >
             <Trans>Add Transaction</Trans>

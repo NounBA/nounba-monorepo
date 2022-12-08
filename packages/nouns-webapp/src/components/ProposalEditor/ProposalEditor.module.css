@@ -10,12 +10,21 @@
 
 .titleInput,
 .bodyInput {
+  color: var(--brand-bg-gray-400);
+  background-color: var(--brand-bg-gray-light);
   padding: 0;
   border: none;
   width: 100% !important;
   outline: none !important;
   box-shadow: none !important;
 }
+.titleInput:focus,
+.bodyInput:focus {
+
+  color: var(--brand-bg-gray-400);
+  background-color: var(--brand-bg-gray-light);
+}
+
 
 .titleInput {
   font-size: 1.25rem;

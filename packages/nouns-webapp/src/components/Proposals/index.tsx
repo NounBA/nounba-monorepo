@@ -158,7 +158,7 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
                 <Trans>Submit Proposal</Trans>
               </Button>
             </div>
-            {!isMobile && hasNounBalance && (
+            {hasNounBalance && (
               <div className={classes.delegateBtnWrapper}>
                 <Button
                   className={classes.changeDelegateBtn}
@@ -172,13 +172,6 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
         )}
       </div>
       {isMobile && <div className={classes.nullStateCopy}>{nullStateCopy()}</div>}
-      {isMobile && hasNounBalance && (
-        <div>
-          <Button className={classes.changeDelegateBtn} onClick={() => setShowDelegateModal(true)}>
-            <Trans>Delegate</Trans>
-          </Button>
-        </div>
-      )}
       {proposals?.length ? (
         proposals
           .slice(0)
@@ -225,19 +218,28 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
                   {isPropInStateToHaveCountDown && (
                     <div className={classes.desktopCountdownWrapper}>{countdownPill}</div>
                   )}
-                  <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
-                    <ProposalStatus status={p.status}></ProposalStatus>
-                  </div>
+                  {!isMobile && (
+                    <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
+                      <ProposalStatus status={p.status}></ProposalStatus>
+                    </div>
+                  )}
                 </div>
 
                 {isPropInStateToHaveCountDown && (
-                  <div className={classes.mobileCountdownWrapper}>{countdownPill}</div>
+                  <div className={classes.mobileCountdownWrapper}>
+                    {isMobile && (
+                      <div className={clsx(classes.proposalStatusWrapper, classes.votePillWrapper)}>
+                        <ProposalStatus status={p.status}></ProposalStatus>
+                      </div>
+                    )}
+                    {countdownPill}
+                  </div>
                 )}
               </div>
             );
           })
       ) : (
-        <Alert variant="secondary">
+        <Alert className={classes.noProposals} variant="secondary">
           <Alert.Heading>
             <Trans>No proposals found</Trans>
           </Alert.Heading>

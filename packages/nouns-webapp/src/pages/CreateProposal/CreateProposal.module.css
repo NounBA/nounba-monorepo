@@ -1,12 +1,12 @@
 .createProposalPage a {
-  color: var(--brand-dark-red);
+  color: var(--brand-white);
 }
 
 .createProposalForm {
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 1rem 2.5rem;
   margin-top: 1em;
-  background-color: white;
+  background-color: var(--brand-bg-gray-light);
 }
 
 .heading {
@@ -21,6 +21,11 @@
 }
 
 .addTransactionButton,
-.createProposalButton {
+.addTransactionButton:hover,
+.createProposalButton,
+.createProposalButton:hover {
   margin-top: 1rem;
+  border-radius: 4px;
+  background-color: var(--brand-gray-background);
+  border-color: var(--brand-gray-background);
 }
