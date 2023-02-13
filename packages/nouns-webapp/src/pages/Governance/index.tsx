@@ -46,14 +46,12 @@ const GovernancePage = () => {
                 </h1>
               </div>
               <p className={classes.subheading}>
-                <Trans>
                   NounBAs govern <span className={classes.boldText}>NounBA DAO</span>. NounBAs can
                   vote on proposals or delegate their vote to a third party. A minimum of{' '}
                   <span className={classes.boldText}>
                     {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
                   </span>{' '}
                   is required to submit proposals.
-                </Trans>
               </p>
             </div>
           </Col>
