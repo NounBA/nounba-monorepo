@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import NetworkAlert from './components/NetworkAlert';
 import Footer from './components/Footer';
 import AuctionPage from './pages/Auction';
+import TeamsPage from './pages/Teams';
 import NounBAPage from './pages/NounBA';
 import GovernancePage from './pages/Governance';
 import CreateProposalPage from './pages/CreateProposal';
@@ -55,12 +56,13 @@ function App() {
         >
           <NavBar />
           <Switch>
-            <Route exact path="/" component={AuctionPage} />
+            <Route exact path="/" component={TeamsPage} />
             <Route
               exact
               path="/nounba/:id"
               render={props => <NounBAPage initialAuctionId={props.match.params.id} />}
             />
+            <Route exact path="/auction" component={AuctionPage} />
             <Route exact path="/soon" component={SoonPage} />
             <Route exact path="/nounders" component={NoundersPage} />
             <Route exact path="/create-proposal" component={CreateProposalPage} />

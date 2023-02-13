@@ -12,10 +12,11 @@ import { nounQuery } from '../../wrappers/subgraph';
 
 interface HolderProps {
   nounId: number;
+  simple?: boolean;
 }
 
 const Holder: React.FC<HolderProps> = props => {
-  const { nounId } = props;
+  const { nounId, simple } = props;
   const activeAccount = useAppSelector(state => state.account.activeAccount);
   const { loading, error, data } = useQuery(nounQuery(nounId.toString()));
   const holder = useMemo(() => data && data.noun.owner.id, [data]);
@@ -52,25 +53,38 @@ const Holder: React.FC<HolderProps> = props => {
         }}
         id="holder-etherscan-tooltip"
       >
-        {!isWinnerYou && <ShortAddress size={30} address={holder} avatar={true} />}
+        {!isWinnerYou && <ShortAddress size={30} address={holder} avatar={!simple} />}
         {isWinnerYou && 'You'}
       </Tooltip>
     </a>
   );
 
-  return (
-    <>
-      <Row className={clsx(classes.wrapper, classes.section)}>
-        <Col xs={12} className={classes.leftCol}>
-          <h4 className={classes.holderCopy}>
+  if (simple) {
+    return (
+      <div className={clsx(classes.wrapper, classes.section)}>
+        <div className={classes.leftCol}>
+          <h4 className={clsx(classes.holderCopy, classes.holderCopySimple)}>
             <Trans>Held by</Trans>
           </h4>
-        </Col>
-        <Col xs={12}>
+        </div>
+        <div>
           <h2 className={classes.holderContent}>{nonNounderNounContent}</h2>
-        </Col>
-      </Row>
-    </>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Row className={clsx(classes.wrapper, classes.section)}>
+      <Col xs={12} className={classes.leftCol}>
+        <h4 className={classes.holderCopy}>
+          <Trans>Held by</Trans>
+        </h4>
+      </Col>
+      <Col xs={12}>
+        <h2 className={classes.holderContent}>{nonNounderNounContent}</h2>
+      </Col>
+    </Row>
   );
 };
 

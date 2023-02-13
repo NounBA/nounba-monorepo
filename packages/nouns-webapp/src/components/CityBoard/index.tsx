@@ -67,6 +67,7 @@ const CityItem = ({
         <div className={classes.cityWrapper}>
           {/* <span className={classes.avatar} /> */}
           <Image className={classes.avatar} src={image} alt={'Noun'} />
+          {id}
           {name}
         </div>
         {!isDisabled && !isSelected && <FontAwesomeIcon icon={faExternalLinkAlt} />}
@@ -107,6 +108,7 @@ const CityBoard = ({ auctionID, side, tokenIndex }: CityBoardProps) => {
       isReferee ? referees : citiesByRegion[side].filter(city => !isNounbaNoun(city.displayName)),
     [isReferee, side],
   );
+
   const pastAuctionsBySeed = useAppSelector<{ [key: string]: AuctionState }>(state =>
     state.pastAuctions.pastAuctions.reduce(
       (prev, auction) => ({ ...prev, [auction.seed.oneOfOneIndex]: auction }),

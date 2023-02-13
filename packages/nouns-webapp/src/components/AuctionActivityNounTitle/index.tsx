@@ -7,7 +7,7 @@ const AuctionActivityNounTitle: React.FC<{ nounId: BigNumber; isCool?: boolean }
   const { nounId } = props;
   const seed = useNounSeed(nounId);
 
-  if (!seed?.oneOfOneIndex) return <></>;
+  if (!seed?.oneOfOneIndex || !allCities[seed.oneOfOneIndex]) return <></>;
   return (
     <div className={classes.wrapper}>
       <h2>NounBA #{nounId.toString()}</h2>
