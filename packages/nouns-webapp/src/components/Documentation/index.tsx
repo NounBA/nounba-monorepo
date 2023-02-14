@@ -29,24 +29,6 @@ const Documentation = () => {
   return (
     <div className={classes.wrapper}>
       <Section fullWidth={false}>
-        {/* <div className={classes.headerWrapper}>
-          <h1>
-            <Trans>WTF?</Trans>
-          </h1>
-          <p className={classes.aboutText}>
-            <Trans>
-              Nouns are an experimental attempt to improve the formation of on-chain avatar
-              communities. While projects such as {cryptopunksLink} have attempted to bootstrap
-              digital community and identity, Nouns attempt to bootstrap identity, community,
-              governance, and a treasury that can be used by the community.
-            </Trans>
-          </p>
-          <p className={classes.aboutText} style={{ paddingBottom: '4rem' }}>
-            <Trans>
-              Learn more below, or start creating Nouns off-chain using the {playgroundLink}.
-            </Trans>
-          </p>
-        </div> */}
         <Accordion flush>
           <Accordion.Item eventKey="0" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader}>
@@ -62,7 +44,7 @@ const Documentation = () => {
                   {publicDomainLink}.
                 </li>
                 <li>
-                  <Trans>34 NounBAs will be auctioned, 2 per day from November 2-19, 2022</Trans>
+                  <Trans>34 NounBAs were auctioned, 2 per day from November 2-19, 2022</Trans>
                 </li>
                 <li>
                   <Trans>All NounBAs are members of the NounBA DAO.</Trans>
@@ -78,7 +60,8 @@ const Documentation = () => {
                 </li>
                 <li>
                   <Trans>
-                    Each of the 6 NounBA Founders receive 1 NounBA, bringing the total supply to 40.
+                    Each of the 6 NounBA Founders received 1 NounBA, bringing the total supply to
+                    40.
                   </Trans>
                 </li>
               </ul>
@@ -91,15 +74,10 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
               <p className={classes.aboutText}>
-                <Trans>
-                  34 NounBAs will be auctioned between Nov 2-19, 2022. Starting on Nov 2, two
-                  simultaneous 24 hour auctions will be kicked off. Each time an auction is settled,
-                  a new NounBA will be minted and a new 24 hour auction will begin. Bids within the
-                  last 5 minutes will reset the auction timer to 5 minutes.
-                </Trans>
+                <Trans>34 NounBAs were auctioned between Nov 2-19, 2022.</Trans>
               </p>
               <p>
-                <Trans>The auction proceeds will be distributed as follows:</Trans>
+                <Trans>The auction proceeds were distributed as follows:</Trans>
               </p>
               <ul>
                 <li>69% to the treasury</li>
@@ -116,7 +94,7 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body className={classes.accordionBody}>
               NounBA DAO utilizes NounBA DAO's fork of {compoundGovLink} and is the main governing
-              body of the NounBA ecosystem. The NounBA DAO treasury receives 69% of ETH proceeds
+              body of the NounBA ecosystem. The NounBA DAO treasury received 69% of ETH proceeds
               from the 34 NounBA auctions. Each of the 40 NounBAs is an irrevocable member of NounBA
               DAO and entitled to one vote in all governance matters. NounBA votes are
               non-transferable (if you sell your NounBA the vote goes with it) but delegatable,

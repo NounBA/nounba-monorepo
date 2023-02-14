@@ -43,13 +43,13 @@ const TeamsPage: React.FC<TeamsPageProps> = () => {
       <Line />
       <ScrollToTop />
       <Container fluid="xl">
-        <Row>
+        {/* <Row>
           <Col sm={12} className={classes.header}>
             <h2>Season 2022</h2>
             <h1>NounBA 2022</h1>
             <p>Below you can see the summary of the 2022 season.</p>
           </Col>
-        </Row>
+        </Row> */}
         <Row className={classes.wrapperTeam}>
           {data?.nouns &&
             teams.map(side => (
