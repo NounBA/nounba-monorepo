@@ -154,7 +154,7 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   );
   const nounWithLink = (
     <Link
-      to={'/noun/' + nounId.toString()}
+      to={'/nounba/' + nounId.toString()}
       className={clsx(classes.clickableNoun, className)}
       onClick={onClickHandler}
     >

@@ -10,6 +10,10 @@
   min-width: 250px;
 }
 
+.holderCopySimple {
+  min-width: auto;
+}
+
 .section h4 {
   font-family: 'DM Sans';
   font-size: 18px;

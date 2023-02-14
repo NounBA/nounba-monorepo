@@ -111,6 +111,7 @@ const config = {
   app: app[CHAIN_ID],
   addresses: getAddresses(),
 };
+console.log(config);
 
 export enum REGIONS {
   west,
